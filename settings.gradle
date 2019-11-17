@@ -1,0 +1,2 @@
+include ':app', ':xsuper', ':module_example'
+rootProject.name='XSuper'
