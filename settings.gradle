@@ -1,2 +1,2 @@
-include ':app', ':xsuper', ':module_example'
+include ':app', ':xsuper', ':module_example', ':module_user'
 rootProject.name='XSuper'

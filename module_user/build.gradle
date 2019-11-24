@@ -1,4 +1,4 @@
-def isModule = module_example_enabled as Boolean
+def isModule = module_user_enabled as Boolean
 if (isModule) {
     apply plugin: 'com.android.library'
 } else {
@@ -55,9 +55,8 @@ android {
         }
     }
 
-    resourcePrefix "example"
+    resourcePrefix "user"
 }
-
 
 kapt {
     arguments {
@@ -68,7 +67,6 @@ kapt {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':xsuper')
-
 
     // ARouter路由
     annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
