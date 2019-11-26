@@ -52,4 +52,7 @@ dependencies {
     kapt rootProject.ext.dependencies["arouter_compiler"]
     api rootProject.ext.dependencies["arouter_api"]
     api rootProject.ext.dependencies["arouter_annotation"]
+
+    //EventBus
+    api rootProject.ext.dependencies["eventbus"]
 }

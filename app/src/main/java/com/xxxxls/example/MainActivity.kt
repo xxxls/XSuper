@@ -1,12 +1,9 @@
 package com.xxxxls.example
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.xxxxls.module_base.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity() {
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_main
     }
 }
