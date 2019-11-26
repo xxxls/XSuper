@@ -16,11 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
         flavorDimensions rootProject.ext.versions["flavorDimensions"]
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
 
     buildTypes {
@@ -38,12 +33,6 @@ android {
     resourcePrefix "super"
 }
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testApi rootProject.ext.dependencies["junit"]
@@ -58,16 +47,12 @@ dependencies {
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["core-ktx"]
     api rootProject.ext.dependencies["constraint_layout"]
+    api rootProject.ext.dependencies["design"]
 
 
     /**
      * @好用组件
      */
-    //ARouter路由
-    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
-    kapt rootProject.ext.dependencies["arouter_compiler"]
-    api rootProject.ext.dependencies["arouter_api"]
-    api rootProject.ext.dependencies["arouter_annotation"]
 
 
     /**

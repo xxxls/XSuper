@@ -106,7 +106,7 @@ kapt {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(path: ':xsuper')
+    implementation project(path: ':module_base')
     implementation project(path: ':module_user')
 
     // ARouter路由
