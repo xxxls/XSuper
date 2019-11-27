@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.Nullable;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -278,5 +280,4 @@ public final class Utils {
     public interface Callback<T> {
         void onCall(T data);
     }
-
 }

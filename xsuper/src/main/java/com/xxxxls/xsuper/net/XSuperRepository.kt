@@ -1,7 +1,7 @@
 package com.xxxxls.xsuper.net
 
 /**
- * Super - Repository
+ * Super - Repository（网络接口，数据库，等..）
  * @author Max
  * @date 2019-11-26.
  */

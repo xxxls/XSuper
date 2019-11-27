@@ -54,6 +54,15 @@ dependencies {
      * @好用组件
      */
 
+    //OkHttp
+    api rootProject.ext.dependencies["okhttp3"]
+    //retrofit
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit2_kotlin"]
+    api rootProject.ext.dependencies["converter-gson"]
+    //Gson
+    api rootProject.ext.dependencies["gson"]
+
 
     /**
      * @其他组件
