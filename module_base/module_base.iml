@@ -26,7 +26,7 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/debug/java;/Users/max/office/DemoProject/XSuper/module_base/src/release/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/release/java;/Users/max/office/DemoProject/XSuper/module_base/src/debugAndroidTest/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/debugUnitTest/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/releaseUnitTest/kotlin">
+      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/debug/java;/Users/max/office/DemoProject/XSuper/module_base/src/devTestUnitTest/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/release/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/release/java;/Users/max/office/DemoProject/XSuper/module_base/src/debugAndroidTest/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/devTest/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/devTest/java;/Users/max/office/DemoProject/XSuper/module_base/src/debugUnitTest/kotlin;/Users/max/office/DemoProject/XSuper/module_base/src/releaseUnitTest/kotlin">
         <compilerSettings>
           <option name="additionalArguments" value="-Xallow-no-source-files" />
         </compilerSettings>
@@ -138,6 +138,8 @@
           <root url="file://$MODULE_DIR$/build/tmp/kapt3/classes/debugAndroidTest" />
           <root url="file://$MODULE_DIR$/build/tmp/kapt3/classes/debug" />
           <root url="file://$MODULE_DIR$/build/tmp/kapt3/classes/debugUnitTest" />
+          <root url="file://$MODULE_DIR$/build/tmp/kapt3/classes/devTest" />
+          <root url="file://$MODULE_DIR$/build/tmp/kapt3/classes/devTestUnitTest" />
           <root url="file://$MODULE_DIR$/build/tmp/kapt3/classes/release" />
           <root url="file://$MODULE_DIR$/build/tmp/kapt3/classes/releaseUnitTest" />
         </CLASSES>
