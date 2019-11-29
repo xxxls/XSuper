@@ -1,7 +1,8 @@
-package com.xxxxls.xsuper.net
+package com.xxxxls.xsuper.net.call
 
 import androidx.annotation.NonNull
 import androidx.lifecycle.Observer
+import com.xxxxls.xsuper.net.XSuperResult
 
 /**
  * super - Call

@@ -8,7 +8,7 @@ import com.xxxxls.xsuper.net.engine.IHttpEngine
  * @author Max
  * @date 2019-11-28.
  */
-class BaseUserApiRepository<Api> : BaseApiRepository<Api>() {
+class UserApiRepository : BaseApiRepository<UserApis>() {
 
     override fun getBaseUrl(): String {
         //可自定义baseUrl

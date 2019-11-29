@@ -11,7 +11,7 @@ import okhttp3.OkHttpClient
  * @author Max
  * @date 2019-11-27.
  */
-open class BaseApiRepository<Api> : ApiRepository<Api>() {
+open class BaseApiRepository<Api:Any> : ApiRepository<Api>() {
     override fun getBaseUrl(): String {
         return NetConfig.BASE_URL
     }

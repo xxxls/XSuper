@@ -1,7 +1,9 @@
 package com.xxxxls.xsuper.net.engine
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * 请求引擎
@@ -43,7 +45,11 @@ class XSuperHttpEngine private constructor(val builder: Builder) : IHttpEngine {
 
             checkNotNull(okHttpClient) { "Base URL required." }
 
-            retrofit = Retrofit.Builder().baseUrl(baseUrl!!).client(okHttpClient).build()
+            retrofit = Retrofit.Builder().baseUrl(baseUrl!!).client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
 
             return XSuperHttpEngine(this)
         }

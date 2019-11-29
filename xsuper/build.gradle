@@ -51,7 +51,9 @@ dependencies {
     api rootProject.ext.dependencies["core-ktx"]
     api rootProject.ext.dependencies["constraint_layout"]
     api rootProject.ext.dependencies["design"]
-
+    api rootProject.ext.dependencies["lifecycle"]
+    //协程
+    api rootProject.ext.dependencies["kotlinx-coroutines"]
 
     /**
      * @好用组件

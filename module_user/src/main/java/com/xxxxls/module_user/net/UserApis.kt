@@ -1,7 +1,10 @@
 package com.xxxxls.module_user.net
 
+import com.xxxxls.module_base.net.BaseCall
+import com.xxxxls.module_base.net.response.BaseListResponse
 import com.xxxxls.module_base.net.response.BaseResponse
 import com.xxxxls.module_user.bean.UserBean
+import kotlinx.coroutines.Deferred
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -20,10 +23,10 @@ interface UserApis {
      */
     @FormUrlEncoded
     @POST("/user/login")
-    suspend fun login(
+    fun login(
         @Field("username") userName: String,
         @Field("password") passWord: String
-    ): BaseResponse<UserBean>
+    ): Deferred<BaseResponse<UserBean>>
 
 
     /**
@@ -38,7 +41,7 @@ interface UserApis {
         @Field("username") userName: String,
         @Field("password") passWord: String,
         @Field("repassword") rePassWord: String
-    ): BaseResponse<UserBean>
+    ): BaseCall<BaseListResponse<UserBean>>
 
 
 }
