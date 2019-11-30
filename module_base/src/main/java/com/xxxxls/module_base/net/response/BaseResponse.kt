@@ -1,6 +1,6 @@
 package com.xxxxls.module_base.net.response
 
-import com.xxxxls.xsuper.model.XSuperApiResponse
+import com.xxxxls.xsuper.model.XSuperResponse
 
 /**
  * 基础响应体
@@ -16,7 +16,7 @@ data class BaseResponse<out T>(
 
     //错误信息
     var errorMsg: String
-) : XSuperApiResponse<T> {
+) : XSuperResponse<T> {
 
     override fun isSuccess(): Boolean {
         return errorCode == 0

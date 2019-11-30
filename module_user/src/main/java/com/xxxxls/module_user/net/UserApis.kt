@@ -1,7 +1,5 @@
 package com.xxxxls.module_user.net
 
-import com.xxxxls.module_base.net.BaseCall
-import com.xxxxls.module_base.net.response.BaseListResponse
 import com.xxxxls.module_base.net.response.BaseResponse
 import com.xxxxls.module_user.bean.UserBean
 import kotlinx.coroutines.Deferred
@@ -41,7 +39,7 @@ interface UserApis {
         @Field("username") userName: String,
         @Field("password") passWord: String,
         @Field("repassword") rePassWord: String
-    ): BaseCall<BaseListResponse<UserBean>>
+    ): BaseResponse<UserBean>
 
 
 }

@@ -13,3 +13,4 @@ open class XSuperRepository {
     open fun onCleared() {}
 
 }
+

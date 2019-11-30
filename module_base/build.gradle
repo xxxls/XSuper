@@ -3,6 +3,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'org.greenrobot.greendao'
 
 
 android {
@@ -50,6 +51,12 @@ android {
 
     }
 
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.xxxxls.xsuper.db'
+        targetGenDir 'src/main/java'
+    }
+
     resourcePrefix "base"
 }
 
@@ -73,4 +80,8 @@ dependencies {
 
     //EventBus
     api rootProject.ext.dependencies["eventbus"]
+
+    //greenDao
+    api rootProject.ext.dependencies["greenDao"]
+    api rootProject.ext.dependencies["greenDaoHelper"]
 }

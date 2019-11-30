@@ -18,6 +18,14 @@ object L {
     fun d(tag: String = TAG, message: String?) {
         Log.d(tag, message ?: "")
     }
+
+    fun e(message: String?) {
+        Log.e(TAG, message ?: "")
+    }
+
+    fun d(message: String?) {
+        Log.d(TAG, message ?: "")
+    }
 }
 
 
