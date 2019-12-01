@@ -1,14 +1,9 @@
 package com.xxxxls.module_user.ui.login
 
-import com.xxxxls.module_base.net.response.BaseResponse
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.net.UserApiRepository
 import com.xxxxls.module_user.net.UserViewModel
-import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.XSuperCallBack
 import com.xxxxls.xsuper.net.XSuperLiveData
-import com.xxxxls.xsuper.util.L
-import com.xxxxls.xsuper.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

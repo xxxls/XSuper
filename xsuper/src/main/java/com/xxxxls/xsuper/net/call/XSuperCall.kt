@@ -13,9 +13,9 @@ interface XSuperCall<T> {
 
     /**
      * 执行异步请求，但不需要绑定组件生命周期(获取全部状态结果)
-     * @param observer 请求回调
+     * @param callback 请求回调
      */
-    fun enqueue(@NonNull observer: Observer<XSuperResult<T>>)
+    fun enqueue(@NonNull callback: XSuperCall<XSuperResult<T>>)
 
     /**
      * 发起同步网络请求

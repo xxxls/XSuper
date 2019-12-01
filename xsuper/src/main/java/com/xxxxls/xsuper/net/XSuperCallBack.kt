@@ -13,7 +13,7 @@ interface XSuperCallBack<T> {
      * 成功
      * @param result 结果
      */
-    fun onSuccess(result: T?)
+    fun onSuccess(result: T)
 
     /**
      * 失败

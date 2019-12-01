@@ -1,17 +1,19 @@
 package com.xxxxls.example
 
-import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter
+import com.xxxxls.xsuper.component.application.XSuperApplication
 
 /**
  * Application
  * @author Max
  * @date 2019-11-26.
  */
-class App : Application() {
+class App : XSuperApplication() {
 
-    override fun onCreate() {
-        super.onCreate()
+
+    override fun onInitialize() {
+        super.onInitialize()
+
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
             ARouter.openDebug()
@@ -19,8 +21,11 @@ class App : Application() {
         ARouter.init(this)
     }
 
+
+
     override fun onTerminate() {
         super.onTerminate()
         ARouter.getInstance().destroy()
     }
+
 }

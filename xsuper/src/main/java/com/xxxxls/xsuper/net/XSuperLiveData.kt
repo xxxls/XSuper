@@ -12,7 +12,7 @@ import com.xxxxls.xsuper.exceptions.XSuperException
  */
 class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(), XSuperCallBack<T> {
 
-    override fun onSuccess(result: T?) {
+    override fun onSuccess(result: T ) {
         postValue(XSuperResult.Success(result))
     }
 

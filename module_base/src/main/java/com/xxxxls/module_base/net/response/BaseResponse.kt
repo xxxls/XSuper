@@ -18,6 +18,10 @@ data class BaseResponse<out T>(
     var errorMsg: String
 ) : XSuperResponse<T> {
 
+    override fun getBody(): T? {
+        return data
+    }
+
     override fun isSuccess(): Boolean {
         return errorCode == 0
     }
