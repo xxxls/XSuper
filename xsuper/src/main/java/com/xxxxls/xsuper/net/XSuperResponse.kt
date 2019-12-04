@@ -1,7 +1,7 @@
-package com.xxxxls.xsuper.model
+package com.xxxxls.xsuper.net
 
 /**
- * Super - 接口响应
+ * Super - 接口请求响应
  * @author Max
  * @date 2019-11-28.
  */
@@ -13,7 +13,7 @@ interface XSuperResponse<out T> {
     fun isSuccess(): Boolean
 
     /**
-     * 真实结果
+     * 真实有效的结果（去除了基础属性后的数据）
      */
     fun getBody(): T?
 

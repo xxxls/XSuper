@@ -55,6 +55,11 @@ dependencies {
     //协程
     api rootProject.ext.dependencies["kotlinx-coroutines"]
 
+
+    api rootProject.ext.dependencies["viewmodel-ktx"]
+    api rootProject.ext.dependencies["runtime-ktx"]
+    api rootProject.ext.dependencies["livedata-ktx"]
+
     /**
      * @好用组件
      */

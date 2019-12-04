@@ -87,9 +87,18 @@ ext {
             "recyclerview"       : "androidx.recyclerview:recyclerview:${versions["recyclerviewVersion"]}",
             "kotlin"             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions["kotlinVersion"]}",
             "kotlinx-coroutines" : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions["kotlinxCoroutinesVersion"]}",
+            // ViewModel and LiveData
             "lifecycle"          : "androidx.lifecycle:lifecycle-extensions:${versions["lifecycleVersion"]}",
             "flexbox"            : "com.google.android:flexbox:${versions["flexboxVersion"]}",
             "core-ktx"           : "androidx.core:core-ktx:${versions["corektxVersion"]}",
+
+            //ViewModelScope
+            "viewmodel-ktx"           : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions["lifecycleVersion"]}",
+            //LifecycleScope
+            "runtime-ktx"           : "androidx.lifecycle:lifecycle-runtime-ktx:${versions["lifecycleVersion"]}",
+            //liveData
+            "livedata-ktx"           : "androidx.lifecycle:lifecycle-livedata-ktx:${versions["lifecycleVersion"]}",
+
 
             /**
              * @好用组件

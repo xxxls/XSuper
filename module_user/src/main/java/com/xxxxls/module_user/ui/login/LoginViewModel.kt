@@ -1,13 +1,11 @@
 package com.xxxxls.module_user.ui.login
 
+import androidx.lifecycle.viewModelScope
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.net.UserApiRepository
 import com.xxxxls.module_user.net.UserViewModel
 import com.xxxxls.xsuper.net.XSuperLiveData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 /**
  * 登录VM
@@ -21,27 +19,17 @@ class LoginViewModel : UserViewModel() {
     val loginLiveData by lazy {
         XSuperLiveData<UserBean>()
     }
-    private val mJob = SupervisorJob()
-    private val mScope = CoroutineScope(Dispatchers.IO + mJob)
+
 
     fun login(userName: String, password: String) {
 
-        mScope.launch {
-            //            val result = mRepository.apis().login(userName, password).await()
-//            L.e(message = "result:$result")
-
-            mRepository.requestApi(loginLiveData) {
-                it.login(userName, password)
-            }
+        mUserRepository.requestApi(loginLiveData) {
+            it.login(userName, password)
         }
 
         val num1 = mUserRepository.login("", "")
 
         val num2 = mUserRepository.login("", "")
-
-        val num5 = mRepository.login("", "")
-
-        val num6 = mRepository.login("", "")
     }
 
 

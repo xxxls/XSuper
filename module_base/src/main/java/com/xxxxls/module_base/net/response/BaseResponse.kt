@@ -1,6 +1,6 @@
 package com.xxxxls.module_base.net.response
 
-import com.xxxxls.xsuper.model.XSuperResponse
+import com.xxxxls.xsuper.net.XSuperResponse
 
 /**
  * 基础响应体

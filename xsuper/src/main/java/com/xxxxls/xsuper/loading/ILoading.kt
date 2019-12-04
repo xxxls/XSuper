@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper
+package com.xxxxls.xsuper.loading
 
 /**
  * 进度视图

@@ -3,7 +3,7 @@ package com.xxxxls.xsuper.net
 import com.xxxxls.xsuper.exceptions.XSuperException
 
 /**
- * super - 结果
+ * super - 响应结果类（成功/失败）
  * @author Max
  * @date 2019-11-28.
  */
