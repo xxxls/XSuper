@@ -1,6 +1,7 @@
-package com.xxxxls.xsuper.util
+package com.xxxxls.xsuper.support
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -58,5 +59,20 @@ fun Context.getColorById(@ColorRes colorResId: Int): Int {
  * 获取图片
  */
 fun Context.getDrawableById(@DrawableRes drawableRedId: Int): Drawable? {
+    return ContextCompat.getDrawable(this, drawableRedId)
+}
+
+
+/**
+ * 获取颜色
+ */
+fun Application.getColorById(@ColorRes colorResId: Int): Int {
+    return ContextCompat.getColor(this, colorResId)
+}
+
+/**
+ * 获取图片
+ */
+fun Application.getDrawableById(@DrawableRes drawableRedId: Int): Drawable? {
     return ContextCompat.getDrawable(this, drawableRedId)
 }

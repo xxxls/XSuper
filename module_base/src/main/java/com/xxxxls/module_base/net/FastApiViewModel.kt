@@ -1,8 +1,7 @@
-package com.xxxxls.xsuper.net.viewmodel
+package com.xxxxls.module_base.net
 
 import com.xxxxls.xsuper.net.XSuperResponse
 import com.xxxxls.xsuper.net.XSuperCallBack
-import com.xxxxls.xsuper.net.repository.ApiRepository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 
@@ -11,10 +10,10 @@ import kotlinx.coroutines.Job
  * @author Max
  * @date 2019-12-02.
  */
-open class FastApiViewModel<Api> : XSuperViewModel() {
+open class FastApiViewModel<Api> : BaseViewModel() {
 
     // 快速Api
-    val mRepositoryApi = createRepository<ApiRepository<Api>>()
+    val mRepositoryApi = createRepository<BaseApiRepository<Api>>()
 
     /**
      * 请求接口

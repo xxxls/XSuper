@@ -5,6 +5,7 @@ import com.xxxxls.xsuper.net.XSuperCallBack
 import com.xxxxls.xsuper.net.engine.IHttpEngine
 import com.xxxxls.xsuper.net.engine.XSuperHttpEngine
 import com.xxxxls.xsuper.util.ClassUtils
+import com.xxxxls.xsuper.util.L
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
 
@@ -13,7 +14,7 @@ import okhttp3.OkHttpClient
  * @author Max
  * @date 2019-11-26.
  */
-open class ApiRepository<Api> : XSuperRepository() {
+abstract class ApiRepository<Api> : XSuperRepository() {
 
     //网络请求
     protected val mHttpEngine: IHttpEngine by lazy {
@@ -26,21 +27,10 @@ open class ApiRepository<Api> : XSuperRepository() {
     }
 
     /**
-     * 获取当前Repository 请求的基础URL
-     * @return 基础URL
-     */
-    protected open fun getBaseUrl(): String {
-        return ""
-    }
-
-    /**
      * 获取Http引擎
+     * @return 请求实例
      */
-    protected open fun getHttpEngine(): IHttpEngine {
-        //默认构造
-        return XSuperHttpEngine.Builder().baseUrl(getBaseUrl())
-            .client(OkHttpClient.Builder().build()).build()
-    }
+    protected abstract fun getHttpEngine(): IHttpEngine
 
     /**
      * 获取接口
@@ -66,12 +56,26 @@ open class ApiRepository<Api> : XSuperRepository() {
      * @param callBack 结果回调
      */
     protected inline fun <T> Deferred<XSuperResponse<T>>.enqueue(callBack: XSuperCallBack<T>): Job {
+        callBack.showLoading()
         return this@ApiRepository.launch {
             try {
+                //响应结果
                 val result = this@enqueue.await()
+                //响应拦截器走一边
+                getHttpEngine().getInterceptors()?.forEach { interceptors ->
+                    if (interceptors.onIntercept(result, mComponentBridge, callBack)) {
+                        return@launch
+                    }
+                }
+
+                //默认成功响应
                 callBack.onSuccess(result.getBody()!!)
             } catch (e: Exception) {
-//                callBack.onError(e)
+                L.e("请求接口异常：$e.toString()")
+                //请求过程异常
+                callBack.onError(getHttpEngine().requestExceptionConversion(e))
+            } finally {
+                callBack.dismissLoading()
             }
         }
     }

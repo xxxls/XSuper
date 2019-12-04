@@ -10,19 +10,8 @@ import com.xxxxls.xsuper.net.engine.IHttpEngine
  */
 class UserApiRepository : BaseApiRepository<UserApis>() {
 
-    private var num: Long = System.currentTimeMillis() + (0..1000).random()
-
-    override fun getBaseUrl(): String {
-        //可自定义baseUrl
-        return super.getBaseUrl()
-    }
-
     override fun getHttpEngine(): IHttpEngine {
-        //可自定义网络配置
+        //可自定义配置该模块下的网络请求
         return super.getHttpEngine()
-    }
-
-    fun login(userName: String, password: String): String {
-        return num.toString()
     }
 }

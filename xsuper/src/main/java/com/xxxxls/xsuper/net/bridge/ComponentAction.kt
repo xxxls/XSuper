@@ -13,7 +13,7 @@ sealed class ComponentAction {
     /**
      * 展示加载弹窗
      */
-    class ShowLoading(val message: CharSequence?) : ComponentAction()
+    class ShowLoading(val message: CharSequence? = null) : ComponentAction()
 
     /**
      * 关闭加载弹窗

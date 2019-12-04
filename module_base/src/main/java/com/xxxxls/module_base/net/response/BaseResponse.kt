@@ -15,7 +15,8 @@ data class BaseResponse<out T>(
     var errorCode: Int?,
 
     //错误信息
-    var errorMsg: String
+    var errorMsg: String?
+
 ) : XSuperResponse<T> {
 
     override fun getBody(): T? {

@@ -10,7 +10,7 @@ import com.xxxxls.xsuper.exceptions.XSuperException
  * @author Max
  * @date 2019-11-30.
  */
-class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(), XSuperCallBack<T> {
+open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(), XSuperCallBack<T> {
 
     override fun onSuccess(result: T ) {
         postValue(XSuperResult.Success(result))

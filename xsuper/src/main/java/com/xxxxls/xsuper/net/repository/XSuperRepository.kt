@@ -1,6 +1,9 @@
 package com.xxxxls.xsuper.net.repository
 
 import androidx.annotation.CallSuper
+import com.xxxxls.xsuper.net.XSuperCallBack
+import com.xxxxls.xsuper.net.XSuperLoadingCallBack
+import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -15,7 +18,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 open class XSuperRepository {
 
     //与组件通信桥
-    private var mComponentBridge: IComponentBridge? = null
+    protected var mComponentBridge: IComponentBridge? = null
 
     private val mJob = SupervisorJob()
 
@@ -44,5 +47,40 @@ open class XSuperRepository {
         mJob.cancel()
         mComponentBridge = null
     }
+
+    //弹窗加载弹窗
+    protected fun showLoading() {
+        mComponentBridge?.onAction(ComponentAction.ShowLoading())
+    }
+
+    //关闭加载弹窗
+    protected fun dismissLoading() {
+        mComponentBridge?.onAction(ComponentAction.DismissLoading())
+    }
+
+    //toast
+    protected fun toast(message: CharSequence) {
+        mComponentBridge?.onAction(ComponentAction.Toast(message))
+    }
+
+
+    /**
+     * show loading
+     */
+    protected fun XSuperCallBack<*>.showLoading() {
+        if (this is XSuperLoadingCallBack<*> && this.isShowLoading()) {
+            this@XSuperRepository.showLoading()
+        }
+    }
+
+    /**
+     * dismiss Loading
+     */
+    protected fun XSuperCallBack<*>.dismissLoading() {
+        if (this is XSuperLoadingCallBack<*> && this.isShowLoading()) {
+            this@XSuperRepository.dismissLoading()
+        }
+    }
+
 }
 

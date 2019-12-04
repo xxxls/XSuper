@@ -1,58 +1,72 @@
 package com.xxxxls.xsuper.net.engine
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import okhttp3.OkHttpClient
+import com.google.gson.JsonParseException
+import com.xxxxls.xsuper.R
+import com.xxxxls.xsuper.exceptions.CodeException
+import com.xxxxls.xsuper.exceptions.NetWorkException
+import com.xxxxls.xsuper.exceptions.XSuperException
+import com.xxxxls.xsuper.net.interceptors.XSuperResponseInterceptor
+import com.xxxxls.xsuper.util.Utils
+import retrofit2.HttpException
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import java.net.ConnectException
+import java.net.SocketException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import java.util.concurrent.TimeoutException
 
 /**
  * 请求引擎
  * @author Max
  * @date 2019-11-26.
  */
-class XSuperHttpEngine private constructor(val builder: Builder) : IHttpEngine {
+open class XSuperHttpEngine(
+    private val retrofit: Retrofit,
+    private val interceptors: ArrayList<XSuperResponseInterceptor>?
+) :
+    IHttpEngine {
 
+    override fun getInterceptors(): ArrayList<XSuperResponseInterceptor>? {
+        return interceptors
+    }
 
-    override fun getOkHttpClient(): OkHttpClient {
-        return builder.okHttpClient!!
+    val httpExceptionMsg = Utils.getApp().getString(R.string.super_network_exception)
+    val connectExceptionMsg = Utils.getApp().getString(R.string.super_connect_exception)
+    val jsonExceptionMsg = Utils.getApp().getString(R.string.super_parse_json_exception)
+    val unknownHostExceptionMsg = Utils.getApp().getString(R.string.super_parse_host_exception)
+    val codeExceptionMsg = Utils.getApp().getString(R.string.super_code_exception)
+
+    override fun requestExceptionConversion(throwable: Throwable): XSuperException {
+
+        return when (throwable) {
+            is HttpException -> {
+                /*网络异常*/
+                NetWorkException(httpExceptionMsg)
+            }
+            is ConnectException,
+            is TimeoutException,
+            is SocketTimeoutException,
+            is SocketException
+            -> {
+                /*链接异常*/
+                NetWorkException(connectExceptionMsg)
+            }
+            is UnknownHostException -> {
+                /*无法解析该域名异常*/
+                NetWorkException(unknownHostExceptionMsg)
+            }
+            is JsonParseException -> {
+                /*json解析异常*/
+                CodeException(jsonExceptionMsg, throwable)
+            }
+            else -> {
+                /*未知异常*/
+                CodeException(codeExceptionMsg, throwable)
+            }
+        }
     }
 
     override fun <T> createService(service: Class<T>): T {
-        return builder.retrofit!!.create(service)
+        return retrofit.create(service)
     }
-
-    class Builder {
-
-        internal var retrofit: Retrofit? = null
-
-        private var baseUrl: String? = null
-
-        internal var okHttpClient: OkHttpClient? = null
-
-        fun client(okHttpClient: OkHttpClient): Builder {
-            this.okHttpClient = okHttpClient
-            return this
-        }
-
-        fun baseUrl(baseUrl: String): Builder {
-            this.baseUrl = baseUrl
-            return this
-        }
-
-        fun build(): XSuperHttpEngine {
-
-            checkNotNull(baseUrl) { "Base URL required." }
-
-            checkNotNull(okHttpClient) { "Base URL required." }
-
-            retrofit = Retrofit.Builder().baseUrl(baseUrl!!).client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-
-            return XSuperHttpEngine(this)
-        }
-    }
-
 }

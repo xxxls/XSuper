@@ -3,14 +3,9 @@ package com.xxxxls.xsuper.net.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xxxxls.xsuper.net.XSuperResponse
-import com.xxxxls.xsuper.net.XSuperCallBack
-import com.xxxxls.xsuper.net.XSuperLiveData
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
-import com.xxxxls.xsuper.net.repository.ApiRepository
 import com.xxxxls.xsuper.net.repository.XSuperRepository
-import com.xxxxls.xsuper.util.ClassUtils
 import kotlinx.coroutines.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.CoroutineContext
