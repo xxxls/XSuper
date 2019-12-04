@@ -1,8 +1,8 @@
 package com.xxxxls.xsuper.net.repository
 
 import androidx.annotation.CallSuper
-import com.xxxxls.xsuper.net.XSuperCallBack
-import com.xxxxls.xsuper.net.XSuperLoadingCallBack
+import com.xxxxls.xsuper.net.callback.XSuperCallBack
+import com.xxxxls.xsuper.net.callback.LoadingCallBack
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
 import kotlinx.coroutines.*
@@ -68,7 +68,7 @@ open class XSuperRepository {
      * show loading
      */
     protected fun XSuperCallBack<*>.showLoading() {
-        if (this is XSuperLoadingCallBack<*> && this.isShowLoading()) {
+        if (this is LoadingCallBack<*> && this.isShowLoading()) {
             this@XSuperRepository.showLoading()
         }
     }
@@ -77,7 +77,7 @@ open class XSuperRepository {
      * dismiss Loading
      */
     protected fun XSuperCallBack<*>.dismissLoading() {
-        if (this is XSuperLoadingCallBack<*> && this.isShowLoading()) {
+        if (this is LoadingCallBack<*> && this.isShowLoading()) {
             this@XSuperRepository.dismissLoading()
         }
     }

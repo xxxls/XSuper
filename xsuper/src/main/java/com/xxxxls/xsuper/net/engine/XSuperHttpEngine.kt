@@ -5,7 +5,7 @@ import com.xxxxls.xsuper.R
 import com.xxxxls.xsuper.exceptions.CodeException
 import com.xxxxls.xsuper.exceptions.NetWorkException
 import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.interceptors.XSuperResponseInterceptor
+import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
 import com.xxxxls.xsuper.util.Utils
 import retrofit2.HttpException
 import retrofit2.Retrofit
@@ -22,11 +22,11 @@ import java.util.concurrent.TimeoutException
  */
 open class XSuperHttpEngine(
     private val retrofit: Retrofit,
-    private val interceptors: ArrayList<XSuperResponseInterceptor>?
+    private val interceptors: ArrayList<IResponseInterceptor>?
 ) :
     IHttpEngine {
 
-    override fun getInterceptors(): ArrayList<XSuperResponseInterceptor>? {
+    override fun getInterceptors(): ArrayList<IResponseInterceptor>? {
         return interceptors
     }
 

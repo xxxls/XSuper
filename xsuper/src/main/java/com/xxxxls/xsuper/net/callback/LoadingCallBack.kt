@@ -1,11 +1,11 @@
-package com.xxxxls.xsuper.net
+package com.xxxxls.xsuper.net.callback
 
 /**
  * 带loading 功能的回调
  * @author Max
  * @date 2019-12-04.
  */
-interface XSuperLoadingCallBack<T> : XSuperCallBack<T> {
+interface LoadingCallBack<T> : XSuperCallBack<T> {
 
     /**
      * 是否展示loading

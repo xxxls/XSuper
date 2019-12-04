@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.net
+package com.xxxxls.xsuper.net.callback
 
 import com.xxxxls.xsuper.exceptions.XSuperException
 

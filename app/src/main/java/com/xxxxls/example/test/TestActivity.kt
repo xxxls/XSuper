@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.xxxxls.example.R
-import com.xxxxls.xsuper.util.falseLet
-import com.xxxxls.xsuper.util.trueLet
+import com.xxxxls.xsuper.support.falseLet
+import com.xxxxls.xsuper.support.trueLet
 import kotlinx.android.synthetic.main.app_activity_test.*
 
 /**

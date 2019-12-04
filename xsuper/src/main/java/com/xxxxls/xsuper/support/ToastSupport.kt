@@ -1,9 +1,10 @@
-package com.xxxxls.xsuper.util
+package com.xxxxls.xsuper.support
 
 import android.content.Context
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import com.xxxxls.xsuper.util.Utils
 
 /**
  * TOAST

@@ -4,13 +4,15 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.xxxxls.xsuper.exceptions.XSuperException
+import com.xxxxls.xsuper.net.callback.XSuperCallBack
 
 /**
  * super - LiveData
  * @author Max
  * @date 2019-11-30.
  */
-open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(), XSuperCallBack<T> {
+open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
+    XSuperCallBack<T> {
 
     override fun onSuccess(result: T ) {
         postValue(XSuperResult.Success(result))

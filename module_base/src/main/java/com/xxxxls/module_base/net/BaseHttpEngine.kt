@@ -2,7 +2,7 @@ package com.xxxxls.module_base.net
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.xxxxls.xsuper.net.engine.XSuperHttpEngine
-import com.xxxxls.xsuper.net.interceptors.XSuperResponseInterceptor
+import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class BaseHttpEngine(
     retrofit: Retrofit,
-    interceptors: ArrayList<XSuperResponseInterceptor>?
+    interceptors: ArrayList<IResponseInterceptor>?
 ) : XSuperHttpEngine(retrofit, interceptors) {
 
     class Builder {
@@ -29,8 +29,8 @@ class BaseHttpEngine(
         private var okHttpClient: OkHttpClient? = null
 
         //响应拦截器
-        private val interceptors: ArrayList<XSuperResponseInterceptor> by lazy {
-            ArrayList<XSuperResponseInterceptor>()
+        private val interceptors: ArrayList<IResponseInterceptor> by lazy {
+            ArrayList<IResponseInterceptor>()
         }
 
         /**
@@ -53,7 +53,7 @@ class BaseHttpEngine(
          * 添加响应拦截器
          * @param interceptor 响应拦截器（根据添加时的顺序响应）
          */
-        fun interceptor(interceptor: XSuperResponseInterceptor): Builder {
+        fun interceptor(interceptor: IResponseInterceptor): Builder {
             if (!interceptors.contains(interceptor)) {
                 interceptors.add(interceptor)
             }

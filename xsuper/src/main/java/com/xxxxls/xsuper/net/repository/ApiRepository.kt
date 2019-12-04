@@ -1,13 +1,11 @@
 package com.xxxxls.xsuper.net.repository
 
 import com.xxxxls.xsuper.net.XSuperResponse
-import com.xxxxls.xsuper.net.XSuperCallBack
+import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import com.xxxxls.xsuper.net.engine.IHttpEngine
-import com.xxxxls.xsuper.net.engine.XSuperHttpEngine
 import com.xxxxls.xsuper.util.ClassUtils
 import com.xxxxls.xsuper.util.L
 import kotlinx.coroutines.*
-import okhttp3.OkHttpClient
 
 /**
  * API 网络请求

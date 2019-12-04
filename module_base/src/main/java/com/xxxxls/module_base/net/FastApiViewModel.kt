@@ -1,7 +1,7 @@
 package com.xxxxls.module_base.net
 
 import com.xxxxls.xsuper.net.XSuperResponse
-import com.xxxxls.xsuper.net.XSuperCallBack
+import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 

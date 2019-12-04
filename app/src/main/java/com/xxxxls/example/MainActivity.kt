@@ -3,7 +3,7 @@ package com.xxxxls.example
 import com.xxxxls.module_base.base.BaseActivity
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_base.util.jump
-import com.xxxxls.xsuper.util.singleClick
+import com.xxxxls.xsuper.support.singleClick
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {

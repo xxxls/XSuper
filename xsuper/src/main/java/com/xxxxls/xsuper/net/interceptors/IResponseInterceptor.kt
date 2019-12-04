@@ -1,15 +1,15 @@
 package com.xxxxls.xsuper.net.interceptors
 
-import com.xxxxls.xsuper.net.XSuperCallBack
+import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import com.xxxxls.xsuper.net.XSuperResponse
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
 
 /**
- * super - 接口响应拦截器
+ * 接口响应拦截器
  * @author Max
  * @date 2019-12-04.
  */
-interface XSuperResponseInterceptor {
+interface IResponseInterceptor {
 
     /**
      * 拦截触发
