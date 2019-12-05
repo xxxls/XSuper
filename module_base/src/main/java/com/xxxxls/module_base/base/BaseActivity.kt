@@ -2,6 +2,7 @@ package com.xxxxls.module_base.base
 
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
+import com.xxxxls.module_base.widget.LoadingDialog
 import com.xxxxls.xsuper.component.XSuperActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -13,6 +14,8 @@ import org.greenrobot.eventbus.ThreadMode
  * @date 2019-11-26.
  */
 open class BaseActivity : XSuperActivity() {
+
+    private var mLoadingDialog: LoadingDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ARouter.getInstance().inject(this)
@@ -46,4 +49,23 @@ open class BaseActivity : XSuperActivity() {
         }
     }
 
+    override fun showLoading(id: Int, message: CharSequence?) {
+        super.showLoading(id, message)
+        if (mLoadingDialog == null) {
+            mLoadingDialog = LoadingDialog(getContext())
+        }
+
+        if (mLoadingDialog!!.isShowing) {
+            return
+        }
+        mLoadingDialog!!.show()
+    }
+
+    override fun dismissLoading(id: Int) {
+        super.dismissLoading(id)
+        if (mLoadingDialog == null || !mLoadingDialog!!.isShowing) {
+            return
+        }
+        mLoadingDialog!!.dismiss()
+    }
 }

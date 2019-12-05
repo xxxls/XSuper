@@ -1,5 +1,6 @@
 package com.xxxxls.module_user.ui.register
 
+import com.xxxxls.module_base.net.BaseLiveData
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.net.UserApis
 import com.xxxxls.module_base.net.FastApiViewModel
@@ -8,12 +9,12 @@ import com.xxxxls.xsuper.net.XSuperLiveData
 /**
  * 注册VM
  * @author Max
- * @date 2019-11-29.
+ * @date 2019-12-05.
  */
 class RegisterViewModel : FastApiViewModel<UserApis>() {
 
     val registerLiveData by lazy {
-        XSuperLiveData<UserBean>()
+        BaseLiveData<UserBean>()
     }
 
     fun register(userName: String, password: String) {

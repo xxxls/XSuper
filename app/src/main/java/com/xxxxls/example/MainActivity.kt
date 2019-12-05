@@ -3,7 +3,7 @@ package com.xxxxls.example
 import com.xxxxls.module_base.base.BaseActivity
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_base.util.jump
-import com.xxxxls.xsuper.support.singleClick
+import com.xxxxls.xsuper.util.singleClick
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -15,6 +15,10 @@ class MainActivity : BaseActivity() {
         super.onInitialize()
         tv_login.singleClick {
             UserPaths.USER_ACTIVITY_LOGIN.jump()
+        }
+
+        tv_register.singleClick {
+            UserPaths.USER_ACTIVITY_REGISTER.jump()
         }
     }
 }

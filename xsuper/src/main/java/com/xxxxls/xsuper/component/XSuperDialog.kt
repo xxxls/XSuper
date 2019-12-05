@@ -20,6 +20,10 @@ import androidx.lifecycle.LifecycleOwner
  */
 open class XSuperDialog : Dialog, IComponent {
 
+    constructor(context: Context) : super(context) {
+        init()
+    }
+
     constructor(context: Context, themeResId: Int) : super(context, themeResId) {
         init()
     }

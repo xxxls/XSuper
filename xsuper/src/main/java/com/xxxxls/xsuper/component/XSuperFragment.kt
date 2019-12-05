@@ -5,13 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import com.xxxxls.xsuper.loading.ILoading
+import com.xxxxls.xsuper.net.bridge.ComponentAction
+import com.xxxxls.xsuper.net.bridge.IComponentBridge
+import com.xxxxls.xsuper.util.L
+import com.xxxxls.xsuper.util.toast
 
 /**
  * Super-Fragment
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperFragment : XSuperLazyFragment(), IComponent {
+open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewModel, ILoading {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,12 +54,54 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent {
         return null
     }
 
-    override fun getLifecycleOwner(): LifecycleOwner? {
+    override fun getLifecycleOwner(): LifecycleOwner {
         return this
     }
 
     override fun <T : View> findViewById(id: Int): T? {
         return view?.findViewById<T>(id)
+    }
+
+    override fun onAction(action: ComponentAction) {
+        super.onAction(action)
+        L.e("${javaClass.simpleName} -> onAction() action:${action}")
+
+        (activity as? IComponentBridge)?.run {
+            //转至activity处理
+            this.onAction(action)
+        } ?: let {
+            //自己处理该事件
+            when (action) {
+                is ComponentAction.ShowLoading -> {
+                    showLoading(message = action.message)
+                }
+                is ComponentAction.DismissLoading -> {
+                    dismissLoading()
+                }
+                is ComponentAction.Toast -> {
+                    toast(action.message)
+                }
+                is ComponentAction.BuildDialog -> {
+                    action.build(activity)
+                }
+            }
+        }
+    }
+
+    override fun showLoading(id: Int, message: CharSequence?) {
+        L.e("${javaClass.simpleName} -> showLoading()")
+        (activity as? ILoading)?.run {
+            //转至activity处理
+            this.showLoading(id, message)
+        }
+    }
+
+    override fun dismissLoading(id: Int) {
+        L.e("${javaClass.simpleName} -> dismissLoading()")
+        (activity as? ILoading)?.run {
+            //转至activity处理
+            this.dismissLoading(id)
+        }
     }
 
 }

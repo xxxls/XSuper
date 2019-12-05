@@ -6,6 +6,10 @@ import com.xxxxls.xsuper.net.engine.IHttpEngine
 import com.xxxxls.xsuper.util.ClassUtils
 import com.xxxxls.xsuper.util.L
 import kotlinx.coroutines.*
+import java.lang.reflect.ParameterizedType
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import kotlinx.coroutines.Deferred
+
 
 /**
  * API 网络请求

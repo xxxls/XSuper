@@ -9,4 +9,6 @@ public interface UserPaths {
     //用户登录
     String USER_ACTIVITY_LOGIN = "/user/activity/login";
 
+    //用户注册
+    String USER_ACTIVITY_REGISTER = "/user/activity/register";
 }
