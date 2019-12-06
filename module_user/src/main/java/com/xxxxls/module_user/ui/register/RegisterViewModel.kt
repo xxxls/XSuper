@@ -4,14 +4,13 @@ import com.xxxxls.module_base.net.BaseLiveData
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.net.UserApis
 import com.xxxxls.module_base.net.FastApiViewModel
-import com.xxxxls.xsuper.net.XSuperLiveData
 
 /**
  * 注册VM
  * @author Max
  * @date 2019-12-05.
  */
-class RegisterViewModel : FastApiViewModel<UserApis>() {
+class RegisterViewModel : FastApiViewModel<UserApis>(UserApis::class.java) {
 
     val registerLiveData by lazy {
         BaseLiveData<UserBean>()

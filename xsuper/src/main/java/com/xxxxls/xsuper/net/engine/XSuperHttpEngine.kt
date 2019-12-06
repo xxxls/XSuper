@@ -26,6 +26,10 @@ open class XSuperHttpEngine(
 ) :
     IHttpEngine {
 
+    override fun getBaseUrl(): String {
+        return retrofit.baseUrl().toString()
+    }
+
     override fun getInterceptors(): ArrayList<IResponseInterceptor>? {
         return interceptors
     }

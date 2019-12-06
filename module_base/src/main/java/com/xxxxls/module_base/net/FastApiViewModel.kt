@@ -10,14 +10,10 @@ import kotlinx.coroutines.Job
  * @author Max
  * @date 2019-12-02.
  */
-open class FastApiViewModel<Api> : BaseViewModel() {
+open class FastApiViewModel<Api>(apiClazz: Class<Api>) : BaseViewModel() {
 
     // 快速Api
-//    val mRepositoryApi = createRepository<BaseApiRepository<Api>>()
-
-
-    // 快速Api
-    val mRepositoryApi = BaseApiRepository<Api>()
+    protected val mRepositoryApi = BaseApiRepository(apiClazz)
 
     /**
      * 请求接口

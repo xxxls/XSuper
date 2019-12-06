@@ -16,7 +16,7 @@ import kotlinx.coroutines.Deferred
  * @author Max
  * @date 2019-11-26.
  */
-abstract class ApiRepository<Api> : XSuperRepository() {
+abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository() {
 
     //网络请求
     protected val mHttpEngine: IHttpEngine by lazy {
@@ -25,7 +25,8 @@ abstract class ApiRepository<Api> : XSuperRepository() {
 
     //Api
     protected val apiService: Api by lazy {
-        mHttpEngine.createService(ClassUtils.getSuperClassGenericType<Api>(javaClass))
+        mHttpEngine.createService(apiClazz)
+//        mHttpEngine.createService(ClassUtils.getSuperClassGenericType<Api>(javaClass))
     }
 
     /**

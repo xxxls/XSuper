@@ -11,6 +11,11 @@ import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
 interface IHttpEngine {
 
     /**
+     * 获取请求地址
+     */
+    fun getBaseUrl(): String
+
+    /**
      * 创建请求Service
      */
     fun <T> createService(service: Class<T>): T

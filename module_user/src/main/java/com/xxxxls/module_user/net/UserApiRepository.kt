@@ -8,7 +8,7 @@ import com.xxxxls.xsuper.net.engine.IHttpEngine
  * @author Max
  * @date 2019-11-28.
  */
-class UserApiRepository : BaseApiRepository<UserApis>() {
+class UserApiRepository : BaseApiRepository<UserApis>(UserApis::class.java) {
 
     override fun getHttpEngine(): IHttpEngine {
         //可自定义配置该模块下的网络请求
