@@ -6,6 +6,8 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.util.L
@@ -71,4 +73,5 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IComponentViewModel
     override fun dismissLoading(id: Int) {
         L.e("${javaClass.simpleName} -> dismissLoading()")
     }
+
 }

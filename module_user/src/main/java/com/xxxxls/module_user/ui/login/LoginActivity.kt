@@ -27,14 +27,19 @@ class LoginActivity : BaseActivity() {
 
     override fun onInitialize() {
         super.onInitialize()
-        mViewModel.loginLiveData.observe(this, success = {
-            L.e("loginLiveData:$it")
-        }, error = {
-            L.e("loginLiveData:$it")
-        })
 
         btn_login.singleClick {
             mViewModel.login(et_username.text.trim().toString(), et_password.text.trim().toString())
         }
     }
+
+    override fun onInitObserve() {
+        super.onInitObserve()
+        mViewModel.loginLiveData.observe(success = {
+            L.e("loginLiveData:$it")
+        }, error = {
+            L.e("loginLiveData:$it")
+        })
+    }
+
 }

@@ -28,13 +28,17 @@ class RegisterActivity : BaseActivity() {
         return R.layout.user_activity_register
     }
 
-    override fun onInitialize() {
-        super.onInitialize()
+    override fun onInitObserve() {
+        super.onInitObserve()
         mViewModel.registerLiveData.observe(this, success = {
             L.e("registerLiveData:$it")
         }, error = {
             L.e("registerLiveData:$it")
         })
+    }
+
+    override fun onInitialize() {
+        super.onInitialize()
 
         btn_register.singleClick {
             mViewModel.register(

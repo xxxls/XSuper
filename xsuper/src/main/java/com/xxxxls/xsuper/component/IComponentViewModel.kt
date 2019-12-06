@@ -1,8 +1,11 @@
 package com.xxxxls.xsuper.component
 
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
+import com.xxxxls.xsuper.exceptions.XSuperException
+import com.xxxxls.xsuper.net.XSuperLiveData
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
 import com.xxxxls.xsuper.net.viewmodel.XSuperViewModel
@@ -41,6 +44,16 @@ interface IComponentViewModel : ViewModelStoreOwner, IComponentBridge {
      * @param action 具体事件动作
      */
     override fun onAction(action: ComponentAction) {
+    }
+
+    /**
+     * 建立关联
+     */
+    fun <T> XSuperLiveData<T>.observe(
+        success: (value: T) -> Unit = {},
+        error: (e: XSuperException) -> Unit = {}
+    ) {
+        this.observe(getLifecycleOwner(), success, error)
     }
 
 }
