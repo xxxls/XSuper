@@ -41,13 +41,21 @@ open class XSuperViewModel : ViewModel(), IComponentBridge {
     /**
      * 创建Repository
      */
-    inline fun <reified T : XSuperRepository> createRepository(): T {
+    protected inline fun <reified T : XSuperRepository> createRepository(): T {
         var repository = mRepositorys[T::class.java] as? T
         if (repository == null) {
             repository = T::class.java.newInstance()
-            repository.setComponentBridge(this)
-            mRepositorys[T::class.java] = repository
+            addRepository(repository)
         }
+        return repository
+    }
+
+    /**
+     * 添加Repository至本viewModel
+     */
+    protected inline fun <reified T : XSuperRepository> addRepository(repository: T): T {
+        repository.setComponentBridge(this)
+        mRepositorys[T::class.java] = repository
         return repository
     }
 

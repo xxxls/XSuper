@@ -13,7 +13,10 @@ import kotlinx.coroutines.Job
 open class FastApiViewModel<Api>(apiClazz: Class<Api>) : BaseViewModel() {
 
     // 快速Api
-    protected val mRepositoryApi = BaseApiRepository(apiClazz)
+    protected val mRepositoryApi by lazy {
+        val repository = BaseApiRepository(apiClazz)
+        addRepository(repository)
+    }
 
     /**
      * 请求接口

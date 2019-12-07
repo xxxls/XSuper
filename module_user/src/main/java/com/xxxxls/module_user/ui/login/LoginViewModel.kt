@@ -18,7 +18,6 @@ class LoginViewModel : UserViewModel() {
         BaseLiveData<UserBean>()
     }
 
-
     fun login(userName: String, password: String) {
 
         mUserRepository.requestApi(loginLiveData) {
