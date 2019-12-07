@@ -30,7 +30,9 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IComponentViewModel
     /**
      * 组件初始化方法，只会调用一次
      */
-    protected open fun onInitialize() {}
+    protected open fun onInitialize() {
+        onInitObserve()
+    }
 
     /**
      * 内容布局ID

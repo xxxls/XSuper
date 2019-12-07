@@ -6,6 +6,10 @@ package com.xxxxls.module_base.constants;
  */
 public interface UserPaths {
 
+
+    //用户首页
+    String USER_FRAGMENT_INDEX= "/user/fragment/index";
+
     //用户登录
     String USER_ACTIVITY_LOGIN = "/user/activity/login";
 

@@ -38,7 +38,9 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewMode
     /**
      * 组件初始化方法，只会调用一次
      */
-    protected open fun onInitialize() {}
+    protected open fun onInitialize() {
+        onInitObserve()
+    }
 
     /**
      * 内容布局资源ID (优先级高于createContentView)

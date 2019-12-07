@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="base_colorPrimary">#211D38</color>
+    <color name="base_colorPrimaryDark">#131120</color>
+    <color name="base_colorAccent">#8D8B9B</color>
+
+    <!--  透明  -->
+    <color name="base_color_transparent">#00000000</color>
+    <!--  主题颜色  -->
+    <color name="base_color_theme">#131120</color>
+    <!--  主题颜色 渐变-开始  -->
+    <color name="base_color_theme_start">#FF5C58E0</color>
+    <!--  主题颜色 渐变-结束 -->
+    <color name="base_color_theme_end">#FFB425FE</color>
+    <!--  主题颜色背景色  -->
+    <color name="base_color_theme_background">#131120</color>
+
+    <!--  分割线颜色  -->
+    <color name="base_color_divider">@color/base_color_ffffff_50</color>
+
+    <!--  首页TAB 背景色  -->
+    <color name="base_color_home_tab_background">#181527</color>
+
+
+    <color name="base_color_000000">#000000</color>
+    <color name="base_color_ffffff">#FFFFFF</color>
+    <color name="base_color_b2b2b2">#b2b2b2</color>
+    <color name="base_color_dbb566">#DBB566</color>
+    <color name="base_color_d6d6d6">#d6d6d6</color>
+    <color name="base_color_8D8B9B">#8D8B9B</color>
+    <color name="base_color_999999">#999999</color>
+    <color name="base_color_0C0C0C">#0C0C0C</color>
+    <color name="base_color_CC0C0C0C">#CC0C0C0C</color>
+    <color name="base_color_d6d6d6_29">#4ad6d6d6</color>
+    <color name="base_color_8D8B9B_20">#338D8B9B</color>
+    <color name="base_color_D8D8D8">#D8D8D8</color>
+    <color name="base_color_211D38">#211D38</color>
+    <color name="base_color_FD1684">#FD1684</color>
+    <color name="base_color_EDEDED">#EDEDED</color>
+    <color name="base_color_3B3650">#3B3650</color>
+    <color name="base_color_1884FF">#1884FF</color>
+    <color name="base_color_FF3B30">#FF3B30</color>
+    <color name="base_color_A8A8A8">#A8A8A8</color>
+    <color name="base_color_00faff">#007AFF</color>
+    <color name="base_color_ff3b30">#FF3B30</color>
+    <color name="base_color_4f3d3b">#4f3d3b</color>
+    <color name="base_color_1b192e">#1B192E</color>
+    <color name="base_color_333333">#333333</color>
+    <color name="base_color_161823">#161823</color>
+    <color name="base_color_f1f1f2">#f1f1f2</color>
+    <color name="base_color_585761">#585761</color>
+    <color name="base_color_88878F">#88878F</color>
+    <color name="base_color_131120">#131120</color>
+    <color name="base_color_292929">#292929</color>
+    <color name="base_color_191919">#191919</color>
+    <color name="base_color_08d400">#08d400</color>
+    <color name="base_color_0cc8ee">#FF0CC8EE</color>
+    <color name="base_color_181527">#181527</color>
+    <color name="base_color_211d38">#211D38</color>
+    <color name="base_color_f9f9f9">#F9F9F9</color>
+
+    <color name="base_color_696c6c7B">#696C6C7B</color>
+    <color name="base_color_8a0a0a0d">#8A0A0A0D</color>
+
+
+    <color name="base_color_88878F_50">#8988878F</color>
+
+    <color name="base_color_FD1684_49">#7DFD1684</color>
+    <!--  百分之50透明度  -->
+    <color name="base_color_ffffff_50">#89FFFFFF</color>
+    <!--  百分之55透明度  -->
+    <color name="base_color_ffffff_55">#8cFFFFFF</color>
+    <!--  百分之14透明度  -->
+    <color name="base_color_ffffff_14">#23FFFFFF</color>
+    <!--  百分之15透明度  -->
+    <color name="base_color_ffffff_15">#38FFFFFF</color>
+    <!--  百分之70透明度  -->
+    <color name="base_color_ffffff_70">#b2FFFFFF</color>
+    <!--  百分之30透明度  -->
+    <color name="base_color_ffffff_30">#4cFFFFFF</color>
+    <!--  百分之29透明度  -->
+    <color name="base_color_ffffff_29">#4aFFFFFF</color>
+    <!--  百分之6透明度  -->
+    <color name="base_color_ffffff_6">#0fFFFFFF</color>
+    <!--  百分之11透明度  -->
+    <color name="base_color_ffffff_11">#1cFFFFFF</color>
+    <color name="base_color_ffffff_10">#19FFFFFF</color>
+    <color name="base_color_ffffff_49">#7DFFFFFF</color>
+    <color name="base_color_ffffff_20">#33FFFFFF</color>
+    <color name="base_color_ffffff_19">#30FFFFFF</color>
+    <color name="base_color_ffffff_9">#17FFFFFF</color>
+
+
+    <color name="base_color_131120_50">#89131120</color>
+    <color name="base_color_000000_49">#7D000000</color>
+    <color name="base_color_000000_50">#89000000</color>
+    <color name="base_color_000000_36">#5C000000</color>
+    <color name="base_color_000000_9">#17000000</color>
+    <color name="base_color_000000_15">#38000000</color>
+    <color name="base_color_000000_11">#29000000</color>
+    <color name="base_color_f9f9f9_78">#C7F9F9F9</color>
+
+
+</resources>

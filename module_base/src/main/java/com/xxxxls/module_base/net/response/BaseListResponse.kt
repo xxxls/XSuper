@@ -5,12 +5,4 @@ package com.xxxxls.module_base.net.response
  * @author Max
  * @date 2019-11-28.
  */
-data class BaseListResponse<out T>(
-    val curPage: Int,
-    val datas: List<T>,
-    val offset: Int,
-    val over: Boolean,
-    val pageCount: Int,
-    val size: Int,
-    val total: Int
-)
+class BaseListResponse<out T> : BaseResponse<ListResponse<T>>()
