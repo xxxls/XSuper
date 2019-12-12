@@ -85,4 +85,7 @@ dependencies {
     //greenDao
     api rootProject.ext.dependencies["greenDao"]
     api rootProject.ext.dependencies["greenDaoHelper"]
+
+    //下拉刷新
+    api rootProject.ext.dependencies["SmartRefresh"]
 }

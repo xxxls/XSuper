@@ -1,5 +1,4 @@
 package com.xxxxls.example.home
-
 import com.xxxxls.example.bean.ArticleBean
 import com.xxxxls.example.net.HomeApis
 import com.xxxxls.module_base.net.BaseLiveData
@@ -17,6 +16,7 @@ class HomeArticleListViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java
         BaseLiveData<ListResponse<ArticleBean>>()
     }
 
+
     fun refresh() {
         requestApi(listLiveData) {
             it.getHomeArticleListAsync(0)
@@ -26,4 +26,5 @@ class HomeArticleListViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java
     fun loadMore() {
 
     }
+
 }

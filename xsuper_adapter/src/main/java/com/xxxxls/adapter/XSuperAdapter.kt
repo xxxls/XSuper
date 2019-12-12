@@ -1,13 +1,16 @@
 package com.xxxxls.adapter
 
 import android.content.Context
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.annotation.NonNull
-import androidx.paging.PagedListAdapter
+import androidx.annotation.Nullable
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * super - Adapter
@@ -15,19 +18,24 @@ import androidx.recyclerview.widget.DiffUtil
  * @date 2019-12-07.
  */
 abstract class XSuperAdapter<T, VH : XSuperViewHolder> :
-    PagedListAdapter<T, VH> {
+    RecyclerView.Adapter<VH>, IDiffItemCallback<T> {
 
     //默认布局ID
     @LayoutRes
     protected var mLayoutResId: Int
 
+    //Context
     protected lateinit var mContext: Context
+
+    //AsyncListDiffer
+    protected val mDiffer: AsyncListDiffer<T> by lazy {
+        AsyncListDiffer<T>(this, getDiffUtilItemCallback())
+    }
+
+    //LayoutInflater
     protected lateinit var mLayoutInflater: LayoutInflater
 
-    constructor(
-        layoutResId: Int,
-        diffCallback: DiffUtil.ItemCallback<T> = XSuperItemCallback()
-    ) : super(diffCallback) {
+    constructor(layoutResId: Int = 0) : super() {
         this.mLayoutResId = layoutResId
     }
 
@@ -43,19 +51,69 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> :
         convert(holder, getItem(position))
     }
 
+    override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
+        if (payloads.isNullOrEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+            return
+        }
+        convertPayloads(holder, getItem(position), payloads)
+    }
+
+    override fun getItemCount(): Int {
+        return mDiffer.currentList.size
+    }
+
+    protected fun getItem(position: Int): T? {
+        return mDiffer.currentList[position]
+    }
+
     protected fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
         return mLayoutInflater.inflate(layoutResId, parent, false)
     }
 
+    /**
+     * 设置数据
+     */
+    public fun submitList(@Nullable newList: List<T>) {
+        mDiffer.submitList(newList)
+    }
 
     /**
-     * Implement this method and use the helper to adapt the view to the given item.
-     *
-     * @param helper A fully initialized helper.
-     * @param item   The item that needs to be displayed.
+     * 更新UI
+     * @param helper
+     * @param item
      */
     protected abstract fun convert(@NonNull helper: VH, item: T?)
 
+    /**
+     * 更新UI 局部
+     * @param helper
+     * @param item
+     * @param payloads
+     */
+    protected open fun convertPayloads(
+        @NonNull helper: VH, item: T?,
+        payloads: MutableList<Any>
+    ) {
+
+    }
+
+    override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
+        return super.areItemsTheSame(oldItem, newItem)
+    }
+
+    override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
+        return super.areContentsTheSame(oldItem, newItem)
+    }
+
+    override fun getChangePayload(oldItem: T, newItem: T): Any? {
+        return super.getChangePayload(oldItem, newItem)
+    }
+
+    //构建ItemCallback
+    open fun getDiffUtilItemCallback(): DiffUtil.ItemCallback<T> {
+        return DefItemCallback(this)
+    }
 }
 
 

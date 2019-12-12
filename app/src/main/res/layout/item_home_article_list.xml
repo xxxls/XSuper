@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/base_color_theme"
+    app:cardBackgroundColor="@color/base_color_f9f9f9"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -20,7 +20,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/base_color_8D8B9B"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="这是文章标题，Hello" />
@@ -32,7 +32,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/base_color_8D8B9B"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             tools:text="作者" />
