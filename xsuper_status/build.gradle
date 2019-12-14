@@ -33,7 +33,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    resourcePrefix "adapter"
+    resourcePrefix "status"
 }
 
 
@@ -43,10 +43,6 @@ dependencies {
     androidTestApi rootProject.ext.dependencies["runner"]
     androidTestApi rootProject.ext.dependencies["espresso_core"]
 
-
     api rootProject.ext.dependencies["appcompat"]
-
-    //分页
-    api rootProject.ext.dependencies["paging"]
 
 }

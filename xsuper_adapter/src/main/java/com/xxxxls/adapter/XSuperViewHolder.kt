@@ -21,7 +21,6 @@ class XSuperViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         SparseArray<View>()
     }
 
-
     /**
      * 设置Text
      * @param viewId ID

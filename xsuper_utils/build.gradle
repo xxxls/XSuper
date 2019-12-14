@@ -33,7 +33,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    resourcePrefix "super_utils"
+    resourcePrefix "utils"
 }
 
 
