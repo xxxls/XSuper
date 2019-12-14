@@ -1,7 +1,7 @@
 package com.xxxxls.xsuper.net.interceptors
 
 
-import com.xxxxls.xsuper.util.L
+import com.xxxxls.utils.L
 import okhttp3.*
 import okio.Buffer
 
@@ -20,8 +20,8 @@ class LoggerInterceptor(private val TAG: String = "LoggerInterceptor") : Interce
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val startTime = System.nanoTime()
-        L.d(TAG, "----------Start----------")
-        L.d(TAG, String.format("请求地址：| %s", request.url))
+        com.xxxxls.utils.L.d(TAG, "----------Start----------")
+        com.xxxxls.utils.L.d(TAG, String.format("请求地址：| %s", request.url))
         //执行请求
         val response = chain.proceed(request)
         printParams(request.body)
@@ -33,7 +33,7 @@ class LoggerInterceptor(private val TAG: String = "LoggerInterceptor") : Interce
         val buffer = source.buffer()
         //接口数据大于16K不显示
         if (buffer.size > 1024 * 16) {
-            L.d(
+            com.xxxxls.utils.L.d(
                 TAG, "请求返回：| (长度:" + buffer.size
                         + ")大于16K不打印,点击链接在网页查看 " + request.url.toString()
             )
@@ -46,11 +46,11 @@ class LoggerInterceptor(private val TAG: String = "LoggerInterceptor") : Interce
             }
             val bodyString = buffer.clone().readString(charset!!)
             //String str = URLDecoder.decode(bodyString, "UTF-8");
-            L.d(TAG, String.format("请求返回：| %s", bodyString))
+            com.xxxxls.utils.L.d(TAG, String.format("请求返回：| %s", bodyString))
         }
         val endTime = System.nanoTime()
         val duration = (endTime - startTime) / 1e6
-        L.d(TAG, "----------End:请求耗时:" + duration + "毫秒----------")
+        com.xxxxls.utils.L.d(TAG, "----------End:请求耗时:" + duration + "毫秒----------")
         return response
     }
 
@@ -67,6 +67,6 @@ class LoggerInterceptor(private val TAG: String = "LoggerInterceptor") : Interce
             charset = contentType.charset(charset)
         }
         val params = buffer.readString(charset!!)
-        L.d(TAG, "请求参数：| $params")
+        com.xxxxls.utils.L.d(TAG, "请求参数：| $params")
     }
 }

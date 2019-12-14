@@ -5,8 +5,8 @@ import com.xxxxls.module_base.base.BaseActivity
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_user.R
 import com.xxxxls.xsuper.net.viewmodel.ViewModelFactory
-import com.xxxxls.xsuper.util.L
-import com.xxxxls.xsuper.util.singleClick
+import com.xxxxls.utils.L
+import com.xxxxls.utils.singleClick
 import kotlinx.android.synthetic.main.user_activity_login.*
 
 /**
@@ -36,9 +36,9 @@ class LoginActivity : BaseActivity() {
     override fun onInitObserve() {
         super.onInitObserve()
         mViewModel.loginLiveData.observe(success = {
-            L.e("loginLiveData:$it")
+            com.xxxxls.utils.L.e("loginLiveData:$it")
         }, error = {
-            L.e("loginLiveData:$it")
+            com.xxxxls.utils.L.e("loginLiveData:$it")
         })
     }
 

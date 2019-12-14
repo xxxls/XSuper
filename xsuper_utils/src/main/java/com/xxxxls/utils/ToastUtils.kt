@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.util
+package com.xxxxls.utils
 
 import android.content.Context
 import android.widget.Toast
@@ -39,7 +39,7 @@ fun Fragment.toast(@StringRes messageResId: Int?, duration: Int = Toast.LENGTH_S
 }
 
 fun Any.toast(message: CharSequence?, duration: Int = Toast.LENGTH_SHORT) {
-    Utils.getApp()?.apply {
+    AppUtils.getApp()?.apply {
         message?.let {
             Toast.makeText(this, message, duration).show()
         }
@@ -47,7 +47,7 @@ fun Any.toast(message: CharSequence?, duration: Int = Toast.LENGTH_SHORT) {
 }
 
 fun Any.toast(@StringRes messageResId: Int?, duration: Int = Toast.LENGTH_SHORT) {
-    Utils.getApp()?.apply {
+    AppUtils.getApp()?.apply {
         messageResId?.let {
             Toast.makeText(this, it, duration).show()
         }

@@ -3,7 +3,7 @@ package com.xxxxls.xsuper.net.repository
 import com.xxxxls.xsuper.R
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
-import com.xxxxls.xsuper.util.Utils
+import com.xxxxls.utils.AppUtils
 import kotlinx.coroutines.*
 
 /**
@@ -13,7 +13,7 @@ import kotlinx.coroutines.*
  */
 abstract class DBRepository<Dao> : XSuperRepository() {
 
-    val codeExceptionMsg = Utils.getApp().getString(R.string.super_code_exception)
+    val codeExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_code_exception)
 
     protected val dbService: Dao by lazy {
         getDao()

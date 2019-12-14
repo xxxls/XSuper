@@ -3,7 +3,8 @@ package com.xxxxls.xsuper.component.application
 import android.app.Application
 import android.text.TextUtils
 import androidx.annotation.CallSuper
-import com.xxxxls.xsuper.util.ClassInterfaceUtils
+import com.xxxxls.utils.AppUtils
+import com.xxxxls.utils.ClassInterfaceUtils
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
@@ -22,6 +23,7 @@ open class XSuperApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppUtils.init(this)
         initApplicationDelegate()
         if (packageName == getProcessName(android.os.Process.myPid())) {
             onInitialize()
@@ -47,7 +49,7 @@ open class XSuperApplication : Application() {
     /**
      * 初始化 Application
      */
-    private fun initApplicationDelegate(){
+    private fun initApplicationDelegate() {
         mAppDelegateList =
             ClassInterfaceUtils.getObjectsWithInterface(
                 this,

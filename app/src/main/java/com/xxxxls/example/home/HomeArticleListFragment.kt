@@ -5,15 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
-import com.xxxxls.adapter.CommonItemDecoration
+import com.xxxxls.adapter.decoration.CommonItemDecoration
 import com.xxxxls.example.R
 import com.xxxxls.example.adapter.HomeArticleAdapter
 import com.xxxxls.module_base.base.BaseFragment
 import com.xxxxls.xsuper.net.viewmodel.ViewModelFactory
-import com.xxxxls.xsuper.util.L
-import com.xxxxls.xsuper.util.dp
-import com.xxxxls.xsuper.util.px
-import com.xxxxls.xsuper.util.toast
+import com.xxxxls.utils.px
+import com.xxxxls.utils.toast
 import kotlinx.android.synthetic.main.fragment_article_list.*
 
 /**
@@ -45,7 +43,7 @@ class HomeArticleListFragment : BaseFragment() {
     override fun onInitObserve() {
         super.onInitObserve()
         mViewModel.listLiveData.observe(success = {
-            L.e("list-success:$it")
+            com.xxxxls.utils.L.e("list-success:$it")
             mAdapter.submitList(it.datas)
             refreshLayout.finishRefresh()
             refreshLayout.finishLoadMore()
@@ -54,7 +52,7 @@ class HomeArticleListFragment : BaseFragment() {
             refreshLayout.state
             refreshLayout.finishRefresh(false)
             refreshLayout.finishLoadMore(false)
-            L.e("list-error:$it")
+            com.xxxxls.utils.L.e("list-error:$it")
         })
     }
 

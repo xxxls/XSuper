@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.util;
+package com.xxxxls.utils;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -10,8 +10,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-
-import androidx.annotation.Nullable;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,7 +40,7 @@ import java.util.concurrent.Executors;
  *     desc  : utils about initialization
  * </pre>
  */
-public final class Utils {
+public final class AppUtils {
 
     private static final ExecutorService       UTIL_POOL          = Executors.newFixedThreadPool(3);
     private static final Handler               UTIL_HANDLER       = new Handler(Looper.getMainLooper());
@@ -51,7 +49,7 @@ public final class Utils {
     private static Application sApplication;
 
 
-    private Utils() {
+    private AppUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -108,12 +106,12 @@ public final class Utils {
         if (Looper.myLooper() == Looper.getMainLooper()) {
             runnable.run();
         } else {
-            Utils.UTIL_HANDLER.post(runnable);
+            AppUtils.UTIL_HANDLER.post(runnable);
         }
     }
 
     public static void runOnUiThreadDelayed(final Runnable runnable, long delayMillis) {
-        Utils.UTIL_HANDLER.postDelayed(runnable, delayMillis);
+        AppUtils.UTIL_HANDLER.postDelayed(runnable, delayMillis);
     }
 
     static String getCurrentProcessName() {
@@ -127,7 +125,7 @@ public final class Utils {
 
     static void fixSoftInputLeaks(final Window window) {
         InputMethodManager imm =
-                (InputMethodManager) Utils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) AppUtils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         String[] leakViews = new String[]{"mLastSrvView", "mCurRootView", "mServedView", "mNextServedView"};
         for (String leakView : leakViews) {
@@ -166,7 +164,7 @@ public final class Utils {
     }
 
     private static String getCurrentProcessNameByAms() {
-        ActivityManager am = (ActivityManager) Utils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) AppUtils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
         if (am == null) return "";
         List<ActivityManager.RunningAppProcessInfo> info = am.getRunningAppProcesses();
         if (info == null || info.size() == 0) return "";
@@ -184,7 +182,7 @@ public final class Utils {
     private static String getCurrentProcessNameByReflect() {
         String processName = "";
         try {
-            Application app = Utils.getApp();
+            Application app = AppUtils.getApp();
             Field loadedApkField = app.getClass().getField("mLoadedApk");
             loadedApkField.setAccessible(true);
             Object loadedApk = loadedApkField.get(app);

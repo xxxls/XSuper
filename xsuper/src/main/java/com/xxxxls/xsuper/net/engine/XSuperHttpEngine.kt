@@ -6,7 +6,7 @@ import com.xxxxls.xsuper.exceptions.CodeException
 import com.xxxxls.xsuper.exceptions.NetWorkException
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
-import com.xxxxls.xsuper.util.Utils
+import com.xxxxls.utils.AppUtils
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import java.net.ConnectException
@@ -34,11 +34,11 @@ open class XSuperHttpEngine(
         return interceptors
     }
 
-    val httpExceptionMsg = Utils.getApp().getString(R.string.super_network_exception)
-    val connectExceptionMsg = Utils.getApp().getString(R.string.super_connect_exception)
-    val jsonExceptionMsg = Utils.getApp().getString(R.string.super_parse_json_exception)
-    val unknownHostExceptionMsg = Utils.getApp().getString(R.string.super_parse_host_exception)
-    val codeExceptionMsg = Utils.getApp().getString(R.string.super_code_exception)
+    val httpExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_network_exception)
+    val connectExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_connect_exception)
+    val jsonExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_parse_json_exception)
+    val unknownHostExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_parse_host_exception)
+    val codeExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_code_exception)
 
     override fun requestExceptionConversion(throwable: Throwable): XSuperException {
 

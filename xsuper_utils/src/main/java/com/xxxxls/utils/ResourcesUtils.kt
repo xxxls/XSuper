@@ -1,10 +1,9 @@
-package com.xxxxls.xsuper.util
+package com.xxxxls.utils
 
 import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Build
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat

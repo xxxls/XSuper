@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.util
+package com.xxxxls.utils
 
 import android.text.Editable
 import android.text.TextWatcher

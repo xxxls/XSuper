@@ -1,4 +1,4 @@
-package com.xxxxls.adapter;
+package com.xxxxls.adapter.decoration;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

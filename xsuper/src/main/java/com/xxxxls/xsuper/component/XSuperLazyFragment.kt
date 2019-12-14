@@ -3,7 +3,7 @@ package com.xxxxls.xsuper.component
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
-import com.xxxxls.xsuper.util.logE
+import com.xxxxls.utils.logE
 
 /**
  * 懒加载Fragment

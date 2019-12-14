@@ -3,11 +3,8 @@ package com.xxxxls.xsuper.net.repository
 import com.xxxxls.xsuper.net.XSuperResponse
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import com.xxxxls.xsuper.net.engine.IHttpEngine
-import com.xxxxls.xsuper.util.ClassUtils
-import com.xxxxls.xsuper.util.L
+import com.xxxxls.utils.L
 import kotlinx.coroutines.*
-import java.lang.reflect.ParameterizedType
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import kotlinx.coroutines.Deferred
 
 
@@ -74,7 +71,7 @@ abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository()
                 //默认成功响应
                 callBack.onSuccess(result.getBody()!!)
             } catch (e: Exception) {
-                L.e("请求接口异常：$e.toString()")
+                com.xxxxls.utils.L.e("请求接口异常：$e.toString()")
                 //请求过程异常
                 callBack.onError(getHttpEngine().requestExceptionConversion(e))
             } finally {

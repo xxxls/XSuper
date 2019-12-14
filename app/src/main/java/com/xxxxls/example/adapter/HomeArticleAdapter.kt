@@ -4,7 +4,7 @@ import com.xxxxls.adapter.XSuperAdapter
 import com.xxxxls.adapter.XSuperViewHolder
 import com.xxxxls.example.R
 import com.xxxxls.example.bean.ArticleBean
-import com.xxxxls.xsuper.util.L
+import com.xxxxls.utils.L
 
 /**
  * 首页文章

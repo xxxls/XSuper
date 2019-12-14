@@ -2,16 +2,13 @@ package com.xxxxls.xsuper.component
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.net.bridge.ComponentAction
-import com.xxxxls.xsuper.util.L
-import com.xxxxls.xsuper.util.toast
+import com.xxxxls.utils.L
+import com.xxxxls.utils.toast
 
 /**
  * Super-Activity
@@ -51,7 +48,7 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IComponentViewModel
 
     override fun onAction(action: ComponentAction) {
         super.onAction(action)
-        L.e("${javaClass.simpleName} -> onAction() action:${action}")
+        com.xxxxls.utils.L.e("${javaClass.simpleName} -> onAction() action:${action}")
         when (action) {
             is ComponentAction.ShowLoading -> {
                 showLoading(message = action.message)
@@ -69,11 +66,11 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IComponentViewModel
     }
 
     override fun showLoading(id: Int, message: CharSequence?) {
-        L.e("${javaClass.simpleName} -> showLoading()")
+        com.xxxxls.utils.L.e("${javaClass.simpleName} -> showLoading()")
     }
 
     override fun dismissLoading(id: Int) {
-        L.e("${javaClass.simpleName} -> dismissLoading()")
+        com.xxxxls.utils.L.e("${javaClass.simpleName} -> dismissLoading()")
     }
 
 }

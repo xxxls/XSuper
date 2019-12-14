@@ -1,7 +1,6 @@
 package com.xxxxls.adapter
 
 import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -112,7 +111,7 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> :
 
     //构建ItemCallback
     open fun getDiffUtilItemCallback(): DiffUtil.ItemCallback<T> {
-        return DefItemCallback(this)
+        return DefaultItemCallback(this)
     }
 }
 

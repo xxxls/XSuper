@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
  * @author Max
  * @date 2019-12-12.
  */
-class DefItemCallback<T>(private val diffItemCallback: IDiffItemCallback<T>) :
+class DefaultItemCallback<T>(private val diffItemCallback: IDiffItemCallback<T>) :
     DiffUtil.ItemCallback<T>() {
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
         //两个条目是否相同

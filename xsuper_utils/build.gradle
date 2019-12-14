@@ -33,8 +33,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    resourcePrefix "super"
+    resourcePrefix "super_utils"
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -42,46 +43,6 @@ dependencies {
     androidTestApi rootProject.ext.dependencies["runner"]
     androidTestApi rootProject.ext.dependencies["espresso_core"]
 
-    //工具集
-    api project(path: ':xsuper_utils')
-
-    /**
-     * @官方组件
-     */
-    api rootProject.ext.dependencies["kotlin"]
     api rootProject.ext.dependencies["appcompat"]
-    api rootProject.ext.dependencies["core-ktx"]
-    api rootProject.ext.dependencies["constraint_layout"]
-    api rootProject.ext.dependencies["design"]
-    api rootProject.ext.dependencies["lifecycle"]
-    //协程
-    api rootProject.ext.dependencies["kotlinx-coroutines"]
-
-    //view-model，live-data
-    api rootProject.ext.dependencies["viewmodel-ktx"]
-    api rootProject.ext.dependencies["runtime-ktx"]
-    api rootProject.ext.dependencies["livedata-ktx"]
-
-    //分页
-    api rootProject.ext.dependencies["paging"]
-
-
-    /**
-     * @好用组件
-     */
-
-    //OkHttp
-    api rootProject.ext.dependencies["okhttp3"]
-    //retrofit
-    api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["retrofit2_kotlin"]
-    api rootProject.ext.dependencies["converter-gson"]
-    //Gson
-    api rootProject.ext.dependencies["gson"]
-
-
-    /**
-     * @其他组件
-     */
 
 }
