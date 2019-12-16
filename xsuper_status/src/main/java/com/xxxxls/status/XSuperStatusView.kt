@@ -1,7 +1,6 @@
 package com.xxxxls.status
 
 import android.content.Context
-import android.os.Handler
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -249,11 +248,6 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
         }
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        switchStatus(XStatus.Content)
-    }
-
     override fun setOnStatusChangeListener(listener: IStatusView.OnStatusChangeListener?) {
         this.statusChangeListener = listener
     }
@@ -262,5 +256,17 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
         this.retryClickListener = listener
     }
 
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        switchStatus(XStatus.Content)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        statusViews.clear()
+        statusLayoutIds.clear()
+        retryClickListener = null
+        statusChangeListener = null
+    }
 
 }
