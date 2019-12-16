@@ -1,9 +1,7 @@
 package com.xxxxls.xsuper.net.repository
 
-import com.xxxxls.xsuper.R
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
-import com.xxxxls.utils.AppUtils
 import kotlinx.coroutines.*
 
 /**
@@ -12,8 +10,6 @@ import kotlinx.coroutines.*
  * @date 2019-12-04.
  */
 abstract class DBRepository<Dao> : XSuperRepository() {
-
-    val codeExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_code_exception)
 
     protected val dbService: Dao by lazy {
         getDao()
@@ -58,11 +54,21 @@ abstract class DBRepository<Dao> : XSuperRepository() {
                 callback.onSuccess(result)
             } catch (e: Exception) {
                 e.printStackTrace()
-                callback.onError(XSuperException(0, codeExceptionMsg, e))
+                callback.onError(requestExceptionConversion(e))
             } finally {
                 callback.dismissLoading()
             }
         }
+    }
+
+
+    /**
+     * 请求异常转换
+     * @param throwable 异常信息
+     * @return 转换为可读异常
+     */
+    protected open fun requestExceptionConversion(throwable: Throwable): XSuperException{
+        return XSuperException(0, throwable.message ?: throwable.toString(), throwable)
     }
 
 }

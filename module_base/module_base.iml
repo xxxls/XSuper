@@ -221,6 +221,7 @@
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:1.1.3@aar" level="project" />
     <orderEntry type="module" module-name="xsuper" />
     <orderEntry type="module" module-name="xsuper_adapter" />
+    <orderEntry type="module" module-name="xsuper_status" />
     <orderEntry type="module" module-name="xsuper_utils" />
   </component>
 </module>

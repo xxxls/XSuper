@@ -1,6 +1,7 @@
 package com.xxxxls.status
 
 import android.content.Context
+import android.os.Handler
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,11 @@ import androidx.annotation.LayoutRes
  * @author Max
  * @date 2019-12-14.
  */
-class XSuperStatusView : RelativeLayout {
+class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
+
 
     //当前类型
-    protected var statusType: XStatus = XStatus.Content
+    protected var statusType: XStatus = XStatus.Default
 
     //状态view集合
     protected val statusViews: HashMap<Class<*>, View> by lazy {
@@ -31,6 +33,12 @@ class XSuperStatusView : RelativeLayout {
     protected val inflater: LayoutInflater by lazy {
         LayoutInflater.from(context)
     }
+
+    //状态改变事件
+    protected var statusChangeListener: IStatusView.OnStatusChangeListener? = null
+
+    //重试事件
+    protected var retryClickListener: IStatusView.OnRetryClickListener? = null
 
     //默认布局参数
     private val DEFAULT_LAYOUT_PARAMS: RelativeLayout.LayoutParams by lazy {
@@ -68,25 +76,25 @@ class XSuperStatusView : RelativeLayout {
         statusLayoutIds[XStatus.Empty::class.java] =
             array.getResourceId(
                 R.styleable.XSuperStatusView_status_empty_layout,
-                R.id.status_empty_view
+                View.NO_ID
             )
 
         statusLayoutIds[XStatus.Error::class.java] =
             array.getResourceId(
                 R.styleable.XSuperStatusView_status_error_layout,
-                R.id.status_error_view
+                View.NO_ID
             )
 
         statusLayoutIds[XStatus.Loading::class.java] =
             array.getResourceId(
                 R.styleable.XSuperStatusView_status_loading_layout,
-                R.id.status_loading_view
+                View.NO_ID
             )
 
-        statusLayoutIds[XStatus.NoNetWork::class.java] =
+        statusLayoutIds[XStatus.NoNetwork::class.java] =
             array.getResourceId(
-                R.styleable.XSuperStatusView_status_content_layout,
-                R.id.status_no_network_view
+                R.styleable.XSuperStatusView_status_no_network_layout,
+                View.NO_ID
             )
 
         array.recycle()
@@ -95,14 +103,29 @@ class XSuperStatusView : RelativeLayout {
     /**
      * 设置更新状态
      */
-    fun setStatus(status: XStatus) {
-        this.statusType = status
+    override fun switchStatus(status: XStatus) {
+        if (this.statusType == status) {
+            return
+        }
+
+        if (status == XStatus.Content) {
+            switchContentView()
+            changeStatus(status)
+            return
+        }
+
+        checkGenerateView(status)?.let {
+            switchView(it)
+            changeStatus(status)
+        } ?: let {
+            //该状态无对应视图
+        }
     }
 
     /**
      * 获取当前类型
      */
-    fun getStatus(): XStatus {
+    override fun getStatus(): XStatus {
         return statusType
     }
 
@@ -111,7 +134,7 @@ class XSuperStatusView : RelativeLayout {
      * @param status 状态类型
      * @param statusView 状态视图
      */
-    fun addStatus(status: XStatus, statusView: View) {
+    override fun addStatus(status: XStatus, statusView: View) {
         statusViews[status.javaClass] = statusView
         statusLayoutIds[status.javaClass] = statusView.id
     }
@@ -121,26 +144,18 @@ class XSuperStatusView : RelativeLayout {
      * @param status 状态类型
      * @param statusLayoutId 状态视图布局ID
      */
-    fun addStatus(status: XStatus, @LayoutRes statusLayoutId: Int) {
+    override fun addStatus(status: XStatus, @LayoutRes statusLayoutId: Int) {
         statusLayoutIds[status.javaClass] = statusLayoutId
     }
 
     /**
-     * 切换状态
-     * @param status 状态
+     * 改变状态
      */
-    fun switchStatus(status: XStatus) {
-        if (this.statusType == status) {
-            return
+    private fun changeStatus(status: XStatus) {
+        if (statusType != XStatus.Default) {
+            statusChangeListener?.onChange(statusType, status)
         }
-
-        statusViews[status.javaClass]?.let { view ->
-            checkAddView(view)
-        } ?: let {
-            statusLayoutIds[status.javaClass]?.let { layoutId ->
-                statusViews[status.javaClass] = inflater.inflate(layoutId, null)
-            }
-        }
+        this.statusType = status
     }
 
     /**
@@ -149,10 +164,12 @@ class XSuperStatusView : RelativeLayout {
      */
     private fun checkGenerateView(status: XStatus): View? {
         statusViews[status.javaClass]?.let { view ->
-            checkAddView(view)
             return view
         } ?: let {
             statusLayoutIds[status.javaClass]?.let { layoutId ->
+                if (layoutId <= 0) {
+                    return null
+                }
                 val statusView = inflater.inflate(layoutId, null)
                 statusViews[status.javaClass] = statusView
                 return statusView
@@ -167,18 +184,20 @@ class XSuperStatusView : RelativeLayout {
      */
     private fun checkAddView(view: View) {
         if (indexOfChild(view) < 0) {
+            view.findViewById<View>(R.id.status_retry_view)?.setOnClickListener(this)
             addView(view, 0, DEFAULT_LAYOUT_PARAMS)
         }
     }
 
     /**
-     * 展示指定ID的View 隐藏其他
-     * @param viewId id
+     * 展示指定View 隐藏其他
+     * @param view id
      */
-    fun switchViewById(viewId: Int) {
+    private fun switchView(view: View) {
+        checkAddView(view)
         for (index in 0 until childCount) {
             getChildAt(index).apply {
-                visibility = if (this.id == viewId) View.VISIBLE else View.GONE
+                visibility = if (this == view) View.VISIBLE else View.GONE
             }
         }
     }
@@ -186,24 +205,62 @@ class XSuperStatusView : RelativeLayout {
     /**
      * 展示内容View
      */
-    fun switchContentView() {
-        for (index in 0 until childCount) {
-            getChildAt(index).apply {
-                visibility = if (statusViews.containsValue(this)) View.GONE else View.VISIBLE
+    private fun switchContentView() {
+        checkGenerateView(XStatus.Content)?.let {
+            switchView(it)
+        } ?: let {
+            for (index in 0 until childCount) {
+                getChildAt(index).apply {
+                    visibility = if (statusViews.containsValue(this)) View.GONE else View.VISIBLE
+                }
             }
         }
     }
 
     fun showContent() {
-
+        switchStatus(XStatus.Content)
     }
 
     fun showError() {
+        switchStatus(XStatus.Error)
+    }
 
+    fun showLoading() {
+        switchStatus(XStatus.Loading)
+    }
+
+    fun showEmpty() {
+        switchStatus(XStatus.Empty)
+    }
+
+    fun showNoNetwork() {
+        switchStatus(XStatus.NoNetwork)
+    }
+
+    override fun onClick(v: View?) {
+        //重试点击事件
+        if (this.statusType != XStatus.Default) {
+            val isLoading = retryClickListener?.onRetry(this.statusType)
+            isLoading?.apply {
+                if (this) {
+                    switchStatus(XStatus.Loading)
+                }
+            }
+        }
     }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
+        switchStatus(XStatus.Content)
     }
+
+    override fun setOnStatusChangeListener(listener: IStatusView.OnStatusChangeListener?) {
+        this.statusChangeListener = listener
+    }
+
+    override fun setOnRetryClickListener(listener: IStatusView.OnRetryClickListener?) {
+        this.retryClickListener = listener
+    }
+
 
 }

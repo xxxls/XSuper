@@ -1,11 +1,23 @@
 package com.xxxxls.module_base.net
 
+import com.google.gson.JsonParseException
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.xxxxls.module_base.R
+import com.xxxxls.utils.AppUtils
+import com.xxxxls.xsuper.exceptions.CodeException
+import com.xxxxls.xsuper.exceptions.NetWorkException
+import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.engine.XSuperHttpEngine
 import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
 import okhttp3.OkHttpClient
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.ConnectException
+import java.net.SocketException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import java.util.concurrent.TimeoutException
 
 /**
  * http 请求实例（引擎）
@@ -16,6 +28,44 @@ class BaseHttpEngine(
     retrofit: Retrofit,
     interceptors: ArrayList<IResponseInterceptor>?
 ) : XSuperHttpEngine(retrofit, interceptors) {
+
+    private val httpExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_network)
+    private val connectExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_connect)
+    private val jsonExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_parse_json)
+    private val unknownHostExceptionMsg =
+        AppUtils.getApp().getString(R.string.base_exception_parse_host)
+    private val codeExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_code)
+
+
+    override fun requestExceptionConversion(throwable: Throwable): XSuperException {
+
+        return when (throwable) {
+            is HttpException -> {
+                /*网络异常*/
+                NetWorkException(httpExceptionMsg)
+            }
+            is ConnectException,
+            is TimeoutException,
+            is SocketTimeoutException,
+            is SocketException
+            -> {
+                /*链接异常*/
+                NetWorkException(connectExceptionMsg)
+            }
+            is UnknownHostException -> {
+                /*无法解析该域名异常*/
+                NetWorkException(unknownHostExceptionMsg)
+            }
+            is JsonParseException -> {
+                /*json解析异常*/
+                CodeException(jsonExceptionMsg, throwable)
+            }
+            else -> {
+                /*未知异常*/
+                CodeException(codeExceptionMsg, throwable)
+            }
+        }
+    }
 
     class Builder {
 

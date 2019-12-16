@@ -1,4 +1,4 @@
-package com.xxxxls.example.home
+package com.xxxxls.example.ui.home
 import com.xxxxls.example.bean.ArticleBean
 import com.xxxxls.example.net.HomeApis
 import com.xxxxls.module_base.net.BaseLiveData

@@ -1,4 +1,4 @@
-package com.xxxxls.example.home
+package com.xxxxls.example.ui.home
 
 import android.graphics.Color
 import androidx.recyclerview.widget.LinearLayoutManager

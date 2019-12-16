@@ -1,19 +1,8 @@
 package com.xxxxls.xsuper.net.engine
 
-import com.google.gson.JsonParseException
-import com.xxxxls.xsuper.R
-import com.xxxxls.xsuper.exceptions.CodeException
-import com.xxxxls.xsuper.exceptions.NetWorkException
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
-import com.xxxxls.utils.AppUtils
-import retrofit2.HttpException
 import retrofit2.Retrofit
-import java.net.ConnectException
-import java.net.SocketException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
-import java.util.concurrent.TimeoutException
 
 /**
  * 请求引擎
@@ -34,40 +23,17 @@ open class XSuperHttpEngine(
         return interceptors
     }
 
-    val httpExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_network_exception)
-    val connectExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_connect_exception)
-    val jsonExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_parse_json_exception)
-    val unknownHostExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_parse_host_exception)
-    val codeExceptionMsg = com.xxxxls.utils.AppUtils.getApp().getString(R.string.super_code_exception)
-
+    /**
+     * 网络异常转换
+     * @param throwable 原始异常
+     * @return 转换后的异常信息
+     */
     override fun requestExceptionConversion(throwable: Throwable): XSuperException {
-
-        return when (throwable) {
-            is HttpException -> {
-                /*网络异常*/
-                NetWorkException(httpExceptionMsg)
-            }
-            is ConnectException,
-            is TimeoutException,
-            is SocketTimeoutException,
-            is SocketException
-            -> {
-                /*链接异常*/
-                NetWorkException(connectExceptionMsg)
-            }
-            is UnknownHostException -> {
-                /*无法解析该域名异常*/
-                NetWorkException(unknownHostExceptionMsg)
-            }
-            is JsonParseException -> {
-                /*json解析异常*/
-                CodeException(jsonExceptionMsg, throwable)
-            }
-            else -> {
-                /*未知异常*/
-                CodeException(codeExceptionMsg, throwable)
-            }
-        }
+        return XSuperException(
+            code = 0,
+            message = throwable.message ?: throwable.toString(),
+            cause = throwable
+        )
     }
 
     override fun <T> createService(service: Class<T>): T {

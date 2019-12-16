@@ -2,12 +2,4 @@
     <string name="super_app_name">XSuper</string>
 
 
-    <string name="super_network_exception">网络错误</string>
-    <string name="super_connect_exception">连接失败</string>
-    <string name="super_parse_json_exception">json解析失败</string>
-    <string name="super_parse_host_exception">无法解析该域名</string>
-    <string name="super_code_exception">数据加载失败</string>
-
-
-
 </resources>

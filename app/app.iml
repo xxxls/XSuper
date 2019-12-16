@@ -270,6 +270,7 @@
     <orderEntry type="module" module-name="module_base" />
     <orderEntry type="module" module-name="xsuper" />
     <orderEntry type="module" module-name="xsuper_adapter" />
+    <orderEntry type="module" module-name="xsuper_status" />
     <orderEntry type="module" module-name="xsuper_utils" />
     <orderEntry type="module" module-name="module_user" />
   </component>

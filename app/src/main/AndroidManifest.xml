@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name="com.xxxxls.example.MainActivity">
+        <activity android:name="com.xxxxls.example.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,13 +29,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".test.TestActivity">
+        <activity android:name="com.xxxxls.example.ui.test.TestActivity">
             <!--            <intent-filter>-->
             <!--                <action android:name="android.intent.action.MAIN" />-->
 
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
+
+        <activity android:name=".ui.status.StatusActivity"/>
     </application>
 
 </manifest>

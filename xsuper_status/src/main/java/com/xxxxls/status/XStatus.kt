@@ -7,6 +7,9 @@ package com.xxxxls.status
  */
 sealed class XStatus {
 
+    //默认
+    internal object Default : XStatus()
+
     //正常
     object Content : XStatus()
 
@@ -20,17 +23,5 @@ sealed class XStatus {
     object Loading : XStatus()
 
     //无网络
-    object NoNetWork : XStatus()
-
-//    //正常
-//    CONTENT,
-//
-//    //错误
-//    ERROR,
-//
-//    //空数据
-//    EMPTY,
-//
-//    //加载中
-//    LOADING
+    object NoNetwork : XStatus()
 }

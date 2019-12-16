@@ -1,4 +1,4 @@
-package com.xxxxls.example.test
+package com.xxxxls.example.ui.test
 
 import android.os.Bundle
 import android.util.Log
