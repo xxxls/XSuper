@@ -23,11 +23,13 @@ object XStatusFactory {
         @LayoutRes emptyRes: Int = View.NO_ID,
         @LayoutRes errorRes: Int = View.NO_ID,
         @LayoutRes noNetworkRes: Int = View.NO_ID,
-        onRetry: (status: XStatus) -> Boolean = { _ -> true }
+        //重试时是否自动切换loading状态
+        isAutoSwitchLoading: Boolean = true,
+        onRetry: (status: XStatus) -> Unit = { }
     ): XSuperStatusView? {
         return status(
             (activity.findViewById(android.R.id.content) as ViewGroup).getChildAt(0),
-            loadingRes, emptyRes, errorRes, noNetworkRes, onRetry
+            loadingRes, emptyRes, errorRes, noNetworkRes, isAutoSwitchLoading, onRetry
         )
     }
 
@@ -41,13 +43,15 @@ object XStatusFactory {
         @LayoutRes emptyRes: Int = View.NO_ID,
         @LayoutRes errorRes: Int = View.NO_ID,
         @LayoutRes noNetworkRes: Int = View.NO_ID,
-        onRetry: (status: XStatus) -> Boolean = { _ -> true }
+        //重试时是否自动切换loading状态
+        isAutoSwitchLoading: Boolean = true,
+        onRetry: (status: XStatus) -> Unit = { }
     ): XSuperStatusView? {
         (activity.findViewById(android.R.id.content) as ViewGroup).findViewById<View>(
             contentViewResId
         )?.apply {
             return status(
-                this, loadingRes, emptyRes, errorRes, noNetworkRes, onRetry
+                this, loadingRes, emptyRes, errorRes, noNetworkRes, isAutoSwitchLoading,  onRetry
             )
         }
         return null
@@ -63,10 +67,12 @@ object XStatusFactory {
         @LayoutRes emptyRes: Int = View.NO_ID,
         @LayoutRes errorRes: Int = View.NO_ID,
         @LayoutRes noNetworkRes: Int = View.NO_ID,
-        onRetry: (status: XStatus) -> Boolean = { _ -> true }
+        //重试时是否自动切换loading状态
+        isAutoSwitchLoading: Boolean = true,
+        onRetry: (status: XStatus) -> Unit = { }
     ): XSuperStatusView? {
         fragment.view?.findViewById<View>(contentViewResId)?.apply {
-            return status(this, loadingRes, emptyRes, errorRes, noNetworkRes, onRetry)
+            return status(this, loadingRes, emptyRes, errorRes, noNetworkRes,  isAutoSwitchLoading, onRetry)
         }
         return null
     }
@@ -81,7 +87,9 @@ object XStatusFactory {
         @LayoutRes emptyRes: Int = View.NO_ID,
         @LayoutRes errorRes: Int = View.NO_ID,
         @LayoutRes noNetworkRes: Int = View.NO_ID,
-        onRetry: (status: XStatus) -> Boolean = { _ -> true }
+        //重试时是否自动切换loading状态
+        isAutoSwitchLoading: Boolean = true,
+        onRetry: (status: XStatus) -> Unit = { }
     ): XSuperStatusView? {
         return status(
             contentView,
@@ -90,8 +98,11 @@ object XStatusFactory {
             errorRes,
             noNetworkRes,
             object : IStatusView.OnRetryClickListener {
-                override fun onRetry(status: XStatus): Boolean {
-                    return onRetry(status)
+                override fun onRetry(statusView: IStatusView, status: XStatus) {
+                    if (isAutoSwitchLoading) {
+                        statusView.switchStatus(XStatus.Loading)
+                    }
+                    onRetry(status)
                 }
             })
     }

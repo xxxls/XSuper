@@ -70,11 +70,10 @@ class StatusXmlFragment : BaseFragment() {
     private fun initEvent() {
 
         statusView.setOnRetryClickListener(object : IStatusView.OnRetryClickListener {
-            override fun onRetry(status: XStatus): Boolean {
+            override fun onRetry(statusView: IStatusView, status: XStatus) {
                 L.e("状态重试：status -> $status")
-//                statusView.showLoading()
+                statusView.switchStatus(XStatus.Loading)
                 loading()
-                return true
             }
         })
 
@@ -107,22 +106,20 @@ class StatusXmlFragment : BaseFragment() {
     }
 
     private fun loading() {
-        Handler().postDelayed({
-            val status = when ((0..3).random()) {
-                0 -> {
-                    XStatus.Empty
-                }
-                1 -> {
-                    XStatus.Error
-                }
-                2 -> {
-                    XStatus.NoNetwork
-                }
-                else -> {
-                    XStatus.Content
-                }
+        val status = when ((0..3).random()) {
+            0 -> {
+                XStatus.Empty
             }
-            statusView.switchStatus(status)
-        }, 1000)
+            1 -> {
+                XStatus.Error
+            }
+            2 -> {
+                XStatus.NoNetwork
+            }
+            else -> {
+                XStatus.Content
+            }
+        }
+        statusView.switchStatus(status, 1000)
     }
 }

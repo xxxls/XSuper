@@ -12,8 +12,10 @@ interface IStatusView {
 
     /**
      * 切换状态
+     * @param status 状态
+     * @param delayMillis 延时切换（毫秒）
      */
-    fun switchStatus(status: XStatus)
+    fun switchStatus(status: XStatus, delayMillis: Long = 0L)
 
     /**
      * 获取状态
@@ -66,9 +68,9 @@ interface IStatusView {
 
         /**
          * 重试操作
+         * @param statusView
          * @param status 触发时的状态
-         * @return 是否切换加载状态
          */
-        fun onRetry(status: XStatus): Boolean
+        fun onRetry(statusView: IStatusView, status: XStatus)
     }
 }

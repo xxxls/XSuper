@@ -1,14 +1,12 @@
 package com.xxxxls.status
 
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
-import org.w3c.dom.Text
 
 /**
  * 多状态
@@ -25,10 +23,20 @@ fun View.statusConfig(
     @LayoutRes emptyRes: Int = View.NO_ID,
     @LayoutRes errorRes: Int = View.NO_ID,
     @LayoutRes noNetworkRes: Int = View.NO_ID,
+    //重试时是否自动切换loading状态
+    isAutoSwitchLoading: Boolean = true,
     //重试回调，返回true时自动切换加载状态
-    onRetry: (status: XStatus) -> Boolean = { _ -> true }
+    onRetry: (status: XStatus) -> Unit = { }
 ): XSuperStatusView? {
-    return XStatusFactory.status(this, loadingRes, emptyRes, errorRes, noNetworkRes, onRetry)
+    return XStatusFactory.status(
+        this,
+        loadingRes,
+        emptyRes,
+        errorRes,
+        noNetworkRes,
+        isAutoSwitchLoading,
+        onRetry
+    )
 }
 
 /**
@@ -69,10 +77,11 @@ fun <V : View> View.getStatusChildView(status: XStatus, @IdRes viewId: Int): V? 
 
 /**
  * 切换状态
+ * @param delayMillis 延迟时长（毫秒）
  */
-fun View.switchStatus(status: XStatus) {
+fun View.switchStatus(status: XStatus, delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(status)
+        this.switchStatus(status, delayMillis)
     }
 }
 
@@ -191,11 +200,16 @@ fun View.setOnStatusChildViewClickListener(
  * 设置重试监听
  */
 fun View.setOnStatusRetryListener(
+    //重试时是否自动切换loading状态
+    isAutoSwitchLoading: Boolean = true,
     onRetry: (status: XStatus) -> Boolean
 ) {
     this.setOnStatusRetryListener(object : IStatusView.OnRetryClickListener {
-        override fun onRetry(status: XStatus): Boolean {
-            return onRetry(status)
+        override fun onRetry(statusView: IStatusView, status: XStatus) {
+            if (isAutoSwitchLoading) {
+                statusView.switchStatus(XStatus.Loading)
+            }
+            onRetry(status)
         }
     })
 }

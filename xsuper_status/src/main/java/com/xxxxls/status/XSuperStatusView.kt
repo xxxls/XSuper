@@ -1,6 +1,7 @@
 package com.xxxxls.status
 
 import android.content.Context
+import android.os.Handler
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     protected var retryClickListener: IStatusView.OnRetryClickListener? = null
 
     //默认布局参数
-    private val DEFAULT_LAYOUT_PARAMS: RelativeLayout.LayoutParams by lazy {
+    protected val DEFAULT_LAYOUT_PARAMS: RelativeLayout.LayoutParams by lazy {
         RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.MATCH_PARENT,
             RelativeLayout.LayoutParams.MATCH_PARENT
@@ -101,7 +102,20 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     /**
      * 设置更新状态
      */
-    override fun switchStatus(status: XStatus) {
+    override fun switchStatus(status: XStatus, delayMillis: Long) {
+        if (delayMillis > 0) {
+            postDelayed({
+                switchStatus(status)
+            }, delayMillis)
+        } else {
+            switchStatus(status)
+        }
+    }
+
+    /**
+     * 切换状态
+     */
+    fun switchStatus(status: XStatus) {
         if (this.statusType == status) {
             return
         }
@@ -251,12 +265,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     override fun onClick(v: View?) {
         //重试点击事件
         if (this.statusType != XStatus.Default) {
-            val isLoading = retryClickListener?.onRetry(this.statusType)
-            isLoading?.apply {
-                if (this) {
-                    switchStatus(XStatus.Loading)
-                }
-            }
+            retryClickListener?.onRetry(this, this.statusType)
         }
     }
 

@@ -71,7 +71,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(path: ':xsuper')
     api project(path: ':xsuper_adapter')
-    api project(path: ':xsuper_status')
 
 
     //ARouter路由

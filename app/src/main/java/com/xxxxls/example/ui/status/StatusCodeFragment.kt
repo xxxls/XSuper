@@ -70,19 +70,22 @@ class StatusCodeFragment : BaseFragment() {
             )
         )
 
+        //配置多状态
         recyclerView.statusConfig(
             loadingRes = R.layout.base_status_loading,
             errorRes = R.layout.base_status_error,
             emptyRes = R.layout.base_status_empty,
             noNetworkRes = R.layout.base_status_no_network,
+            isAutoSwitchLoading = true,
             onRetry = { status: XStatus ->
                 L.e("状态重试：status -> $status")
                 loading()
-                true
             })
 
-        recyclerView.setStatusText(XStatus.NoNetwork, R.id.base_status_hint_content, "1201212112")
+        //设置某个状态下的子view文本
+        recyclerView.setStatusText(XStatus.NoNetwork, R.id.base_status_hint_content, "没有网络吗？")
 
+        //设置某个状态下的子view点击事件
         recyclerView.setOnStatusChildViewClickListener(
             XStatus.Empty,
             R.id.base_status_hint_content
@@ -116,22 +119,20 @@ class StatusCodeFragment : BaseFragment() {
     }
 
     private fun loading() {
-        Handler().postDelayed({
-            val status = when ((0..3).random()) {
-                0 -> {
-                    XStatus.Empty
-                }
-                1 -> {
-                    XStatus.Error
-                }
-                2 -> {
-                    XStatus.NoNetwork
-                }
-                else -> {
-                    XStatus.Content
-                }
+        val status = when ((0..3).random()) {
+            0 -> {
+                XStatus.Empty
             }
-            recyclerView?.switchStatus(status)
-        }, 1000)
+            1 -> {
+                XStatus.Error
+            }
+            2 -> {
+                XStatus.NoNetwork
+            }
+            else -> {
+                XStatus.Content
+            }
+        }
+        recyclerView?.switchStatus(status, 3000)
     }
 }
