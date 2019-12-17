@@ -12,8 +12,6 @@
     <item name="status_no_network_view" type="id" />
 
 
-    <!--  内容提示  -->
-    <item name="status_hint_content" type="id" />
     <!--  重试操作view  -->
     <item name="status_retry_view" type="id" />
 </resources>

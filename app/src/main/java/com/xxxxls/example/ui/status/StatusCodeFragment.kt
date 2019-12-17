@@ -1,17 +1,16 @@
 package com.xxxxls.example.ui.status
 
 import android.os.Handler
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xxxxls.example.R
 import com.xxxxls.module_base.adapter.SimpleAdapter
 import com.xxxxls.module_base.base.BaseFragment
-import com.xxxxls.status.IStatusView
-import com.xxxxls.status.XStatus
-import com.xxxxls.status.XStatusFactory
-import com.xxxxls.status.XSuperStatusView
+import com.xxxxls.status.*
 import com.xxxxls.utils.L
 import com.xxxxls.utils.singleClick
+import com.xxxxls.utils.toast
 import kotlinx.android.synthetic.main.fragment_status_xml.*
 import kotlinx.android.synthetic.main.fragment_status_xml.recyclerView
 import kotlinx.android.synthetic.main.layout_status_operation.*
@@ -25,7 +24,7 @@ class StatusCodeFragment : BaseFragment() {
 
     val adapter = SimpleAdapter()
 
-    var statusView:XSuperStatusView? = null
+    var statusView: XSuperStatusView? = null
 
     override fun getLayoutResId(): Int {
         return R.layout.fragment_status_code
@@ -71,41 +70,47 @@ class StatusCodeFragment : BaseFragment() {
             )
         )
 
-        statusView = XStatusFactory.status(
-            this,
+        recyclerView.statusConfig(
             loadingRes = R.layout.base_status_loading,
             errorRes = R.layout.base_status_error,
             emptyRes = R.layout.base_status_empty,
             noNetworkRes = R.layout.base_status_no_network,
-            onRetry = { statusView: IStatusView, status: XStatus ->
+            onRetry = { status: XStatus ->
                 L.e("状态重试：status -> $status")
                 loading()
                 true
-            }
-        )
+            })
 
+        recyclerView.setStatusText(XStatus.NoNetwork, R.id.base_status_hint_content, "1201212112")
+
+        recyclerView.setOnStatusChildViewClickListener(
+            XStatus.Empty,
+            R.id.base_status_hint_content
+        ) {
+            toast("点我了")
+        }
     }
 
     private fun initEvent() {
 
         tv_content.singleClick {
-            statusView?.showContent()
+            recyclerView?.showContent()
         }
 
         tv_loading.singleClick {
-            statusView?.showLoading()
+            recyclerView?.showLoading()
         }
 
         tv_empty.singleClick {
-            statusView?.showEmpty()
+            recyclerView?.showEmpty()
         }
 
         tv_error.singleClick {
-            statusView?.showError()
+            recyclerView?.showError()
         }
 
         tv_no_work.singleClick {
-            statusView?.showNoNetwork()
+            recyclerView?.showNoNetwork()
         }
 
     }
@@ -126,7 +131,7 @@ class StatusCodeFragment : BaseFragment() {
                     XStatus.Content
                 }
             }
-            statusView?.switchStatus(status)
+            recyclerView?.switchStatus(status)
         }, 1000)
     }
 }

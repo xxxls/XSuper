@@ -44,6 +44,11 @@ interface IStatusView {
      */
     fun setOnRetryClickListener(listener: OnRetryClickListener?)
 
+    /**
+     * 获取某状态对应的视图
+     * @param status 状态
+     */
+    fun getViewByStatus(status: XStatus): View?
 
     //状态改变状态
     interface OnStatusChangeListener {

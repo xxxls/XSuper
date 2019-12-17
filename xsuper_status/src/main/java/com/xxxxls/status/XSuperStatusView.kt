@@ -14,7 +14,6 @@ import androidx.annotation.LayoutRes
  */
 class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
 
-
     //当前类型
     protected var statusType: XStatus = XStatus.Default
 
@@ -184,7 +183,8 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     private fun checkAddView(view: View) {
         if (indexOfChild(view) < 0) {
             view.findViewById<View>(R.id.status_retry_view)?.setOnClickListener(this)
-            addView(view, 0, DEFAULT_LAYOUT_PARAMS)
+            addView(view, -1, DEFAULT_LAYOUT_PARAMS)
+            view.visibility = View.GONE
         }
     }
 
@@ -215,6 +215,18 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
             }
         }
     }
+
+    /**
+     * 获取某状态视图
+     */
+    override fun getViewByStatus(status: XStatus): View? {
+        checkGenerateView(status)?.let {
+            checkAddView(it)
+            return it
+        }
+        return null
+    }
+
 
     fun showContent() {
         switchStatus(XStatus.Content)
