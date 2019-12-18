@@ -71,7 +71,7 @@ abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository()
                 //默认成功响应
                 callBack.onSuccess(result.getBody()!!)
             } catch (e: Exception) {
-                com.xxxxls.utils.L.e("请求接口异常：$e.toString()")
+                L.e("请求接口异常：$e.toString()")
                 //请求过程异常
                 callBack.onError(getHttpEngine().requestExceptionConversion(e))
             } finally {

@@ -1,0 +1,63 @@
+package com.xxxxls.example.adapter
+
+import androidx.recyclerview.widget.DiffUtil
+import com.xxxxls.adapter.XSuperAdapter
+import com.xxxxls.adapter.XSuperViewHolder
+import com.xxxxls.adapter.paging.XSuperPagingAdapter
+import com.xxxxls.example.R
+import com.xxxxls.example.bean.ArticleBean
+import com.xxxxls.utils.L
+
+/**
+ * 首页文章
+ * @author Max
+ * @date 2019-12-07.
+ */
+class HomeArticleAdapter2 :
+    XSuperPagingAdapter<ArticleBean, XSuperViewHolder>(
+        R.layout.item_home_article_list,
+        DiffCallback()
+    ) {
+
+    override fun convertPayloads(
+        helper: XSuperViewHolder,
+        item: ArticleBean?,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.contains("superChapterName")) {
+            helper.setText(R.id.tv_author, (item?.author ?: "") + " -Update")
+        }
+        L.e("convertPayloads() payloads: $payloads")
+    }
+
+    override fun convert(helper: XSuperViewHolder, item: ArticleBean?) {
+        helper.setText(R.id.tv_title, item?.title ?: "")
+        helper.setText(R.id.tv_author, item?.author ?: "")
+    }
+
+    override fun areItemsTheSame(oldItem: ArticleBean, newItem: ArticleBean): Boolean {
+        return newItem.superChapterName == oldItem.superChapterName
+    }
+
+    override fun areContentsTheSame(oldItem: ArticleBean, newItem: ArticleBean): Boolean {
+        return newItem.superChapterName == oldItem.superChapterName
+    }
+
+    override fun getChangePayload(oldItem: ArticleBean, newItem: ArticleBean): Any? {
+        if (newItem.superChapterName != oldItem.superChapterName) {
+            return "superChapterName"
+        }
+        return super.getChangePayload(oldItem, newItem)
+    }
+}
+
+class DiffCallback : DiffUtil.ItemCallback<ArticleBean>() {
+    override fun areItemsTheSame(oldItem: ArticleBean, newItem: ArticleBean): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: ArticleBean, newItem: ArticleBean): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+}
