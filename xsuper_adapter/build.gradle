@@ -43,10 +43,11 @@ dependencies {
     androidTestApi rootProject.ext.dependencies["runner"]
     androidTestApi rootProject.ext.dependencies["espresso_core"]
 
-
     api rootProject.ext.dependencies["appcompat"]
 
     //分页
     api rootProject.ext.dependencies["paging"]
 
+    //工具类
+    api project(path: ':xsuper_utils')
 }

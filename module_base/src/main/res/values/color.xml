@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="base_colorPrimary">#211D38</color>
-    <color name="base_colorPrimaryDark">#131120</color>
+    <color name="base_colorPrimary">#FFFFFF</color>
+    <color name="base_colorPrimaryDark">#FFFFFF</color>
     <color name="base_colorAccent">#8D8B9B</color>
 
     <!--  透明  -->
     <color name="base_color_transparent">#00000000</color>
     <!--  主题颜色  -->
-    <color name="base_color_theme">#131120</color>
-    <!--  主题颜色 渐变-开始  -->
-    <color name="base_color_theme_start">#FF5C58E0</color>
-    <!--  主题颜色 渐变-结束 -->
-    <color name="base_color_theme_end">#FFB425FE</color>
+    <color name="base_color_theme">#FFFFFF</color>
     <!--  主题颜色背景色  -->
-    <color name="base_color_theme_background">#131120</color>
+    <color name="base_color_theme_background">#FFFFFF</color>
 
     <!--  分割线颜色  -->
     <color name="base_color_divider">@color/base_color_ffffff_50</color>
-
-    <!--  首页TAB 背景色  -->
-    <color name="base_color_home_tab_background">#181527</color>
 
 
     <color name="base_color_000000">#000000</color>

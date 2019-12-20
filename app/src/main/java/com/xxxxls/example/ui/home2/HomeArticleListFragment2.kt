@@ -42,6 +42,7 @@ class HomeArticleListFragment2 : BaseFragment() {
         super.onInitialize()
         initView()
         initEvent()
+//        refreshLayout.setEnableLoadMore(false)
 //        refreshLayout.autoRefresh()
     }
 
@@ -49,14 +50,22 @@ class HomeArticleListFragment2 : BaseFragment() {
         super.onInitObserve()
         mViewModel.listLiveData.observe(this,
             Observer<PagedList<ArticleBean>> { t -> mAdapter.submitList(t) })
+
+        mViewModel.listStatusLiveData.observe(this, success = {
+            if(it){
+                refreshLayout.finishRefresh()
+            }else{
+                refreshLayout.finishLoadMore()
+            }
+        }, error = {
+            refreshLayout.finishRefresh(false)
+            refreshLayout.finishLoadMore(false)
+        })
     }
 
     private fun initView() {
         recyclerView.adapter = mAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
-        recyclerView.addItemDecoration(
-            CommonItemDecoration.builder().widthAndHeight(10.px()).color(Color.TRANSPARENT).build()
-        )
     }
 
     private fun initEvent() {

@@ -59,9 +59,6 @@ class HomeArticleListFragment : BaseFragment() {
     private fun initView() {
         recyclerView.adapter = mAdapter
         recyclerView.layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
-        recyclerView.addItemDecoration(
-            CommonItemDecoration.builder().widthAndHeight(10.px()).color(Color.TRANSPARENT).build()
-        )
     }
 
     private fun initEvent() {
