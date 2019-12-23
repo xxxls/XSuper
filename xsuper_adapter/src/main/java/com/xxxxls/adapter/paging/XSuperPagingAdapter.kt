@@ -20,7 +20,7 @@ import com.xxxxls.adapter.XSuperViewHolder
  * @date 2019-12-07.
  */
 abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> :
-    PagedListAdapter<T, VH>, IDiffItemCallback<T> {
+    PagedListAdapter<T, VH> {
 
     //默认布局ID
     @LayoutRes
@@ -79,23 +79,6 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> :
         payloads: MutableList<Any>
     ) {
 
-    }
-
-    override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-        return super.areItemsTheSame(oldItem, newItem)
-    }
-
-    override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-        return super.areContentsTheSame(oldItem, newItem)
-    }
-
-    override fun getChangePayload(oldItem: T, newItem: T): Any? {
-        return super.getChangePayload(oldItem, newItem)
-    }
-
-    //构建ItemCallback
-    open fun getDiffUtilItemCallback(): DiffUtil.ItemCallback<T> {
-        return DefaultItemCallback(this)
     }
 }
 

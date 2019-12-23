@@ -1,7 +1,7 @@
 package com.xxxxls.adapter.paging
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.xxxxls.utils.L
@@ -13,48 +13,59 @@ import com.xxxxls.utils.L
  */
 class XSuperPaging<Key, Value>(
     val dataSourceFactory: XSuperDataSourceFactory<Key, Value>,
-    val config: PagedList.Config
-) {
+    val config: PagedList.Config,
+    val statusLiveData: MutableLiveData<XSuperListStatus>? = null
+) : OnListStatusListener {
 
-    private var retry: (() -> Any)? = null
+    //当前状态
+    var status: XSuperListStatus? = null
 
     /**
      * 刷新
      */
-    fun refresh(){
+    fun refresh() {
         dataSourceFactory.dataSourceLiveData.value?.invalidate()
     }
 
-    fun loadAfter(){
+    /**
+     * 重试
+     * @return 是否成功调用重试操作
+     */
+    fun retry(): Boolean {
+        L.e("XSuperPaging -> retry()  status:$status")
 
-    }
+        if (status?.isError() == false) {
+            //失败类型才重试
+            L.e("XSuperPaging -> isError")
+            return false
+        }
 
-    fun loadBefore(){
+        if (status?.retry == null) {
+            //无重试操作
+            L.e("XSuperPaging -> retry == null")
+            return false
+        }
 
+        status?.retry?.invoke()
+        return true
     }
 
     fun build(pagedListBuilder: ((livePagedListBuilder: LivePagedListBuilder<Key, Value>) -> Unit)? = null): LiveData<PagedList<Value>> {
+        dataSourceFactory.statusListener = this
         return LivePagedListBuilder(
             dataSourceFactory,
             config
         ).apply {
-            setBoundaryCallback(object : PagedList.BoundaryCallback<Value>() {
-                override fun onItemAtEndLoaded(itemAtEnd: Value) {
-                    super.onItemAtEndLoaded(itemAtEnd)
-                    L.e("BoundaryCallback() -> onItemAtEndLoaded() :${itemAtEnd.toString()}")
-                }
-
-                override fun onItemAtFrontLoaded(itemAtFront: Value) {
-                    super.onItemAtFrontLoaded(itemAtFront)
-                    L.e("BoundaryCallback() -> onItemAtFrontLoaded() :${itemAtFront.toString()}")
-                }
-
-                override fun onZeroItemsLoaded() {
-                    super.onZeroItemsLoaded()
-                    L.e("BoundaryCallback -> onZeroItemsLoaded()")
-                }
-            })
+            //边界回调
+            setBoundaryCallback(XSuperBoundaryCallback<Value>(this@XSuperPaging))
             pagedListBuilder?.invoke(this)
         }.build()
     }
+
+    override fun onListStatusChange(status: XSuperListStatus) {
+        L.e("XSuperPaging -> $status")
+        this.status = status
+        statusLiveData?.postValue(status)
+    }
+
 }

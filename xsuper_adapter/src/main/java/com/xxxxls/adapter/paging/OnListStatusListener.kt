@@ -6,7 +6,7 @@ package com.xxxxls.adapter.paging
  * @author Max
  * @date 2019-12-20.
  */
-interface IListStatus {
+interface OnListStatusListener {
 
     /**
      * 列表状态改变

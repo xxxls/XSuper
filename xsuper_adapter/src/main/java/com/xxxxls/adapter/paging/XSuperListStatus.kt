@@ -5,8 +5,50 @@ package com.xxxxls.adapter.paging
  * @author Max
  * @date 2019-12-20.
  */
-sealed class XSuperListStatus {
+sealed class XSuperListStatus(val retry: (() -> Unit)? = null) {
 
+    /**
+     * 是否正在获取中
+     */
+    fun isRuning(): Boolean {
+        when (this) {
+            is Initialize,
+            is LoadMoreIn,
+            is FrontLoadMoreIn -> {
+                //正在刷新中
+                return true
+            }
+        }
+        return false
+    }
+
+    /**
+     * 是否失败类型
+     */
+    fun isError(): Boolean {
+        when (this) {
+            is InitializeError,
+            is LoadMoreError,
+            is FrontLoadMoreError -> {
+                return true
+            }
+        }
+        return false
+    }
+
+    /**
+     * 是否结束类型
+     */
+    fun isEnd(): Boolean {
+        when (this) {
+            is LoadMoreEnd,
+            is FrontEnd,
+            is Empty -> {
+                return true
+            }
+        }
+        return false
+    }
 
     /**
      * 初始化中
@@ -16,17 +58,17 @@ sealed class XSuperListStatus {
     /**
      * 初始化成功
      */
-    object InitializeSuccess : XSuperListStatus()
+    class InitializeSuccess(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 
     /**
      * 初始化错误
      */
-    object InitializeError : XSuperListStatus()
+    class InitializeError(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 
     /**
      * 列表空
      */
-    object Empty : XSuperListStatus()
+    class Empty(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 
     /**
      * 列表往下加载更多中
@@ -36,35 +78,35 @@ sealed class XSuperListStatus {
     /**
      * 列表往下加载成功
      */
-    object LoadMoreSuccess : XSuperListStatus()
+    class LoadMoreSuccess(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 
     /**
      * 列表往下加载失败
      */
-    object LoadMoreError : XSuperListStatus()
+    class LoadMoreError(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 
     /**
      * 列表往下已全部加载完毕
      */
-    object End : XSuperListStatus()
+    class LoadMoreEnd(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 
     /**
      * 列表往上加载更多中
      */
-    object AtFrontLoadMoreIn : XSuperListStatus()
+    object FrontLoadMoreIn : XSuperListStatus()
 
     /**
      * 列表往上加载成功
      */
-    object AtFrontLoadMoreSuccess : XSuperListStatus()
+    class FrontLoadMoreSuccess(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 
     /**
      * 列表往上加载失败
      */
-    object AtFrontLoadMoreError : XSuperListStatus()
+    class FrontLoadMoreError(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 
     /**
      * 列表往上已全部加载完毕
      */
-    object AtFrontEnd : XSuperListStatus()
+    class FrontEnd(retry: (() -> Unit)? = null) : XSuperListStatus(retry)
 }

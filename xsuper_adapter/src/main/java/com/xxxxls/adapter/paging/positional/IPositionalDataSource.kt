@@ -1,14 +1,13 @@
 package com.xxxxls.adapter.paging.positional
 
 import androidx.paging.PositionalDataSource
-import com.xxxxls.adapter.paging.IListStatus
 
 /**
  * PositionalDataSource
  * @author Max
  * @date 2019-12-17.
  */
-interface IPositionalDataSource<T> : IListStatus {
+interface IPositionalDataSource<T> {
 
     fun loadRange(
         params: PositionalDataSource.LoadRangeParams,

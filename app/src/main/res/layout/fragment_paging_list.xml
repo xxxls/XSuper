@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:itemCount="10"
-            tools:listitem="@layout/item_home_article_list" />
+            tools:listitem="@layout/item_paging_list" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

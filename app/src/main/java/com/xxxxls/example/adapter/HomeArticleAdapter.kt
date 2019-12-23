@@ -12,14 +12,14 @@ import com.xxxxls.utils.L
  * @date 2019-12-07.
  */
 class HomeArticleAdapter :
-    XSuperAdapter<ArticleBean, XSuperViewHolder>(R.layout.item_home_article_list) {
+    XSuperAdapter<ArticleBean, XSuperViewHolder>(R.layout.item_paging_list) {
 
     override fun convertPayloads(
         helper: XSuperViewHolder,
         item: ArticleBean?,
         payloads: MutableList<Any>
     ) {
-        if (payloads.contains("superChapterName")) {
+        if (payloads.contains("author")) {
             helper.setText(R.id.tv_author, (item?.author ?: "") + " -Update")
         }
         L.e("convertPayloads() payloads: $payloads")
@@ -31,16 +31,16 @@ class HomeArticleAdapter :
     }
 
     override fun areItemsTheSame(oldItem: ArticleBean, newItem: ArticleBean): Boolean {
-        return newItem.superChapterName == oldItem.superChapterName
+        return newItem == oldItem
     }
 
     override fun areContentsTheSame(oldItem: ArticleBean, newItem: ArticleBean): Boolean {
-        return newItem.superChapterName == oldItem.superChapterName
+        return newItem.author == oldItem.author
     }
 
     override fun getChangePayload(oldItem: ArticleBean, newItem: ArticleBean): Any? {
-        if (newItem.superChapterName != oldItem.superChapterName) {
-            return "superChapterName"
+        if (newItem.author != oldItem.author) {
+            return "title"
         }
         return super.getChangePayload(oldItem, newItem)
     }

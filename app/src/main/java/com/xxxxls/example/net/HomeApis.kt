@@ -1,6 +1,7 @@
 package com.xxxxls.example.net
 
 import com.xxxxls.example.bean.ArticleBean
+import com.xxxxls.example.bean.TestPagingBean
 import com.xxxxls.module_base.net.response.BaseListResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.*
@@ -20,5 +21,15 @@ interface HomeApis {
     fun getHomeArticleListAsync(
         @Path("page") page: Int
     ): Deferred<BaseListResponse<ArticleBean>>
+
+
+    /**
+     * 测试接口
+     * @param page 页码
+     */
+    @GET("/article/list/{page}/json")
+    fun getTestPagingListAsync(
+        @Path("page") page: Int
+    ): Deferred<BaseListResponse<TestPagingBean>>
 
 }

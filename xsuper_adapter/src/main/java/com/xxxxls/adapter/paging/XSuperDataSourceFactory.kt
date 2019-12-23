@@ -8,12 +8,16 @@ import androidx.paging.DataSource
  * @author Max
  * @date 2019-12-20.
  */
-abstract class XSuperDataSourceFactory<Key, Value> : DataSource.Factory<Key, Value>() {
+abstract class XSuperDataSourceFactory<Key, Value> :
+    DataSource.Factory<Key, Value>() {
 
     //dataSource
     val dataSourceLiveData: MutableLiveData<DataSource<Key, Value>> by lazy {
         MutableLiveData<DataSource<Key, Value>>()
     }
+
+    //列表状态改变事件
+    var statusListener: OnListStatusListener? = null
 
     final override fun create(): DataSource<Key, Value> {
         val dataSource = createDataSource()
@@ -22,4 +26,5 @@ abstract class XSuperDataSourceFactory<Key, Value> : DataSource.Factory<Key, Val
     }
 
     abstract fun createDataSource(): DataSource<Key, Value>
+
 }
