@@ -9,7 +9,7 @@ import com.xxxxls.adapter.paging.XSuperListStatus
  * @author Max
  * @date 2019-12-17.
  */
-class XSuperPositionalDataSource<T>(
+class PositionalDataSource<T>(
     val dataSource: IPositionalDataSource<T>,
     val statusListener: OnListStatusListener?
 ) :
@@ -25,7 +25,7 @@ class XSuperPositionalDataSource<T>(
         }
         dataSource.loadRange(
             params,
-            XSuperPositionalLoadRangeCallback(callback, statusListener, retry)
+            PositionalLoadRangeCallback(callback, statusListener, retry)
         )
     }
 
@@ -36,7 +36,7 @@ class XSuperPositionalDataSource<T>(
         }
         dataSource.loadInitial(
             params,
-            XSuperPositionalLoadInitialCallback(callback, statusListener, retry)
+            PositionalLoadInitialCallback(callback, statusListener, retry)
         )
     }
 }

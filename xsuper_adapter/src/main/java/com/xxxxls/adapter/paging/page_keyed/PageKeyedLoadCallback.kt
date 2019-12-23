@@ -1,24 +1,24 @@
-package com.xxxxls.adapter.paging.positional
+package com.xxxxls.adapter.paging.page_keyed
 
-import androidx.paging.PositionalDataSource
+import androidx.paging.PageKeyedDataSource
 import com.xxxxls.adapter.paging.LoadErrorCallback
 import com.xxxxls.adapter.paging.OnListStatusListener
 import com.xxxxls.adapter.paging.XSuperListStatus
 
 /**
- *
+ * PageKeyedLoadCallback
  * @author Max
  * @date 2019-12-20.
  */
-class XSuperPositionalLoadRangeCallback<T>(
-    val callback: PositionalDataSource.LoadRangeCallback<T>,
+class PageKeyedLoadCallback<Key,Value>(
+    val callback: PageKeyedDataSource.LoadCallback<Key,Value>,
     val status: OnListStatusListener?,
     private val retry: (() -> Unit)? = null
 ) :
-    PositionalDataSource.LoadRangeCallback<T>(), LoadErrorCallback {
+    PageKeyedDataSource.LoadCallback<Key,Value>(), LoadErrorCallback {
 
-    override fun onResult(data: List<T>) {
-        callback.onResult(data)
+    override fun onResult(data: List<Value>, adjacentPageKey: Key?) {
+        callback.onResult(data, adjacentPageKey)
         status?.onListStatusChange(XSuperListStatus.LoadMoreSuccess())
     }
 

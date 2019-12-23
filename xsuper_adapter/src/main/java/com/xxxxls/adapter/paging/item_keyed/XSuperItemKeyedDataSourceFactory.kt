@@ -1,6 +1,7 @@
 package com.xxxxls.adapter.paging.item_keyed
 
 import androidx.paging.DataSource
+import com.xxxxls.adapter.paging.XSuperDataSourceFactory
 
 /**
  * XSuperItemKeyedDataSourceFactory
@@ -8,8 +9,9 @@ import androidx.paging.DataSource
  * @date 2019-12-17.
  */
 class XSuperItemKeyedDataSourceFactory<Key, Value>(val dataSource: IItemKeyedDataSource<Key, Value>) :
-    DataSource.Factory<Key, Value>() {
-    override fun create(): DataSource<Key, Value> {
-        return XSuperItemKeyedDataSource(dataSource)
+    XSuperDataSourceFactory<Key, Value>() {
+
+    override fun createDataSource(): DataSource<Key, Value> {
+        return ItemKeyedDataSource(dataSource, statusListener = statusListener)
     }
 }

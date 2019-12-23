@@ -12,6 +12,6 @@ class XSuperPositionalDataSourceFactory<T>(val dataSource: IPositionalDataSource
     XSuperDataSourceFactory<Int, T>() {
 
     override fun createDataSource(): DataSource<Int, T> {
-        return XSuperPositionalDataSource(dataSource,statusListener)
+        return PositionalDataSource(dataSource,statusListener)
     }
 }

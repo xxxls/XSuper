@@ -6,11 +6,11 @@ import com.xxxxls.adapter.paging.OnListStatusListener
 import com.xxxxls.adapter.paging.XSuperListStatus
 
 /**
- *
+ * InitialCallback
  * @author Max
  * @date 2019-12-20.
  */
-class XSuperPositionalLoadInitialCallback<T>(
+class PositionalLoadInitialCallback<T>(
     val callback: PositionalDataSource.LoadInitialCallback<T>,
     val statusListener: OnListStatusListener?,
     private val retry: (() -> Unit)? = null

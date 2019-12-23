@@ -11,11 +11,11 @@ interface IPositionalDataSource<T> {
 
     fun loadRange(
         params: PositionalDataSource.LoadRangeParams,
-        callback: XSuperPositionalLoadRangeCallback<T>
+        callback: PositionalLoadRangeCallback<T>
     )
 
     fun loadInitial(
         params: PositionalDataSource.LoadInitialParams,
-        callback: XSuperPositionalLoadInitialCallback<T>
+        callback: PositionalLoadInitialCallback<T>
     )
 }

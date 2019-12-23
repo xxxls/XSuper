@@ -8,8 +8,8 @@ import com.xxxxls.adapter.paging.XSuperListStatus
 import com.xxxxls.adapter.paging.XSuperPaging
 import com.xxxxls.adapter.paging.positional.XSuperPositionalDataSourceFactory
 import com.xxxxls.adapter.paging.positional.IPositionalDataSource
-import com.xxxxls.adapter.paging.positional.XSuperPositionalLoadInitialCallback
-import com.xxxxls.adapter.paging.positional.XSuperPositionalLoadRangeCallback
+import com.xxxxls.adapter.paging.positional.PositionalLoadInitialCallback
+import com.xxxxls.adapter.paging.positional.PositionalLoadRangeCallback
 import com.xxxxls.example.bean.TestPagingBean
 import com.xxxxls.example.net.HomeApis
 import com.xxxxls.module_base.net.FastApiViewModel
@@ -19,7 +19,6 @@ import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
 
 /**
- * 首页文章列表
  * @author Max
  * @date 2019-12-07.
  */
@@ -66,7 +65,7 @@ class PositionalViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
 
     override fun loadRange(
         params: PositionalDataSource.LoadRangeParams,
-        callback: XSuperPositionalLoadRangeCallback<TestPagingBean>
+        callback: PositionalLoadRangeCallback<TestPagingBean>
     ) {
         L.e("loadRange() -> ${params.startPosition}")
 
@@ -93,14 +92,14 @@ class PositionalViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
 
     override fun loadInitial(
         params: PositionalDataSource.LoadInitialParams,
-        callback: XSuperPositionalLoadInitialCallback<TestPagingBean>
+        callback: PositionalLoadInitialCallback<TestPagingBean>
     ) {
         L.e("loadInitial() -> ${params.requestedStartPosition}")
         requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
             override fun onSuccess(_result: ListResponse<TestPagingBean>) {
 
                 val result = testData(0)
-                val value = (1..10).random()
+                val value = (1..3).random()
                 if (value % 2 == 0) {
                     callback.onResult(result.datas, 0, result.total)
                 } else {

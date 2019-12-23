@@ -14,7 +14,8 @@ import com.xxxxls.utils.L
 class XSuperPaging<Key, Value>(
     val dataSourceFactory: XSuperDataSourceFactory<Key, Value>,
     val config: PagedList.Config,
-    val statusLiveData: MutableLiveData<XSuperListStatus>? = null
+    val statusLiveData: MutableLiveData<XSuperListStatus>? = null,
+    val builder: ((livePagedListBuilder: LivePagedListBuilder<Key, Value>) -> Unit)? = null
 ) : OnListStatusListener {
 
     //当前状态
@@ -50,7 +51,7 @@ class XSuperPaging<Key, Value>(
         return true
     }
 
-    fun build(pagedListBuilder: ((livePagedListBuilder: LivePagedListBuilder<Key, Value>) -> Unit)? = null): LiveData<PagedList<Value>> {
+    fun build(): LiveData<PagedList<Value>> {
         dataSourceFactory.statusListener = this
         return LivePagedListBuilder(
             dataSourceFactory,
@@ -58,7 +59,7 @@ class XSuperPaging<Key, Value>(
         ).apply {
             //边界回调
             setBoundaryCallback(XSuperBoundaryCallback<Value>(this@XSuperPaging))
-            pagedListBuilder?.invoke(this)
+             builder?.invoke(this)
         }.build()
     }
 
