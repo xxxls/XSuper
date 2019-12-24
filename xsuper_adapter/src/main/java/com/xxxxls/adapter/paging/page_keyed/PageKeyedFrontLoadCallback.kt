@@ -19,9 +19,8 @@ class PageKeyedFrontLoadCallback<Key, Value>(
 
     override fun onResult(data: List<Value>, adjacentPageKey: Key?) {
         callback.onResult(data, adjacentPageKey)
-        status?.onListStatusChange(XSuperListStatus.FrontLoadMoreIn)
+        status?.onListStatusChange(XSuperListStatus.FrontLoadMoreSuccess())
     }
-
 
     override fun onError(throwable: Throwable?) {
         status?.onListStatusChange(XSuperListStatus.FrontLoadMoreError(retry))

@@ -99,11 +99,11 @@ class PositionalViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
             override fun onSuccess(_result: ListResponse<TestPagingBean>) {
 
                 val result = testData(0)
-                val value = (1..3).random()
-                if (value % 2 == 0) {
-                    callback.onResult(result.datas, 0, result.total)
-                } else {
+                val value = (0..8).random()
+                if (value % 3 == 0) {
                     callback.onResult(ArrayList(), 0, 0)
+                } else {
+                    callback.onResult(result.datas, 0, result.total)
                 }
             }
 

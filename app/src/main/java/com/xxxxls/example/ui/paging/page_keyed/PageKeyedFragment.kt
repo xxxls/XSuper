@@ -58,6 +58,10 @@ class PageKeyedFragment : BaseFragment() {
                     is XSuperListStatus.InitializeError -> {
                         refreshLayout.finishRefresh(false)
                     }
+                    is XSuperListStatus.Empty -> {
+                        refreshLayout.finishRefresh(false)
+                        refreshLayout.finishLoadMore(false)
+                    }
                     is XSuperListStatus.LoadMoreIn -> {
 
                     }
@@ -70,10 +74,18 @@ class PageKeyedFragment : BaseFragment() {
                     is XSuperListStatus.LoadMoreEnd -> {
                         refreshLayout.finishLoadMore()
                     }
-                    is XSuperListStatus.FrontEnd -> {
+                    is XSuperListStatus.FrontLoadMoreIn->{
+
+                    }
+                    is XSuperListStatus.FrontLoadMoreSuccess -> {
+                        refreshLayout.finishRefresh()
                         refreshLayout.finishLoadMore()
                     }
-                    is XSuperListStatus.Empty -> {
+                    is XSuperListStatus.FrontLoadMoreError -> {
+                        refreshLayout.finishRefresh(false)
+                        refreshLayout.finishLoadMore(false)
+                    }
+                    is XSuperListStatus.FrontEnd -> {
                         refreshLayout.finishRefresh(false)
                         refreshLayout.finishLoadMore(false)
                     }

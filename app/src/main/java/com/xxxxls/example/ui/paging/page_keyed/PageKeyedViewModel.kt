@@ -2,10 +2,12 @@ package com.xxxxls.example.ui.paging.page_keyed
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PageKeyedDataSource
 import androidx.paging.PagedList
 import androidx.paging.PositionalDataSource
 import com.xxxxls.adapter.paging.XSuperListStatus
 import com.xxxxls.adapter.paging.XSuperPaging
+import com.xxxxls.adapter.paging.page_keyed.*
 import com.xxxxls.adapter.paging.positional.XSuperPositionalDataSourceFactory
 import com.xxxxls.adapter.paging.positional.IPositionalDataSource
 import com.xxxxls.adapter.paging.positional.PositionalLoadInitialCallback
@@ -23,11 +25,12 @@ import com.xxxxls.xsuper.net.callback.XSuperCallBack
  * @date 2019-12-07.
  */
 class PageKeyedViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
-    IPositionalDataSource<TestPagingBean> {
+    IPageKeyedDataSource<Int, TestPagingBean> {
+
 
     val paging: XSuperPaging<Int, TestPagingBean> by lazy {
         XSuperPaging(
-            XSuperPositionalDataSourceFactory(this),
+            XSuperPageKeyedDataSourceFactory(this),
             PagedList.Config.Builder().apply {
                 this.setPageSize(20)
                 this.setInitialLoadSizeHint(20)
@@ -63,22 +66,44 @@ class PageKeyedViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
         }
     }
 
-    override fun loadRange(
-        params: PositionalDataSource.LoadRangeParams,
-        callback: PositionalLoadRangeCallback<TestPagingBean>
+    override fun loadInitial(
+        params: PageKeyedDataSource.LoadInitialParams<Int>,
+        callback: PageKeyedLoadInitialCallback<Int, TestPagingBean>
     ) {
-        L.e("loadRange() -> ${params.startPosition}")
-
         requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
             override fun onSuccess(_result: ListResponse<TestPagingBean>) {
+                val result = testData(0)
+                val value = (0..8).random()
+                if (value % 3 == 0) {
+                    callback.onResult(ArrayList(), 0, 0)
+                } else {
+                    val previousPageKey = if (value % 2 == 0) 1 else null
+                    callback.onResult(result.datas, previousPageKey, result.datas.last().id)
+                }
+            }
 
-                val result = testData(params.startPosition)
-                if (params.startPosition > 100) {
-                    callback.onResult(ArrayList())
+            override fun onError(exception: XSuperException) {
+                callback.onError(exception)
+            }
+
+        }) {
+            it.getTestPagingListAsync(0)
+        }
+    }
+
+    override fun loadAfter(
+        params: PageKeyedDataSource.LoadParams<Int>,
+        callback: PageKeyedLoadCallback<Int, TestPagingBean>
+    ) {
+        requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
+            override fun onSuccess(_result: ListResponse<TestPagingBean>) {
+                val result = testData(params.key)
+                if (params.key > 100) {
+                    callback.onResult(ArrayList(), null)
 //                    callback.onError(null)
                     return
                 }
-                callback.onResult(result.datas)
+                callback.onResult(result.datas, result.datas.last().id)
             }
 
             override fun onError(exception: XSuperException) {
@@ -86,42 +111,60 @@ class PageKeyedViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
             }
 
         }) {
-            it.getTestPagingListAsync(params.startPosition)
+            it.getTestPagingListAsync(params.key!!)
         }
     }
 
-    override fun loadInitial(
-        params: PositionalDataSource.LoadInitialParams,
-        callback: PositionalLoadInitialCallback<TestPagingBean>
+    override fun loadBefore(
+        params: PageKeyedDataSource.LoadParams<Int>,
+        callback: PageKeyedFrontLoadCallback<Int, TestPagingBean>
     ) {
-        L.e("loadInitial() -> ${params.requestedStartPosition}")
         requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
             override fun onSuccess(_result: ListResponse<TestPagingBean>) {
-
-                val result = testData(0)
-                val value = (1..10).random()
-                if (value % 2 == 0) {
-                    callback.onResult(result.datas, 0, result.total)
-                } else {
-                    callback.onResult(ArrayList(), 0, 0)
+                val result = testDataBefore(params.key)
+                if (params.key < -100) {
+                    callback.onResult(ArrayList(), null)
+                    return
                 }
+                callback.onResult(result.datas, result.datas.first().id)
             }
 
             override fun onError(exception: XSuperException) {
                 callback.onError(exception)
             }
-
         }) {
-            it.getTestPagingListAsync(params.requestedStartPosition)
+            it.getTestPagingListAsync(params.key!!)
         }
     }
 
 
+    /**
+     * 往下加载数据
+     */
     private fun testData(position: Int): ListResponse<TestPagingBean> {
         val list = ArrayList<TestPagingBean>()
-        for (index in position until (position + 20)) {
-            list.add(TestPagingBean(position, "author:$position", "item#$index"))
+        val startIndex = position + 1
+        val endIndex = startIndex + 20
+
+        for (index in startIndex until endIndex) {
+            list.add(TestPagingBean(index, "author:$position", "item#$index"))
         }
+
+        return ListResponse(position, list, 0, false, 5, list.size, 5 * 20)
+    }
+
+    /**
+     * 往上加载数据
+     */
+    private fun testDataBefore(position: Int): ListResponse<TestPagingBean> {
+        val list = ArrayList<TestPagingBean>()
+        val endIndex = position
+        val startIndex = endIndex + (20 * -1) + 1
+
+        for (index in startIndex until endIndex) {
+            list.add(TestPagingBean(index, "author:$position", "item#$index"))
+        }
+
         return ListResponse(position, list, 0, false, 5, list.size, 5 * 20)
     }
 }

@@ -57,6 +57,10 @@ class PositionalFragment : BaseFragment() {
                     is XSuperListStatus.InitializeError -> {
                         refreshLayout.finishRefresh(false)
                     }
+                    is XSuperListStatus.Empty -> {
+                        refreshLayout.finishRefresh(false)
+                        refreshLayout.finishLoadMore(false)
+                    }
                     is XSuperListStatus.LoadMoreIn -> {
 
                     }
@@ -69,10 +73,18 @@ class PositionalFragment : BaseFragment() {
                     is XSuperListStatus.LoadMoreEnd -> {
                         refreshLayout.finishLoadMore()
                     }
-                    is XSuperListStatus.FrontEnd -> {
-                        refreshLayout.finishRefresh()
+                    is XSuperListStatus.FrontLoadMoreIn -> {
+
                     }
-                    is XSuperListStatus.Empty -> {
+                    is XSuperListStatus.FrontLoadMoreSuccess -> {
+                        refreshLayout.finishRefresh()
+                        refreshLayout.finishLoadMore()
+                    }
+                    is XSuperListStatus.FrontLoadMoreError -> {
+                        refreshLayout.finishRefresh(false)
+                        refreshLayout.finishLoadMore(false)
+                    }
+                    is XSuperListStatus.FrontEnd -> {
                         refreshLayout.finishRefresh(false)
                         refreshLayout.finishLoadMore(false)
                     }
