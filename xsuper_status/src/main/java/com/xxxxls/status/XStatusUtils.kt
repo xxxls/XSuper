@@ -89,9 +89,9 @@ fun View.switchStatus(status: XStatus, delayMillis: Long = 0L) {
 /**
  * 切换状态 - Content
  */
-fun View.showContent() {
+fun View.showContent(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.Content)
+        this.switchStatus(XStatus.Content, delayMillis)
     }
 }
 
@@ -99,9 +99,9 @@ fun View.showContent() {
 /**
  * 切换状态 - Loading
  */
-fun View.showLoading() {
+fun View.showLoading(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.Loading)
+        this.switchStatus(XStatus.Loading, delayMillis)
     }
 }
 
@@ -109,9 +109,9 @@ fun View.showLoading() {
 /**
  * 切换状态 - Error
  */
-fun View.showError() {
+fun View.showError(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.Error)
+        this.switchStatus(XStatus.Error, delayMillis)
     }
 }
 
@@ -119,9 +119,9 @@ fun View.showError() {
 /**
  * 切换状态 - Empty
  */
-fun View.showEmpty() {
+fun View.showEmpty(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.Empty)
+        this.switchStatus(XStatus.Empty, delayMillis)
     }
 }
 
@@ -129,9 +129,9 @@ fun View.showEmpty() {
 /**
  * 切换状态 - NoNetwork
  */
-fun View.showNoNetwork() {
+fun View.showNoNetwork(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.NoNetwork)
+        this.switchStatus(XStatus.NoNetwork, delayMillis)
     }
 }
 

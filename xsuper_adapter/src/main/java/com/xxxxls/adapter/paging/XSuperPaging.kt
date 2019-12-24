@@ -24,8 +24,9 @@ class XSuperPaging<Key, Value>(
     /**
      * 刷新
      */
-    fun refresh() {
+    fun refresh(): Boolean {
         dataSourceFactory.dataSourceLiveData.value?.invalidate()
+        return true
     }
 
     /**
@@ -59,7 +60,7 @@ class XSuperPaging<Key, Value>(
         ).apply {
             //边界回调
             setBoundaryCallback(XSuperBoundaryCallback<Value>(this@XSuperPaging))
-             builder?.invoke(this)
+            builder?.invoke(this)
         }.build()
     }
 

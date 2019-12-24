@@ -1,10 +1,10 @@
 package com.xxxxls.example.ui.paging
 
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxxxls.example.R
-import com.xxxxls.example.ui.paging.item_keyed.ItemKeyedFragment
-import com.xxxxls.example.ui.paging.page_keyed.PageKeyedFragment
-import com.xxxxls.example.ui.paging.positional.PositionalFragment
 import com.xxxxls.module_base.base.BaseFragment
+import com.xxxxls.module_base.constants.HomePaths
+import com.xxxxls.module_base.util.newFragment
 import com.xxxxls.xsuper.adapter.CommonFragmentPagerAdapter
 import kotlinx.android.synthetic.main.fragment_paging_index.*
 import kotlinx.android.synthetic.main.fragment_paging_index.viewPager
@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_paging_index.viewPager
  * @author Max
  * @date 2019-12-23.
  */
+@Route(path = HomePaths.HOME_FRAGMENT_PAGING_INDEX)
 class PagingIndexFragment : BaseFragment() {
 
     override fun getLayoutResId(): Int? {
@@ -23,9 +24,13 @@ class PagingIndexFragment : BaseFragment() {
     override fun onInitialize() {
         super.onInitialize()
 
-        val fragments = arrayListOf(PositionalFragment(), ItemKeyedFragment(), PageKeyedFragment())
+        val fragments = arrayListOf(
+            HomePaths.HOME_FRAGMENT_PAGING_LIST.newFragment(HomePaths.KEY_HOME_FRAGMENT_PAGING_LIST_TYPE to 0)!!,
+            HomePaths.HOME_FRAGMENT_PAGING_LIST.newFragment(HomePaths.KEY_HOME_FRAGMENT_PAGING_LIST_TYPE to 1)!!,
+            HomePaths.HOME_FRAGMENT_PAGING_LIST.newFragment(HomePaths.KEY_HOME_FRAGMENT_PAGING_LIST_TYPE to 2)!!
+        )
 
-        val tabs = arrayListOf<String>("positional", "itemKeyed", "pageKeyed")
+        val tabs = arrayListOf("positional", "itemKeyed", "pageKeyed")
 
         viewPager.adapter = CommonFragmentPagerAdapter(
             fragmentManager = childFragmentManager,

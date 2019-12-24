@@ -1,31 +1,27 @@
-package com.xxxxls.example.ui.paging.positional
+package com.xxxxls.example.ui.paging.vm
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import androidx.paging.PositionalDataSource
-import com.xxxxls.adapter.paging.XSuperListStatus
 import com.xxxxls.adapter.paging.XSuperPaging
 import com.xxxxls.adapter.paging.positional.XSuperPositionalDataSourceFactory
 import com.xxxxls.adapter.paging.positional.IPositionalDataSource
 import com.xxxxls.adapter.paging.positional.PositionalLoadInitialCallback
 import com.xxxxls.adapter.paging.positional.PositionalLoadRangeCallback
 import com.xxxxls.example.bean.TestPagingBean
-import com.xxxxls.example.net.HomeApis
-import com.xxxxls.module_base.net.FastApiViewModel
 import com.xxxxls.module_base.net.response.ListResponse
 import com.xxxxls.utils.L
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
 
 /**
+ * PositionalViewModel
  * @author Max
  * @date 2019-12-07.
  */
-class PositionalViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
+class PositionalViewModel : BasePagingListViewModel(),
     IPositionalDataSource<TestPagingBean> {
 
-    val paging: XSuperPaging<Int, TestPagingBean> by lazy {
+    private val paging: XSuperPaging<Int, TestPagingBean> by lazy {
         XSuperPaging(
             XSuperPositionalDataSourceFactory(this),
             PagedList.Config.Builder().apply {
@@ -38,29 +34,8 @@ class PositionalViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
         )
     }
 
-    val listLiveData: LiveData<PagedList<TestPagingBean>> by lazy {
-        paging.build()
-    }
-
-    val listStatusLiveData: MutableLiveData<XSuperListStatus> by lazy {
-        MutableLiveData<XSuperListStatus>()
-    }
-
-    fun refresh() {
-        L.e("refresh() -> ")
-        paging.refresh()
-    }
-
-    fun loadMore() {
-        L.e("loadMore() -> ")
-        val isRetry = paging.retry()
-        if (!isRetry) {
-            L.e("loadMore() -> false")
-            //调用重试失败，重新刷新下当前状态
-            listStatusLiveData.postValue(paging.status)
-        } else {
-            L.e("loadMore() -> true")
-        }
+    override fun getXSuperPaging(): XSuperPaging<*, TestPagingBean> {
+        return paging
     }
 
     override fun loadRange(
@@ -99,8 +74,8 @@ class PositionalViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
             override fun onSuccess(_result: ListResponse<TestPagingBean>) {
 
                 val result = testData(0)
-                val value = (0..8).random()
-                if (value % 3 == 0) {
+                val value = (0..10).random()
+                if (value % 4 == 0) {
                     callback.onResult(ArrayList(), 0, 0)
                 } else {
                     callback.onResult(result.datas, 0, result.total)
@@ -116,12 +91,4 @@ class PositionalViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
         }
     }
 
-
-    private fun testData(position: Int): ListResponse<TestPagingBean> {
-        val list = ArrayList<TestPagingBean>()
-        for (index in position until (position + 20)) {
-            list.add(TestPagingBean(position, "author:$position", "item#$index"))
-        }
-        return ListResponse(position, list, 0, false, 5, list.size, 5 * 20)
-    }
 }
