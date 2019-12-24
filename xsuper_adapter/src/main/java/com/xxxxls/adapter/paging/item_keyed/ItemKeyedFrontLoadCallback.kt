@@ -19,7 +19,7 @@ class ItemKeyedFrontLoadCallback<Value>(
 
     override fun onResult(data: List<Value>) {
         callback.onResult(data)
-        status?.onListStatusChange(XSuperListStatus.FrontLoadMoreIn)
+        status?.onListStatusChange(XSuperListStatus.FrontLoadMoreSuccess())
     }
 
     override fun onError(throwable: Throwable?) {

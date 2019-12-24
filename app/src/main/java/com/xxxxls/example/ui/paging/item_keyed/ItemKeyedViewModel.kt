@@ -75,11 +75,11 @@ class ItemKeyedViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
         requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
             override fun onSuccess(_result: ListResponse<TestPagingBean>) {
                 val result = testData(0)
-                val value = (1..3).random()
-                if (value % 2 == 0) {
-                    callback.onResult(result.datas, 0, result.total)
-                } else {
+                val value = (0..8).random()
+                if (value % 3 == 0) {
                     callback.onResult(ArrayList(), 0, 0)
+                } else {
+                    callback.onResult(result.datas)
                 }
             }
 
@@ -88,7 +88,6 @@ class ItemKeyedViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
             }
 
         }) {
-            params.requestedInitialKey
             it.getTestPagingListAsync(0)
         }
     }
@@ -123,10 +122,9 @@ class ItemKeyedViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
     ) {
         requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
             override fun onSuccess(_result: ListResponse<TestPagingBean>) {
-                val result = testData(params.key)
-                if (params.key > 40) {
+                val result = testDataBefore(params.key)
+                if (params.key < -100) {
                     callback.onResult(ArrayList())
-//                    callback.onError(null)
                     return
                 }
                 callback.onResult(result.datas)
@@ -144,13 +142,33 @@ class ItemKeyedViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java),
         return item.id
     }
 
+    /**
+     * 往下加载数据
+     */
     private fun testData(position: Int): ListResponse<TestPagingBean> {
         val list = ArrayList<TestPagingBean>()
-        val num = if (position > 0) 1 else -1
-        for (index in position until (position + 20)) {
-            val value = index * num
-            list.add(TestPagingBean(position, "author:$position", "item#$value"))
+        val startIndex = position + 1
+        val endIndex = startIndex + 20
+
+        for (index in startIndex until endIndex) {
+            list.add(TestPagingBean(index, "author:$position", "item#$index"))
         }
+
+        return ListResponse(position, list, 0, false, 5, list.size, 5 * 20)
+    }
+
+    /**
+     * 往上加载数据
+     */
+    private fun testDataBefore(position: Int): ListResponse<TestPagingBean> {
+        val list = ArrayList<TestPagingBean>()
+        val endIndex = position
+        val startIndex = endIndex + (20 * -1) + 1
+
+        for (index in startIndex until endIndex) {
+            list.add(TestPagingBean(index, "author:$position", "item#$index"))
+        }
+
         return ListResponse(position, list, 0, false, 5, list.size, 5 * 20)
     }
 }

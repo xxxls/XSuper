@@ -39,7 +39,6 @@ class ItemKeyedDataSource<Key, Value>(
         retry = {
             loadAfter(params, callback)
         }
-
         dataSource.loadAfter(
             params,
             ItemKeyedLoadCallback(callback = callback, status = statusListener, retry = retry)

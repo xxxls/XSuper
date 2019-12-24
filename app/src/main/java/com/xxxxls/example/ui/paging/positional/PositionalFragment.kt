@@ -70,7 +70,7 @@ class PositionalFragment : BaseFragment() {
                         refreshLayout.finishLoadMore()
                     }
                     is XSuperListStatus.FrontEnd -> {
-                        refreshLayout.finishLoadMore()
+                        refreshLayout.finishRefresh()
                     }
                     is XSuperListStatus.Empty -> {
                         refreshLayout.finishRefresh(false)
