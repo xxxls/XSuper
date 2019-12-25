@@ -21,6 +21,6 @@ interface IResponseInterceptor {
     fun <T> onIntercept(
         response: XSuperResponse<T>,
         componentBridge: IComponentBridge?,
-        callBack: XSuperCallBack<T>
+        callBack: XSuperCallBack<XSuperResponse<T>>
     ): Boolean
 }

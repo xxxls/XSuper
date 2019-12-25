@@ -19,8 +19,7 @@ class LoginViewModel : UserViewModel() {
     }
 
     fun login(userName: String, password: String) {
-//
-        mUserRepository.requestApi(loginLiveData) {
+        mUserRepository.requestApi(callBack = loginLiveData) {
             it.login(userName, password)
         }
     }

@@ -27,7 +27,7 @@ open class FastApiViewModel<Api>(apiClazz: Class<Api>) : BaseViewModel() {
         callBack: XSuperCallBack<T>,
         service: (it: Api) -> Deferred<XSuperResponse<T>>
     ): Job {
-        return mRepositoryApi.requestApi(callBack, service)
+        return mRepositoryApi.requestApi(callBack = callBack, service = service)
     }
 
 }

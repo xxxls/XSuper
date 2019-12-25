@@ -4,8 +4,13 @@ import com.xxxxls.xsuper.net.XSuperResponse
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import com.xxxxls.xsuper.net.engine.IHttpEngine
 import com.xxxxls.utils.L
+import com.xxxxls.xsuper.exceptions.XSuperException
+import com.xxxxls.xsuper.net.XSuperLiveData
+import com.xxxxls.xsuper.net.callback.map
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Deferred
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 
 /**
@@ -43,41 +48,131 @@ abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository()
      * 请求接口
      * @param callBack 结果回调
      * @param service 调用的接口
+     * @return 任务
      */
     fun <T> requestApi(
         callBack: XSuperCallBack<T>,
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
         service: (it: Api) -> Deferred<XSuperResponse<T>>
     ): Job {
-        return service(apiService).enqueue(callBack)
+        return service(apiService).enqueue(callBack = callBack.map {
+            return@map it.getBody()!!
+        }, context = context, start = start)
+    }
+
+    /**
+     * 请求接口
+     * @param service 调用的接口
+     * @return LiveData
+     */
+    fun <T> requestApi(
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        service: (it: Api) -> Deferred<XSuperResponse<T>>
+    ): XSuperLiveData<T> {
+        val liveData = XSuperLiveData<T>()
+        service(apiService).enqueue(callBack = object : XSuperCallBack<XSuperResponse<T>> {
+            override fun onSuccess(result: XSuperResponse<T>) {
+                liveData.onSuccess(result = result.getBody()!!)
+            }
+
+            override fun onError(exception: XSuperException) {
+                liveData.onError(exception)
+            }
+        }, context = context, start = start)
+        return liveData
+    }
+
+    /**
+     * 请求接口
+     * @param service 调用的接口
+     * @return 协程
+     */
+    fun <T> requestApiAsync(
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        service: (it: Api) -> Deferred<XSuperResponse<T>>
+    ): Deferred<XSuperResponse<T>> {
+        return service(apiService).enqueueAsync(context = context, start = start)
     }
 
     /**
      * 发起请求
      * @param callBack 结果回调
+     * @return 任务
      */
-    protected inline fun <T> Deferred<XSuperResponse<T>>.enqueue(callBack: XSuperCallBack<T>): Job {
+    protected fun <T> Deferred<XSuperResponse<T>>.enqueue(
+        callBack: XSuperCallBack<XSuperResponse<T>>,
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT
+    ): Job {
         callBack.showLoading()
-        return this@ApiRepository.launch {
+        return this@ApiRepository.launch(context, start) {
             try {
                 //响应结果
                 val result = this@enqueue.await()
                 //响应拦截器走一边
-                getHttpEngine().getInterceptors()?.forEach { interceptors ->
+                mHttpEngine.getInterceptors()?.forEach { interceptors ->
                     if (interceptors.onIntercept(result, mComponentBridge, callBack)) {
                         return@launch
                     }
                 }
 
                 //默认成功响应
-                callBack.onSuccess(result.getBody()!!)
+                callBack.onSuccess(result)
             } catch (e: Exception) {
                 L.e("请求接口异常：$e.toString()")
                 //请求过程异常
-                callBack.onError(getHttpEngine().requestExceptionConversion(e))
+                callBack.onError(mHttpEngine.requestExceptionConversion(e))
             } finally {
                 callBack.dismissLoading()
             }
         }
     }
+
+    /**
+     * 发起请求
+     */
+    protected fun <T> Deferred<XSuperResponse<T>>.enqueueAsync(
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT
+    ): Deferred<XSuperResponse<T>> {
+
+        return async(context, start) {
+            var responseSuccess: XSuperResponse<T>? = null
+            var responseError: XSuperException? = null
+            val callback = object : XSuperCallBack<XSuperResponse<T>> {
+                override fun onSuccess(result: XSuperResponse<T>) {
+                    responseSuccess = result
+                }
+
+                override fun onError(exception: XSuperException) {
+                    responseError = exception
+                }
+            }
+            try {
+                //响应结果
+                val result = this@enqueueAsync.await()
+
+                //响应拦截器走一边
+                mHttpEngine.getInterceptors()?.forEach { interceptors ->
+                    if (interceptors.onIntercept(result, mComponentBridge, callback)) {
+                        if (responseSuccess != null) {
+                            return@async responseSuccess!!
+                        } else {
+                            throw responseError!!
+                        }
+                    }
+                }
+                return@async result
+            } catch (e: Exception) {
+                L.e("请求接口异常：$e.toString()")
+                //请求过程异常
+                throw mHttpEngine.requestExceptionConversion(e)
+            }
+        }
+    }
+
 
 }

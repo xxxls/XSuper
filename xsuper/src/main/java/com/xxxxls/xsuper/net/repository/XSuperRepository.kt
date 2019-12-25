@@ -1,6 +1,8 @@
 package com.xxxxls.xsuper.net.repository
 
 import androidx.annotation.CallSuper
+import androidx.annotation.NonNull
+import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import com.xxxxls.xsuper.net.callback.LoadingCallBack
 import com.xxxxls.xsuper.net.bridge.ComponentAction
@@ -37,6 +39,17 @@ open class XSuperRepository {
         block: suspend CoroutineScope.() -> Unit
     ): Job {
         return mScope.launch(context, start, block)
+    }
+
+    /**
+     * 创建一个协程任务（带返回值）
+     */
+    fun <T> async(
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend CoroutineScope.() -> T
+    ): Deferred<T> {
+        return mScope.async(context, start, block)
     }
 
     /**

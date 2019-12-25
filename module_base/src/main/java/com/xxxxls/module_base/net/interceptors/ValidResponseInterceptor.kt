@@ -16,7 +16,7 @@ class ValidResponseInterceptor : IResponseInterceptor {
     override fun <T> onIntercept(
         response: XSuperResponse<T>,
         componentBridge: IComponentBridge?,
-        callBack: XSuperCallBack<T>
+        callBack: XSuperCallBack<XSuperResponse<T>>
     ): Boolean {
         if (!response.isSuccess()) {
             (response as? BaseResponse<T>)?.apply {

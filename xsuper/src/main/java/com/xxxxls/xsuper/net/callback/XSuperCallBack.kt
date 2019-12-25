@@ -1,5 +1,6 @@
 package com.xxxxls.xsuper.net.callback
 
+import androidx.annotation.NonNull
 import com.xxxxls.xsuper.exceptions.XSuperException
 
 /**
@@ -20,4 +21,20 @@ interface XSuperCallBack<T> {
      * @param exception 错误信息
      */
     fun onError(exception: XSuperException)
+}
+
+/**
+ * 转换
+ */
+fun <T, R> XSuperCallBack<T>.map(@NonNull mapFunction: (R) -> T): XSuperCallBack<R> {
+
+    return object : XSuperCallBack<R> {
+        override fun onSuccess(result: R) {
+            this@map.onSuccess(mapFunction(result))
+        }
+
+        override fun onError(exception: XSuperException) {
+            this@map.onError(exception)
+        }
+    }
 }
