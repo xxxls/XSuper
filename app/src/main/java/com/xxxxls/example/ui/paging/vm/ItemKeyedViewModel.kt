@@ -41,70 +41,45 @@ class ItemKeyedViewModel : BasePagingListViewModel(),
         params: ItemKeyedDataSource.LoadInitialParams<Int>,
         callback: ItemKeyedLoadInitialCallback<TestPagingBean>
     ) {
-        requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
-            override fun onSuccess(_result: ListResponse<TestPagingBean>) {
-                val result = testData(0)
-                val value = (0..10).random()
-                if (value % 4 == 0) {
-                    callback.onResult(ArrayList(), 0, 0)
-                } else {
-                    callback.onResult(result.datas)
-                }
+        mHomeRepository.getTestPagingList(false,0,object :XSuperCallBack<ListResponse<TestPagingBean>>{
+            override fun onSuccess(result: ListResponse<TestPagingBean>) {
+                callback.onResult(result.datas)
             }
 
             override fun onError(exception: XSuperException) {
                 callback.onError(exception)
             }
-
-        }) {
-            it.getTestPagingListAsync(0)
-        }
+        })
     }
 
     override fun loadAfter(
         params: ItemKeyedDataSource.LoadParams<Int>,
         callback: ItemKeyedLoadCallback<TestPagingBean>
     ) {
-        requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
-            override fun onSuccess(_result: ListResponse<TestPagingBean>) {
-                val result = testData(params.key)
-                if (params.key > 100) {
-                    callback.onResult(ArrayList())
-//                    callback.onError(null)
-                    return
-                }
+        mHomeRepository.getTestPagingList(false,params.key!!,object :XSuperCallBack<ListResponse<TestPagingBean>>{
+            override fun onSuccess(result: ListResponse<TestPagingBean>) {
                 callback.onResult(result.datas)
             }
 
             override fun onError(exception: XSuperException) {
                 callback.onError(exception)
             }
-
-        }) {
-            it.getTestPagingListAsync(params.key!!)
-        }
+        })
     }
 
     override fun loadBefore(
         params: ItemKeyedDataSource.LoadParams<Int>,
         callback: ItemKeyedFrontLoadCallback<TestPagingBean>
     ) {
-        requestApi(object : XSuperCallBack<ListResponse<TestPagingBean>> {
-            override fun onSuccess(_result: ListResponse<TestPagingBean>) {
-                val result = testDataBefore(params.key)
-                if (params.key < -100) {
-                    callback.onResult(ArrayList())
-                    return
-                }
+        mHomeRepository.getTestPagingList(true,params.key!!,object :XSuperCallBack<ListResponse<TestPagingBean>>{
+            override fun onSuccess(result: ListResponse<TestPagingBean>) {
                 callback.onResult(result.datas)
             }
 
             override fun onError(exception: XSuperException) {
                 callback.onError(exception)
             }
-        }) {
-            it.getTestPagingListAsync(params.key!!)
-        }
+        })
     }
 
     override fun getKey(item: TestPagingBean): Int {
