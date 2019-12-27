@@ -12,7 +12,7 @@ import com.xxxxls.utils.L
  * @date 2019-12-07.
  */
 class HomeArticleAdapter :
-    XSuperAdapter<ArticleBean, XSuperViewHolder>(R.layout.item_paging_list) {
+    XSuperAdapter<ArticleBean, XSuperViewHolder>(R.layout.item_home_article) {
 
     override fun convertPayloads(
         helper: XSuperViewHolder,
@@ -20,14 +20,14 @@ class HomeArticleAdapter :
         payloads: MutableList<Any>
     ) {
         if (payloads.contains("author")) {
-            helper.setText(R.id.tv_author, (item?.author ?: "") + " -Update")
+            helper.setText(R.id.tv_content, (item?.author ?: "") + " -Update")
         }
         L.e("convertPayloads() payloads: $payloads")
     }
 
     override fun convert(helper: XSuperViewHolder, item: ArticleBean?) {
         helper.setText(R.id.tv_title, item?.title ?: "")
-        helper.setText(R.id.tv_author, item?.author ?: "")
+        helper.setText(R.id.tv_content, item?.author ?: "")
     }
 
     override fun areItemsTheSame(oldItem: ArticleBean, newItem: ArticleBean): Boolean {

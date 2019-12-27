@@ -3,6 +3,7 @@ package com.xxxxls.example.ui
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.xxxxls.example.R
+import com.xxxxls.example.ui.home.HomeArticleListFragment
 import com.xxxxls.example.ui.test.TestFragment
 import com.xxxxls.module_base.base.BaseActivity
 import com.xxxxls.module_base.constants.HomePaths
@@ -29,7 +30,7 @@ class MainActivity : BaseActivity() {
     private fun initView() {
         val fragments = ArrayList<Fragment>()
         fragments.add(HomePaths.HOME_FRAGMENT_PAGING_INDEX.newFragment())
-        fragments.add(TestFragment())
+        fragments.add(HomeArticleListFragment())
         fragments.add(UserPaths.USER_FRAGMENT_INDEX.newFragment())
         viewPager.adapter = CommonFragmentPagerAdapter(supportFragmentManager, fragments)
         viewPager.offscreenPageLimit = fragments.size

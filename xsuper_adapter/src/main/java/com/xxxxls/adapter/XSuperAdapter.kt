@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Max
  * @date 2019-12-07.
  */
-abstract class XSuperAdapter<T, VH : XSuperViewHolder> :
+ abstract class XSuperAdapter<T, VH : XSuperViewHolder> :IAdapter<T>,
     RecyclerView.Adapter<VH>, IDiffItemCallback<T> {
 
     //默认布局ID
@@ -62,18 +62,18 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> :
         return mDiffer.currentList.size
     }
 
-    protected fun getItem(position: Int): T? {
+    protected open fun getItem(position: Int): T? {
         return mDiffer.currentList[position]
     }
 
-    protected fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
+    protected open fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
         return mLayoutInflater.inflate(layoutResId, parent, false)
     }
 
     /**
      * 设置数据
      */
-    public fun submitList(@Nullable newList: List<T>) {
+    fun submitList(@Nullable newList: List<T>) {
         mDiffer.submitList(newList)
     }
 
@@ -112,6 +112,30 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> :
     //构建ItemCallback
     open fun getDiffUtilItemCallback(): DiffUtil.ItemCallback<T> {
         return DefaultItemCallback(this)
+    }
+
+    override fun getData(): List<T> {
+        return mDiffer.currentList
+    }
+
+    override fun getItemView(position: Int): View? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun addData(newData: T, position: Int?) {
+//        mDiffer.submitList()
+    }
+
+    override fun addData(newData: List<T>, position: Int?) {
+    }
+
+    override fun remove(position: Int) {
+    }
+
+    override fun removeAll() {
+    }
+
+    override fun replaceData(data: List<T>) {
     }
 }
 

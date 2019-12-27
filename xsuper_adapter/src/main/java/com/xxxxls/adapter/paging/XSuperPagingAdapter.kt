@@ -11,15 +11,18 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.xxxxls.adapter.DefaultItemCallback
+import com.xxxxls.adapter.IAdapter
 import com.xxxxls.adapter.IDiffItemCallback
 import com.xxxxls.adapter.XSuperViewHolder
+import com.xxxxls.adapter.listener.OnItemChildClickListener
+import com.xxxxls.adapter.listener.OnItemClickListener
 
 /**
  * super - Adapter
  * @author Max
  * @date 2019-12-07.
  */
-abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> :
+abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IAdapter<T>,
     PagedListAdapter<T, VH> {
 
     //默认布局ID
@@ -32,7 +35,16 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> :
     //LayoutInflater
     protected lateinit var mLayoutInflater: LayoutInflater
 
-    constructor(layoutResId: Int = 0,diffCallback: DiffUtil.ItemCallback<T>) : super(diffCallback) {
+    //条目点击事件
+    var mOnItemClickListener: OnItemClickListener? = null
+    //条目子view点击事件
+    var mOnItemChildClickListener: OnItemChildClickListener? = null
+
+
+    constructor(
+        layoutResId: Int = 0,
+        diffCallback: DiffUtil.ItemCallback<T>
+    ) : super(diffCallback) {
         this.mLayoutResId = layoutResId
     }
 
@@ -56,8 +68,7 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> :
         convertPayloads(holder, getItem(position), payloads)
     }
 
-
-    protected fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
+    protected open fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
         return mLayoutInflater.inflate(layoutResId, parent, false)
     }
 
@@ -80,6 +91,35 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> :
     ) {
 
     }
+
+    override fun getData(): List<T> {
+        currentList?.let {
+            return it
+        } ?: let {
+            return emptyList()
+        }
+    }
+
+    override fun getItemView(position: Int): View? {
+        return null
+    }
+
+    override fun addData(newData: T, position: Int?) {
+    }
+
+    override fun addData(newData: List<T>, position: Int?) {
+    }
+
+    override fun remove(position: Int) {
+    }
+
+    override fun removeAll() {
+    }
+
+    override fun replaceData(data: List<T>) {
+    }
+
+
 }
 
 
