@@ -6,6 +6,7 @@ import com.xxxxls.adapter.paging.XSuperPaging
 import com.xxxxls.adapter.paging.item_keyed.*
 import com.xxxxls.example.bean.TestPagingBean
 import com.xxxxls.module_base.net.response.ListResponse
+import com.xxxxls.utils.L
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
 
@@ -28,7 +29,7 @@ class ItemKeyedViewModel : BasePagingListViewModel(),
             }.build(),
             listStatusLiveData,
             builder = {
-                it.setInitialLoadKey(0)
+                it.setInitialLoadKey(-1)
             }
         )
     }
@@ -41,45 +42,63 @@ class ItemKeyedViewModel : BasePagingListViewModel(),
         params: ItemKeyedDataSource.LoadInitialParams<Int>,
         callback: ItemKeyedLoadInitialCallback<TestPagingBean>
     ) {
-        mHomeRepository.getTestPagingList(false,0,object :XSuperCallBack<ListResponse<TestPagingBean>>{
-            override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                callback.onResult(result.datas)
-            }
+        L.e("ItemKeyedViewModel -> loadInitial()")
+        mHomeRepository.getTestPagingList(
+            false,
+            params.requestedInitialKey ?: -1,
+            object : XSuperCallBack<ListResponse<TestPagingBean>> {
+                override fun onSuccess(result: ListResponse<TestPagingBean>) {
+                    callback.onResult(result.datas)
+                    L.e("ItemKeyedViewModel -> loadInitial() -> onSuccess()")
+                }
 
-            override fun onError(exception: XSuperException) {
-                callback.onError(exception)
-            }
-        })
+                override fun onError(exception: XSuperException) {
+                    callback.onError(exception)
+                    L.e("ItemKeyedViewModel -> loadInitial() -> onError()")
+                }
+            })
     }
 
     override fun loadAfter(
         params: ItemKeyedDataSource.LoadParams<Int>,
         callback: ItemKeyedLoadCallback<TestPagingBean>
     ) {
-        mHomeRepository.getTestPagingList(false,params.key!!,object :XSuperCallBack<ListResponse<TestPagingBean>>{
-            override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                callback.onResult(result.datas)
-            }
+        L.e("ItemKeyedViewModel -> onError()")
+        mHomeRepository.getTestPagingList(
+            false,
+            params.key!!,
+            object : XSuperCallBack<ListResponse<TestPagingBean>> {
+                override fun onSuccess(result: ListResponse<TestPagingBean>) {
+                    callback.onResult(result.datas)
+                    L.e("ItemKeyedViewModel -> loadAfter() -> onSuccess()")
+                }
 
-            override fun onError(exception: XSuperException) {
-                callback.onError(exception)
-            }
-        })
+                override fun onError(exception: XSuperException) {
+                    callback.onError(exception)
+                    L.e("ItemKeyedViewModel -> loadAfter() -> onError()")
+                }
+            })
     }
 
     override fun loadBefore(
         params: ItemKeyedDataSource.LoadParams<Int>,
         callback: ItemKeyedFrontLoadCallback<TestPagingBean>
     ) {
-        mHomeRepository.getTestPagingList(true,params.key!!,object :XSuperCallBack<ListResponse<TestPagingBean>>{
-            override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                callback.onResult(result.datas)
-            }
+        L.e("ItemKeyedViewModel -> loadBefore()")
+        mHomeRepository.getTestPagingList(
+            true,
+            params.key!!,
+            object : XSuperCallBack<ListResponse<TestPagingBean>> {
+                override fun onSuccess(result: ListResponse<TestPagingBean>) {
+                    callback.onResult(result.datas)
+                    L.e("ItemKeyedViewModel -> loadBefore() -> onSuccess()")
+                }
 
-            override fun onError(exception: XSuperException) {
-                callback.onError(exception)
-            }
-        })
+                override fun onError(exception: XSuperException) {
+                    callback.onError(exception)
+                    L.e("ItemKeyedViewModel -> loadBefore() -> onError()")
+                }
+            })
     }
 
     override fun getKey(item: TestPagingBean): Int {

@@ -35,7 +35,6 @@ class HomeRepository : BaseApiRepository<HomeApis>(HomeApis::class.java) {
                 callback.onError(NetWorkException("模拟网络连接失败"))
                 return@launch
             }
-
             if (random > 7) {
                 //模拟空数据
                 callback.onSuccess(
@@ -49,8 +48,8 @@ class HomeRepository : BaseApiRepository<HomeApis>(HomeApis::class.java) {
                         total = 0
                     )
                 )
+                return@launch
             }
-
             //成功响应
             if (isBefore) {
                 callback.onSuccess(getBeforeData(key))
@@ -69,7 +68,7 @@ class HomeRepository : BaseApiRepository<HomeApis>(HomeApis::class.java) {
         val endIndex = startIndex + Constants.PAGE_SIZE
 
         for (index in startIndex until endIndex) {
-            list.add(TestPagingBean(index, "author:$key", "item#$index"))
+            list.add(TestPagingBean(index, "content:$key", "item#$index"))
         }
 
         return ListResponse(key, list, 0, false, 5, list.size, 5 * Constants.PAGE_SIZE)
@@ -81,10 +80,10 @@ class HomeRepository : BaseApiRepository<HomeApis>(HomeApis::class.java) {
      */
     private fun getBeforeData(key: Int): ListResponse<TestPagingBean> {
         val list = ArrayList<TestPagingBean>()
-        val startIndex = key + (Constants.PAGE_SIZE * -1) + 1
+        val startIndex = key + (Constants.PAGE_SIZE * -1)
 
         for (index in startIndex until key) {
-            list.add(TestPagingBean(index, "author:$key", "item#$index"))
+            list.add(TestPagingBean(index, "content:$key", "item#$index"))
         }
 
         return ListResponse(key, list, 0, false, 5, list.size, 5 * Constants.PAGE_SIZE)

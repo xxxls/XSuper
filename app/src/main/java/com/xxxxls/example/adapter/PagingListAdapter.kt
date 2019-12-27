@@ -24,15 +24,15 @@ class PagingListAdapter :
         item: TestPagingBean?,
         payloads: MutableList<Any>
     ) {
-        if (payloads.contains("author")) {
-            helper.setText(R.id.tv_author, (item?.author ?: "") + " -Update")
+        if (payloads.contains("content")) {
+            helper.setText(R.id.tv_author, (item?.content ?: "") + " -Update")
         }
         L.e("convertPayloads() payloads: $payloads")
     }
 
     override fun convert(helper: XSuperViewHolder, item: TestPagingBean?) {
         helper.setText(R.id.tv_title, item?.title ?: "")
-        helper.setText(R.id.tv_author, item?.author ?: "")
+        helper.setText(R.id.tv_author, item?.content ?: "")
     }
 }
 

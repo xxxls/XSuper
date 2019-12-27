@@ -7,6 +7,6 @@ package com.xxxxls.example.bean
  */
 data class TestPagingBean(
     val id: Int,
-    val author: String,
+    val content: String,
     val title: String
 )

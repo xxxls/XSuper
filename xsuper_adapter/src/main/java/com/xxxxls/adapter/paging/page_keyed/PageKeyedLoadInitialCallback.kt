@@ -24,12 +24,12 @@ class PageKeyedLoadInitialCallback<Key,Value>(
         nextPageKey: Key?
     ) {
         callback.onResult(data, position, totalCount, previousPageKey, nextPageKey)
-        status?.onListStatusChange(XSuperListStatus.LoadMoreSuccess())
+        status?.onListStatusChange(XSuperListStatus.InitializeSuccess())
     }
 
     override fun onResult(data: List<Value>, previousPageKey: Key?, nextPageKey: Key?) {
         callback.onResult(data, previousPageKey, nextPageKey)
-        status?.onListStatusChange(XSuperListStatus.LoadMoreSuccess())
+        status?.onListStatusChange(XSuperListStatus.InitializeSuccess())
     }
 
     override fun onError(throwable: Throwable?) {

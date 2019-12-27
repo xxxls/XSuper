@@ -10,6 +10,7 @@ import com.xxxxls.adapter.paging.positional.PositionalLoadRangeCallback
 import com.xxxxls.example.bean.TestPagingBean
 import com.xxxxls.module_base.constants.Constants
 import com.xxxxls.module_base.net.response.ListResponse
+import com.xxxxls.utils.L
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
 
@@ -42,12 +43,15 @@ class PositionalViewModel : BasePagingListViewModel(),
         params: PositionalDataSource.LoadRangeParams,
         callback: PositionalLoadRangeCallback<TestPagingBean>
     ) {
+        L.e("PositionalViewModel -> loadRange()")
         mHomeRepository.getTestPagingList(false,params.startPosition,object :XSuperCallBack<ListResponse<TestPagingBean>> {
             override fun onSuccess(result: ListResponse<TestPagingBean>) {
+                L.e("PositionalViewModel -> loadRange() -> onSuccess()")
                 callback.onResult(result.datas)
             }
 
             override fun onError(exception: XSuperException) {
+                L.e("PositionalViewModel -> loadRange() -> onError()")
                 callback.onError(exception)
             }
         })
@@ -57,13 +61,16 @@ class PositionalViewModel : BasePagingListViewModel(),
         params: PositionalDataSource.LoadInitialParams,
         callback: PositionalLoadInitialCallback<TestPagingBean>
     ) {
+        L.e("PositionalViewModel -> loadInitial()")
         mHomeRepository.getTestPagingList(false,params.requestedStartPosition,object :XSuperCallBack<ListResponse<TestPagingBean>> {
             override fun onSuccess(result: ListResponse<TestPagingBean>) {
                 callback.onResult(result.datas, 0, result.total)
+                L.e("PositionalViewModel -> loadInitial() -> onSuccess()")
             }
 
             override fun onError(exception: XSuperException) {
                 callback.onError(exception)
+                L.e("PositionalViewModel -> loadInitial() -> onError()")
             }
         })
     }

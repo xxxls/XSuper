@@ -19,12 +19,12 @@ class ItemKeyedLoadInitialCallback<Value>(
 
     override fun onResult(data: List<Value>) {
         callback.onResult(data)
-        status?.onListStatusChange(XSuperListStatus.LoadMoreSuccess())
+        status?.onListStatusChange(XSuperListStatus.InitializeSuccess())
     }
 
     override fun onResult(data: List<Value>, position: Int, totalCount: Int) {
         callback.onResult(data)
-        status?.onListStatusChange(XSuperListStatus.LoadMoreSuccess())
+        status?.onListStatusChange(XSuperListStatus.InitializeSuccess())
     }
 
     override fun onError(throwable: Throwable?) {
