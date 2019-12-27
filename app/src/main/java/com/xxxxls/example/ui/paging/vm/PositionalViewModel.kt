@@ -8,6 +8,7 @@ import com.xxxxls.adapter.paging.positional.IPositionalDataSource
 import com.xxxxls.adapter.paging.positional.PositionalLoadInitialCallback
 import com.xxxxls.adapter.paging.positional.PositionalLoadRangeCallback
 import com.xxxxls.example.bean.TestPagingBean
+import com.xxxxls.module_base.constants.Constants
 import com.xxxxls.module_base.net.response.ListResponse
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
@@ -24,9 +25,9 @@ class PositionalViewModel : BasePagingListViewModel(),
         XSuperPaging(
             XSuperPositionalDataSourceFactory(this),
             PagedList.Config.Builder().apply {
-                this.setPageSize(20)
-                this.setInitialLoadSizeHint(20)
-                this.setPrefetchDistance((20 / 5))
+                this.setPageSize(Constants.PAGE_SIZE)
+                this.setInitialLoadSizeHint(Constants.PAGE_SIZE)
+                this.setPrefetchDistance((Constants.PAGE_SIZE / 5))
                 this.setEnablePlaceholders(false)
             }.build(),
             listStatusLiveData

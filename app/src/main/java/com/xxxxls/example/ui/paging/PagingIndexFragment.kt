@@ -38,6 +38,6 @@ class PagingIndexFragment : BaseFragment() {
             titles = tabs
         )
         tabLayout.setupWithViewPager(viewPager)
-        viewPager.offscreenPageLimit = fragments.size
+//        viewPager.offscreenPageLimit = fragments.size
     }
 }

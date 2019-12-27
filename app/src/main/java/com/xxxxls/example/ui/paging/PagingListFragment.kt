@@ -12,6 +12,7 @@ import com.xxxxls.adapter.paging.XSuperListStatus
 import com.xxxxls.example.R
 import com.xxxxls.example.adapter.PagingListAdapter
 import com.xxxxls.example.bean.TestPagingBean
+import com.xxxxls.example.ui.paging.vm.BasePagingListViewModel
 import com.xxxxls.example.ui.paging.vm.ItemKeyedViewModel
 import com.xxxxls.example.ui.paging.vm.PageKeyedViewModel
 import com.xxxxls.example.ui.paging.vm.PositionalViewModel
@@ -21,8 +22,7 @@ import com.xxxxls.module_base.util.status
 import com.xxxxls.status.showContent
 import com.xxxxls.status.showEmpty
 import com.xxxxls.status.showError
-import com.xxxxls.status.statusConfig
-import com.xxxxls.xsuper.net.viewmodel.ViewModelFactory
+import com.xxxxls.xsuper.net.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_paging_list.*
 
 /**
@@ -42,13 +42,14 @@ class PagingListFragment : BaseFragment() {
     @Autowired(name = HomePaths.KEY_HOME_FRAGMENT_PAGING_LIST_TYPE)
     var type: Int = 0
 
-    private val mViewModel by ViewModelFactory(
+    private val mViewModel by ViewModelFactoryLazy {
         when (type) {
             0 -> PositionalViewModel::class.java
             1 -> ItemKeyedViewModel::class.java
             else -> PageKeyedViewModel::class.java
-        }
-    )
+        } as Class<BasePagingListViewModel>
+    }
+
 
     override fun getLayoutResId(): Int? {
         return R.layout.fragment_paging_list
@@ -62,6 +63,7 @@ class PagingListFragment : BaseFragment() {
 
     override fun onInitObserve() {
         super.onInitObserve()
+
         mViewModel.listLiveData.observe(this,
             Observer<PagedList<TestPagingBean>> { t -> mAdapter.submitList(t) })
 

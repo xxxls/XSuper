@@ -1,6 +1,7 @@
 package com.xxxxls.example.net
 
 import com.xxxxls.example.bean.TestPagingBean
+import com.xxxxls.module_base.constants.Constants
 import com.xxxxls.module_base.net.BaseApiRepository
 import com.xxxxls.module_base.net.response.ListResponse
 import com.xxxxls.xsuper.exceptions.NetWorkException
@@ -52,9 +53,9 @@ class HomeRepository : BaseApiRepository<HomeApis>(HomeApis::class.java) {
 
             //成功响应
             if (isBefore) {
-                callback.onSuccess(getAfterData(key))
-            } else {
                 callback.onSuccess(getBeforeData(key))
+            } else {
+                callback.onSuccess(getAfterData(key))
             }
         }
     }
@@ -65,13 +66,13 @@ class HomeRepository : BaseApiRepository<HomeApis>(HomeApis::class.java) {
     private fun getAfterData(key: Int): ListResponse<TestPagingBean> {
         val list = ArrayList<TestPagingBean>()
         val startIndex = key + 1
-        val endIndex = startIndex + 20
+        val endIndex = startIndex + Constants.PAGE_SIZE
 
         for (index in startIndex until endIndex) {
             list.add(TestPagingBean(index, "author:$key", "item#$index"))
         }
 
-        return ListResponse(key, list, 0, false, 5, list.size, 5 * 20)
+        return ListResponse(key, list, 0, false, 5, list.size, 5 * Constants.PAGE_SIZE)
     }
 
 
@@ -80,12 +81,12 @@ class HomeRepository : BaseApiRepository<HomeApis>(HomeApis::class.java) {
      */
     private fun getBeforeData(key: Int): ListResponse<TestPagingBean> {
         val list = ArrayList<TestPagingBean>()
-        val startIndex = key + (20 * -1) + 1
+        val startIndex = key + (Constants.PAGE_SIZE * -1) + 1
 
         for (index in startIndex until key) {
             list.add(TestPagingBean(index, "author:$key", "item#$index"))
         }
 
-        return ListResponse(key, list, 0, false, 5, list.size, 5 * 20)
+        return ListResponse(key, list, 0, false, 5, list.size, 5 * Constants.PAGE_SIZE)
     }
 }
