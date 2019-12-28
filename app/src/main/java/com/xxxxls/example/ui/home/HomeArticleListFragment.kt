@@ -59,6 +59,8 @@ class HomeArticleListFragment : BaseFragment() {
     }
 
     private fun initEvent() {
+
+        mAdapter.onItemChildClickListener
         refreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 mViewModel.loadMore()

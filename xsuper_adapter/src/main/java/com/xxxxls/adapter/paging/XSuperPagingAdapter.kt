@@ -104,6 +104,10 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IAdapter<T>,
         return null
     }
 
+    override fun getItemChildView(position: Int, viewId: Int): View? {
+        return null
+    }
+
     override fun addData(newData: T, position: Int?) {
     }
 

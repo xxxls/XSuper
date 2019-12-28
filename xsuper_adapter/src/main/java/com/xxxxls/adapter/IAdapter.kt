@@ -1,9 +1,10 @@
 package com.xxxxls.adapter
 
 import android.view.View
+import androidx.annotation.IdRes
 
 /**
- * adapter
+ * 基础adapter
  * @author Max
  * @date 2019-12-27.
  */
@@ -20,6 +21,14 @@ interface IAdapter<T> {
      * @return 对应视图
      */
     fun getItemView(position: Int): View?
+
+    /**
+     * 获取条目子view
+     * @param position 在列表中的位置
+     * @param viewId viewId
+     *
+     */
+    fun getItemChildView(position: Int, @IdRes viewId: Int): View?
 
     /**
      * 添加条目
