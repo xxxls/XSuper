@@ -14,7 +14,10 @@ import com.xxxxls.adapter.listener.OnItemChildClickListener
 import com.xxxxls.adapter.listener.OnItemChildLongClickListener
 import com.xxxxls.adapter.listener.OnItemClickListener
 import com.xxxxls.adapter.listener.OnItemLongClickListener
+import com.xxxxls.utils.ClassUtils
 import com.xxxxls.utils.getStatusBarHeight
+import java.lang.Exception
+import java.lang.reflect.Modifier
 
 /**
  * super - Adapter
@@ -58,10 +61,20 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         mContext = parent.context
         mLayoutInflater = LayoutInflater.from(mContext)
-        return (XSuperViewHolder(
-            getItemView(mLayoutResId, parent)
-        ) as VH).apply {
-            adapter = this@XSuperAdapter
+        return createViewHolder(getItemView(mLayoutResId, parent))
+    }
+
+    /**
+     * createViewHolder
+     */
+    protected open fun createViewHolder(view: View): VH {
+        return try {
+            val clazz = ClassUtils.getSuperClassGenericType<VH>(javaClass, 2)
+            val constructor = clazz.getDeclaredConstructor(View::class.java)
+            constructor.isAccessible = true
+            constructor.newInstance(view)
+        } catch (e: Exception) {
+            XSuperViewHolder(view) as VH
         }
     }
 

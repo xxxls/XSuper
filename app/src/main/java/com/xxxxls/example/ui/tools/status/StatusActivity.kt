@@ -1,4 +1,4 @@
-package com.xxxxls.example.ui.status
+package com.xxxxls.example.ui.tools.status
 
 import androidx.fragment.app.Fragment
 import com.xxxxls.example.R

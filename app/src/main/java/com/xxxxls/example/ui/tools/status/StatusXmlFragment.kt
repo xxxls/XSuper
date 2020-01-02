@@ -1,6 +1,5 @@
-package com.xxxxls.example.ui.status
+package com.xxxxls.example.ui.tools.status
 
-import android.os.Handler
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xxxxls.example.R

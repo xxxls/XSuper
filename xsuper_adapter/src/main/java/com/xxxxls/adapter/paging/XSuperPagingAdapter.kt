@@ -16,6 +16,8 @@ import com.xxxxls.adapter.IDiffItemCallback
 import com.xxxxls.adapter.XSuperViewHolder
 import com.xxxxls.adapter.listener.OnItemChildClickListener
 import com.xxxxls.adapter.listener.OnItemClickListener
+import com.xxxxls.utils.ClassUtils
+import java.lang.Exception
 
 /**
  * super - Adapter
@@ -51,9 +53,21 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IAdapter<T>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         mContext = parent.context
         mLayoutInflater = LayoutInflater.from(mContext)
-        return XSuperViewHolder(
-            getItemView(mLayoutResId, parent)
-        ) as VH
+        return createViewHolder(getItemView(mLayoutResId, parent))
+    }
+
+    /**
+     * createViewHolder
+     */
+    protected open fun createViewHolder(view: View): VH {
+        return try {
+            val clazz = ClassUtils.getSuperClassGenericType<VH>(javaClass, 2)
+            val constructor = clazz.getDeclaredConstructor(View::class.java)
+            constructor.isAccessible = true
+            constructor.newInstance(view)
+        } catch (e: Exception) {
+            XSuperViewHolder(view) as VH
+        }
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {

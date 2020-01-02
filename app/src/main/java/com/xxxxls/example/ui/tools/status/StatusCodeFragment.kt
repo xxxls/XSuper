@@ -1,7 +1,5 @@
-package com.xxxxls.example.ui.status
+package com.xxxxls.example.ui.tools.status
 
-import android.os.Handler
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xxxxls.example.R
@@ -11,7 +9,6 @@ import com.xxxxls.status.*
 import com.xxxxls.utils.L
 import com.xxxxls.utils.singleClick
 import com.xxxxls.utils.toast
-import kotlinx.android.synthetic.main.fragment_status_xml.*
 import kotlinx.android.synthetic.main.fragment_status_xml.recyclerView
 import kotlinx.android.synthetic.main.layout_status_operation.*
 
