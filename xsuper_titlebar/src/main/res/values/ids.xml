@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--左视图-->
+    <item name="titlebar_left_view" type="id" />
+
+    <!--右视图-->
+    <item name="titlebar_right_view" type="id" />
+
+    <!--标题视图-->
+    <item name="titlebar_title_view" type="id" />
+
+    <!--副标题视图-->
+    <item name="titlebar_subtitle_view" type="id" />
+
+    <!--标题视图容器-->
+    <item name="titlebar_title_layout" type="id" />
+</resources>

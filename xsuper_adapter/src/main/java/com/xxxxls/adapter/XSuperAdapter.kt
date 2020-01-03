@@ -14,10 +14,8 @@ import com.xxxxls.adapter.listener.OnItemChildClickListener
 import com.xxxxls.adapter.listener.OnItemChildLongClickListener
 import com.xxxxls.adapter.listener.OnItemClickListener
 import com.xxxxls.adapter.listener.OnItemLongClickListener
-import com.xxxxls.utils.ClassUtils
-import com.xxxxls.utils.getStatusBarHeight
+import com.xxxxls.adapter.utils.ClassUtils
 import java.lang.Exception
-import java.lang.reflect.Modifier
 
 /**
  * super - Adapter

@@ -44,8 +44,6 @@ dependencies {
 
     //工具集
     api project(path: ':xsuper_utils')
-    //多状态
-    api project(path: ':xsuper_status')
 
     /**
      * @官方组件

@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.annotation.NonNull
-import androidx.annotation.Nullable
 import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import com.xxxxls.adapter.DefaultItemCallback
 import com.xxxxls.adapter.IAdapter
-import com.xxxxls.adapter.IDiffItemCallback
 import com.xxxxls.adapter.XSuperViewHolder
 import com.xxxxls.adapter.listener.OnItemChildClickListener
 import com.xxxxls.adapter.listener.OnItemClickListener
-import com.xxxxls.utils.ClassUtils
+import com.xxxxls.adapter.utils.ClassUtils
 import java.lang.Exception
 
 /**

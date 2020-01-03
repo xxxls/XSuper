@@ -20,6 +20,34 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!-- 默认标题栏 -->
+    <style name="base_TitleBar">
+        <item name="titlebar_left_icon">@android:drawable/ic_menu_close_clear_cancel</item>
+        <!--左标题文本颜色-->
+        <item name="titlebar_left_text_color">@color/base_color_8D8B9B</item>
+        <!--左标题文本大小-->
+        <item name="titlebar_left_text_size">16sp</item>
+        <!--右标题文本颜色-->
+        <item name="titlebar_right_text_color">@color/base_color_8D8B9B</item>
+        <!--右标题文本大小-->
+        <item name="titlebar_right_text_size">16sp</item>
+        <!--主标题文本颜色-->
+        <item name="titlebar_title_text_color">@color/base_color_8D8B9B</item>
+        <!--主标题文本大小-->
+        <item name="titlebar_title_text_size">18sp</item>
+        <!--副标题文本颜色-->
+        <item name="titlebar_subtitle_text_color">@color/base_color_8D8B9B</item>
+        <!--副标题文本大小-->
+        <item name="titlebar_subtitle_text_size">12sp</item>
+        <!--主标题与副标题的间距-->
+        <item name="titlebar_title_margin">2dp</item>
+        <!--左标题图片与文本间距-->
+        <item name="titlebar_left_drawable_padding">2dp</item>
+        <!--右标题图片与文本间距-->
+        <item name="titlebar_right_drawable_padding">2dp</item>
+        <!--左右条目的左右内间距-->
+        <item name="titlebar_child_left_right_padding">16dp</item>
+    </style>
 
     <!--   宽高  -->
     <style name="base_WW">
@@ -118,8 +146,6 @@
     <style name="base_TextView_Not_Padding">
         <item name="android:includeFontPadding">false</item>
     </style>
-
-
 
 
 </resources>

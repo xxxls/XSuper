@@ -4,6 +4,7 @@ import android.content.Intent
 import com.xxxxls.example.R
 import com.xxxxls.example.ui.tools.glide.GlideActivity
 import com.xxxxls.example.ui.tools.status.StatusActivity
+import com.xxxxls.example.ui.tools.titlebar.TitleBarActivity
 import com.xxxxls.module_base.base.BaseFragment
 import com.xxxxls.utils.singleClick
 import kotlinx.android.synthetic.main.fragment_tools.*
@@ -27,6 +28,10 @@ class ToolsIndexFragment : BaseFragment() {
 
         btn_glide.singleClick {
             startActivity(Intent(context, GlideActivity::class.java))
+        }
+
+        btn_titlebar.singleClick {
+            startActivity(Intent(context, TitleBarActivity::class.java))
         }
     }
 }
