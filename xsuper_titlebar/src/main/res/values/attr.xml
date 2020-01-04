@@ -11,6 +11,8 @@
         <attr name="titlebar_left_text_color" format="color" />
         <!--左标题图标-->
         <attr name="titlebar_left_icon" format="reference" />
+        <!--左标题图标背景-->
+        <attr name="titlebar_left_background" format="reference|color" />
         <!--左标题图标与文本的边距-->
         <attr name="titlebar_left_drawable_padding" format="dimension" />
 
@@ -22,6 +24,8 @@
         <attr name="titlebar_right_text_color" format="color" />
         <!--右标题图标-->
         <attr name="titlebar_right_icon" format="reference" />
+        <!--右标题图标背景-->
+        <attr name="titlebar_right_background" format="reference|color" />
         <!--右标题图标与文本的边距-->
         <attr name="titlebar_right_drawable_padding" format="dimension" />
 

@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_titlebar.*
  * @author Max
  * @date 2020-01-03.
  */
-class TitleBarActivity : BaseActivity() {
+class TitleBarActivity : BaseActivity(), OnTitleBarClickListener {
 
     override fun getLayoutResId(): Int {
         return R.layout.activity_titlebar
@@ -29,29 +29,28 @@ class TitleBarActivity : BaseActivity() {
             }
         }
 
-        titlebar_b.onRightTitleClickListener = object : OnRightTitleClickListener {
-            override fun onRightTitleClick(view: View) {
-                toast("help")
-            }
-        }
+        titlebar_b.setOnTitleBarClickListener(this)
 
-        titlebar_c.setOnTitleBarClickListener(object : OnTitleBarClickListener() {
-            override fun onTitleClick(view: View) {
-                toast("click title")
-            }
+        titlebar_c.setOnTitleBarClickListener(this)
 
-            override fun onSubTitleClick(view: View) {
-                toast("click subTitle")
-            }
+        titlebar_d.setOnTitleBarClickListener(this)
 
-            override fun onLeftTitleClick(view: View) {
-                toast("click left")
-            }
-
-            override fun onRightTitleClick(view: View) {
-                toast("click right")
-            }
-        })
+        titlebar_e.setOnTitleBarClickListener(this)
     }
 
+    override fun onTitleClick(view: View) {
+        toast("click title")
+    }
+
+    override fun onSubTitleClick(view: View) {
+        toast("click subTitle")
+    }
+
+    override fun onLeftTitleClick(view: View) {
+        toast("click left")
+    }
+
+    override fun onRightTitleClick(view: View) {
+        toast("click right")
+    }
 }

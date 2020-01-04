@@ -80,6 +80,11 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             getTitleBarStyle().getChildLeftRightPadding()
         )
 
+        if (background == null) {
+//            默认背景
+            background = getTitleBarStyle().getBackground()
+        }
+
         //初始化左视图
         initLeftView(array)
         //初始化右视图
@@ -116,11 +121,15 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             R.styleable.XSuperTitleBar_titlebar_left_drawable_padding,
             getTitleBarStyle().getDrawablePadding()
         )
+        //背景
+        val background = array.getDrawable(R.styleable.XSuperTitleBar_titlebar_left_background)
+            ?: getTitleBarStyle().getLeftBackground()
 
         val itemView = AppCompatTextView(context).apply {
             id = R.id.titlebar_left_view
             isSingleLine = true
             gravity = Gravity.CENTER
+            isEnabled = false
             ellipsize = TextUtils.TruncateAt.END
             setTextSize(COMPLEX_UNIT_PX, textSize)
             setTextColor(textColor)
@@ -144,6 +153,8 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
         icon?.let {
             setLeftIcon(it)
         } ?: setLeftIcon(getTitleBarStyle().getLeftIcon())
+        //设置背景
+        setLeftBackground(background)
     }
 
 
@@ -168,11 +179,15 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             R.styleable.XSuperTitleBar_titlebar_right_drawable_padding,
             getTitleBarStyle().getDrawablePadding()
         )
+        val background = array.getDrawable(R.styleable.XSuperTitleBar_titlebar_right_background)
+            ?: getTitleBarStyle().getRightBackground()
+
 
         val itemView = AppCompatTextView(context).apply {
             id = R.id.titlebar_right_view
             isSingleLine = true
             gravity = Gravity.CENTER
+            isEnabled = false
             ellipsize = TextUtils.TruncateAt.END
             setTextSize(COMPLEX_UNIT_PX, textSize)
             setTextColor(textColor)
@@ -194,6 +209,8 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
         setRightText(text)
         //设置图标
         setRightIcon(icon)
+        //设置右背景
+        setRightBackground(background)
     }
 
     /**
@@ -441,7 +458,10 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
      * 设置左标题
      */
     open fun setLeftText(content: String?): XSuperTitleBar {
-        getLeftView().text = content
+        getLeftView().apply {
+            text = content
+            onUpdateContent(this)
+        }
         return this
     }
 
@@ -450,7 +470,10 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
      * 设置左图标
      */
     open fun setLeftIcon(drawable: Drawable?): XSuperTitleBar {
-        getLeftView().setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        getLeftView().apply {
+            setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            onUpdateContent(this)
+        }
         return this
     }
 
@@ -459,6 +482,14 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
      */
     open fun setLeftIcon(@DrawableRes resId: Int): XSuperTitleBar {
         return setLeftIcon(context.getDrawableById(resId))
+    }
+
+    /**
+     * 设置左背景
+     */
+    open fun setLeftBackground(drawable: Drawable?): XSuperTitleBar {
+        getLeftView().background = drawable
+        return this
     }
 
     /**
@@ -480,7 +511,10 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
      * 设置右标题
      */
     open fun setRightText(content: String?): XSuperTitleBar {
-        getRightView().text = content
+        getRightView().apply {
+            text = content
+            onUpdateContent(this)
+        }
         return this
     }
 
@@ -488,7 +522,10 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
      * 设置右图标
      */
     open fun setRightIcon(drawable: Drawable?): XSuperTitleBar {
-        getRightView().setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        getRightView().apply {
+            setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            onUpdateContent(this)
+        }
         return this
     }
 
@@ -500,11 +537,38 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     }
 
     /**
+     * 设置右背景
+     */
+    open fun setRightBackground(drawable: Drawable?): XSuperTitleBar {
+        getRightView().background = drawable
+        return this
+    }
+
+    /**
      * 设置右文本大小
      */
     open fun setRightTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): XSuperTitleBar {
         getRightView().setTextSize(unit, size)
         return this
+    }
+
+    /**
+     * 内容更新
+     * @param itemView 视图
+     */
+    protected open fun onUpdateContent(itemView: AppCompatTextView?) {
+        itemView?.isEnabled = checkHasContent(itemView)
+    }
+
+    /**
+     * 检查是否有内容（文本或图标）
+     * @param itemView view
+     */
+    protected open fun checkHasContent(itemView: AppCompatTextView?): Boolean {
+        val hasDrawable = itemView?.compoundDrawables?.any {
+            it != null
+        } ?: false
+        return (!itemView?.text.isNullOrEmpty() || hasDrawable)
     }
 
     /**

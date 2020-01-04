@@ -7,7 +7,7 @@ import android.view.View
  * @author Max
  * @date 2020-01-03.
  */
-open class OnTitleBarClickListener : OnTitleClickListener, OnSubTitleClickListener,
+interface OnTitleBarClickListener : OnTitleClickListener, OnSubTitleClickListener,
     OnLeftTitleClickListener, OnRightTitleClickListener {
     override fun onLeftTitleClick(view: View) {
     }

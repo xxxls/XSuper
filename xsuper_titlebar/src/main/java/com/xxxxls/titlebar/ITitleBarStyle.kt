@@ -70,6 +70,11 @@ interface ITitleBarStyle {
     fun getLeftIcon(): Drawable?
 
     /**
+     * 左标题栏背景
+     */
+    fun getLeftBackground(): Drawable?
+
+    /**
      * 右标题文本大小
      */
     fun getRightTextSize(): Float
@@ -78,6 +83,11 @@ interface ITitleBarStyle {
      * 右标题文本颜色
      */
     fun getRightTextColor(): Int
+
+    /**
+     * 右标题栏背景
+     */
+    fun getRightBackground(): Drawable?
 
     /**
      * 分割线背景

@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import com.xxxxls.titlebar.utils.UiUtils
+import com.xxxxls.titlebar.utils.getDrawableById
 
 /**
  * 默认标题栏样式
@@ -12,6 +13,13 @@ import com.xxxxls.titlebar.utils.UiUtils
  * @date 2020-01-03.
  */
 open class DefaultTitleBarStyle(val context: Context) : ITitleBarStyle {
+    override fun getLeftBackground(): Drawable? {
+        return context.getDrawableById(R.drawable.titlebar_ripple_default)
+    }
+
+    override fun getRightBackground(): Drawable? {
+        return context.getDrawableById(R.drawable.titlebar_ripple_default)
+    }
 
     override fun getChildLeftRightPadding(): Int {
         return UiUtils.dip2px(context, 16f).toInt()
