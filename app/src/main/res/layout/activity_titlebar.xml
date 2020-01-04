@@ -6,37 +6,71 @@
     android:orientation="vertical">
 
     <com.xxxxls.titlebar.XSuperTitleBar
-        style="@style/base_TitleBar"
         android:id="@+id/titlebar_a"
+        style="@style/base_TitleBar_HasBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/base_color_3B3650"
         app:titlebar_left_icon="@android:drawable/ic_menu_close_clear_cancel"
+        app:titlebar_line_background="@drawable/bg_test"
         app:titlebar_right_text="帮助"
-        app:titlebar_title="标题栏" />
+        app:titlebar_right_text_color="@color/base_color_ffffff"
+        app:titlebar_title="标题栏"
+        app:titlebar_title_text_color="@color/base_color_ffffff" />
 
     <com.xxxxls.titlebar.XSuperTitleBar
         android:id="@+id/titlebar_b"
-        style="@style/base_TitleBar"
+        style="@style/base_TitleBar_HasBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/base_color_f9f9f9"
-        app:titlebar_left_icon="@mipmap/ic_launcher"
+        android:background="@color/base_color_FD1684"
+        app:titlebar_left_icon="@android:drawable/ic_menu_close_clear_cancel"
         app:titlebar_left_text="返回"
+        app:titlebar_left_text_color="@color/base_color_ffffff"
+        app:titlebar_line_background="@color/base_color_ffffff_49"
         app:titlebar_right_icon="@android:drawable/ic_menu_help"
         app:titlebar_right_text="@string/help"
+        app:titlebar_right_text_color="@color/base_color_ffffff"
         app:titlebar_subtitle_text="副标题"
-        app:titlebar_title="@string/app_name" />
+        app:titlebar_subtitle_text_color="@color/base_color_f9f9f9"
+        app:titlebar_title="@string/app_name"
+        app:titlebar_title_text_color="@color/base_color_ffffff" />
 
     <com.xxxxls.titlebar.XSuperTitleBar
-        style="@style/base_TitleBar"
         android:id="@+id/titlebar_c"
+        style="@style/base_TitleBar_HasBack"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:background="@color/base_color_000000"
         app:titlebar_left_icon="@android:drawable/ic_menu_close_clear_cancel"
+        app:titlebar_left_text="返回"
+        app:titlebar_left_text_color="@color/base_color_FD1684"
+        app:titlebar_left_text_size="12sp"
+        app:titlebar_line_visible="false"
         app:titlebar_right_icon="@android:drawable/ic_menu_help"
-        app:titlebar_title="标题栏" />
+        app:titlebar_right_text_color="@color/base_color_ffffff"
+        app:titlebar_title="我比较矮"
+        app:titlebar_title_text_color="@color/base_color_FD1684"
+        app:titlebar_title_text_size="14sp" />
+
+    <com.xxxxls.titlebar.XSuperTitleBar
+        android:id="@+id/titlebar_d"
+        style="@style/base_TitleBar"
+        android:layout_marginTop="10dp"
+        android:background="@color/base_color_3B3650"
+        app:titlebar_line_background="@drawable/ic_launcher_background"
+        app:titlebar_right_text_color="@color/base_color_ffffff"
+        app:titlebar_title="Title"
+        app:titlebar_title_text_color="@color/base_color_ffffff" />
+
+    <com.xxxxls.titlebar.XSuperTitleBar
+        android:id="@+id/titlebar_e"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:titlebar_left_text="返回"
+        app:titlebar_right_icon="@android:drawable/ic_menu_help"
+        app:titlebar_title="默认样式"/>
 </LinearLayout>

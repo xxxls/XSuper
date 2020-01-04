@@ -22,7 +22,8 @@
 
     <!-- 默认标题栏 -->
     <style name="base_TitleBar">
-        <item name="titlebar_left_icon">@android:drawable/ic_menu_close_clear_cancel</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <!--左标题文本颜色-->
         <item name="titlebar_left_text_color">@color/base_color_8D8B9B</item>
         <!--左标题文本大小-->
@@ -47,6 +48,19 @@
         <item name="titlebar_right_drawable_padding">2dp</item>
         <!--左右条目的左右内间距-->
         <item name="titlebar_child_left_right_padding">16dp</item>
+        <!--分割线可见性-->
+        <item name="titlebar_line_visible">true</item>
+        <!--分割线背景-->
+        <item name="titlebar_line_background">@color/base_color_8D8B9B</item>
+        <!--分割线高度-->
+        <item name="titlebar_line_height">3dp</item>
+    </style>
+
+
+    <!-- 默认标题栏 -->
+    <style name="base_TitleBar_HasBack" parent="base_TitleBar">
+        <!--左标题图标-->
+        <item name="titlebar_left_icon">@android:drawable/ic_menu_close_clear_cancel</item>
     </style>
 
     <!--   宽高  -->

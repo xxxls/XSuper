@@ -14,7 +14,7 @@ import com.xxxxls.titlebar.utils.UiUtils
 open class DefaultTitleBarStyle(val context: Context) : ITitleBarStyle {
 
     override fun getChildLeftRightPadding(): Int {
-        return UiUtils.dip2px(context, 5f).toInt()
+        return UiUtils.dip2px(context, 16f).toInt()
     }
 
     override fun getTitleMargin(): Int {
@@ -46,11 +46,11 @@ open class DefaultTitleBarStyle(val context: Context) : ITitleBarStyle {
     }
 
     override fun getLeftTextColor(): Int {
-        return Color.GRAY
+        return Color.BLACK
     }
 
     override fun getTitleTextColor(): Int {
-        return Color.GRAY
+        return Color.BLACK
     }
 
     override fun getSubTitleTextColor(): Int {
@@ -58,7 +58,7 @@ open class DefaultTitleBarStyle(val context: Context) : ITitleBarStyle {
     }
 
     override fun getRightTextColor(): Int {
-        return Color.GRAY
+        return Color.BLACK
     }
 
     override fun getLeftIcon(): Drawable? {
@@ -66,11 +66,11 @@ open class DefaultTitleBarStyle(val context: Context) : ITitleBarStyle {
     }
 
     override fun getLineDrawable(): Drawable? {
-        return null
+        return ColorDrawable(Color.GRAY)
     }
 
-    override fun getLineHeight(): Float? {
-        return null
+    override fun getLineHeight(): Int? {
+        return 2
     }
 
     override fun getDrawablePadding(): Float {

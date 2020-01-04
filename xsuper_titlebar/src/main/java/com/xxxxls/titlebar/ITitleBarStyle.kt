@@ -87,5 +87,5 @@ interface ITitleBarStyle {
     /**
      * 分割线高度
      */
-    fun getLineHeight(): Float?
+    fun getLineHeight(): Int?
 }

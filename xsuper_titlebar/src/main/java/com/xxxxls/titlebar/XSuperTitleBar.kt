@@ -86,6 +86,8 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
         initRightView(array)
         //初始化标题视图（主，副标题）
         initTitleLayout(array)
+        //初始化分割线
+        initLineView(array)
         array.recycle()
     }
 
@@ -124,13 +126,13 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             setTextColor(textColor)
             compoundDrawablePadding = drawablePadding.toInt()
             setOnClickListener(this@XSuperTitleBar)
+            setPadding(childLeftRightPadding, 0, childLeftRightPadding, 0)
         }
 
         val layoutParams = LayoutParams(
             LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
+            LayoutParams.MATCH_PARENT
         ).apply {
-            setPadding(childLeftRightPadding, 0, childLeftRightPadding, 0)
             gravity = Gravity.START or Gravity.CENTER_VERTICAL
         }
 
@@ -176,13 +178,13 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             setTextColor(textColor)
             compoundDrawablePadding = drawablePadding.toInt()
             setOnClickListener(this@XSuperTitleBar)
+            setPadding(childLeftRightPadding, 0, childLeftRightPadding, 0)
         }
 
         val layoutParams = LayoutParams(
             LayoutParams.WRAP_CONTENT,
-            LayoutParams.WRAP_CONTENT
+            LayoutParams.MATCH_PARENT
         ).apply {
-            setPadding(childLeftRightPadding, 0, childLeftRightPadding, 0)
             gravity = Gravity.END or Gravity.CENTER_VERTICAL
         }
 
@@ -299,6 +301,30 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
         setSubTitleText(text)
     }
 
+    /**
+     * 初始化分割线
+     */
+    protected open fun initLineView(array: TypedArray) {
+        val visible = array.getBoolean(R.styleable.XSuperTitleBar_titlebar_line_visible, true)
+        val drawable = array.getDrawable(R.styleable.XSuperTitleBar_titlebar_line_background)
+            ?: getTitleBarStyle().getLineDrawable()
+        val height = array.getDimensionPixelOffset(
+            R.styleable.XSuperTitleBar_titlebar_line_height,
+            getTitleBarStyle().getLineHeight() ?: 1
+        )
+
+        val itemView = View(context).apply {
+            background = drawable
+            visibility = if (visible) View.VISIBLE else View.GONE
+        }
+        val layoutParams = LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            height
+        ).apply {
+            gravity = Gravity.BOTTOM
+        }
+        addView(itemView, layoutParams)
+    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val height = measureHeight(heightMeasureSpec)
@@ -341,6 +367,13 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
      */
     open fun getSubTitleView(): AppCompatTextView? {
         return findViewById(R.id.titlebar_subtitle_view)
+    }
+
+    /**
+     * 获取分割线视图
+     */
+    open fun getLineView(): View? {
+        return findViewById(R.id.titlebar_line_view)
     }
 
     /**
