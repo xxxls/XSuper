@@ -77,6 +77,8 @@ dependencies {
     api project(path: ':xsuper_titlebar')
     //多状态
     api project(path: ':xsuper_status')
+    //widget
+    api project(path: ':xsuper_status')
 
 
     //ARouter路由
