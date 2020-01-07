@@ -69,8 +69,8 @@ fun String.jumpForResult(context: Activity, requestCode: Int) {
 /**
  * 获取fragment
  */
-fun String.newFragment(bundle: Bundle? = null): Fragment {
-    return ARouter.getInstance().build(this).with(bundle).navigation() as Fragment
+fun String.newFragment(bundle: Bundle? = null): Fragment? {
+    return ARouter.getInstance().build(this).with(bundle).navigation() as? Fragment
 }
 
 /**

@@ -29,9 +29,9 @@ class MainActivity : BaseActivity() {
 
     private fun initView() {
         val fragments = ArrayList<Fragment>()
-        fragments.add(HomePaths.HOME_FRAGMENT_PAGING_INDEX.newFragment())
-        fragments.add(ToolsIndexFragment())
-        fragments.add(UserPaths.USER_FRAGMENT_INDEX.newFragment())
+        fragments.add(HomePaths.HOME_FRAGMENT_PAGING_INDEX.newFragment()!!)
+        fragments.add(HomePaths.HOME_FRAGMENT_HOME_INDEXS.newFragment()!!)
+        fragments.add(UserPaths.USER_FRAGMENT_INDEX.newFragment()!!)
         viewPager.adapter = CommonFragmentPagerAdapter(supportFragmentManager, fragments)
         viewPager.offscreenPageLimit = fragments.size
     }

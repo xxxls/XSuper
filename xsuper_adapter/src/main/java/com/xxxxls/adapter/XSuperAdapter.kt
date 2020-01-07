@@ -59,7 +59,9 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         mContext = parent.context
         mLayoutInflater = LayoutInflater.from(mContext)
-        return createViewHolder(getItemView(mLayoutResId, parent))
+        return createViewHolder(getItemView(mLayoutResId, parent)).apply {
+            bindItemViewListener(this)
+        }
     }
 
     /**
@@ -92,7 +94,7 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
         return mDiffer.currentList.size
     }
 
-    protected open fun getItem(position: Int): T? {
+    override fun getItem(position: Int): T? {
         return mDiffer.currentList[position]
     }
 

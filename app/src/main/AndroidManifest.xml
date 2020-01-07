@@ -35,6 +35,8 @@
         <activity android:name="com.xxxxls.example.ui.tools.glide.GlideActivity" />
 
         <activity android:name=".ui.tools.titlebar.TitleBarActivity"/>
+
+        <activity android:name=".ui.widget.SemicircleProgressActivity"/>
     </application>
 
 </manifest>

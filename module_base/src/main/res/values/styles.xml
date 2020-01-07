@@ -22,6 +22,7 @@
 
     <!-- 默认标题栏 -->
     <style name="base_TitleBar">
+        <item name="android:id">@id/titlebar</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <!--左标题文本颜色-->
@@ -33,7 +34,7 @@
         <!--右标题文本大小-->
         <item name="titlebar_right_text_size">16sp</item>
         <!--主标题文本颜色-->
-        <item name="titlebar_title_text_color">@color/base_color_8D8B9B</item>
+        <item name="titlebar_title_text_color">@color/base_color_000000</item>
         <!--主标题文本大小-->
         <item name="titlebar_title_text_size">18sp</item>
         <!--副标题文本颜色-->
@@ -53,7 +54,7 @@
         <!--分割线背景-->
         <item name="titlebar_line_background">@color/base_color_8D8B9B</item>
         <!--分割线高度-->
-        <item name="titlebar_line_height">3dp</item>
+        <item name="titlebar_line_height">1px</item>
     </style>
 
 

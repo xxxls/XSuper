@@ -16,4 +16,13 @@ public interface HomePaths {
     //paging 列表类型 （0，1，2）
     String KEY_HOME_FRAGMENT_PAGING_LIST_TYPE = "/key/home/fragment/paging/list/type";
 
+
+    //主页-主页集
+    String HOME_FRAGMENT_HOME_INDEXS = "/home/fragment/home/indexs";
+
+    //工具主页
+    String HOME_FRAGMENT_TOOLS_INDEX = "/home/fragment/tools/index";
+
+    //widget主页
+    String HOME_FRAGMENT_WIDGET_INDEX = "/home/fragment/widget/index";
 }

@@ -93,6 +93,7 @@
     <color name="base_color_000000_15">#38000000</color>
     <color name="base_color_000000_11">#29000000</color>
     <color name="base_color_f9f9f9_78">#C7F9F9F9</color>
+    <color name="base_color_000000_6">#0f000000</color>
 
 
 </resources>

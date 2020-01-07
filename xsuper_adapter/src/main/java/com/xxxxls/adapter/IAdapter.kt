@@ -16,6 +16,11 @@ interface IAdapter<T> {
     fun getData(): List<T>
 
     /**
+     * 获取指定位置的数据
+     */
+    fun getItem(position: Int): T?
+
+    /**
      * 获取条目视图
      * @param position 在列表中的位置
      * @return 对应视图

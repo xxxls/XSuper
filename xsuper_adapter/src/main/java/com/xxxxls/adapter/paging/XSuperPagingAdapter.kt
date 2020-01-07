@@ -133,6 +133,9 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IAdapter<T>,
     override fun replaceData(data: List<T>) {
     }
 
+    override fun getItem(position: Int): T? {
+        return super.getItem(position)
+    }
 
 }
 

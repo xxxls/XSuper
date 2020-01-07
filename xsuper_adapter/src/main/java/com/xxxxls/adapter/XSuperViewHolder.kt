@@ -70,7 +70,7 @@ open class XSuperViewHolder(view: View) : RecyclerView.ViewHolder(view) {
      * @param value 设置的值
      * @return this
      */
-    fun setText(@IdRes viewId: Int, value: CharSequence): XSuperViewHolder {
+    fun setText(@IdRes viewId: Int, value: CharSequence?): XSuperViewHolder {
         getView<TextView>(viewId)?.text = value
         return this
     }

@@ -2,6 +2,8 @@
 <resources>
 
 
+    <!--视图-->
+    <item name="titlebar" type="id" />
     <!--左视图-->
     <item name="titlebar_left_view" type="id" />
 
