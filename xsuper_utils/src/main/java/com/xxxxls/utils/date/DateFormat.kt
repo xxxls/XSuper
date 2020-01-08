@@ -44,7 +44,7 @@ sealed class DateFormat(private val format: String) {
     }
 
     //日期(Date)转换为文本
-    fun formatDate(date: Date): String? {
+    fun formatDate(date: Date): String {
         return dateFormat.format(date)
     }
 
@@ -105,4 +105,7 @@ sealed class DateFormat(private val format: String) {
 
     //年-月-日 时:分:秒|毫秒(12小时制)
     object YMD_hms_SSS : DateFormat("yyyy-MM-dd HH:mm:ss|SSS")
+
+    //自定义格式
+    data class DIY(val format: String) : DateFormat(format)
 }
