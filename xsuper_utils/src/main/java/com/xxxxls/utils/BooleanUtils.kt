@@ -1,11 +1,10 @@
 package com.xxxxls.utils
 
-/**
- *
- * @author Max
- * @date 2019-11-26.
- */
 
+/**
+ * true 执行函数
+ * @return Else :false执行函数
+ */
 inline infix fun Boolean.trueLet(trueBlock: Boolean.() -> Unit): Else {
     if (this) {
         trueBlock()
@@ -14,6 +13,10 @@ inline infix fun Boolean.trueLet(trueBlock: Boolean.() -> Unit): Else {
     return DoElse(this)
 }
 
+/**
+ * false 执行函数
+ * @return Else :true执行函数
+ */
 inline infix fun Boolean.falseLet(falseBlock: Boolean.() -> Unit): Else {
     if (!this) {
         falseBlock()

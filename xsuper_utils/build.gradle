@@ -44,5 +44,8 @@ dependencies {
     androidTestApi rootProject.ext.dependencies["espresso_core"]
 
     api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["lifecycle"]
+    //协程
+    api rootProject.ext.dependencies["kotlinx-coroutines"]
 
 }

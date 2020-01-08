@@ -1,16 +1,7 @@
 package com.xxxxls.utils
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Checkable
-import android.widget.EditText
-
-/**
- *
- * @author Max
- * @date 2019-11-29.
- */
 
 
 /**
@@ -36,7 +27,7 @@ inline fun View.visibleOrInvisible(show: View.() -> Boolean = { true }) {
 }
 
 /**
- * 单点
+ * 点击事件
  */
 inline fun <T : View> T.singleClick(time: Long = 800, crossinline block: (T) -> Unit) {
     setOnClickListener {
@@ -48,7 +39,9 @@ inline fun <T : View> T.singleClick(time: Long = 800, crossinline block: (T) -> 
     }
 }
 
-//兼容点击事件设置为this的情况
+/**
+ * 点击事件
+ */
 fun <T : View> T.singleClick(onClickListener: View.OnClickListener, time: Long = 800) {
     setOnClickListener {
         val currentTimeMillis = System.currentTimeMillis()
@@ -64,44 +57,3 @@ var <T : View> T.lastClickTime: Long
     get() = getTag(1766613352) as? Long ?: 0
 
 
-/**
- * 设置editText输入监听
- * @param onChanged 改变事件
- */
-inline fun EditText.setOnInputChangedListener(
-    /**
-     * @param Int：当前长度
-     * @return 是否接受此次文本的改变
-     */
-    crossinline onChanged: (Int).() -> Boolean
-) {
-    this.addTextChangedListener(object : TextWatcher {
-
-        var flag = false
-
-        override fun afterTextChanged(p0: Editable?) {
-            if (flag) {
-                return
-            }
-            if (!onChanged(p0?.length ?: 0)) {
-                flag = true
-                this@setOnInputChangedListener.setText(
-                    this@setOnInputChangedListener.getTag(
-                        1982329101
-                    ) as? String
-                )
-                this@setOnInputChangedListener.setSelection(this@setOnInputChangedListener.length())
-                flag = false
-            } else {
-                flag = false
-            }
-        }
-
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            this@setOnInputChangedListener.setTag(1982329101, p0?.toString())
-        }
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        }
-    })
-}

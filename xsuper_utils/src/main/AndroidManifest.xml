@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xxxxls.utils" />
+    package="com.xxxxls.utils" >
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+</manifest>
