@@ -177,8 +177,8 @@ fun View?.setTitleBarLeftText(
 
 //Activity - 设置左文本
 fun Activity?.setTitleBarLeftText(
-    text: String?,
-    onClickListener: ((view: View) -> Unit)? = null, @IdRes id: Int = R.id.titlebar
+    text: String?, @IdRes id: Int = R.id.titlebar,
+    onClickListener: ((view: View) -> Unit)? = null
 ): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftText(text)
