@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:color="@color/base_color_ffffff_9"
+    android:color="@color/base_color_000000_9"
     tools:targetApi="lollipop">
-
+    
     <item
-        android:id="@android:id/mask" android:drawable="@drawable/base_shape_circle_ffffff_30"></item>
+        android:id="@android:id/mask"
+        android:drawable="@color/base_color_ffffff"/>
+
 </ripple>

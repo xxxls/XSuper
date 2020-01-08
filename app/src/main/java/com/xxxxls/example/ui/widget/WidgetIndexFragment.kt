@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxxxls.example.bean.IndexItemBean
 import com.xxxxls.example.ui.indexs.BaseIndexFragment
 import com.xxxxls.module_base.constants.HomePaths
+import com.xxxxls.titlebar.setTitleBarLeftText
 
 /**
  * Widget
@@ -14,6 +15,12 @@ import com.xxxxls.module_base.constants.HomePaths
 @Route(path = HomePaths.HOME_FRAGMENT_WIDGET_INDEX)
 class WidgetIndexFragment : BaseIndexFragment() {
 
+    override fun onInitialize() {
+        super.onInitialize()
+        setTitleBarLeftText("返回") {
+            activity?.onBackPressed()
+        }
+    }
     override fun getTitle(): String {
         return "Widget"
     }

@@ -43,7 +43,7 @@ open class XSuperViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 isClickable = true
                 setOnClickListener { view ->
                     adapter?.getOnItemChildClickListener()
-                        ?.onItemChildClick(adapter!!, view, adapterPosition)
+                        ?.onItemChildClick(view, adapterPosition)
                 }
             }
         }
@@ -58,7 +58,7 @@ open class XSuperViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 isClickable = true
                 setOnLongClickListener { view ->
                     return@setOnLongClickListener adapter?.getOnItemChildLongClickListener()
-                        ?.onItemChildLongClick(adapter!!, view, adapterPosition) ?: false
+                        ?.onItemChildLongClick(view, adapterPosition) ?: false
                 }
             }
         }

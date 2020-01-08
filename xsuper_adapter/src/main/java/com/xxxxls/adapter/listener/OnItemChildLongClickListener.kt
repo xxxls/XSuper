@@ -14,7 +14,6 @@ interface OnItemChildLongClickListener {
      * 子view长按事件
      */
     fun onItemChildLongClick(
-        adapter: IAdapter<*>,
         view: View,
         position: Int
     ): Boolean

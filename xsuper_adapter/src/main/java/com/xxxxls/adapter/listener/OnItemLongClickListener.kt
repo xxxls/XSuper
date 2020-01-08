@@ -12,12 +12,10 @@ interface OnItemLongClickListener {
 
     /**
      * 列表条目长按事件
-     * @param adapter
      * @param view 条目View
      * @param position 在列表中的位置
      */
     fun onItemLongClick(
-        adapter: IAdapter<*>,
         view: View,
         position: Int
     ): Boolean

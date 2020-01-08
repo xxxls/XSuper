@@ -37,8 +37,8 @@ abstract class BaseIndexFragment : BaseFragment() {
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         adapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(adapter: IAdapter<*>, view: View, position: Int) {
-                onItemClick(position, adapter.getItem(position) as IndexItemBean)
+            override fun onItemClick(view: View, position: Int) {
+                onItemClick(position, adapter.getItem(position)!!)
             }
         })
     }

@@ -14,14 +14,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:background="@drawable/base_ripple_rectangle_9_000000"
             android:id="@+id/tv_login"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
             android:text="LOGIN" />
 
-
         <TextView
+            android:background="@drawable/base_ripple_rectangle_9_000000"
             android:id="@+id/tv_register"
             android:layout_width="match_parent"
             android:layout_height="50dp"

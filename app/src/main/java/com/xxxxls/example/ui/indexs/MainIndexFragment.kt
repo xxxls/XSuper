@@ -19,7 +19,7 @@ class MainIndexFragment : BaseIndexFragment() {
     }
 
     override fun getItems(): Array<IndexItemBean> {
-        return arrayOf(IndexItemBean("Tools"), IndexItemBean("Widget"))
+        return arrayOf(IndexItemBean("tools"), IndexItemBean("widget"))
     }
 
     override fun onItemClick(index: Int, item: IndexItemBean) {

@@ -13,5 +13,5 @@ interface OnItemChildClickListener {
     /**
      * 子 view点击事件
      */
-    fun onItemChildClick(adapter: IAdapter<*>, view: View, position: Int)
+    fun onItemChildClick(view: View, position: Int)
 }

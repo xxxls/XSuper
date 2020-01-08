@@ -169,12 +169,12 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
 
     //条目点击事件
     protected open fun onItemClick(view: View, position: Int) {
-        mOnItemClickListener?.onItemClick(this, view, position)
+        mOnItemClickListener?.onItemClick(view, position)
     }
 
     //条目长按事件
     protected open fun onItemLongClick(view: View, position: Int): Boolean {
-        return mOnItemLongClickListener?.onItemLongClick(this, view, position) ?: false
+        return mOnItemLongClickListener?.onItemLongClick(view, position) ?: false
     }
 
     override fun getData(): List<T> {

@@ -114,133 +114,221 @@ fun View?.setTitleBarSubTitle(@StringRes textIdRes: Int, @IdRes id: Int = R.id.t
 
 
 //Activity - 设置左图标
-fun Activity?.setTitleBarLeftIcon(@DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Activity?.setTitleBarLeftIcon(
+    @DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftIcon(iconResIdRes)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
 
 //Fragment - 设置左图标
-fun Fragment?.setTitleBarLeftIcon(@DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Fragment?.setTitleBarLeftIcon(
+    @DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftIcon(iconResIdRes)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
 
 //View - 设置左图标
-fun View?.setTitleBarLeftIcon(@DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun View?.setTitleBarLeftIcon(
+    @DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftIcon(iconResIdRes)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
 
 
 //Activity - 设置左文本
-fun Activity?.setTitleBarLeftText(@StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Activity?.setTitleBarLeftText(
+    @StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftText(textIdRes)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
 
 //Fragment - 设置左文本
-fun Fragment?.setTitleBarLeftText(@StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Fragment?.setTitleBarLeftText(
+    @StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftText(textIdRes)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
 
 //View - 设置左文本
-fun View?.setTitleBarLeftText(@StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun View?.setTitleBarLeftText(
+    @StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftText(textIdRes)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
 
 
 //Activity - 设置左文本
-fun Activity?.setTitleBarLeftText(text: String?, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Activity?.setTitleBarLeftText(
+    text: String?,
+    onClickListener: ((view: View) -> Unit)? = null, @IdRes id: Int = R.id.titlebar
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftText(text)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
 
 //Fragment - 设置左文本
-fun Fragment?.setTitleBarLeftText(text: String?, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Fragment?.setTitleBarLeftText(
+    text: String?, @IdRes id: Int = R.id.titlebar,
+    onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftText(text)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
 
 //View - 设置左文本
-fun View?.setTitleBarLeftText(text: String?, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun View?.setTitleBarLeftText(
+    text: String?,
+    @IdRes id: Int = R.id.titlebar,
+    onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setLeftText(text)
+        setOnLeftTitleClickListener(onClickListener)
     }
 }
-
 
 
 //Activity - 设置右图标
-fun Activity?.setTitleBarRightIcon(@DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Activity?.setTitleBarRightIcon(
+    @DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightIcon(iconResIdRes)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
 
 //Fragment - 设置右图标
-fun Fragment?.setTitleBarRightIcon(@DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Fragment?.setTitleBarRightIcon(
+    @DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightIcon(iconResIdRes)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
 
 //View - 设置右图标
-fun View?.setTitleBarRightIcon(@DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun View?.setTitleBarRightIcon(
+    @DrawableRes iconResIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightIcon(iconResIdRes)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
 
 
 //Activity - 设置右文本
-fun Activity?.setTitleBarRightText(@StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Activity?.setTitleBarRightText(
+    @StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightText(textIdRes)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
 
 //Fragment - 设置右文本
-fun Fragment?.setTitleBarRightText(@StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Fragment?.setTitleBarRightText(
+    @StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightText(textIdRes)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
 
 //View - 设置右文本
-fun View?.setTitleBarRightText(@StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun View?.setTitleBarRightText(
+    @StringRes textIdRes: Int, @IdRes id: Int = R.id.titlebar, onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightText(textIdRes)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
 
 
 //Activity - 设置右文本
-fun Activity?.setTitleBarRightText(text: String?, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Activity?.setTitleBarRightText(
+    text: String?, @IdRes id: Int = R.id.titlebar,
+    onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightText(text)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
 
 //Fragment - 设置右文本
-fun Fragment?.setTitleBarRightText(text: String?, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun Fragment?.setTitleBarRightText(
+    text: String?, @IdRes id: Int = R.id.titlebar,
+    onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightText(text)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
 
 //View - 设置右文本
-fun View?.setTitleBarRightText(text: String?, @IdRes id: Int = R.id.titlebar): XSuperTitleBar? {
+fun View?.setTitleBarRightText(
+    text: String?, @IdRes id: Int = R.id.titlebar,
+    onClickListener: ((view: View) -> Unit)? = null
+): XSuperTitleBar? {
     return this.getTitleBar(id)?.apply {
         this.setRightText(text)
+        setOnRightTitleClickListener(onClickListener)
     }
 }
+
+//XSuperTitleBar - 设置左点击事件
+fun XSuperTitleBar?.setOnLeftTitleClickListener(onClickListener: ((view: View) -> Unit)? = null): XSuperTitleBar? {
+    return this?.apply {
+        onClickListener?.let {
+            this.onLeftTitleClickListener = object : OnLeftTitleClickListener {
+                override fun onLeftTitleClick(view: View) {
+                    it(view)
+                }
+            }
+        }
+    }
+}
+
+
+//XSuperTitleBar - 设置右点击事件
+fun XSuperTitleBar?.setOnRightTitleClickListener(onClickListener: ((view: View) -> Unit)? = null): XSuperTitleBar? {
+    return this?.apply {
+        onClickListener?.let {
+            this.onRightTitleClickListener = object : OnRightTitleClickListener {
+                override fun onRightTitleClick(view: View) {
+                    it(view)
+                }
+            }
+        }
+    }
+}
+

@@ -8,6 +8,7 @@ import com.xxxxls.example.ui.tools.glide.GlideActivity
 import com.xxxxls.example.ui.tools.status.StatusActivity
 import com.xxxxls.example.ui.tools.titlebar.TitleBarActivity
 import com.xxxxls.module_base.constants.HomePaths
+import com.xxxxls.titlebar.setTitleBarLeftText
 
 /**
  * 工具集
@@ -16,6 +17,14 @@ import com.xxxxls.module_base.constants.HomePaths
  */
 @Route(path = HomePaths.HOME_FRAGMENT_TOOLS_INDEX)
 class ToolsIndexFragment : BaseIndexFragment() {
+
+    override fun onInitialize() {
+        super.onInitialize()
+        setTitleBarLeftText("返回") {
+            activity?.onBackPressed()
+        }
+    }
+
     override fun getTitle(): String {
         return "Tools"
     }

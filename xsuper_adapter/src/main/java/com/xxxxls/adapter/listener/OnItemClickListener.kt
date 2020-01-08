@@ -9,5 +9,11 @@ import com.xxxxls.adapter.IAdapter
  * @date 2019-12-27.
  */
 interface OnItemClickListener {
-    fun onItemClick(adapter: IAdapter<*>, view: View, position: Int)
+
+    /**
+     * 条目点击
+     * @param view
+     * @param position
+     */
+    fun onItemClick(view: View, position: Int)
 }
