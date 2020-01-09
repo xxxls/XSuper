@@ -43,12 +43,17 @@ sealed class DateFormat(private val format: String) {
         return dateFormat
     }
 
-    //日期(Date)转换为文本
-    fun formatDate(date: Date): String {
-        return dateFormat.format(date)
+    /**
+     * 日期(Date)转换为文本(默认当前日期)
+     * @param date
+     */
+    fun formatDate(date: Date?): String {
+        return dateFormat.format(date ?: Date())
     }
 
-    //文本转换为日期(Date)
+    /**
+     * 文本转换为日期(Date)
+     */
     fun parseData(source: String): Date? {
         return try {
             dateFormat.parse(source)
@@ -81,6 +86,12 @@ sealed class DateFormat(private val format: String) {
 
     //年-月-日
     object YMD : DateFormat("yyyy-MM-dd")
+
+    //时:分 (24小时制)
+    object HM : DateFormat("HH:mm")
+
+    //时:分 (12小时制)
+    object hm : DateFormat("hh:mm")
 
     //时:分:秒 (24小时制)
     object HMS : DateFormat("HH:mm:ss")
