@@ -8,7 +8,7 @@ import java.util.*
  * @author Max
  * @date 2020-01-08.
  */
-sealed class DateFormat(private val format: String) {
+sealed class DateFormat(val format: String) {
 
     //dateFormat
     private val dateFormat: SimpleDateFormat by lazy {
@@ -44,11 +44,23 @@ sealed class DateFormat(private val format: String) {
     }
 
     /**
-     * 日期(Date)转换为文本(默认当前日期)
+     * 日期(Date)转换为文本(参数为空时默认当前日期)
      * @param date
      */
     fun formatDate(date: Date?): String {
         return dateFormat.format(date ?: Date())
+    }
+
+
+    /**
+     * 日期(Date)转换为文本(可能为null)
+     * @param date
+     */
+    fun formatDateOrNull(date: Date?): String? {
+        if (date == null) {
+            return null
+        }
+        return dateFormat.format(date)
     }
 
     /**
@@ -118,5 +130,5 @@ sealed class DateFormat(private val format: String) {
     object YMD_hms_SSS : DateFormat("yyyy-MM-dd HH:mm:ss|SSS")
 
     //自定义格式
-    data class DIY(val format: String) : DateFormat(format)
+    class DIY(format: String) : DateFormat(format)
 }

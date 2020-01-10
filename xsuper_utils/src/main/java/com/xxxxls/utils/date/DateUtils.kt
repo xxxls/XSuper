@@ -38,6 +38,19 @@ object DateUtils {
         return calender
     }
 
+    /**
+     * 获取Calendar
+     * @param millis 指定日期（为空结果为空）
+     */
+    fun getCalendarOrNull(millis: Long?): Calendar? {
+        if (millis == null) {
+            return null
+        }
+        return Calendar.getInstance().apply {
+            timeInMillis = millis
+        }
+    }
+
     //</editor-fold>
     //<editor-fold desc="获取当前时间 指定格式">
 
@@ -251,7 +264,6 @@ object DateUtils {
     }
 
     //</editor-fold>
-
     //<editor-fold desc="获取指定日期的周几">
     /**
      * 获取指定日期的周几
@@ -260,6 +272,49 @@ object DateUtils {
     fun getWeek(date: Date? = Date()): Int {
         val calendar = getCalendar(date = date ?: Date())
         return if (calendar.get(Calendar.DAY_OF_WEEK) - 1 < 0) 0 else calendar.get(Calendar.DAY_OF_WEEK) - 1
+    }
+
+    //</editor-fold>
+    //<editor-fold desc="是否今年">
+    /**
+     * 是否今年
+     * @param date 指定日期
+     */
+    fun isThisYear(date: Date?): Boolean {
+        if (date == null) {
+            return false
+        }
+        return isSameDay(date, Date())
+    }
+
+    /**
+     * 是否今年
+     * @param millis 指定日期时间戳
+     */
+    fun isThisYear(millis: Long): Boolean {
+        return isSameDay(millis, Date().time)
+    }
+
+    //</editor-fold>
+    //<editor-fold desc="是否今年">
+
+    /**
+     * 是否这个月
+     * @param date 指定日期
+     */
+    fun isThisMonth(date: Date?): Boolean {
+        if (date == null) {
+            return false
+        }
+        return isSameMonth(date, Date())
+    }
+
+    /**
+     * 是否这个月
+     * @param millis 指定日期时间戳
+     */
+    fun isThisMonth(millis: Long): Boolean {
+        return isSameMonth(millis, Date().time)
     }
 
     //</editor-fold>
@@ -284,9 +339,63 @@ object DateUtils {
         return isSameDay(millis, Date().time)
     }
 
-    //</editor-fold>
 
+    //</editor-fold>
+    //<editor-fold desc="是否同一年（同年）">
+    /**
+     * 是否同一年（同年）
+     * @param dateA 日期1
+     * @param dateB 日期2
+     */
+    fun isSameYear(dateA: Date?, dateB: Date?): Boolean {
+        if (dateA == null && dateB == null) return true
+        if (dateA == null || dateB == null) return false
+        return isSameYear(dateA.time, dateB.time)
+    }
+
+    /**
+     * 是否同一年（同年）
+     * @param millisA 日期1时间戳
+     * @param millisB 日期2时间戳
+     */
+    fun isSameYear(millisA: Long?, millisB: Long?): Boolean {
+        if (millisA == null && millisB == null) return true
+        if (millisA == null || millisB == null) return false
+        val calendarA = getCalendar(millisA)
+        val calendarB = getCalendar(millisB)
+        return calendarA.get(Calendar.YEAR) == calendarB.get(Calendar.YEAR)
+    }
+
+    //</editor-fold>
+    //<editor-fold desc="是否同一月（同年同月）">
+    /**
+     * 是否同一月（同年同月）
+     * @param dateA 日期1
+     * @param dateB 日期2
+     */
+    fun isSameMonth(dateA: Date?, dateB: Date?): Boolean {
+        if (dateA == null && dateB == null) return true
+        if (dateA == null || dateB == null) return false
+        return isSameMonth(dateA.time, dateB.time)
+    }
+
+    /**
+     * 是否同一月（同年同月）
+     * @param millisA 日期1时间戳
+     * @param millisB 日期2时间戳
+     */
+    fun isSameMonth(millisA: Long?, millisB: Long?): Boolean {
+        if (millisA == null && millisB == null) return true
+        if (millisA == null || millisB == null) return false
+        val calendarA = getCalendar(millisA)
+        val calendarB = getCalendar(millisB)
+        return calendarA.get(Calendar.YEAR) == calendarB.get(Calendar.YEAR) &&
+                calendarA.get(Calendar.MONTH) == calendarB.get(Calendar.MONTH)
+    }
+
+    //</editor-fold>
     //<editor-fold desc="是否同一天（同年同天）">
+
     /**
      * 是否同一天（同年同天）
      * @param dateA 日期1
@@ -294,7 +403,8 @@ object DateUtils {
      */
     fun isSameDay(dateA: Date?, dateB: Date?): Boolean {
         if (dateA == null && dateB == null) return true
-        return isSameDay(dateA?.time ?: 0L, dateB?.time ?: 0L)
+        if (dateA == null || dateB == null) return false
+        return isSameDay(dateA.time, dateB.time)
     }
 
     /**
@@ -304,11 +414,14 @@ object DateUtils {
      */
     fun isSameDay(millisA: Long?, millisB: Long?): Boolean {
         if (millisA == null && millisB == null) return true
-        return kotlin.math.abs(getTimeSpan(millisA, millisB)) < TimeConstants.DAY
+        if (millisA == null || millisB == null) return false
+        val calendarA = getCalendar(millisA)
+        val calendarB = getCalendar(millisB)
+        return calendarA.get(Calendar.YEAR) == calendarB.get(Calendar.YEAR) &&
+                calendarA.get(Calendar.DAY_OF_YEAR) == calendarB.get(Calendar.DAY_OF_YEAR)
     }
 
     //</editor-fold>
-
     //<editor-fold desc="指定日期是否闰年">
 
     /**
