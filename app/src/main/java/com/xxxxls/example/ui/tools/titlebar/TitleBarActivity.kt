@@ -4,9 +4,8 @@ import android.view.View
 import com.xxxxls.example.R
 import com.xxxxls.module_base.base.BaseActivity
 import com.xxxxls.titlebar.OnLeftTitleClickListener
-import com.xxxxls.titlebar.OnRightTitleClickListener
 import com.xxxxls.titlebar.OnTitleBarClickListener
-import com.xxxxls.utils.toast
+import com.xxxxls.utils.ktx.toast
 import kotlinx.android.synthetic.main.activity_titlebar.*
 
 /**

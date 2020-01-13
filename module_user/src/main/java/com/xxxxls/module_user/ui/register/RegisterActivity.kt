@@ -5,8 +5,7 @@ import com.xxxxls.module_base.base.BaseActivity
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_user.R
 import com.xxxxls.xsuper.net.viewmodel.ViewModelFactory
-import com.xxxxls.utils.L
-import com.xxxxls.utils.singleClick
+import com.xxxxls.utils.ktx.singleClick
 import kotlinx.android.synthetic.main.user_activity_login.et_password
 import kotlinx.android.synthetic.main.user_activity_login.et_username
 import kotlinx.android.synthetic.main.user_activity_register.*

@@ -7,7 +7,9 @@ import com.xxxxls.example.ui.indexs.BaseIndexFragment
 import com.xxxxls.example.ui.tools.glide.GlideActivity
 import com.xxxxls.example.ui.tools.status.StatusActivity
 import com.xxxxls.example.ui.tools.titlebar.TitleBarActivity
+import com.xxxxls.module_base.constants.BasePaths
 import com.xxxxls.module_base.constants.HomePaths
+import com.xxxxls.module_base.util.jump
 import com.xxxxls.titlebar.setTitleBarLeftText
 
 /**
@@ -30,18 +32,26 @@ class ToolsIndexFragment : BaseIndexFragment() {
     }
 
     override fun getItems(): Array<IndexItemBean> {
-        return arrayOf(IndexItemBean("status"), IndexItemBean("glide"), IndexItemBean("titlebar"))
+        return arrayOf(
+            IndexItemBean("toolsList"),
+            IndexItemBean("status"),
+            IndexItemBean("glide"),
+            IndexItemBean("titlebar")
+        )
     }
 
     override fun onItemClick(index: Int, item: IndexItemBean) {
         when (index) {
             0 -> {
-                startActivity(Intent(context, StatusActivity::class.java))
+                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_BASE_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_TIMER_INDEX)
             }
             1 -> {
-                startActivity(Intent(context, GlideActivity::class.java))
+                startActivity(Intent(context, StatusActivity::class.java))
             }
             2 -> {
+                startActivity(Intent(context, GlideActivity::class.java))
+            }
+            3 -> {
                 startActivity(Intent(context, TitleBarActivity::class.java))
             }
         }

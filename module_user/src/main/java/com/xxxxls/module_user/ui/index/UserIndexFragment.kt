@@ -5,7 +5,7 @@ import com.xxxxls.module_base.base.BaseFragment
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_base.util.jump
 import com.xxxxls.module_user.R
-import com.xxxxls.utils.singleClick
+import com.xxxxls.utils.ktx.singleClick
 import kotlinx.android.synthetic.main.fragment_user_index.*
 
 /**

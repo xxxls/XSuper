@@ -25,4 +25,10 @@ public interface HomePaths {
 
     //widget主页
     String HOME_FRAGMENT_WIDGET_INDEX = "/home/fragment/widget/index";
+
+    //工具列表
+    String HOME_FRAGMENT_TOOLS_LIST = "/home/fragment/tools/list";
+
+    //定时器主页
+    String HOME_FRAGMENT_TIMER_INDEX = "/home/fragment/timer/index";
 }

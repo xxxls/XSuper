@@ -6,7 +6,7 @@ import com.xxxxls.module_base.R
 import com.xxxxls.module_base.base.BaseActivity
 import com.xxxxls.module_base.constants.BasePaths
 import com.xxxxls.module_base.util.newFragment
-import com.xxxxls.utils.showFragment
+import com.xxxxls.utils.ktx.showFragment
 
 /**
  * Fragment的Activity形式

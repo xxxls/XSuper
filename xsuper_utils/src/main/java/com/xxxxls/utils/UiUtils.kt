@@ -11,34 +11,6 @@ import android.util.TypedValue
  * @date 2019-12-10.
  */
 
-fun Long.dp(): Float {
-    return UiUtils.px2dip(this.toFloat())
-}
-
-
-fun Float.dp(): Float {
-    return UiUtils.px2dip(this)
-}
-
-
-fun Int.dp(): Float {
-    return UiUtils.px2dip(this.toFloat())
-}
-
-
-fun Long.px(): Float {
-    return UiUtils.dip2px(this.toFloat())
-}
-
-
-fun Float.px(): Float {
-    return UiUtils.dip2px(this)
-}
-
-
-fun Int.px(): Float {
-    return UiUtils.dip2px(this.toFloat())
-}
 
 object UiUtils {
     fun getScreenWidth(context: Context): Int {

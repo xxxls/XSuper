@@ -8,7 +8,7 @@ import com.xxxxls.module_base.base.BaseFragment
 import com.xxxxls.status.IStatusView
 import com.xxxxls.status.XStatus
 import com.xxxxls.utils.L
-import com.xxxxls.utils.singleClick
+import com.xxxxls.utils.ktx.singleClick
 import kotlinx.android.synthetic.main.fragment_status_xml.*
 import kotlinx.android.synthetic.main.layout_status_operation.*
 

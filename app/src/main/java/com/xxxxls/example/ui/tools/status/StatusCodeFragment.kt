@@ -7,8 +7,8 @@ import com.xxxxls.module_base.adapter.SimpleAdapter
 import com.xxxxls.module_base.base.BaseFragment
 import com.xxxxls.status.*
 import com.xxxxls.utils.L
-import com.xxxxls.utils.singleClick
-import com.xxxxls.utils.toast
+import com.xxxxls.utils.ktx.singleClick
+import com.xxxxls.utils.ktx.toast
 import kotlinx.android.synthetic.main.fragment_status_xml.recyclerView
 import kotlinx.android.synthetic.main.layout_status_operation.*
 

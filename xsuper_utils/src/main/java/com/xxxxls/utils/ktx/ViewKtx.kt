@@ -1,4 +1,4 @@
-package com.xxxxls.utils
+package com.xxxxls.utils.ktx
 
 import android.view.View
 import android.widget.Checkable

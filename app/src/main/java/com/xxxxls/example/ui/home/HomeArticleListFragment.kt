@@ -8,7 +8,7 @@ import com.xxxxls.example.R
 import com.xxxxls.example.adapter.HomeArticleAdapter
 import com.xxxxls.module_base.base.BaseFragment
 import com.xxxxls.xsuper.net.viewmodel.ViewModelFactory
-import com.xxxxls.utils.toast
+import com.xxxxls.utils.ktx.toast
 import kotlinx.android.synthetic.main.fragment_paging_list.*
 
 /**

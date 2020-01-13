@@ -1,4 +1,4 @@
-package com.xxxxls.utils
+package com.xxxxls.utils.ktx
 
 import android.app.Activity
 import android.app.Application

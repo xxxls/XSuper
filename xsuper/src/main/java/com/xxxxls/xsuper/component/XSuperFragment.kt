@@ -8,8 +8,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
-import com.xxxxls.utils.L
-import com.xxxxls.utils.toast
+import com.xxxxls.utils.ktx.toast
 
 /**
  * Super-Fragment

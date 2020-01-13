@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/base_margin_content">
+
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--"
+        android:textColor="@color/base_color_FD1684"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_count_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/base_ripple_rectangle_9_000000"
+        android:padding="4dp"
+        android:text="开始"
+        app:layout_constraintLeft_toLeftOf="@id/tv_count"
+        app:layout_constraintTop_toBottomOf="@id/tv_count" />
+
+    <TextView
+        android:id="@+id/tv_count_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/base_ripple_rectangle_9_000000"
+        android:padding="4dp"
+        android:text="取消"
+        app:layout_constraintLeft_toRightOf="@id/tv_count_start"
+        app:layout_constraintTop_toTopOf="@id/tv_count_start" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_launcher_background"
+        app:layout_constraintTop_toBottomOf="@id/tv_count_start" />
+
+    <TextView
+        android:id="@+id/tv_loop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="--"
+        android:textColor="@color/base_color_FD1684"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
+    <TextView
+        android:id="@+id/tv_loop_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/base_ripple_rectangle_9_000000"
+        android:padding="4dp"
+        android:text="开始"
+        app:layout_constraintLeft_toLeftOf="@id/tv_loop"
+        app:layout_constraintTop_toBottomOf="@id/tv_loop" />
+
+    <TextView
+        android:id="@+id/tv_loop_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/base_ripple_rectangle_9_000000"
+        android:padding="4dp"
+        android:text="取消"
+        app:layout_constraintLeft_toRightOf="@id/tv_loop_start"
+        app:layout_constraintTop_toTopOf="@id/tv_loop_start" />
+</androidx.constraintlayout.widget.ConstraintLayout>
