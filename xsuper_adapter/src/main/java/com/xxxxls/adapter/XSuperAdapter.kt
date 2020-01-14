@@ -60,6 +60,7 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
         mContext = parent.context
         mLayoutInflater = LayoutInflater.from(mContext)
         return createViewHolder(getItemView(mLayoutResId, parent)).apply {
+            adapter = this@XSuperAdapter
             bindItemViewListener(this)
         }
     }

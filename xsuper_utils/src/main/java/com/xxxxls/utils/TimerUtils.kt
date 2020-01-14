@@ -85,6 +85,7 @@ object TimerUtils {
         countDownTimer.start()
         return object : TimerTask {
             override fun cancel() {
+                lifecycleOwner.lifecycle.removeObserver(observer)
                 countDownTimer.cancel()
             }
         }
@@ -143,6 +144,7 @@ object TimerUtils {
         countDownTimer.start()
         return object : TimerTask {
             override fun cancel() {
+                lifecycleOwner.lifecycle.removeObserver(observer)
                 countDownTimer.cancel()
             }
         }

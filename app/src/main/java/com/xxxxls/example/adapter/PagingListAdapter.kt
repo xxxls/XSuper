@@ -31,6 +31,7 @@ class PagingListAdapter :
     }
 
     override fun convert(helper: XSuperViewHolder, item: TestPagingBean?) {
+        helper.addOnClickListener(R.id.tv_add, R.id.tv_del)
         helper.setText(R.id.tv_title, item?.title ?: "")
         helper.setText(R.id.tv_content, item?.content ?: "")
     }

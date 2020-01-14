@@ -37,30 +37,24 @@ open class XSuperViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     /**
      * 添加view点击事件
      */
-    protected open fun addOnClickListener(@IdRes vararg viewIds: Int) {
+    fun addOnClickListener(@IdRes vararg viewIds: Int) {
         viewIds.forEach {
-            getView<View>(it)?.apply {
-                isClickable = true
-                setOnClickListener { view ->
-                    adapter?.getOnItemChildClickListener()
-                        ?.onItemChildClick(view, adapterPosition)
-                }
-            }
+            setOnClickListener(it, listener = View.OnClickListener { v ->
+                adapter?.getOnItemChildClickListener()
+                    ?.onItemChildClick(v, adapterPosition)
+            })
         }
     }
 
     /**
      * 添加view长按点击事件
      */
-    protected open fun addOnLongClickListener(@IdRes vararg viewIds: Int) {
+    fun addOnLongClickListener(@IdRes vararg viewIds: Int) {
         viewIds.forEach {
-            getView<View>(it)?.apply {
-                isClickable = true
-                setOnLongClickListener { view ->
-                    return@setOnLongClickListener adapter?.getOnItemChildLongClickListener()
-                        ?.onItemChildLongClick(view, adapterPosition) ?: false
-                }
-            }
+            setOnLongClickListener(viewId = it, listener = View.OnLongClickListener { v ->
+                adapter?.getOnItemChildLongClickListener()
+                    ?.onItemChildLongClick(v!!, adapterPosition) ?: false
+            })
         }
     }
 
@@ -189,6 +183,20 @@ open class XSuperViewHolder(view: View) : RecyclerView.ViewHolder(view) {
      */
     fun setChecked(@IdRes viewId: Int, checked: Boolean) {
         (getView<View>(viewId) as? Checkable)?.isChecked = checked
+    }
+
+    /**
+     * 设置点击事件
+     */
+    fun setOnClickListener(@IdRes viewId: Int, listener: View.OnClickListener) {
+        getView<View>(viewId)?.setOnClickListener(listener)
+    }
+
+    /**
+     * 设置长按点击事件
+     */
+    fun setOnLongClickListener(@IdRes viewId: Int, listener: View.OnLongClickListener) {
+        getView<View>(viewId)?.setOnLongClickListener(listener)
     }
 
     /**

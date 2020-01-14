@@ -50,7 +50,7 @@ class TimerFragment : BaseFragment() {
         countTimerTask = countTask(
             isVisiblePost = false,
             isDesc = true,
-            totalCount = 3,
+            totalCount = 10,
             countUnit = 1000,
             onTick = {
                 tv_count.text = it.toString()
@@ -66,7 +66,7 @@ class TimerFragment : BaseFragment() {
     private fun startLoop() {
         loopTimerTask = loopTask(
             isVisiblePost = true,
-            countInterval = 100,
+            countInterval = 500,
             onTick = {
                 tv_loop.text = (it / 100).toString()
                 L.e("tv_loop -> onTick :$it")

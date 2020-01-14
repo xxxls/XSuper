@@ -42,6 +42,7 @@
             tools:text="Content" />
 
         <TextView
+            android:background="@drawable/base_ripple_rectangle_9_000000"
             android:textSize="12sp"
             android:id="@+id/tv_add"
             android:layout_width="wrap_content"
@@ -53,6 +54,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_del" />
 
         <TextView
+            android:background="@drawable/base_ripple_rectangle_9_000000"
             android:textSize="12sp"
             android:id="@+id/tv_del"
             android:layout_width="wrap_content"

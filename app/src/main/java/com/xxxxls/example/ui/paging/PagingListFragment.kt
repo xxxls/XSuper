@@ -1,5 +1,6 @@
 package com.xxxxls.example.ui.paging
 
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import com.xxxxls.adapter.listener.OnItemChildClickListener
 import com.xxxxls.adapter.paging.XSuperListStatus
 import com.xxxxls.example.R
 import com.xxxxls.example.adapter.PagingListAdapter
@@ -22,6 +24,8 @@ import com.xxxxls.module_base.util.status
 import com.xxxxls.status.showContent
 import com.xxxxls.status.showEmpty
 import com.xxxxls.status.showError
+import com.xxxxls.utils.L
+import com.xxxxls.utils.ktx.toast
 import com.xxxxls.xsuper.net.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_paging_list.*
 
@@ -134,6 +138,31 @@ class PagingListFragment : BaseFragment() {
 
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 mViewModel.refresh()
+            }
+        })
+
+        mAdapter.setOnItemChildClickListener(object : OnItemChildClickListener {
+            override fun onItemChildClick(view: View, position: Int) {
+                when (view.id) {
+                    R.id.tv_add -> {
+                        L.e("onItemChildClick - add")
+                        val id = position + 10
+                        mAdapter.addData(
+                            arrayListOf(
+                                TestPagingBean(
+                                    position + 10,
+                                    title = "add#item#$id",
+                                    content = "content:$id"
+                                )
+                            )
+                            , position
+                        )
+                    }
+                    R.id.tv_del -> {
+                        L.e("onItemChildClick - del")
+                        mAdapter.remove(position)
+                    }
+                }
             }
         })
     }
