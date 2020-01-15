@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.annotation.NonNull
-import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.xxxxls.adapter.IAdapter
-import com.xxxxls.adapter.IXSuperAdapter
-import com.xxxxls.adapter.XSuperViewHolder
+import com.xxxxls.adapter.*
 import com.xxxxls.adapter.listener.OnItemChildClickListener
 import com.xxxxls.adapter.listener.OnItemChildLongClickListener
 import com.xxxxls.adapter.listener.OnItemClickListener
@@ -26,19 +22,20 @@ import java.lang.Exception
  * @date 2019-12-07.
  */
 abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
+    XSuperAdapterEngine<T, VH>,
     PagedListAdapter<T, VH> {
 
     private var mRecyclerView: RecyclerView? = null
 
     //默认布局ID
     @LayoutRes
-    protected var mLayoutResId: Int
+    protected var mLayoutResId: Int? = null
 
     //Context
-    protected lateinit var mContext: Context
+    protected var mContext: Context? = null
 
     //LayoutInflater
-    protected lateinit var mLayoutInflater: LayoutInflater
+    protected var mLayoutInflater: LayoutInflater? = null
 
     //条目点击事件
     private var mOnItemClickListener: OnItemClickListener? = null
@@ -49,6 +46,7 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>
     //条目子view长按事件
     private var mOnItemChildLongClickListener: OnItemChildLongClickListener? = null
 
+    constructor(diffCallback: DiffUtil.ItemCallback<T>) : super(diffCallback)
 
     constructor(
         layoutResId: Int = 0,
@@ -58,26 +56,11 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        mContext = parent.context
-        mLayoutInflater = LayoutInflater.from(mContext)
-        return createViewHolder(getItemView(mLayoutResId, parent)).apply {
-            adapter = this@XSuperPagingAdapter
-            bindItemViewListener(this)
+        if (mContext == null) {
+            mContext = parent.context
+            mLayoutInflater = LayoutInflater.from(parent.context)
         }
-    }
-
-    /**
-     * createViewHolder
-     */
-    protected open fun createViewHolder(view: View): VH {
-        return try {
-            val clazz = ClassUtils.getSuperClassGenericType<VH>(javaClass, 2)
-            val constructor = clazz.getDeclaredConstructor(View::class.java)
-            constructor.isAccessible = true
-            constructor.newInstance(view)
-        } catch (e: Exception) {
-            XSuperViewHolder(view) as VH
-        }
+        return xCreateViewHolder(parent, viewType)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
@@ -92,28 +75,31 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>
         convertPayloads(holder, getItem(position), payloads)
     }
 
-    protected open fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
-        return mLayoutInflater.inflate(layoutResId, parent, false)
+    /**
+     * createViewHolder
+     */
+    override fun createSuperViewHolder(view: View): VH {
+        return try {
+            val clazz = ClassUtils.getSuperClassGenericType<VH>(javaClass, 2)
+            val constructor = clazz.getDeclaredConstructor(View::class.java)
+            constructor.isAccessible = true
+            constructor.newInstance(view)
+        } catch (e: Exception) {
+            XSuperViewHolder(view) as VH
+        }
     }
 
-    /**
-     * 更新UI
-     * @param helper
-     * @param item
-     */
-    protected abstract fun convert(@NonNull helper: VH, item: T?)
+    override fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
+        return mLayoutInflater!!.inflate(layoutResId, parent, false)
+    }
 
-    /**
-     * 更新UI 局部
-     * @param helper
-     * @param item
-     * @param payloads
-     */
-    protected open fun convertPayloads(
-        @NonNull helper: VH, item: T?,
-        payloads: MutableList<Any>
-    ) {
+    override fun getAdapter(): IXSuperAdapter<T> {
+        return this
+    }
 
+    override fun getItemViewLayoutId(itemType: Int): Int {
+        checkNotNull(mLayoutResId)
+        return mLayoutResId!!
     }
 
     override fun getData(): List<T> {
@@ -133,28 +119,6 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>
             viewId
         )
     }
-
-    /**
-     * 绑定itemView事件
-     */
-    protected open fun bindItemViewListener(holder: VH) {
-        //点击事件
-        mOnItemClickListener?.apply {
-            holder.itemView.setOnClickListener {
-                val position = holder.adapterPosition
-                onItemClick(it, position)
-            }
-        }
-
-        //长按事件
-        mOnItemLongClickListener?.apply {
-            holder.itemView.setOnLongClickListener {
-                val position = holder.adapterPosition
-                onItemLongClick(it, position)
-            }
-        }
-    }
-
 
     override fun addData(newData: T, position: Int?) {
         submitList(currentList?.apply {

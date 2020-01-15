@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -23,25 +22,26 @@ import java.lang.Exception
  * @date 2019-12-07.
  */
 abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
-    RecyclerView.Adapter<VH>, IDiffItemCallback<T> {
-
+    RecyclerView.Adapter<VH>,
+    XSuperAdapterEngine<T, VH>,
+    IDiffItemCallback<T> {
 
     private var mRecyclerView: RecyclerView? = null
 
     //默认布局ID
     @LayoutRes
-    protected var mLayoutResId: Int
+    protected var mLayoutResId: Int? = null
 
     //Context
-    protected lateinit var mContext: Context
+    protected var mContext: Context? = null
+
+    //LayoutInflater
+    protected var mLayoutInflater: LayoutInflater? = null
 
     //AsyncListDiffer
     protected val mDiffer: AsyncListDiffer<T> by lazy {
         AsyncListDiffer<T>(this, getDiffUtilItemCallback())
     }
-
-    //LayoutInflater
-    protected lateinit var mLayoutInflater: LayoutInflater
 
     //条目点击事件
     private var mOnItemClickListener: OnItemClickListener? = null
@@ -52,43 +52,35 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
     //条目子view长按事件
     private var mOnItemChildLongClickListener: OnItemChildLongClickListener? = null
 
-    constructor(layoutResId: Int = 0) : super() {
+    constructor() : super()
+
+    constructor(layoutResId: Int) : super() {
         this.mLayoutResId = layoutResId
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        mContext = parent.context
-        mLayoutInflater = LayoutInflater.from(mContext)
-        return createViewHolder(getItemView(mLayoutResId, parent)).apply {
-            adapter = this@XSuperAdapter
-            bindItemViewListener(this)
+        if (mContext == null) {
+            mContext = parent.context
+            mLayoutInflater = LayoutInflater.from(parent.context)
         }
-    }
-
-    /**
-     * createViewHolder
-     */
-    protected open fun createViewHolder(view: View): VH {
-        return try {
-            val clazz = ClassUtils.getSuperClassGenericType<VH>(javaClass, 2)
-            val constructor = clazz.getDeclaredConstructor(View::class.java)
-            constructor.isAccessible = true
-            constructor.newInstance(view)
-        } catch (e: Exception) {
-            XSuperViewHolder(view) as VH
-        }
+        return xCreateViewHolder(parent, viewType)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        convert(holder, getItem(position))
+        xBindViewHolder(holder, position)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
-        if (payloads.isNullOrEmpty()) {
-            super.onBindViewHolder(holder, position, payloads)
-            return
-        }
-        convertPayloads(holder, getItem(position), payloads)
+        xBindViewHolder(holder, position, payloads)
+    }
+
+    override fun getAdapter(): XSuperAdapter<T, VH> {
+        return this
+    }
+
+    override fun getItemViewLayoutId(itemType: Int): Int {
+        checkNotNull(mLayoutResId)
+        return mLayoutResId!!
     }
 
     override fun getItemCount(): Int {
@@ -99,8 +91,8 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
         return mDiffer.currentList[position]
     }
 
-    protected open fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
-        return mLayoutInflater.inflate(layoutResId, parent, false)
+    final override fun getItemView(@LayoutRes layoutResId: Int, parent: ViewGroup): View {
+        return mLayoutInflater!!.inflate(layoutResId, parent, false)
     }
 
     /**
@@ -108,26 +100,6 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
      */
     fun submitList(@Nullable newList: List<T>) {
         mDiffer.submitList(newList)
-    }
-
-    /**
-     * 更新UI
-     * @param helper
-     * @param item
-     */
-    protected abstract fun convert(@NonNull helper: VH, item: T?)
-
-    /**
-     * 更新UI 局部
-     * @param helper
-     * @param item
-     * @param payloads
-     */
-    protected open fun convertPayloads(
-        @NonNull helper: VH, item: T?,
-        payloads: MutableList<Any>
-    ) {
-
     }
 
     override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
@@ -145,27 +117,6 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
     //构建ItemCallback
     open fun getDiffUtilItemCallback(): DiffUtil.ItemCallback<T> {
         return DefaultItemCallback(this)
-    }
-
-    /**
-     * 绑定itemView事件
-     */
-    protected open fun bindItemViewListener(holder: VH) {
-        //点击事件
-        mOnItemClickListener?.apply {
-            holder.itemView.setOnClickListener {
-                val position = holder.adapterPosition
-                onItemClick(it, position)
-            }
-        }
-
-        //长按事件
-        mOnItemLongClickListener?.apply {
-            holder.itemView.setOnLongClickListener {
-                val position = holder.adapterPosition
-                onItemLongClick(it, position)
-            }
-        }
     }
 
     //条目点击事件
@@ -261,6 +212,22 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
     override fun getOnItemChildLongClickListener(): OnItemChildLongClickListener? {
         return mOnItemChildLongClickListener
     }
+
+    /**
+     * 创建VH
+     * @param view 视图
+     */
+    override fun createSuperViewHolder(view: View): VH {
+        return try {
+            val clazz = ClassUtils.getSuperClassGenericType<VH>(javaClass, 2)
+            val constructor = clazz.getDeclaredConstructor(View::class.java)
+            constructor.isAccessible = true
+            constructor.newInstance(view)
+        } catch (e: Exception) {
+            XSuperViewHolder(view) as VH
+        }
+    }
+
 }
 
 

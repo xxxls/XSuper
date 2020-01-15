@@ -1,7 +1,5 @@
 package com.xxxxls.example.ui.tools.timer
 
-import android.os.CountDownTimer
-import androidx.lifecycle.*
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxxxls.example.R
 import com.xxxxls.module_base.base.BaseFragment
@@ -10,7 +8,6 @@ import com.xxxxls.utils.L
 import com.xxxxls.utils.TimerTask
 import com.xxxxls.utils.ktx.*
 import kotlinx.android.synthetic.main.fragment_timer.*
-import kotlin.math.roundToLong
 
 /**
  * 定时任务相关

@@ -2,9 +2,9 @@ package com.xxxxls.example.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.xxxxls.adapter.XSuperViewHolder
+import com.xxxxls.adapter.paging.XSuperMultiItemPagingAdapter
 import com.xxxxls.adapter.paging.XSuperPagingAdapter
 import com.xxxxls.example.R
-import com.xxxxls.example.bean.ArticleBean
 import com.xxxxls.example.bean.TestPagingBean
 import com.xxxxls.utils.L
 
@@ -14,10 +14,18 @@ import com.xxxxls.utils.L
  * @date 2019-12-07.
  */
 class PagingListAdapter :
-    XSuperPagingAdapter<TestPagingBean, XSuperViewHolder>(
-        R.layout.item_paging_list,
+    XSuperMultiItemPagingAdapter<TestPagingBean, XSuperViewHolder>(
         DiffCallback()
     ) {
+
+    init {
+        addItemType(0, R.layout.item_paging_list)
+        addItemType(1, R.layout.item_paging_list2)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position % 2
+    }
 
     override fun convertPayloads(
         helper: XSuperViewHolder,
