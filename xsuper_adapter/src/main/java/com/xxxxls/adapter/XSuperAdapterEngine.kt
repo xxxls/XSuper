@@ -12,7 +12,7 @@ import com.xxxxls.adapter.listener.OnItemLongClickListener
  * @author Max
  * @date 2020-01-14.
  */
-internal interface XSuperAdapterEngine<T, VH : XSuperViewHolder> {
+interface XSuperAdapterEngine<T, VH : XSuperViewHolder> {
 
     fun getAdapter(): IXSuperAdapter<T>
 
