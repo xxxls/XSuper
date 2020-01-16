@@ -38,7 +38,7 @@ internal interface XSuperAdapterEngine<T, VH : XSuperViewHolder> {
      */
     fun xBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
         if (payloads.isNullOrEmpty()) {
-            xBindViewHolder(holder, position, payloads)
+            xBindViewHolder(holder, position)
             return
         }
         convertPayloads(holder, getItem(position), payloads)
