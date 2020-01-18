@@ -111,6 +111,9 @@ sealed class DateFormat(val format: String) {
     //时:分:秒(12小时制)
     object hms : DateFormat("hh:mm:ss")
 
+    //分:秒
+    object ms : DateFormat("mm:ss")
+
     //年-月-日 时:分:秒(24小时制)
     object YMD_HMS : DateFormat("yyyy-MM-dd HH:mm:ss")
 
