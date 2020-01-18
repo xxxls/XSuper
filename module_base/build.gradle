@@ -79,6 +79,8 @@ dependencies {
     api project(path: ':xsuper_status')
     //widget
     api project(path: ':xsuper_status')
+    //日志
+    api project(path: ':xsuper_logger')
 
 
     //ARouter路由
