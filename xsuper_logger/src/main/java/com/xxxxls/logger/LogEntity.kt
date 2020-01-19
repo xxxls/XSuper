@@ -15,8 +15,35 @@ class LogEntity(
     //线程信息
     var threadInfo: String? = null,
     //堆栈跟踪信息
-    var stackTraceInfo: String? = null
-) {
+    var stackTraceInfo: String? = null,
+    //是否展示边框
+    var withBorder: Boolean? = null,
+    //是否携带线程信息
+    var withThread: Boolean? = null,
+    //堆栈信息深度
+    var depth: Int? = null
+) : LogParams {
+
+    /**
+     * 是否携带边框
+     */
+    override fun withBorder(): Boolean? {
+        return withBorder
+    }
+
+    /**
+     * 是否携带线程信息
+     */
+    override fun withThread(): Boolean? {
+        return withThread
+    }
+
+    /**
+     * 堆栈信息深度
+     */
+    override fun getStackTraceDepth(): Int? {
+        return depth
+    }
 
     /**
      * 获取消息(非空)

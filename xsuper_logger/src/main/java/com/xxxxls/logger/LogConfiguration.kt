@@ -1,6 +1,13 @@
 package com.xxxxls.logger
 
-import com.xxxxls.logger.interceptor.LogInterceptor
+import com.xxxxls.logger.formatter.border.DefaultBorderFormatter
+import com.xxxxls.logger.formatter.stacktrace.DefaultStackTraceFormatter
+import com.xxxxls.logger.formatter.thread.DefaultThreadFormatter
+import com.xxxxls.logger.formatter.thread.ThreadFormatter
+import com.xxxxls.logger.interceptor.BorderInterceptor
+import com.xxxxls.logger.interceptor.Interceptor
+import com.xxxxls.logger.interceptor.StackTraceInterceptor
+import com.xxxxls.logger.interceptor.ThreadInterceptor
 
 
 /**
@@ -16,37 +23,37 @@ private constructor(builder: Builder) {
      */
     val tag: String
 
-    /**
-     * 是否展示日志边框
-     */
-    val withBorder: Boolean
-
-    /**
-     * 是否展示日志线程信息
-     */
-    val withThread: Boolean
-
-    /**
-     * 是否展示堆栈跟踪信息
-     */
-    val withStackTrace: Boolean
-
-    /**
-     * 堆栈跟踪信息深度
-     */
-    val stackTraceDepth: Int
+//    /**
+//     * 是否展示日志边框
+//     */
+//    val withBorder: Boolean
+//
+//    /**
+//     * 是否展示日志线程信息
+//     */
+//    val withThread: Boolean
+//
+//    /**
+//     * 是否展示堆栈跟踪信息
+//     */
+//    val withStackTrace: Boolean
+//
+//    /**
+//     * 堆栈跟踪信息深度
+//     */
+//    val stackTraceDepth: Int
 
     /**
      * 日志拦截器
      */
-    val interceptors: MutableList<LogInterceptor>?
+    val interceptors: MutableList<Interceptor>?
 
     init {
         this.tag = builder.tag
-        this.withBorder = builder.withBorder
-        this.withThread = builder.withThread
-        this.withStackTrace = builder.withStackTrace
-        this.stackTraceDepth = builder.stackTraceDepth
+//        this.withBorder = builder.withBorder
+//        this.withThread = builder.withThread
+//        this.withStackTrace = builder.withStackTrace
+//        this.stackTraceDepth = builder.stackTraceDepth
         this.interceptors = builder.interceptors
     }
 
@@ -76,20 +83,15 @@ private constructor(builder: Builder) {
             internal var withThread: Boolean = false
 
             /**
-             * 是否展示堆栈跟踪信息
-             */
-            internal var withStackTrace: Boolean = false
-
-            /**
              * 堆栈跟踪信息深度
              */
-            internal var stackTraceDepth: Int = 2
+            internal var stackTraceDepth: Int = 0
 
             /**
              * 拦截器
              */
-            internal val interceptors: MutableList<LogInterceptor> by lazy {
-                ArrayList<LogInterceptor>()
+            internal val interceptors: MutableList<Interceptor> by lazy {
+                ArrayList<Interceptor>()
             }
 
             /**
@@ -133,22 +135,6 @@ private constructor(builder: Builder) {
             }
 
             /**
-             * 展示堆栈跟踪信息
-             */
-            fun showStackTrace(): Builder {
-                this.withStackTrace = true
-                return this
-            }
-
-            /**
-             * 隐藏堆栈跟踪信息
-             */
-            fun hideStackTrace(): Builder {
-                this.withStackTrace = false
-                return this
-            }
-
-            /**
              * 设置堆栈跟踪信息深度
              */
             fun setStackTraceDepth(depth: Int): Builder {
@@ -159,9 +145,14 @@ private constructor(builder: Builder) {
             /**
              * 添加日志拦截器
              * @param interceptor 拦截器
+             * @param index 插入的位置PS：为空时默认插入到列表末尾
              */
-            fun addInterceptors(interceptor: LogInterceptor): Builder {
-                this.interceptors.add(interceptor)
+            fun addInterceptors(interceptor: Interceptor, index: Int? = null): Builder {
+                if (index != null) {
+                    this.interceptors.add(index, interceptor)
+                } else {
+                    this.interceptors.add(interceptor)
+                }
                 return this
             }
 
@@ -169,6 +160,20 @@ private constructor(builder: Builder) {
              * 构建日志配置
              */
             fun build(): LogConfiguration {
+                //添加堆栈信息拦截器
+                addInterceptors(
+                    StackTraceInterceptor(
+                        stackTraceDepth,
+                        DefaultStackTraceFormatter()
+                    )
+                    , 0
+                )
+
+                //添加线程信息拦截器
+                addInterceptors(ThreadInterceptor(withThread, DefaultThreadFormatter()), 0)
+
+                //添加边框拦截器（添加至末尾）
+                addInterceptors(BorderInterceptor(withBorder, DefaultBorderFormatter()))
                 return LogConfiguration(this)
             }
         }

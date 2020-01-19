@@ -7,7 +7,7 @@ import com.xxxxls.logger.LogEntity
  * @author Max
  * @date 2020-01-19.
  */
-class BlacklistTagInterceptor : LogInterceptor {
+class BlacklistTagInterceptor : Interceptor {
 
     /**
      * 黑名单列表-标签

@@ -7,7 +7,7 @@ import com.xxxxls.logger.LogLevel
  * @author Max
  * @date 2020-01-18.
  */
-interface IPrinter {
+interface Printer {
 
     /**
      * 打印日志

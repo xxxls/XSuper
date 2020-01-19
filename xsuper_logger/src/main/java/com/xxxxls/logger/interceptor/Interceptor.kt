@@ -8,7 +8,7 @@ import com.xxxxls.logger.LogEntity
  * @author Max
  * @date 2020-01-19.
  */
-interface LogInterceptor {
+interface Interceptor {
 
     /**
      * 拦截

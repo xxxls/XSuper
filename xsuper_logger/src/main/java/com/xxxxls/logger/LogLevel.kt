@@ -5,20 +5,20 @@ package com.xxxxls.logger
  * @author Max
  * @date 2020-01-18.
  */
-enum class LogLevel(var level: Int) {
+enum class LogLevel(var level: Int, var levelName: String, var shortName: String) {
 
-    VERBOSE(2),
+    VERBOSE(2, "VERBOSE", "V"),
 
-    DEBUG(3),
+    DEBUG(3, "DEBUG", "D"),
 
-    INFO(4),
+    INFO(4, "INFO", "I"),
 
-    WARN(5),
+    WARN(5, "WARN", "W"),
 
-    ERROR(6),
+    ERROR(6, "ERROR", "E"),
 
-    ALL(Integer.MIN_VALUE),
+    ALL(Integer.MIN_VALUE, "ALL", "A"),
 
-    NONE(Integer.MAX_VALUE)
+    NONE(Integer.MAX_VALUE, "NONE", "N")
 
 }

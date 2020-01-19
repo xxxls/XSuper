@@ -1,7 +1,7 @@
 package com.xxxxls.logger
 
 import com.xxxxls.logger.printer.AndroidPrinter
-import com.xxxxls.logger.printer.IPrinter
+import com.xxxxls.logger.printer.Printer
 
 /**
  * LOGGER
@@ -18,7 +18,7 @@ object XSuperLogger {
     /**
      * 打印器
      */
-    private var printer: IPrinter = AndroidPrinter()
+    private var printer: Printer = AndroidPrinter()
 
     /**
      * 初始化
@@ -30,8 +30,8 @@ object XSuperLogger {
     /**
      * 设置打印器
      */
-    fun setPrinter(iPrinter: IPrinter) {
-        this.printer = iPrinter
+    fun setPrinter(printer: Printer) {
+        this.printer = printer
     }
 
     /**

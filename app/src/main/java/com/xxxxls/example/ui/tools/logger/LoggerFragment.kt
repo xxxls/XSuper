@@ -25,8 +25,8 @@ class LoggerFragment : BaseIndexFragment() {
                 .addInterceptors(BlacklistTagInterceptor("BLACK-TAG1", "BLACK-TAG2"))
                 //展示边框
                 .showBorder()
-                //展示堆栈跟踪信息
-                .showStackTrace()
+                //设置堆栈深度
+                .setStackTraceDepth(2)
                 //展示线程信息
                 .showThread().build()
         )
