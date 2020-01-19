@@ -36,7 +36,8 @@ class ToolsIndexFragment : BaseIndexFragment() {
             IndexItemBean("toolsList"),
             IndexItemBean("status"),
             IndexItemBean("glide"),
-            IndexItemBean("titlebar")
+            IndexItemBean("titleBar"),
+            IndexItemBean("logger")
         )
     }
 
@@ -53,6 +54,9 @@ class ToolsIndexFragment : BaseIndexFragment() {
             }
             3 -> {
                 startActivity(Intent(context, TitleBarActivity::class.java))
+            }
+            4 -> {
+                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_BASE_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_LOGGER_INDEX)
             }
         }
     }

@@ -31,4 +31,7 @@ public interface HomePaths {
 
     //定时器主页
     String HOME_FRAGMENT_TIMER_INDEX = "/home/fragment/timer/index";
+
+    //LOGGER主页
+    String HOME_FRAGMENT_LOGGER_INDEX = "/home/fragment/logger/index";
 }
