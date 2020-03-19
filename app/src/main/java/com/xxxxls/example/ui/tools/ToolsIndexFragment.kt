@@ -7,7 +7,9 @@ import com.xxxxls.example.ui.indexs.BaseIndexFragment
 import com.xxxxls.example.ui.tools.glide.GlideActivity
 import com.xxxxls.example.ui.tools.status.StatusActivity
 import com.xxxxls.example.ui.tools.titlebar.TitleBarActivity
+import com.xxxxls.module_base.constants.ExamplePaths.EXAMPLE_ACTIVITY_MULTI_VIDEO
 import com.xxxxls.module_base.constants.HomePaths
+import com.xxxxls.module_base.util.jump
 
 /**
  * 工具集
@@ -21,7 +23,7 @@ class ToolsIndexFragment : BaseIndexFragment() {
     }
 
     override fun getItems(): Array<IndexItemBean> {
-        return arrayOf(IndexItemBean("status"), IndexItemBean("glide"), IndexItemBean("titlebar"))
+        return arrayOf(IndexItemBean("status"), IndexItemBean("glide"), IndexItemBean("titlebar"), IndexItemBean("multiVideo"))
     }
 
     override fun onItemClick(index: Int, item: IndexItemBean) {
@@ -34,6 +36,9 @@ class ToolsIndexFragment : BaseIndexFragment() {
             }
             2 -> {
                 startActivity(Intent(context, TitleBarActivity::class.java))
+            }
+            3 -> {
+                EXAMPLE_ACTIVITY_MULTI_VIDEO.jump()
             }
         }
     }

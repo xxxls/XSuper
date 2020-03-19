@@ -1,5 +1,6 @@
 package com.xxxxls.example
 
+import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.xxxxls.xsuper.component.application.XSuperApplication
 
@@ -10,10 +11,9 @@ import com.xxxxls.xsuper.component.application.XSuperApplication
  */
 class App : XSuperApplication() {
 
-
     override fun onInitialize() {
         super.onInitialize()
-
+        MultiDex.install(this)
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
             ARouter.openDebug()
