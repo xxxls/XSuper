@@ -11,6 +11,7 @@ import com.xxxxls.module_base.constants.BasePaths
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.util.jump
 import com.xxxxls.titlebar.setTitleBarLeftText
+import com.xxxxls.module_base.constants.ExamplePaths.EXAMPLE_ACTIVITY_MULTI_VIDEO
 
 /**
  * 工具集
@@ -37,7 +38,8 @@ class ToolsIndexFragment : BaseIndexFragment() {
             IndexItemBean("status"),
             IndexItemBean("glide"),
             IndexItemBean("titleBar"),
-            IndexItemBean("logger")
+            IndexItemBean("logger"),
+            IndexItemBean("multiVideo")
         )
     }
 
@@ -57,6 +59,9 @@ class ToolsIndexFragment : BaseIndexFragment() {
             }
             4 -> {
                 BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_BASE_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_LOGGER_INDEX)
+            }
+            5 -> {
+                EXAMPLE_ACTIVITY_MULTI_VIDEO.jump()
             }
         }
     }
