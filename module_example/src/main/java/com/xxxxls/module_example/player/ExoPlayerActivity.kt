@@ -1,5 +1,6 @@
 package com.xxxxls.module_example.player
 
+import android.graphics.Matrix
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.DefaultRenderersFactory
 import com.google.android.exoplayer2.ExoPlayer
@@ -23,6 +24,10 @@ class ExoPlayerActivity : BaseActivity() {
         )
     }
 
+    private val matrix: Matrix by lazy {
+        Matrix()
+    }
+
     override fun onInitialize() {
         super.onInitialize()
     }
@@ -37,43 +42,56 @@ class ExoPlayerActivity : BaseActivity() {
      * @param videoHeight 视频高度
      * @param rotate 旋转角度
      */
-    fun resetDisplaySize(videoWidth:Float,videoHeight:Float,rotate:Int){
+    fun resetDisplaySize(videoWidth: Float, videoHeight: Float, rotate: Float) {
+
+        // 是否旋转视频画面（垂直变横向）
+        val isHasRotate = (rotate / 90) % 2 == 1f
 
         // 播放视频大小比例
-        val videoRatio = 0.5625f
+        var videoRatio = videoWidth / videoHeight
+
+        if (isHasRotate) {
+            // 有旋转，反向比例计算
+            videoRatio = videoHeight / videoWidth
+        }
 
         // 播放控件大小
         val viewWidth = 9f
         val viewHeight = 16f
 
         // 播放控件大小比例
-        val viewRatio = 0.5625f
+        val viewRatio = viewWidth / viewHeight
 
         // 最终显示大小
         var displayWidth = 0f
         var displayHeight = 0f
 
-        if(videoRatio > viewRatio)
-        {
+        if (videoRatio > viewRatio) {
             // 宽度铺满，高度计算
             displayWidth = viewWidth
-            displayHeight = viewWidth / viewRatio
-        }else
-        {
+            displayHeight = viewWidth / videoRatio
+        } else {
             // 高度铺满，宽度计算
-            displayWidth = viewHeight * viewRatio
+            displayWidth = viewHeight * videoRatio
             displayHeight = viewHeight
         }
 
+        if (isHasRotate) {
+            // 有旋转，宽高替换
+            val temp = displayWidth
+            displayWidth = displayHeight
+            displayHeight = temp
+        }
+
         // 缩放大小
-        var scaleX = displayWidth / viewWidth
-        var scaleY = displayHeight / viewHeight
+        val scaleX = displayWidth / viewWidth
+        val scaleY = displayHeight / viewHeight
 
-        // 设置缩放..
+        // 设置缩放
+        matrix.setScale(scaleX, scaleY, viewHeight / 2, viewHeight / 2)
 
-        //
-
-
+        // 设置旋转
+        matrix.postRotate(rotate,viewHeight / 2, viewHeight / 2)
     }
 
     override fun onDestroy() {
