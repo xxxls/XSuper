@@ -2,6 +2,8 @@ package com.xxxxls.adapter
 
 import android.view.View
 import androidx.annotation.IdRes
+import androidx.annotation.Nullable
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * 基础adapter
@@ -9,6 +11,11 @@ import androidx.annotation.IdRes
  * @date 2019-12-27.
  */
 interface IAdapter<T> {
+
+    /**
+     * 获取RecycleView Adapter
+     */
+    fun getRecyclerViewAdapter(): RecyclerView.Adapter<*>
 
     /**
      * 获取所有列表数据
@@ -65,4 +72,75 @@ interface IAdapter<T> {
      * @param data 替换的数据
      */
     fun replaceData(data: List<T>)
+
+
+    /**
+     * 设置列表条目点击事件
+     */
+    fun setOnItemClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Unit)
+
+    /**
+     * 设置列表条目点击事件
+     */
+    fun setOnItemLongClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Boolean)
+
+    /**
+     * 设置列表条目子VIEW点击事件
+     */
+    fun setOnItemChildClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Unit)
+
+    /**
+     * 设置列表条目子VIEW长按点击事件
+     */
+    fun setOnItemChildLongClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Boolean)
+
+    /**
+     * notifyDataSetChanged
+     */
+    fun notifyDataSetChanged()
+
+    /**
+     * notifyItemRangeChanged
+     */
+    fun notifyItemRangeChanged(positionStart: Int, itemCount: Int, @Nullable payload: Any? = null)
+
+    /**
+     * notifyItemMoved
+     */
+    fun notifyItemMoved(fromPosition: Int, toPosition: Int)
+
+    /**
+     * notifyItemRangeInserted
+     */
+    fun notifyItemRangeInserted(positionStart: Int, itemCount: Int)
+
+    /**
+     * notifyItemRemoved
+     */
+    fun notifyItemRemoved(position: Int)
+
+    /**
+     * notifyItemRangeRemoved
+     */
+    fun notifyItemRangeRemoved(positionStart: Int, itemCount: Int)
+
+    /**
+     * notifyItemInserted
+     */
+    fun notifyItemInserted(position: Int)
+
+    /**
+     * notifyItemChanged
+     */
+    fun notifyItemChanged(position: Int, @Nullable payload: Any? = null)
+
+    /**
+     * getItemCount
+     */
+    fun getItemCount(): Int
+
+    /**
+     * getItemViewType
+     */
+    fun getItemViewType(position: Int): Int
 }

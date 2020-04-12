@@ -169,6 +169,38 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
         mDiffer.submitList(mDiffer.currentList)
     }
 
+    override fun setOnItemClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Unit) {
+        this.mOnItemClickListener = object :OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                listener(this@XSuperAdapter,view, position)
+            }
+        }
+    }
+
+    override fun setOnItemLongClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Boolean) {
+        this.mOnItemLongClickListener = object : OnItemLongClickListener {
+            override fun onItemLongClick(view: View, position: Int): Boolean {
+                return listener(this@XSuperAdapter, view, position)
+            }
+        }
+    }
+
+    override fun setOnItemChildClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Unit) {
+        this.mOnItemChildClickListener = object : OnItemChildClickListener {
+            override fun onItemChildClick(view: View, position: Int) {
+                listener(this@XSuperAdapter, view, position)
+            }
+        }
+    }
+
+    override fun setOnItemChildLongClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Boolean) {
+        this.mOnItemChildLongClickListener = object : OnItemChildLongClickListener {
+            override fun onItemChildLongClick(view: View, position: Int): Boolean {
+                return listener(this@XSuperAdapter, view, position)
+            }
+        }
+    }
+
     /**
      * 设置点击事件
      */
@@ -226,6 +258,10 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
         } catch (e: Exception) {
             XSuperViewHolder(view) as VH
         }
+    }
+
+    override fun getRecyclerViewAdapter(): RecyclerView.Adapter<*> {
+        return this
     }
 
 }

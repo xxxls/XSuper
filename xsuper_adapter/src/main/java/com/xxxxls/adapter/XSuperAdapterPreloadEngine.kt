@@ -38,7 +38,7 @@ interface XSuperAdapterPreloadEngine<T, VH : XSuperViewHolder> : XSuperAdapterEn
     }
 
     /**
-     * 字段加载
+     * 自动加载
      */
     private fun autoLoad(position: Int){
         //TODO 后续完善
