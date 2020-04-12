@@ -29,22 +29,22 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>
 
     //默认布局ID
     @LayoutRes
-    protected var mLayoutResId: Int? = null
+    protected open var mLayoutResId: Int? = null
 
     //Context
-    protected var mContext: Context? = null
+    protected open var mContext: Context? = null
 
     //LayoutInflater
-    protected var mLayoutInflater: LayoutInflater? = null
+    protected open var mLayoutInflater: LayoutInflater? = null
 
     //条目点击事件
-    private var mOnItemClickListener: OnItemClickListener? = null
+    protected open var mOnItemClickListener: OnItemClickListener? = null
     //条目子view点击事件
-    private var mOnItemChildClickListener: OnItemChildClickListener? = null
+    protected open var mOnItemChildClickListener: OnItemChildClickListener? = null
     //条目长按事件
-    private var mOnItemLongClickListener: OnItemLongClickListener? = null
+    protected open var mOnItemLongClickListener: OnItemLongClickListener? = null
     //条目子view长按事件
-    private var mOnItemChildLongClickListener: OnItemChildLongClickListener? = null
+    protected open var mOnItemChildLongClickListener: OnItemChildLongClickListener? = null
 
     constructor(diffCallback: DiffUtil.ItemCallback<T>) : super(diffCallback)
 
@@ -93,7 +93,7 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>
         return mLayoutInflater!!.inflate(layoutResId, parent, false)
     }
 
-    override fun getAdapter(): IXSuperAdapter<T> {
+    override fun getXSuperAdapter(): IXSuperAdapter<T> {
         return this
     }
 
@@ -151,36 +151,12 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>
         })
     }
 
+    override fun getRecyclerViewAdapter(): RecyclerView.Adapter<*> {
+        return this
+    }
+
     override fun getItem(position: Int): T? {
         return super.getItem(position)
-    }
-
-    /**
-     * 设置点击事件
-     */
-    fun setOnItemClickListener(listener: OnItemClickListener?) {
-        this.mOnItemClickListener = listener
-    }
-
-    /**
-     * 设置长按事件
-     */
-    fun setOnItemLongClickListener(listener: OnItemLongClickListener?) {
-        this.mOnItemLongClickListener = listener
-    }
-
-    /**
-     * 设置子view点击事件
-     */
-    fun setOnItemChildClickListener(listener: OnItemChildClickListener?) {
-        this.mOnItemChildClickListener = listener
-    }
-
-    /**
-     * 设置子view长按事件
-     */
-    fun setOnItemChildLongClickListener(listener: OnItemChildLongClickListener?) {
-        this.mOnItemChildLongClickListener = listener
     }
 
     override fun getOnItemClickListener(): OnItemClickListener? {
@@ -198,6 +174,35 @@ abstract class XSuperPagingAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>
     override fun getOnItemChildLongClickListener(): OnItemChildLongClickListener? {
         return mOnItemChildLongClickListener
     }
+
+    /**
+     * 设置点击事件
+     */
+    override fun setOnItemClickListener(listener: OnItemClickListener?) {
+        this.mOnItemClickListener = listener
+    }
+
+    /**
+     * 设置长按事件
+     */
+    override fun setOnItemLongClickListener(listener: OnItemLongClickListener?) {
+        this.mOnItemLongClickListener = listener
+    }
+
+    /**
+     * 设置子view点击事件
+     */
+    override fun setOnItemChildClickListener(listener: OnItemChildClickListener?) {
+        this.mOnItemChildClickListener = listener
+    }
+
+    /**
+     * 设置子view长按事件
+     */
+    override fun setOnItemChildLongClickListener(listener: OnItemChildLongClickListener?) {
+        this.mOnItemChildLongClickListener = listener
+    }
+
 }
 
 

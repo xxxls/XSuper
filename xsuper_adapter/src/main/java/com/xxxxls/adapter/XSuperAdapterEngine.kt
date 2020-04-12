@@ -14,14 +14,14 @@ import com.xxxxls.adapter.listener.OnItemLongClickListener
  */
 interface XSuperAdapterEngine<T, VH : XSuperViewHolder> {
 
-    fun getAdapter(): IXSuperAdapter<T>
+    fun getXSuperAdapter(): IXSuperAdapter<T>
 
     /**
      * Adapter - onCreateViewHolder
      */
     fun xCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return createSuperViewHolder(getItemView(getItemViewLayoutId(viewType), parent)).apply {
-            adapter = getAdapter()
+            adapter = getXSuperAdapter()
             bindItemViewListener(this)
         }
     }
@@ -95,7 +95,7 @@ interface XSuperAdapterEngine<T, VH : XSuperViewHolder> {
      */
     fun bindItemViewListener(holder: VH) {
         //点击事件
-        getOnItemClickListener()?.apply {
+        getXSuperAdapter().getOnItemClickListener()?.apply {
             holder.itemView.setOnClickListener {
                 val position = holder.adapterPosition
                 onItemClick(it, position)
@@ -103,22 +103,11 @@ interface XSuperAdapterEngine<T, VH : XSuperViewHolder> {
         }
 
         //长按事件
-        getOnItemLongClickListener()?.apply {
+        getXSuperAdapter().getOnItemLongClickListener()?.apply {
             holder.itemView.setOnLongClickListener {
                 val position = holder.adapterPosition
                 onItemLongClick(it, position)
             }
         }
     }
-
-    /**
-     * 条目点击事件
-     */
-    fun getOnItemClickListener(): OnItemClickListener?
-
-    /**
-     * 条目长按点击事件
-     */
-    fun getOnItemLongClickListener(): OnItemLongClickListener?
-
 }

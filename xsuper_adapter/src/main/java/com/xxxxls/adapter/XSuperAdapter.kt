@@ -30,27 +30,27 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
 
     //默认布局ID
     @LayoutRes
-    protected var mLayoutResId: Int? = null
+    protected open  var mLayoutResId: Int? = null
 
     //Context
-    protected var mContext: Context? = null
+    protected open  var mContext: Context? = null
 
     //LayoutInflater
-    protected var mLayoutInflater: LayoutInflater? = null
+    protected open  var mLayoutInflater: LayoutInflater? = null
 
     //AsyncListDiffer
-    protected val mDiffer: AsyncListDiffer<T> by lazy {
+    protected open  val mDiffer: AsyncListDiffer<T> by lazy {
         AsyncListDiffer<T>(this, getDiffUtilItemCallback())
     }
 
     //条目点击事件
-    private var mOnItemClickListener: OnItemClickListener? = null
+    protected open  var mOnItemClickListener: OnItemClickListener? = null
     //条目子view点击事件
-    private var mOnItemChildClickListener: OnItemChildClickListener? = null
+    protected open  var mOnItemChildClickListener: OnItemChildClickListener? = null
     //条目长按事件
-    private var mOnItemLongClickListener: OnItemLongClickListener? = null
+    protected open  var mOnItemLongClickListener: OnItemLongClickListener? = null
     //条目子view长按事件
-    private var mOnItemChildLongClickListener: OnItemChildLongClickListener? = null
+    protected open  var mOnItemChildLongClickListener: OnItemChildLongClickListener? = null
 
     constructor() : super()
 
@@ -74,7 +74,7 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
         xBindViewHolder(holder, position, payloads)
     }
 
-    override fun getAdapter(): XSuperAdapter<T, VH> {
+    override fun getXSuperAdapter(): XSuperAdapter<T, VH> {
         return this
     }
 
@@ -169,64 +169,24 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
         mDiffer.submitList(mDiffer.currentList)
     }
 
-    override fun setOnItemClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Unit) {
-        this.mOnItemClickListener = object :OnItemClickListener{
-            override fun onItemClick(view: View, position: Int) {
-                listener(this@XSuperAdapter,view, position)
-            }
+
+    /**
+     * 创建VH
+     * @param view 视图
+     */
+    override fun createSuperViewHolder(view: View): VH {
+        return try {
+            val clazz = ClassUtils.getSuperClassGenericType<VH>(javaClass, 2)
+            val constructor = clazz.getDeclaredConstructor(View::class.java)
+            constructor.isAccessible = true
+            constructor.newInstance(view)
+        } catch (e: Exception) {
+            XSuperViewHolder(view) as VH
         }
     }
 
-    override fun setOnItemLongClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Boolean) {
-        this.mOnItemLongClickListener = object : OnItemLongClickListener {
-            override fun onItemLongClick(view: View, position: Int): Boolean {
-                return listener(this@XSuperAdapter, view, position)
-            }
-        }
-    }
-
-    override fun setOnItemChildClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Unit) {
-        this.mOnItemChildClickListener = object : OnItemChildClickListener {
-            override fun onItemChildClick(view: View, position: Int) {
-                listener(this@XSuperAdapter, view, position)
-            }
-        }
-    }
-
-    override fun setOnItemChildLongClickListener(listener: (adapter: IAdapter<out T>, view: View, position: Int) -> Boolean) {
-        this.mOnItemChildLongClickListener = object : OnItemChildLongClickListener {
-            override fun onItemChildLongClick(view: View, position: Int): Boolean {
-                return listener(this@XSuperAdapter, view, position)
-            }
-        }
-    }
-
-    /**
-     * 设置点击事件
-     */
-    fun setOnItemClickListener(listener: OnItemClickListener?) {
-        this.mOnItemClickListener = listener
-    }
-
-    /**
-     * 设置长按事件
-     */
-    fun setOnItemLongClickListener(listener: OnItemLongClickListener?) {
-        this.mOnItemLongClickListener = listener
-    }
-
-    /**
-     * 设置子view点击事件
-     */
-    fun setOnItemChildClickListener(listener: OnItemChildClickListener?) {
-        this.mOnItemChildClickListener = listener
-    }
-
-    /**
-     * 设置子view长按事件
-     */
-    fun setOnItemChildLongClickListener(listener: OnItemChildLongClickListener?) {
-        this.mOnItemChildLongClickListener = listener
+    override fun getRecyclerViewAdapter(): RecyclerView.Adapter<*> {
+        return this
     }
 
     override fun getOnItemClickListener(): OnItemClickListener? {
@@ -246,22 +206,31 @@ abstract class XSuperAdapter<T, VH : XSuperViewHolder> : IXSuperAdapter<T>,
     }
 
     /**
-     * 创建VH
-     * @param view 视图
+     * 设置点击事件
      */
-    override fun createSuperViewHolder(view: View): VH {
-        return try {
-            val clazz = ClassUtils.getSuperClassGenericType<VH>(javaClass, 2)
-            val constructor = clazz.getDeclaredConstructor(View::class.java)
-            constructor.isAccessible = true
-            constructor.newInstance(view)
-        } catch (e: Exception) {
-            XSuperViewHolder(view) as VH
-        }
+    override fun setOnItemClickListener(listener: OnItemClickListener?) {
+        this.mOnItemClickListener = listener
     }
 
-    override fun getRecyclerViewAdapter(): RecyclerView.Adapter<*> {
-        return this
+    /**
+     * 设置长按事件
+     */
+    override fun setOnItemLongClickListener(listener: OnItemLongClickListener?) {
+        this.mOnItemLongClickListener = listener
+    }
+
+    /**
+     * 设置子view点击事件
+     */
+    override fun setOnItemChildClickListener(listener: OnItemChildClickListener?) {
+        this.mOnItemChildClickListener = listener
+    }
+
+    /**
+     * 设置子view长按事件
+     */
+    override fun setOnItemChildLongClickListener(listener: OnItemChildLongClickListener?) {
+        this.mOnItemChildLongClickListener = listener
     }
 
 }
