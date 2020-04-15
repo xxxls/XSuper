@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RecordButton">
+        <attr name="r_progress_ring_stroke_width" format="dimension|reference" />
+        <attr name="r_progress_ring_background_start_color" format="color|reference" />
+        <attr name="r_progress_ring_background_end_color" format="color|reference" />
+        <attr name="r_progress_ring_start_color" format="color|reference" />
+        <attr name="r_progress_ring_end_color" format="color|reference" />
+        <attr name="r_circle_start_color" format="color|reference" />
+        <attr name="r_circle_end_color" format="color|reference" />
+        <attr name="r_circle_max_radius" format="dimension|reference" />
+        <attr name="r_circle_min_radius" format="dimension|reference" />
+        <attr name="r_split_color" format="color|reference" />
+        <attr name="r_split_width" format="dimension|reference" />
+    </declare-styleable>
+</resources>
