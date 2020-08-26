@@ -14,4 +14,14 @@ class UserApiRepository : BaseApiRepository<UserApis>(UserApis::class.java) {
         //可自定义配置该模块下的网络请求
         return super.getHttpEngine()
     }
+
+    /**
+     * 登录
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun login(userName: String, password: String) {
+        apiService.login(userName, password).await()
+    }
+
 }

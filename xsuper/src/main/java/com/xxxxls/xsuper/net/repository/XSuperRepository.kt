@@ -94,6 +94,5 @@ open class XSuperRepository {
             this@XSuperRepository.dismissLoading()
         }
     }
-
 }
 

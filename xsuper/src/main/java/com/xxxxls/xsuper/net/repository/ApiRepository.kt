@@ -5,7 +5,9 @@ import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import com.xxxxls.xsuper.net.engine.IHttpEngine
 import com.xxxxls.utils.L
 import com.xxxxls.xsuper.exceptions.XSuperException
+import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.net.XSuperLiveData
+import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.callback.map
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Deferred
@@ -95,6 +97,49 @@ abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository()
         service: (it: Api) -> Deferred<XSuperResponse<T>>
     ): Deferred<XSuperResponse<T>> {
         return service(apiService).enqueueAsync(context = context, start = start)
+    }
+
+
+    /**
+     * 发起请求
+     * @return 任务
+     */
+    protected suspend fun <T> Deferred<XSuperResponse<T>>.enqueue(
+        loading: ILoading? = null,
+        context: CoroutineContext = EmptyCoroutineContext,
+        start: CoroutineStart = CoroutineStart.DEFAULT
+    ): XSuperResult<T> {
+        loading?.showLoading()
+        try {
+            val response = this@enqueue.await()
+            val result = onResponseIntercept(response)
+            if (result != null) {
+                return result
+            }
+            // 成功响应
+            return XSuperResult.Success<T>(response.getBody())
+        } catch (e: Exception) {
+            L.e("请求接口异常：$e.toString()")
+            // 请求过程异常
+            return XSuperResult.Error(mHttpEngine.requestExceptionConversion(e))
+        } finally {
+            loading?.dismissLoading()
+        }
+    }
+
+    /**
+     * 响应拦截器
+     * @param response 接口响应结果
+     * @return 拦截后的处理结果
+     */
+    protected fun <T> onResponseIntercept(response: XSuperResponse<T>): XSuperResult<T>? {
+        mHttpEngine.getInterceptors()?.forEach { interceptors ->
+            val result = interceptors.onIntercept(response, mComponentBridge)
+            if (result != null) {
+                return result
+            }
+        }
+        return null
     }
 
     /**

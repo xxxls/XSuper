@@ -13,7 +13,7 @@ sealed class XSuperResult<out T> {
      * 成功
      * @param data 成功的结果
      */
-    class Success<T>(val data: T) : XSuperResult<T>()
+    class Success<T>(val data: T?) : XSuperResult<T>()
 
     /**
      * 失败
