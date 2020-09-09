@@ -17,7 +17,7 @@
 package com.xxxxls.logger.util
 
 
-import com.xxxxls.logger.XSuperLogger
+import com.xxxxls.logger.XLogger
 
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -32,7 +32,7 @@ object StackTraceUtil {
 
     init {
         // Let's start from xlog library.
-        val xlogClassName = XSuperLogger::class.java.name
+        val xlogClassName = XLogger::class.java.name
         XLOG_STACK_TRACE_ORIGIN = xlogClassName.substring(0, xlogClassName.lastIndexOf('.') + 1)
     }
 

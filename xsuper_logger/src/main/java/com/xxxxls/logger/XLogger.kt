@@ -8,7 +8,7 @@ import com.xxxxls.logger.printer.Printer
  * @author Max
  * @date 2020-01-18.
  */
-object XSuperLogger {
+object XLogger {
 
     /**
      * 日志配置

@@ -3,7 +3,7 @@ package com.xxxxls.module_base.util
 import android.util.ArrayMap
 import com.xxxxls.logger.BuildConfig
 import com.xxxxls.logger.LogLevel
-import com.xxxxls.logger.XSuperLogger
+import com.xxxxls.logger.XLogger
 
 /**
  * log 日志扩展（方便灵活的控制某个实例下日志功能）
@@ -166,34 +166,34 @@ interface ILog {
         if (!isLog(tag)) {
             return
         }
-        XSuperLogger.e(tag, message.toString())
+        XLogger.e(tag, message.toString())
     }
 
     fun logD(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XSuperLogger.d(tag, message.toString())
+        XLogger.d(tag, message.toString())
     }
 
     fun logW(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XSuperLogger.w(tag, message.toString())
+        XLogger.w(tag, message.toString())
     }
 
     fun logI(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XSuperLogger.i(tag, message.toString())
+        XLogger.i(tag, message.toString())
     }
 
     fun logV(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XSuperLogger.v(tag, message.toString())
+        XLogger.v(tag, message.toString())
     }
 }
