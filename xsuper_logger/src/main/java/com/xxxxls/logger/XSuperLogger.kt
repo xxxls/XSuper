@@ -63,6 +63,27 @@ object XSuperLogger {
     }
 
     /**
+     * log-W
+     */
+    fun w(message: String, tag: String = getConfiguration().tag) {
+        println(logLevel = LogLevel.WARN, tag = tag, message = message)
+    }
+
+    /**
+     * log-I
+     */
+    fun i(message: String, tag: String = getConfiguration().tag) {
+        println(logLevel = LogLevel.INFO, tag = tag, message = message)
+    }
+
+    /**
+     * log-V
+     */
+    fun v(message: String, tag: String = getConfiguration().tag) {
+        println(logLevel = LogLevel.VERBOSE, tag = tag, message = message)
+    }
+
+    /**
      * 打印日志
      * @param logLevel 级别
      * @param tag 标签

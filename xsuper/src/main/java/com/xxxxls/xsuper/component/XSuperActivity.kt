@@ -64,11 +64,11 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IComponentViewModel
         }
     }
 
-    override fun showLoading(id: Int, message: CharSequence?) {
+    override fun showLoading(id: Int?, message: CharSequence?) {
         com.xxxxls.utils.L.e("${javaClass.simpleName} -> showLoading()")
     }
 
-    override fun dismissLoading(id: Int) {
+    override fun dismissLoading(id: Int?) {
         com.xxxxls.utils.L.e("${javaClass.simpleName} -> dismissLoading()")
     }
 

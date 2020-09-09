@@ -50,7 +50,7 @@ interface IComponentViewModel : ViewModelStoreOwner, IComponentBridge {
      * 建立关联
      */
     fun <T> XSuperLiveData<T>.observe(
-        success: (value: T) -> Unit = {},
+        success: (value: T?) -> Unit = {},
         error: (e: XSuperException) -> Unit = {}
     ) {
         this.observe(getLifecycleOwner(), success, error)

@@ -11,6 +11,7 @@ import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.callback.map
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Deferred
+import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -59,7 +60,7 @@ abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository()
         service: (it: Api) -> Deferred<XSuperResponse<T>>
     ): Job {
         return service(apiService).enqueue(callBack = callBack.map {
-            return@map it.getBody()!!
+            return@map it?.getBody()
         }, context = context, start = start)
     }
 
@@ -75,8 +76,8 @@ abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository()
     ): XSuperLiveData<T> {
         val liveData = XSuperLiveData<T>()
         service(apiService).enqueue(callBack = object : XSuperCallBack<XSuperResponse<T>> {
-            override fun onSuccess(result: XSuperResponse<T>) {
-                liveData.onSuccess(result = result.getBody()!!)
+            override fun onSuccess(result: XSuperResponse<T>?) {
+                liveData.onSuccess(result = result?.getBody())
             }
 
             override fun onError(exception: XSuperException) {
@@ -99,32 +100,46 @@ abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository()
         return service(apiService).enqueueAsync(context = context, start = start)
     }
 
+    /**
+     * 请求接口
+     * @param loading 加载组件
+     * @param service 调用的接口
+     * @return 任务
+     */
+    suspend fun <T> requestApi(
+        loading: ILoading? = this@ApiRepository,
+        service: (it: Api) -> Deferred<XSuperResponse<T>>
+    ): XSuperResult<T> {
+        return service(apiService).enqueue(loading)
+    }
 
     /**
      * 发起请求
+     * @param loading 加载组件
      * @return 任务
      */
     protected suspend fun <T> Deferred<XSuperResponse<T>>.enqueue(
-        loading: ILoading? = null,
-        context: CoroutineContext = EmptyCoroutineContext,
-        start: CoroutineStart = CoroutineStart.DEFAULT
+        loading: ILoading? = this@ApiRepository
     ): XSuperResult<T> {
-        loading?.showLoading()
-        try {
-            val response = this@enqueue.await()
-            val result = onResponseIntercept(response)
-            if (result != null) {
-                return result
+        return withContext(Dispatchers.IO) {
+            L.e("enqueue() thread:${Thread.currentThread().name}")
+            try {
+                loading?.showLoading()
+                val response = this@enqueue.await()
+                val result = onResponseIntercept(response)
+                if (result != null) {
+                    return@withContext result
+                }
+                // 成功响应
+                return@withContext XSuperResult.Success<T>(response.getBody())
+            } catch (e: Exception) {
+                L.e("请求接口异常：$e.toString()")
+                // 请求过程异常
+                return@withContext XSuperResult.Error(mHttpEngine.requestExceptionConversion(e))
+            } finally {
+                loading?.dismissLoading()
             }
-            // 成功响应
-            return XSuperResult.Success<T>(response.getBody())
-        } catch (e: Exception) {
-            L.e("请求接口异常：$e.toString()")
-            // 请求过程异常
-            return XSuperResult.Error(mHttpEngine.requestExceptionConversion(e))
-        } finally {
-            loading?.dismissLoading()
-        }
+        }!!
     }
 
     /**
@@ -188,7 +203,7 @@ abstract class ApiRepository<Api>(var apiClazz: Class<Api>) : XSuperRepository()
             var responseSuccess: XSuperResponse<T>? = null
             var responseError: XSuperException? = null
             val callback = object : XSuperCallBack<XSuperResponse<T>> {
-                override fun onSuccess(result: XSuperResponse<T>) {
+                override fun onSuccess(result: XSuperResponse<T>?) {
                     responseSuccess = result
                 }
 

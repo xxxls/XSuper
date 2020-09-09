@@ -2,7 +2,11 @@ package com.xxxxls.xsuper.net.repository
 
 import androidx.annotation.CallSuper
 import androidx.annotation.NonNull
+import com.xxxxls.utils.L
 import com.xxxxls.xsuper.exceptions.XSuperException
+import com.xxxxls.xsuper.loading.ILoading
+import com.xxxxls.xsuper.net.XSuperResponse
+import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import com.xxxxls.xsuper.net.callback.LoadingCallBack
 import com.xxxxls.xsuper.net.bridge.ComponentAction
@@ -17,7 +21,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperRepository {
+open class XSuperRepository : ILoading {
 
     //与组件通信桥
     protected var mComponentBridge: IComponentBridge? = null
@@ -61,21 +65,11 @@ open class XSuperRepository {
         mComponentBridge = null
     }
 
-    //弹窗加载弹窗
-    protected fun showLoading() {
-        mComponentBridge?.onAction(ComponentAction.ShowLoading())
-    }
-
-    //关闭加载弹窗
-    protected fun dismissLoading() {
-        mComponentBridge?.onAction(ComponentAction.DismissLoading())
-    }
 
     //toast
     protected fun toast(message: CharSequence) {
         mComponentBridge?.onAction(ComponentAction.Toast(message))
     }
-
 
     /**
      * show loading
@@ -93,6 +87,14 @@ open class XSuperRepository {
         if (this is LoadingCallBack<*> && this.isShowLoading()) {
             this@XSuperRepository.dismissLoading()
         }
+    }
+
+    override fun showLoading(id: Int? , message: CharSequence?) {
+        mComponentBridge?.onAction(ComponentAction.ShowLoading(id, message))
+    }
+
+    override fun dismissLoading(id: Int?) {
+        mComponentBridge?.onAction(ComponentAction.DismissLoading(id))
     }
 }
 

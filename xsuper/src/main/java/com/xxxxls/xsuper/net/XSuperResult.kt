@@ -1,6 +1,7 @@
 package com.xxxxls.xsuper.net
 
 import com.xxxxls.xsuper.exceptions.XSuperException
+import com.xxxxls.xsuper.net.callback.XSuperCallBack
 
 /**
  * super - 响应结果类（成功/失败）
@@ -27,4 +28,27 @@ sealed class XSuperResult<out T> {
             is Error -> "Error[exception=$exception]"
         }
     }
+}
+
+
+/**
+ * Result to callback
+ */
+fun <T> XSuperResult<T>.callback(callBack: XSuperCallBack<T>) {
+    when (this) {
+        is XSuperResult.Success<T> -> {
+            callBack.onSuccess(this.data)
+        }
+        is XSuperResult.Error -> {
+            callBack.onError(this.exception)
+        }
+    }
+}
+
+
+/**
+ * 是否成功
+ */
+fun XSuperResult<*>.isSuccess(): Boolean {
+    return this is XSuperResult.Success<*>
 }

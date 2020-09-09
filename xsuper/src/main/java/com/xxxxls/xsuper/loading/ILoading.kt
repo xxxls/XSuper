@@ -12,11 +12,11 @@ interface ILoading {
      * @param id
      * @param message 消息
      */
-    fun showLoading(id: Int = 0, message: CharSequence? = null)
+    fun showLoading(id: Int? = null, message: CharSequence? = null)
 
     /**
      * 关闭进度
      * @param id
      */
-    fun dismissLoading(id: Int = 0)
+    fun dismissLoading(id: Int? = null)
 }

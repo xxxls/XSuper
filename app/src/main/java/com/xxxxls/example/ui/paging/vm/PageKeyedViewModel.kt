@@ -43,13 +43,14 @@ class PageKeyedViewModel : BasePagingListViewModel(),
             false,
             -1,
             object : XSuperCallBack<ListResponse<TestPagingBean>> {
-                override fun onSuccess(result: ListResponse<TestPagingBean>) {
+                override fun onSuccess(result: ListResponse<TestPagingBean>?) {
                     //模拟随机无前面数据
                     val random = (0..10).random()
+                    val list = result?.datas?:ArrayList()
                     callback.onResult(
-                        result.datas,
-                        if (random % 2 == 0) result.datas.firstOrNull()?.id else null,
-                        result.datas.lastOrNull()?.id
+                        list,
+                        if (random % 2 == 0) list.firstOrNull()?.id else null,
+                        list.lastOrNull()?.id
                     )
                     L.e("PageKeyedViewModel -> loadInitial() -> onSuccess()")
                 }
@@ -70,8 +71,9 @@ class PageKeyedViewModel : BasePagingListViewModel(),
             false,
             0,
             object : XSuperCallBack<ListResponse<TestPagingBean>> {
-                override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                    callback.onResult(result.datas, result.datas.lastOrNull()?.id)
+                override fun onSuccess(result: ListResponse<TestPagingBean>?) {
+                    val list = result?.datas?:ArrayList()
+                    callback.onResult(list, list.lastOrNull()?.id)
                     L.e("PageKeyedViewModel -> loadAfter() -> onSuccess()")
                 }
 
@@ -91,8 +93,9 @@ class PageKeyedViewModel : BasePagingListViewModel(),
             true,
             params.key,
             object : XSuperCallBack<ListResponse<TestPagingBean>> {
-                override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                    callback.onResult(result.datas, result.datas.firstOrNull()?.id)
+                override fun onSuccess(result: ListResponse<TestPagingBean>?) {
+                    val list = result?.datas?:ArrayList()
+                    callback.onResult(list, list.firstOrNull()?.id)
                     L.e("PageKeyedViewModel -> loadBefore() -> onSuccess()")
                 }
 

@@ -14,7 +14,7 @@ import com.xxxxls.xsuper.net.callback.XSuperCallBack
 open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     XSuperCallBack<T> {
 
-    override fun onSuccess(result: T ) {
+    override fun onSuccess(result: T?) {
         postValue(XSuperResult.Success(result))
     }
 
@@ -30,7 +30,7 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
      */
     fun observe(
         owner: LifecycleOwner,
-        success: (value: T) -> Unit = {},
+        success: (value: T?) -> Unit = {},
         error: (e: XSuperException) -> Unit = {}
     ): XSuperLiveData<T> {
         super.observe(owner, Observer<XSuperResult<T>> {
@@ -52,7 +52,7 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
      * @param error 失败回调
      */
     fun observeForever(
-        success: (value: T) -> Unit = {},
+        success: (value: T?) -> Unit = {},
         error: (e: XSuperException) -> Unit = {}
     ): XSuperLiveData<T> {
         super.observeForever {

@@ -41,7 +41,7 @@ class HomeArticleListFragment : BaseFragment() {
         super.onInitObserve()
         mViewModel.listLiveData.observe(success = {
             com.xxxxls.utils.L.e("list-success:$it")
-            mAdapter.submitList(it.datas)
+            mAdapter.submitList(it?.datas?:ArrayList())
             refreshLayout.finishRefresh()
             refreshLayout.finishLoadMore()
         }, error = {

@@ -49,7 +49,7 @@ open class BaseActivity : XSuperActivity() {
         }
     }
 
-    override fun showLoading(id: Int, message: CharSequence?) {
+    override fun showLoading(id: Int?, message: CharSequence?) {
         super.showLoading(id, message)
         if (mLoadingDialog == null) {
             mLoadingDialog = LoadingDialog(getContext())
@@ -61,7 +61,7 @@ open class BaseActivity : XSuperActivity() {
         mLoadingDialog!!.show()
     }
 
-    override fun dismissLoading(id: Int) {
+    override fun dismissLoading(id: Int?) {
         super.dismissLoading(id)
         if (mLoadingDialog == null || !mLoadingDialog!!.isShowing) {
             return

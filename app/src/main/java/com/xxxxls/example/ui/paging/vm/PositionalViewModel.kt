@@ -45,9 +45,9 @@ class PositionalViewModel : BasePagingListViewModel(),
     ) {
         L.e("PositionalViewModel -> loadRange()")
         mHomeRepository.getTestPagingList(false,params.startPosition,object :XSuperCallBack<ListResponse<TestPagingBean>> {
-            override fun onSuccess(result: ListResponse<TestPagingBean>) {
+            override fun onSuccess(result: ListResponse<TestPagingBean>?) {
                 L.e("PositionalViewModel -> loadRange() -> onSuccess()")
-                callback.onResult(result.datas)
+                callback.onResult(result?.datas?:ArrayList())
             }
 
             override fun onError(exception: XSuperException) {
@@ -63,8 +63,8 @@ class PositionalViewModel : BasePagingListViewModel(),
     ) {
         L.e("PositionalViewModel -> loadInitial()")
         mHomeRepository.getTestPagingList(false,params.requestedStartPosition,object :XSuperCallBack<ListResponse<TestPagingBean>> {
-            override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                callback.onResult(result.datas, 0, result.total)
+            override fun onSuccess(result: ListResponse<TestPagingBean>?) {
+                callback.onResult(result?.datas?:ArrayList(), 0, result?.total?:0)
                 L.e("PositionalViewModel -> loadInitial() -> onSuccess()")
             }
 

@@ -47,8 +47,8 @@ class ItemKeyedViewModel : BasePagingListViewModel(),
             false,
             params.requestedInitialKey ?: -1,
             object : XSuperCallBack<ListResponse<TestPagingBean>> {
-                override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                    callback.onResult(result.datas)
+                override fun onSuccess(result: ListResponse<TestPagingBean>?) {
+                    callback.onResult(result?.datas ?: ArrayList())
                     L.e("ItemKeyedViewModel -> loadInitial() -> onSuccess()")
                 }
 
@@ -68,8 +68,8 @@ class ItemKeyedViewModel : BasePagingListViewModel(),
             false,
             params.key!!,
             object : XSuperCallBack<ListResponse<TestPagingBean>> {
-                override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                    callback.onResult(result.datas)
+                override fun onSuccess(result: ListResponse<TestPagingBean>?) {
+                    callback.onResult(result?.datas?:ArrayList())
                     L.e("ItemKeyedViewModel -> loadAfter() -> onSuccess()")
                 }
 
@@ -89,8 +89,8 @@ class ItemKeyedViewModel : BasePagingListViewModel(),
             true,
             params.key!!,
             object : XSuperCallBack<ListResponse<TestPagingBean>> {
-                override fun onSuccess(result: ListResponse<TestPagingBean>) {
-                    callback.onResult(result.datas)
+                override fun onSuccess(result: ListResponse<TestPagingBean>?) {
+                    callback.onResult(result?.datas?:ArrayList())
                     L.e("ItemKeyedViewModel -> loadBefore() -> onSuccess()")
                 }
 

@@ -14,7 +14,7 @@ interface XSuperCallBack<T> {
      * 成功
      * @param result 结果
      */
-    fun onSuccess(result: T)
+    fun onSuccess(result: T?)
 
     /**
      * 失败
@@ -26,10 +26,10 @@ interface XSuperCallBack<T> {
 /**
  * 转换
  */
-fun <T, R> XSuperCallBack<T>.map(@NonNull mapFunction: (R) -> T): XSuperCallBack<R> {
+fun <T, R> XSuperCallBack<T>.map(@NonNull mapFunction: (R?) -> T?): XSuperCallBack<R> {
 
     return object : XSuperCallBack<R> {
-        override fun onSuccess(result: R) {
+        override fun onSuccess(result: R?) {
             this@map.onSuccess(mapFunction(result))
         }
 

@@ -3,8 +3,10 @@ package com.xxxxls.xsuper.net.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
+import com.xxxxls.xsuper.net.callback.XSuperCallBack
 import com.xxxxls.xsuper.net.repository.XSuperRepository
 import kotlinx.coroutines.*
 import java.util.concurrent.ConcurrentHashMap
@@ -83,4 +85,5 @@ open class XSuperViewModel : ViewModel(), IComponentBridge {
     override fun onAction(action: ComponentAction) {
         mIComponentBridgeLiveData.postValue(action)
     }
+
 }

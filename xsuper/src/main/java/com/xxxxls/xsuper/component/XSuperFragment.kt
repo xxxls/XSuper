@@ -89,7 +89,7 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewMode
         }
     }
 
-    override fun showLoading(id: Int, message: CharSequence?) {
+    override fun showLoading(id: Int?, message: CharSequence?) {
         com.xxxxls.utils.L.e("${javaClass.simpleName} -> showLoading()")
         (activity as? ILoading)?.run {
             //转至activity处理
@@ -97,7 +97,7 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewMode
         }
     }
 
-    override fun dismissLoading(id: Int) {
+    override fun dismissLoading(id: Int?) {
         com.xxxxls.utils.L.e("${javaClass.simpleName} -> dismissLoading()")
         (activity as? ILoading)?.run {
             //转至activity处理

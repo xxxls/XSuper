@@ -13,12 +13,12 @@ sealed class ComponentAction {
     /**
      * 展示加载弹窗
      */
-    class ShowLoading(val message: CharSequence? = null) : ComponentAction()
+    class ShowLoading(val id: Int? = null, val message: CharSequence? = null) : ComponentAction()
 
     /**
      * 关闭加载弹窗
      */
-    class DismissLoading : ComponentAction()
+    class DismissLoading(val id: Int? = null) : ComponentAction()
 
     /**
      * 展示弹窗
