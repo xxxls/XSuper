@@ -1,4 +1,4 @@
-package com.xxxxls.module_user.net
+package com.xxxxls.module_user.service
 
 import com.xxxxls.module_base.net.response.BaseResponse
 import com.xxxxls.module_user.bean.UserBean

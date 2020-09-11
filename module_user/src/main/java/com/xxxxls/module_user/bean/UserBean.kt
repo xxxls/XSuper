@@ -1,10 +1,14 @@
 package com.xxxxls.module_user.bean
 
+import androidx.room.Entity
+
+
 /**
  * 用户Bean
  * @author Max
  * @date 2019-11-28.
  */
+@Entity
 data class UserBean(
     val admin: Boolean,
     val chapterTops: List<Any>,

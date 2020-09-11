@@ -23,12 +23,12 @@ open class XSuperViewModel : ViewModel(), IComponentBridge {
     /**
      * 与组件(activity，fragment)的通信（加载弹窗，toast等）
      */
-    val mIComponentBridgeLiveData: MutableLiveData<ComponentAction> by lazy {
+    val componentBridgeLiveData: MutableLiveData<ComponentAction> by lazy {
         MutableLiveData<ComponentAction>()
     }
 
     //Repository集合
-    protected val mRepositorys: ConcurrentHashMap<Class<*>, XSuperRepository> by lazy {
+    protected val repositorys: ConcurrentHashMap<Class<*>, XSuperRepository> by lazy {
         ConcurrentHashMap<Class<*>, XSuperRepository>()
     }
 
@@ -44,7 +44,7 @@ open class XSuperViewModel : ViewModel(), IComponentBridge {
      * 创建Repository
      */
     protected inline fun <reified T : XSuperRepository> createRepository(): T {
-        var repository = mRepositorys[T::class.java] as? T
+        var repository = repositorys[T::class.java] as? T
         if (repository == null) {
             repository = T::class.java.newInstance()
             addRepository(repository)
@@ -57,7 +57,7 @@ open class XSuperViewModel : ViewModel(), IComponentBridge {
      */
     protected inline fun <reified T : XSuperRepository> addRepository(repository: T): T {
         repository.setComponentBridge(this)
-        mRepositorys[T::class.java] = repository
+        repositorys[T::class.java] = repository
         return repository
     }
 
@@ -74,7 +74,7 @@ open class XSuperViewModel : ViewModel(), IComponentBridge {
 
     override fun onCleared() {
         super.onCleared()
-        mRepositorys.forEach {
+        repositorys.forEach {
             it.value.onCleared()
         }
     }
@@ -83,7 +83,7 @@ open class XSuperViewModel : ViewModel(), IComponentBridge {
      * 中转给组件
      */
     override fun onAction(action: ComponentAction) {
-        mIComponentBridgeLiveData.postValue(action)
+        componentBridgeLiveData.postValue(action)
     }
 
 }

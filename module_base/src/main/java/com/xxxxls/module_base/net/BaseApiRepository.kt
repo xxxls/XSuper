@@ -12,7 +12,10 @@ import okhttp3.OkHttpClient
  * @author Max
  * @date 2019-11-27.
  */
-open class BaseApiRepository<Api>(clazz: Class<Api>) : ApiRepository<Api>(clazz) {
+open class BaseApiRepository<Api> : ApiRepository<Api> {
+
+    constructor() : super()
+    constructor(apiClazz: Class<Api>?) : super(apiClazz)
 
     override fun getHttpEngine(): IHttpEngine {
         return HttpEngineManager.getInstance().buildEngine(NetConfig.BASE_URL) {

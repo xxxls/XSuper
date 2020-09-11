@@ -13,7 +13,7 @@ import kotlinx.coroutines.delay
  * @author Max
  * @date 2019-12-25.
  */
-class HomeRepository : BaseApiRepository<HomeApis>(HomeApis::class.java) {
+class HomeRepository : BaseApiRepository<HomeApis>() {
 
     /**
      * 模拟获取测试数据

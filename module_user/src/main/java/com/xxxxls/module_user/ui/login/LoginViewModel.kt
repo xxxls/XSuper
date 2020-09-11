@@ -2,8 +2,8 @@ package com.xxxxls.module_user.ui.login
 
 import com.xxxxls.module_base.net.BaseLiveData
 import com.xxxxls.module_user.bean.UserBean
-import com.xxxxls.module_user.net.UserApiRepository
-import com.xxxxls.module_user.net.UserViewModel
+import com.xxxxls.module_user.service.UserApiRepository
+import com.xxxxls.module_user.service.UserViewModel
 import com.xxxxls.xsuper.net.callback
 
 /**

@@ -36,6 +36,7 @@ object ClassUtils {
             genType = cls.genericSuperclass
         }
         val params = genType.actualTypeArguments
+//        val params2 = cls?.get.actualTypeArguments
         require(!(index >= params.size || index < 0))
         return if (params[index] !is Class<*>) {
             throw IllegalArgumentException()

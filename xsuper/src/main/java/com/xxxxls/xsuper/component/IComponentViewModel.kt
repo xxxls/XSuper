@@ -34,7 +34,7 @@ interface IComponentViewModel : ViewModelStoreOwner, IComponentBridge {
      */
     fun addViewModel(viewModel: XSuperViewModel?) {
         //建立组件与ViewModel的通信
-        viewModel?.mIComponentBridgeLiveData?.observe(getLifecycleOwner(), Observer<ComponentAction> {
+        viewModel?.componentBridgeLiveData?.observe(getLifecycleOwner(), Observer<ComponentAction> {
             onAction(it)
         })
     }

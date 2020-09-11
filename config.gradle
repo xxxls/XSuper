@@ -32,6 +32,7 @@ ext {
             flexboxVersion          : "1.1.0",
             corektxVersion          : "1.1.0",
             pagingVersion           : "1.0.1",
+            roomVersion             : "2.1.0-alpha03",
 
             //@好用组件
             eventbusVersion         : "3.1.1",
@@ -100,7 +101,11 @@ ext {
             "runtime-ktx"        : "androidx.lifecycle:lifecycle-runtime-ktx:${versions["lifecycleVersion"]}",
             //liveData
             "livedata-ktx"       : "androidx.lifecycle:lifecycle-livedata-ktx:${versions["lifecycleVersion"]}",
-
+            //room
+            "room"               : "androidx.room:room-runtime:${versions["roomVersion"]}",
+            "room-compiler"      : "androidx.room:room-compiler:${versions["roomVersion"]}",
+            "room-coroutines"    : "androidx.room:room-coroutines:${versions["roomVersion"]}",
+            "room-RxJava"        : "androidx.room:room-rxjava2:${versions["roomVersion"]}",
 
             /**
              * @好用组件
@@ -161,5 +166,6 @@ ext {
 
             //ffmpeg
             "rxFFmpeg"           : "com.github.microshow:RxFFmpeg:${versions["rxFFmpegVersion"]}",
+
     ]
 }

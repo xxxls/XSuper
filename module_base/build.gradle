@@ -98,4 +98,9 @@ dependencies {
 
     //下拉刷新
     api rootProject.ext.dependencies["SmartRefresh"]
+
+    //room
+    api rootProject.ext.dependencies["room"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
+    api rootProject.ext.dependencies["room-coroutines"]
 }

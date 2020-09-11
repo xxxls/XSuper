@@ -14,15 +14,15 @@ import kotlin.reflect.KProperty
 class ViewModelFactory<VM : XSuperViewModel>(private val clazz: Class<VM>) :
     ReadOnlyProperty<IComponentViewModel, VM> {
 
-    private var mViewModel: VM? = null
+    private var viewModel: VM? = null
 
     override fun getValue(thisRef: IComponentViewModel, property: KProperty<*>): VM {
-        if (mViewModel == null) {
-            mViewModel = ViewModelProvider(thisRef).get(clazz)
+        if (viewModel == null) {
+            viewModel = ViewModelProvider(thisRef).get(clazz)
             //建立与组件的关联
-            thisRef.addViewModel(mViewModel!!)
+            thisRef.addViewModel(viewModel!!)
         }
-        return mViewModel!!
+        return viewModel!!
     }
 
 }

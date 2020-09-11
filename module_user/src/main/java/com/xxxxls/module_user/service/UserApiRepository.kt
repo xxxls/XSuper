@@ -1,18 +1,16 @@
-package com.xxxxls.module_user.net
+package com.xxxxls.module_user.service
 
 import com.xxxxls.module_base.net.BaseApiRepository
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.engine.IHttpEngine
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * 用户模块的基础请求Repository (ps:这里只是展示用法，如果某模块的baseUrl或网络公共参数不同可这样单独配置）
  * @author Max
  * @date 2019-11-28.
  */
-class UserApiRepository : BaseApiRepository<UserApis>(UserApis::class.java) {
+class UserApiRepository : BaseApiRepository<UserApis>() {
 
     override fun getHttpEngine(): IHttpEngine {
         //可自定义配置该模块下的网络请求
@@ -25,6 +23,8 @@ class UserApiRepository : BaseApiRepository<UserApis>(UserApis::class.java) {
      * @param password 密码
      */
     suspend fun login(userName: String, password: String): XSuperResult<UserBean> {
+//        return apis2(UserApis::class.java).login(userName, password).enqueue()
+//        return UserApis::class.java.api().login(userName, password).enqueue()
         return apiService.login(userName, password).enqueue()
     }
 

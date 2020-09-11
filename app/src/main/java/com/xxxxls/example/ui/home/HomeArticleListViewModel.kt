@@ -10,7 +10,7 @@ import com.xxxxls.module_base.net.response.ListResponse
  * @author Max
  * @date 2019-12-07.
  */
-class HomeArticleListViewModel : FastApiViewModel<HomeApis>(HomeApis::class.java) {
+class HomeArticleListViewModel : FastApiViewModel<HomeApis>() {
 
     val listLiveData: BaseLiveData<ListResponse<ArticleBean>> by lazy {
         BaseLiveData<ListResponse<ArticleBean>>()
