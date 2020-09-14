@@ -23,7 +23,7 @@ class LoginViewModel : UserViewModel() {
      * 登录 方案一
      */
     fun login(userName: String, password: String) {
-        launch {
+        launch(loading = null) {
             mUserRepository.login(userName, password).callback(loginLiveData)
         }
     }

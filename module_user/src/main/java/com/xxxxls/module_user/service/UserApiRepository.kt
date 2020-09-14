@@ -12,9 +12,9 @@ import com.xxxxls.xsuper.net.engine.IHttpEngine
  */
 class UserApiRepository : BaseApiRepository<UserApis>() {
 
-    override fun getHttpEngine(): IHttpEngine {
+    override fun createHttpEngine(): IHttpEngine {
         //可自定义配置该模块下的网络请求
-        return super.getHttpEngine()
+        return super.createHttpEngine()
     }
 
     /**
@@ -23,9 +23,8 @@ class UserApiRepository : BaseApiRepository<UserApis>() {
      * @param password 密码
      */
     suspend fun login(userName: String, password: String): XSuperResult<UserBean> {
-//        return apis2(UserApis::class.java).login(userName, password).enqueue()
-//        return UserApis::class.java.api().login(userName, password).enqueue()
-        return apiService.login(userName, password).enqueue()
+        return api.login(userName, password).enqueue()
     }
+
 
 }
