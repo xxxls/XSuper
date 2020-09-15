@@ -3,11 +3,15 @@ package com.xxxxls.xsuper.net.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.xxxxls.utils.data.ConcurrentHashMapStore
+import com.xxxxls.utils.data.XSuperStore
+import com.xxxxls.xsuper.clazz.*
 import com.xxxxls.xsuper.loading.*
 import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
+import com.xxxxls.xsuper.net.repository.ApiRepository
 import com.xxxxls.xsuper.net.repository.XSuperRepository
 import kotlinx.coroutines.*
 import java.util.concurrent.ConcurrentHashMap
@@ -28,38 +32,22 @@ open class XSuperViewModel : ViewModel(), IComponentBridge, ILoading {
         MutableLiveData<ComponentAction>()
     }
 
-    //Repository集合
-    protected val repositorys: ConcurrentHashMap<Class<*>, XSuperRepository> by lazy {
-        ConcurrentHashMap<Class<*>, XSuperRepository>()
+    // 数据仓存储器
+    private val store: XSuperStore<Class<*>, XSuperRepository> by lazy {
+        ConcurrentHashMapStore<Class<*>, XSuperRepository>()
     }
-
-//    //主Repository
-//    val mRepository: R by lazy {
-//        val clazz = (ClassUtils.getSuperClassGenericType<R>(javaClass))
-//        val repository = clazz.newInstance()
-//        mRepositorys[clazz] = repository
-//        repository
-//    }
 
     /**
      * 创建Repository
      */
-    protected inline fun <reified T : XSuperRepository> createRepository(): T {
-        var repository = repositorys[T::class.java] as? T
-        if (repository == null) {
-            repository = T::class.java.newInstance()
-            addRepository(repository)
+    protected fun <T : XSuperRepository> createRepository(
+        clazz: Class<T>, build: (Class<*>) -> T = {
+            (it.newInstance() as T)
         }
-        return repository
-    }
-
-    /**
-     * 添加Repository至本viewModel
-     */
-    protected inline fun <reified T : XSuperRepository> addRepository(repository: T): T {
-        repository.attachComponentBridge(this)
-        repositorys[T::class.java] = repository
-        return repository
+    ): T {
+        return (store.get(key = clazz, build = build) as T).apply {
+            this.attachComponentBridge(this@XSuperViewModel)
+        }
     }
 
     /**
@@ -95,9 +83,7 @@ open class XSuperViewModel : ViewModel(), IComponentBridge, ILoading {
 
     override fun onCleared() {
         super.onCleared()
-        repositorys.forEach {
-            it.value.onCleared()
-        }
+        store.clear()
     }
 
     /**
@@ -114,5 +100,6 @@ open class XSuperViewModel : ViewModel(), IComponentBridge, ILoading {
     override fun dismissLoading(id: Int?) {
         this.onAction(ComponentAction.DismissLoading(id))
     }
+
 
 }

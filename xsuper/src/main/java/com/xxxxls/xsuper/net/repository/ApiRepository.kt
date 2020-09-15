@@ -2,9 +2,8 @@ package com.xxxxls.xsuper.net.repository
 
 import com.xxxxls.utils.ClassUtils
 import com.xxxxls.utils.L
-import com.xxxxls.xsuper.clazz.ClazzProvider
-import com.xxxxls.xsuper.clazz.DefaultApiFactory
-import com.xxxxls.xsuper.clazz.MemoryStore
+import com.xxxxls.utils.data.ConcurrentHashMapStore
+import com.xxxxls.utils.data.XSuperStore
 import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.loading.dismissLoadingInCoroutine
 import com.xxxxls.xsuper.loading.showLoadingInCoroutine
@@ -14,7 +13,6 @@ import com.xxxxls.xsuper.net.engine.IHttpEngine
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.concurrent.ConcurrentHashMap
 
 /**
  * API 网络请求
@@ -23,13 +21,19 @@ import java.util.concurrent.ConcurrentHashMap
  */
 abstract class ApiRepository<Api> : XSuperRepository {
 
+    // 网络服务存储器
+    protected val store: XSuperStore<Class<*>, Any> by lazy {
+        ConcurrentHashMapStore<Class<*>, Any>()
+    }
+
     // HTTP-请求器
+//    @PublishedApi
     protected val httpEngine: IHttpEngine by lazy {
         createHttpEngine()
     }
 
     // API-Service-Class
-    protected var apiClazz: Class<Api>? = null
+    private var apiClazz: Class<Api>? = null
         get() {
             if (field == null) {
                 field = ClassUtils.getSuperClassGenericType<Api>(
@@ -41,17 +45,9 @@ abstract class ApiRepository<Api> : XSuperRepository {
 
     // 默认-API-Service（泛型）
     protected val api: Api by lazy {
-        apiProvider.get(apiClazz as Class<Any>) as Api
-    }
-
-    // API - 提供者
-    protected val apiProvider: ClazzProvider by lazy {
-        createApiProvider()
-    }
-
-    // API - 存储器
-    protected val apiStore: ClazzProvider.Store by lazy {
-        createApiStore()
+        store.get(apiClazz!!) {
+            httpEngine.createService(it)
+        } as Api
     }
 
     constructor() : this(null)
@@ -61,41 +57,20 @@ abstract class ApiRepository<Api> : XSuperRepository {
     }
 
     /**
+     *  创建API(大多数情况下不需要这样，当需要多API时，需要通过此方法构建)
+     */
+    protected fun <T> createApi(clazz: Class<T>): T {
+        return store.get(key = clazz, build = {
+            httpEngine.createService(it)
+        }) as T
+    }
+
+    /**
      * 获取Http引擎
      * @return 请求实例
      */
     protected abstract fun createHttpEngine(): IHttpEngine
 
-    /**
-     * 创建API提供
-     */
-    protected open fun createApiProvider(): ClazzProvider {
-        return ClazzProvider(
-            apiStore,
-            DefaultApiFactory(httpEngine)
-        )
-    }
-
-    /**
-     * API 存储器
-     */
-    protected open fun createApiStore(): ClazzProvider.Store {
-        return MemoryStore()
-    }
-
-    /**
-     * 创建API(大多数情况下不需要这样，当需要多API时，需要通过此方法构建)
-     */
-    inline fun <reified Api> api(): Api {
-        return apiProvider.get(Api::class.java)
-    }
-
-    /**
-     * 创建API服务
-     */
-    fun <Api> api(clazz: Class<Api>): Api {
-        return apiProvider.get(clazz = clazz as Class<Any>) as Api
-    }
 
     /**
      * 请求接口
@@ -156,7 +131,7 @@ abstract class ApiRepository<Api> : XSuperRepository {
 
     override fun onCleared() {
         super.onCleared()
-        apiStore.clear()
+        store.clear()
     }
 
 }

@@ -17,12 +17,18 @@ class UserApiRepository : BaseApiRepository<UserApis>() {
         return super.createHttpEngine()
     }
 
+    // 模拟多个ApiService
+    private val api2: UserApis by lazy {
+        createApi(UserApis::class.java)
+    }
+
     /**
      * 登录
      * @param userName 用户名
      * @param password 密码
      */
     suspend fun login(userName: String, password: String): XSuperResult<UserBean> {
+//        api2.login(userName, password).enqueue()
         return api.login(userName, password).enqueue()
     }
 

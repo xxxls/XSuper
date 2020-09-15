@@ -17,7 +17,7 @@ import com.xxxxls.utils.L
  */
 abstract class BasePagingListViewModel : BaseViewModel() {
 
-    protected val mHomeRepository = createRepository<HomeRepository>()
+    protected val mHomeRepository = createRepository(HomeRepository::class.java)
 
     val listLiveData: LiveData<PagedList<TestPagingBean>> by lazy {
         getXSuperPaging().build()

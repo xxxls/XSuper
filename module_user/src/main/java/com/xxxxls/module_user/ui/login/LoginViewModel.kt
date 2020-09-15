@@ -13,7 +13,14 @@ import com.xxxxls.xsuper.net.callback
  */
 class LoginViewModel : UserViewModel() {
 
-    private val mUserRepository = createRepository<UserApiRepository>()
+    private val userRepository: UserApiRepository by lazy {
+        createRepository(UserApiRepository::class.java)
+    }
+
+    // 模拟多Repository的情况
+    private val userApiRepository2: UserApiRepository by lazy {
+        createRepository(UserApiRepository::class.java)
+    }
 
     val loginLiveData by lazy {
         BaseLiveData<UserBean>()
@@ -24,7 +31,7 @@ class LoginViewModel : UserViewModel() {
      */
     fun login(userName: String, password: String) {
         launch(loading = null) {
-            mUserRepository.login(userName, password).callback(loginLiveData)
+            userRepository.login(userName, password).callback(loginLiveData)
         }
     }
 
@@ -33,7 +40,7 @@ class LoginViewModel : UserViewModel() {
      */
     fun login2(userName: String, password: String) {
         launch {
-            mUserRepository.requestApi {
+            userRepository.requestApi {
                 it.login(userName, password)
             }.callback(loginLiveData)
         }

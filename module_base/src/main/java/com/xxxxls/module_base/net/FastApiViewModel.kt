@@ -5,6 +5,7 @@ import com.xxxxls.xsuper.net.XSuperResponse
 import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.callback
 import com.xxxxls.xsuper.net.callback.XSuperCallBack
+import com.xxxxls.xsuper.net.repository.ApiRepository
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 
@@ -16,10 +17,11 @@ import kotlinx.coroutines.Job
 open class FastApiViewModel<Api> : BaseViewModel() {
 
     // 快速Api
-    private val repositoryApi: BaseApiRepository<Api> by lazy {
+    private val repositoryApi: ApiRepository<Api> by lazy {
         val clazz = ClassUtils.getSuperClassGenericType<Api>(this.javaClass)
-        val repository = BaseApiRepository<Api>(clazz)
-        addRepository(repository)
+        createRepository(clazz = ApiRepository::class.java, build = {
+            BaseApiRepository<Api>(clazz)
+        }) as BaseApiRepository<Api>
     }
 
     /**
