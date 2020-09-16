@@ -2,8 +2,8 @@ package com.xxxxls.example.ui.tools.glide
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.xxxxls.example.R
+import com.xxxxls.image.loadImage
 import com.xxxxls.module_base.base.BaseActivity
-import com.xxxxls.xsuper.utils.loadImage
 import kotlinx.android.synthetic.main.activity_glide.*
 
 /**

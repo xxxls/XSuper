@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         if (!isModule) {
-            applicationId "com.xxxxls.example"
+            applicationId "com.xxxxls.example.user"
         }
 
         minSdkVersion rootProject.ext.versions["minSdkVersion"]

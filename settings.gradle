@@ -1,2 +1,2 @@
-include ':app', ':xsuper_core', ':module_example', ':module_user', ':module_base', ':xsuper_adapter', ':xsuper_utils', ':xsuper_status', ':xsuper_titlebar', ':xsuper_widget', ':xsuper_logger'
+include ':app', ':xsuper_core', ':module_example', ':module_user', ':module_base', ':xsuper_adapter', ':xsuper_utils', ':xsuper_status', ':xsuper_titlebar', ':xsuper_widget', ':xsuper_logger', ':xsuper_image'
 rootProject.name='XSuper'

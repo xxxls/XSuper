@@ -235,7 +235,9 @@
     <orderEntry type="module" module-name="xsuper_adapter" />
     <orderEntry type="module" module-name="XSuper-xsuper_titlebar" />
     <orderEntry type="module" module-name="XSuper-xsuper_status" />
+    <orderEntry type="module" module-name="xsuper_widget" />
     <orderEntry type="module" module-name="xsuper_logger" />
+    <orderEntry type="module" module-name="xsuper_image" />
     <orderEntry type="module" module-name="XSuper-xsuper_utils" />
   </component>
 </module>

@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.utils
+package com.xxxxls.image
 
 import android.app.Activity
 import android.content.Context
@@ -12,7 +12,6 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.TransitionOptions
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.*
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
@@ -20,11 +19,10 @@ import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import java.io.File
 
 /**
- * 图片加载
+ *
  * @author Max
- * @date 2020-01-02.
+ * @date 2020/9/16.
  */
-
 
 /**
  * 构建Glide请求体

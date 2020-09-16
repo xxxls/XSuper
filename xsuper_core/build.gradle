@@ -84,6 +84,4 @@ dependencies {
      * @其他组件
      */
 
-    //图片加载
-    api  rootProject.ext.dependencies["glide"]
 }

@@ -77,10 +77,12 @@ dependencies {
     api project(path: ':xsuper_titlebar')
     //多状态
     api project(path: ':xsuper_status')
-    //widget
-    api project(path: ':xsuper_status')
+    //控件集
+    api project(path: ':xsuper_widget')
     //日志
     api project(path: ':xsuper_logger')
+    //图片加载工具
+    api project(path: ':xsuper_image')
 
 
     //ARouter路由

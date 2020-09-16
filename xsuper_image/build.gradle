@@ -33,7 +33,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    resourcePrefix "widget"
+    resourcePrefix "image"
 }
 
 
@@ -45,4 +45,7 @@ dependencies {
 
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["lifecycle"]
+
+    //图片加载
+    api  rootProject.ext.dependencies["glide"]
 }
