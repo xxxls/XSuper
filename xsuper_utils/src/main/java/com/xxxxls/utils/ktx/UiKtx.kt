@@ -1,12 +1,28 @@
 package com.xxxxls.utils.ktx
 
+import android.content.res.Resources
 import com.xxxxls.utils.UiUtils
+import kotlin.math.roundToInt
 
 /**
  * UI
  * @author Max
  * @date 2020-01-10.
  */
+
+
+/**
+ * 转换为PX值
+ */
+val Float.dp: Int get() = this.toPX().roundToInt()
+val Int.dp: Int get() =  this.toPX().roundToInt()
+
+/**
+ * 转换为DP值
+ */
+val Float.px: Int get() = this.toDP().roundToInt()
+val Int.px: Int get() = this.toDP().roundToInt()
+
 
 fun Long.toDP(): Float {
     return UiUtils.px2dip(this.toFloat())
