@@ -80,8 +80,10 @@ open class XSuperBottomSheetDialogFragment : BottomSheetDialogFragment(),
                     if (state == BottomSheetBehavior.STATE_DRAGGING) {
                         //判断为向下拖动行为时，则强制设定状态为展开
                         if (!isCanSlideClose()) {
-                            behavior.state = state
+                            behavior.state = BottomSheetBehavior.STATE_EXPANDED
                         }
+                    } else if (state == BottomSheetBehavior.STATE_HIDDEN) {
+                        dismiss()
                     }
                 }
 

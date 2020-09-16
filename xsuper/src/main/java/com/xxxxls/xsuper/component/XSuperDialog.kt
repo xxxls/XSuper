@@ -6,6 +6,8 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.style.BackgroundColorSpan
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -78,26 +80,48 @@ open class XSuperDialog : Dialog, IComponent {
     }
 
     /**
+     * 设置边距
+     */
+    protected fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
+        window?.apply {
+            this.decorView
+                .setPadding(left, top, right, bottom)
+        }
+    }
+
+    /**
+     * 设置宽高
+     */
+    protected fun setSize(
+        width: Int = WindowManager.LayoutParams.WRAP_CONTENT,
+        height: Int = WindowManager.LayoutParams.WRAP_CONTENT
+    ) {
+        window?.apply {
+            val layoutParams = this.attributes
+            layoutParams.width = width
+            layoutParams.height = height
+            this.attributes = layoutParams
+        }
+    }
+
+    /**
      * 设置方向
      */
-    protected fun setGravity(gravity: Int) {
-        val params = window!!.attributes
-        params.gravity = gravity
-        val win = window
-        win!!.decorView
-            .setPadding(0, 0, 0, 0)
-        val lp = win.attributes
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
-        win.attributes = lp
+    protected fun setGravity(gravity: Int = Gravity.CENTER) {
+        window?.apply {
+            val layoutParams = this.attributes
+            layoutParams.gravity = gravity
+            this.attributes = layoutParams
+        }
     }
 
     /**
      * 设置全屏
+     * @param backgroundColor 背景颜色 (默认透明)
      */
-    protected fun setFullScreen() {
+    protected fun setFullScreen(backgroundColor: Int = Color.TRANSPARENT) {
         //设置window背景，默认的背景会有Padding值，不能全屏。当然不一定要是透明，你可以设置其他背景，替换默认的背景即可。
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window?.setBackgroundDrawable(ColorDrawable(backgroundColor))
         //一定要在setContentView之后调用，否则无效
         window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
