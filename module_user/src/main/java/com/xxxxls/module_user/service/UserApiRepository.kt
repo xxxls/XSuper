@@ -2,6 +2,8 @@ package com.xxxxls.module_user.service
 
 import com.xxxxls.module_base.net.BaseApiRepository
 import com.xxxxls.module_user.bean.UserBean
+import com.xxxxls.module_user.service.db.UserDao
+import com.xxxxls.module_user.service.db.UserDatabase
 import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.engine.IHttpEngine
 
@@ -22,6 +24,11 @@ class UserApiRepository : BaseApiRepository<UserApis>() {
         createApi(UserApis::class.java)
     }
 
+    // 用户数据库
+    private val userDao: UserDao by lazy {
+        UserDatabase.instance.getUserDao()
+    }
+
     /**
      * 登录
      * @param userName 用户名
@@ -29,7 +36,37 @@ class UserApiRepository : BaseApiRepository<UserApis>() {
      */
     suspend fun login(userName: String, password: String): XSuperResult<UserBean> {
 //        api2.login(userName, password).enqueue()
-        return api.login(userName, password).enqueue()
+        return api.login(userName, password).enqueue().apply {
+            (this as? XSuperResult.Success<UserBean>)?.let {
+                // 模拟保存用户信息
+                saveLoginRecord(it.data!!)
+            }
+        }
+    }
+
+    /**
+     * 保存登录记录
+     */
+    suspend fun saveLoginRecord(user: UserBean): Boolean {
+        return try {
+            userDao.insert(user)
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+
+    /**
+     * 保存登录记录
+     */
+    suspend fun getAllLoginRecord(): List<UserBean>? {
+        return try {
+            userDao.getAll()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
 

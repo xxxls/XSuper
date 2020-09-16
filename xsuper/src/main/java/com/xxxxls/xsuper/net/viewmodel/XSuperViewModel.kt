@@ -5,18 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xxxxls.utils.data.ConcurrentHashMapStore
 import com.xxxxls.utils.data.XSuperStore
-import com.xxxxls.xsuper.clazz.*
 import com.xxxxls.xsuper.loading.*
-import com.xxxxls.xsuper.net.XSuperResult
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
-import com.xxxxls.xsuper.net.callback.XSuperCallBack
-import com.xxxxls.xsuper.net.repository.ApiRepository
 import com.xxxxls.xsuper.net.repository.XSuperRepository
 import kotlinx.coroutines.*
-import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 
 /**
  * super - ViewModel
@@ -54,7 +48,7 @@ open class XSuperViewModel : ViewModel(), IComponentBridge, ILoading {
      * 启动一个协程任务
      * @param context 默认IO
      * @param start 默认启动方式
-     * @param iLoading 执行进度弹窗，null表示不使用弹窗
+     * @param loading 执行进度弹窗，null表示不使用弹窗
      * @param block 执行的任务
      */
     @UseExperimental(InternalCoroutinesApi::class)

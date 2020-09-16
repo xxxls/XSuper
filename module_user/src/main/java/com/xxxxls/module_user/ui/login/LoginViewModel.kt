@@ -30,6 +30,8 @@ class LoginViewModel : UserViewModel() {
      * 登录 方案一
      */
     fun login(userName: String, password: String) {
+        // 模拟获取本地记录
+        getAllLoginRecord()
         launch(loading = null) {
             userRepository.login(userName, password).callback(loginLiveData)
         }
@@ -46,4 +48,18 @@ class LoginViewModel : UserViewModel() {
         }
     }
 
+    /**
+     * 获取登录记录
+     */
+    fun getAllLoginRecord() {
+        launch(loading = null) {
+            logE("getAllLoginRecord()")
+            userRepository.getAllLoginRecord()?.let {
+                logE("getAllLoginRecord() old-count:${it.size}")
+                it.forEachIndexed { index, userBean ->
+                    logE("index:$index,user:$userBean")
+                }
+            }
+        }
+    }
 }

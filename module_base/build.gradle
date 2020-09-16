@@ -84,7 +84,6 @@ dependencies {
 
 
     //ARouter路由
-    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
     kapt rootProject.ext.dependencies["arouter_compiler"]
     api rootProject.ext.dependencies["arouter_api"]
     api rootProject.ext.dependencies["arouter_annotation"]
@@ -101,6 +100,6 @@ dependencies {
 
     //room
     api rootProject.ext.dependencies["room"]
-    annotationProcessor rootProject.ext.dependencies["room-compiler"]
     api rootProject.ext.dependencies["room-coroutines"]
+    kapt rootProject.ext.dependencies["room-compiler"]
 }

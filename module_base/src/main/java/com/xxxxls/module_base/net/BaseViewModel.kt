@@ -1,5 +1,6 @@
 package com.xxxxls.module_base.net
 
+import com.xxxxls.module_base.util.ILog
 import com.xxxxls.xsuper.net.viewmodel.XSuperViewModel
 
 /**
@@ -7,6 +8,6 @@ import com.xxxxls.xsuper.net.viewmodel.XSuperViewModel
  * @author Max
  * @date 2019-11-29.
  */
-open class BaseViewModel : XSuperViewModel() {
+open class BaseViewModel : XSuperViewModel(), ILog {
 
 }

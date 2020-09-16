@@ -70,7 +70,6 @@ dependencies {
     implementation project(path: ':module_base')
 
     // ARouter路由
-    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
     kapt rootProject.ext.dependencies["arouter_compiler"]
 
     // exoplayer
