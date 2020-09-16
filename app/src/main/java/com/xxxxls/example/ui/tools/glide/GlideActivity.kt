@@ -1,14 +1,8 @@
 package com.xxxxls.example.ui.tools.glide
 
-import android.graphics.drawable.Drawable
-import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.xxxxls.example.R
 import com.xxxxls.module_base.base.BaseActivity
-import com.xxxxls.utils.L
 import com.xxxxls.xsuper.utils.loadImage
 import kotlinx.android.synthetic.main.activity_glide.*
 
