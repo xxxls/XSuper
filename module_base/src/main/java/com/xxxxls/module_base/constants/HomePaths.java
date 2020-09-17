@@ -34,4 +34,7 @@ public interface HomePaths {
 
     //LOGGER主页
     String HOME_FRAGMENT_LOGGER_INDEX = "/home/fragment/logger/index";
+
+    //感知生命周期-TASK
+    String HOME_FRAGMENT_LIFECYCLE_TASK_INDEX = "/home/fragment/lifecycle/task/index";
 }

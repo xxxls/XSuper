@@ -2,6 +2,7 @@ package com.xxxxls.module_base.base
 
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
+import com.xxxxls.module_base.util.ILog
 import com.xxxxls.module_base.widget.LoadingDialog
 import com.xxxxls.xsuper.component.XSuperActivity
 import org.greenrobot.eventbus.EventBus
@@ -13,7 +14,7 @@ import org.greenrobot.eventbus.ThreadMode
  * @author Max
  * @date 2019-11-26.
  */
-open class BaseActivity : XSuperActivity() {
+open class BaseActivity : XSuperActivity(), ILog {
 
     private var mLoadingDialog: LoadingDialog? = null
 

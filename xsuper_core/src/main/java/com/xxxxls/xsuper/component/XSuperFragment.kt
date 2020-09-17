@@ -9,13 +9,20 @@ import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
 import com.xxxxls.utils.ktx.toast
+import com.xxxxls.xsuper.support.LifecycleTask
 
 /**
  * Super-Fragment
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewModel, ILoading {
+open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewModel, ILoading,
+    LifecycleTask.LifecycleTaskOwner {
+
+    // 生命周期任务
+    private val lifecycleTask: LifecycleTask.LifecycleTaskImpl by lazy {
+        LifecycleTask.LifecycleTaskImpl(lifecycle)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -103,6 +110,10 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewMode
             //转至activity处理
             this.dismissLoading(id)
         }
+    }
+
+    override fun getLifecycleTask(): LifecycleTask {
+        return lifecycleTask
     }
 
 }

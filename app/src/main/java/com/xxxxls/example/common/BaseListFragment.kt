@@ -1,32 +1,31 @@
-package com.xxxxls.example.ui.indexs
+package com.xxxxls.example.common
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.xxxxls.adapter.IAdapter
 import com.xxxxls.adapter.listener.OnItemClickListener
 import com.xxxxls.example.R
-import com.xxxxls.example.adapter.IndexItemAdapter
-import com.xxxxls.example.bean.IndexItemBean
+import com.xxxxls.example.adapter.SimpleListItemAdapter
+import com.xxxxls.example.bean.SimpleItemBean
 import com.xxxxls.module_base.base.BaseFragment
 import com.xxxxls.titlebar.setTitleBarTitle
-import kotlinx.android.synthetic.main.fragment_common_index.*
+import kotlinx.android.synthetic.main.fragment_simple_list.*
 
 /**
- * 基础indexFragment
+ * 基础- List - Fragment
  * @author Max
  * @date 2020-01-07.
  */
-abstract class BaseIndexFragment : BaseFragment() {
+abstract class BaseListFragment : BaseFragment() {
 
-    protected val adapter: IndexItemAdapter by lazy {
-        IndexItemAdapter().apply {
+    protected val adapter: SimpleListItemAdapter by lazy {
+        SimpleListItemAdapter().apply {
             submitList(getItems().toList())
         }
     }
 
     override fun getLayoutResId(): Int? {
-        return R.layout.fragment_common_index
+        return R.layout.fragment_simple_list
     }
 
     override fun onInitialize() {
@@ -45,7 +44,7 @@ abstract class BaseIndexFragment : BaseFragment() {
 
     protected abstract fun getTitle(): String
 
-    protected abstract fun getItems(): Array<IndexItemBean>
+    protected abstract fun getItems(): Array<SimpleItemBean>
 
-    protected abstract fun onItemClick(index: Int, item: IndexItemBean)
+    protected abstract fun onItemClick(index: Int, item: SimpleItemBean)
 }

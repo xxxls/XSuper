@@ -2,6 +2,7 @@ package com.xxxxls.module_base.base
 
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
+import com.xxxxls.module_base.util.ILog
 import com.xxxxls.xsuper.component.XSuperFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -12,7 +13,7 @@ import org.greenrobot.eventbus.ThreadMode
  * @author Max
  * @date 2019-11-26.
  */
-open class BaseFragment : XSuperFragment() {
+open class BaseFragment : XSuperFragment(), ILog {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

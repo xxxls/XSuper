@@ -18,7 +18,7 @@ class FragmentActivity : BaseActivity() {
 
     //fragment路径
     @JvmField
-    @Autowired(name = BasePaths.KEY_BASE_ACTIVITY_FRAGMENT_PATH)
+    @Autowired(name = BasePaths.KEY_ACTIVITY_FRAGMENT_PATH)
     var fragmentPath: String = ""
 
     override fun getLayoutResId(): Int {

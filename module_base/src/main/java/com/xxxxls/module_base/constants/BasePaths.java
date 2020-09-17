@@ -10,5 +10,5 @@ public interface BasePaths {
     String BASE_ACTIVITY_FRAGMENT = "/base/activity/fragment";
 
     //Fragment路径
-    String KEY_BASE_ACTIVITY_FRAGMENT_PATH = "/key/base/activity/fragment";
+    String KEY_ACTIVITY_FRAGMENT_PATH = "/key/base/activity/fragment";
 }

@@ -1,8 +1,8 @@
 package com.xxxxls.example.ui.tools.logger
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.xxxxls.example.bean.IndexItemBean
-import com.xxxxls.example.ui.indexs.BaseIndexFragment
+import com.xxxxls.example.bean.SimpleItemBean
+import com.xxxxls.example.common.BaseListFragment
 import com.xxxxls.logger.LogConfiguration
 import com.xxxxls.logger.XLogger
 import com.xxxxls.logger.interceptor.BlacklistTagInterceptor
@@ -16,7 +16,7 @@ import java.util.*
  * @date 2020-01-19.
  */
 @Route(path = HomePaths.HOME_FRAGMENT_LOGGER_INDEX)
-class LoggerFragment : BaseIndexFragment() {
+class LoggerFragment : BaseListFragment() {
     override fun onInitialize() {
         super.onInitialize()
         XLogger.init(
@@ -36,11 +36,11 @@ class LoggerFragment : BaseIndexFragment() {
         return "LOGGER"
     }
 
-    override fun getItems(): Array<IndexItemBean> {
-        return arrayOf(IndexItemBean("D"), IndexItemBean("E"), IndexItemBean("BLACK-D"))
+    override fun getItems(): Array<SimpleItemBean> {
+        return arrayOf(SimpleItemBean("D"), SimpleItemBean("E"), SimpleItemBean("BLACK-D"))
     }
 
-    override fun onItemClick(index: Int, item: IndexItemBean) {
+    override fun onItemClick(index: Int, item: SimpleItemBean) {
         when (index) {
             0 -> {
                 XLogger.d(message = "当前详情时间：${DateFormat.YMD_HMS_SS.formatDate(Date())}")
