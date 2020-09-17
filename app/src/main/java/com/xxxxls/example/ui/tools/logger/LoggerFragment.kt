@@ -3,9 +3,7 @@ package com.xxxxls.example.ui.tools.logger
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxxxls.example.bean.SimpleItemBean
 import com.xxxxls.example.common.BaseListFragment
-import com.xxxxls.logger.LogConfiguration
 import com.xxxxls.logger.XLogger
-import com.xxxxls.logger.interceptor.BlacklistTagInterceptor
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.utils.date.DateFormat
 import java.util.*
@@ -19,17 +17,10 @@ import java.util.*
 class LoggerFragment : BaseListFragment() {
     override fun onInitialize() {
         super.onInitialize()
-        XLogger.init(
-            LogConfiguration.newBuilder()
-                //添加拦截器
-                .addInterceptors(BlacklistTagInterceptor("BLACK-TAG1", "BLACK-TAG2"))
-                //展示边框
-                .showBorder()
-                //设置堆栈深度
-                .setStackTraceDepth(2)
-                //展示线程信息
-                .showThread().build()
-        )
+        XLogger.init(XLogger.createDefaultConfig().apply {
+            // 黑名单
+            this.blackListTagList = arrayListOf("BLACK-TAG1", "BLACK-TAG2")
+        })
     }
 
     override fun getTitle(): String {

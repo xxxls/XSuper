@@ -45,7 +45,6 @@ dependencies {
 
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["lifecycle"]
-    //协程
-    api rootProject.ext.dependencies["kotlinx-coroutines"]
 
+    implementation rootProject.ext.dependencies["xLog"]
 }

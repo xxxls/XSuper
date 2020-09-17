@@ -63,6 +63,7 @@ ext {
             rxFFmpegVersion         : "2.1.0",
             progressmanagerVersion  : "1.5.0",
             picture_libraryVersion  : "v2.2.3-androidx",
+            xLogVersion             : "1.6.1",
     ]
 
 
@@ -166,6 +167,9 @@ ext {
 
             //ffmpeg
             "rxFFmpeg"           : "com.github.microshow:RxFFmpeg:${versions["rxFFmpegVersion"]}",
+
+            //日志
+            "xLog"               : "com.elvishew:xlog:${versions["xLogVersion"]}",
 
     ]
 }
