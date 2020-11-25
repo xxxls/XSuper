@@ -65,6 +65,8 @@ dependencies {
     //分页
     api rootProject.ext.dependencies["paging"]
 
+    //Hilt
+    api rootProject.ext.dependencies["hilt"]
 
     /**
      * @好用组件

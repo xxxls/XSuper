@@ -73,4 +73,6 @@ dependencies {
 
     //room
     kapt rootProject.ext.dependencies["room-compiler"]
+    //Hilt
+    kapt rootProject.ext.dependencies["hilt-compiler"]
 }

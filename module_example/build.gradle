@@ -71,6 +71,8 @@ dependencies {
 
     // ARouter路由
     kapt rootProject.ext.dependencies["arouter_compiler"]
+    //Hilt
+    kapt rootProject.ext.dependencies["hilt-compiler"]
 
     // exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.10.4'

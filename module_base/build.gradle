@@ -84,6 +84,8 @@ dependencies {
     //图片加载工具
     api project(path: ':xsuper_image')
 
+    //Hilt
+    kapt rootProject.ext.dependencies["hilt-compiler"]
 
     //ARouter路由
     kapt rootProject.ext.dependencies["arouter_compiler"]
