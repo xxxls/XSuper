@@ -10,10 +10,12 @@ import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_base.util.newFragment
 import com.xxxxls.xsuper.adapter.CommonFragmentPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
 
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
 

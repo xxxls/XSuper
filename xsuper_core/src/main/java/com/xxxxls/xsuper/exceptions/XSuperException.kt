@@ -16,7 +16,7 @@ open class XSuperException : Exception {
     /**
      * 显示的异常信息
      */
-    var displayMessage: String
+    var displayMessage: String = ""
 
     constructor(code: Int = 0, message: String = "") : super(message) {
         this.code = code
@@ -28,6 +28,8 @@ open class XSuperException : Exception {
         this.displayMessage = message
     }
 
+    constructor(cause: Throwable?) : super(cause)
+
     constructor(
         code: Int = 0,
         message: String = "",
@@ -38,5 +40,6 @@ open class XSuperException : Exception {
         this.code = code
         this.displayMessage = message
     }
+
 
 }

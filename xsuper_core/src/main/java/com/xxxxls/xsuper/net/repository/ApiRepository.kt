@@ -107,7 +107,7 @@ abstract class ApiRepository<Api> : XSuperRepository {
             } catch (e: Exception) {
                 L.e("enqueue() 请求接口异常：$e")
                 // 请求过程异常
-                return@withContext XSuperResult.Error(httpEngine.requestExceptionConversion(e))
+                return@withContext XSuperResult.Failure(httpEngine.requestExceptionConversion(e))
             } finally {
                 loading?.dismissLoadingInCoroutine(hashCode())
             }

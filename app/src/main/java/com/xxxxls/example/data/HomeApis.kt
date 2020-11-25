@@ -1,4 +1,4 @@
-package com.xxxxls.example.net
+package com.xxxxls.example.data
 
 import com.xxxxls.example.bean.ArticleBean
 import com.xxxxls.example.bean.TestPagingBean

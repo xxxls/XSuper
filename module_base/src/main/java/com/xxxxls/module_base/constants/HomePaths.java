@@ -23,6 +23,9 @@ public interface HomePaths {
     //工具主页
     String HOME_FRAGMENT_TOOLS_INDEX = "/home/fragment/tools/index";
 
+    //网络请求主页
+    String HOME_FRAGMENT_NETWORK_INDEX = "/home/fragment/network/index";
+
     //widget主页
     String HOME_FRAGMENT_WIDGET_INDEX = "/home/fragment/widget/index";
 

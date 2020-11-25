@@ -14,18 +14,18 @@ sealed class XSuperResult<out T> {
      * 成功
      * @param data 成功的结果
      */
-    class Success<T>(val data: T?) : XSuperResult<T>()
+    data class Success<T>(val data: T?) : XSuperResult<T>()
 
     /**
      * 失败
-     * @param exception 异常信息
+     * @param exception
      */
-    class Error(val exception: XSuperException) : XSuperResult<Nothing>()
+    class Failure(val exception: XSuperException) : XSuperResult<Nothing>()
 
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
-            is Error -> "Error[exception=$exception]"
+            is Failure -> "Failure[exception=$exception]"
         }
     }
 }
@@ -39,7 +39,7 @@ fun <T> XSuperResult<T>.callback(callBack: XSuperCallBack<T>) {
         is XSuperResult.Success<T> -> {
             callBack.onSuccess(this.data)
         }
-        is XSuperResult.Error -> {
+        is XSuperResult.Failure -> {
             callBack.onError(this.exception)
         }
     }

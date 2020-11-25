@@ -33,6 +33,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     resourcePrefix "super"
 }
 
@@ -54,6 +58,9 @@ dependencies {
     api rootProject.ext.dependencies["constraint_layout"]
     api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["lifecycle"]
+    api rootProject.ext.dependencies["fragment-ktx"]
+    api rootProject.ext.dependencies["activity-ktx"]
+
     //协程
     api rootProject.ext.dependencies["kotlinx-coroutines"]
 
@@ -67,6 +74,7 @@ dependencies {
 
     //Hilt
     api rootProject.ext.dependencies["hilt"]
+    api rootProject.ext.dependencies["hilt-viewmodel"]
 
     /**
      * @好用组件

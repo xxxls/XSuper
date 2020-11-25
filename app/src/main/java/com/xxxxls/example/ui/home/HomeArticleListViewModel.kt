@@ -1,6 +1,6 @@
 package com.xxxxls.example.ui.home
 import com.xxxxls.example.bean.ArticleBean
-import com.xxxxls.example.net.HomeApis
+import com.xxxxls.example.data.HomeApis
 import com.xxxxls.module_base.net.BaseLiveData
 import com.xxxxls.module_base.net.FastApiViewModel
 import com.xxxxls.module_base.net.response.ListResponse

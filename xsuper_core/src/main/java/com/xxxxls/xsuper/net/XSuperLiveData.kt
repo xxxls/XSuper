@@ -19,7 +19,7 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     }
 
     override fun onError(exception: XSuperException) {
-        postValue(XSuperResult.Error(exception))
+        postValue(XSuperResult.Failure(exception))
     }
 
     /**
@@ -35,7 +35,7 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     ): XSuperLiveData<T> {
         super.observe(owner, Observer<XSuperResult<T>> {
             when (it) {
-                is XSuperResult.Error -> {
+                is XSuperResult.Failure -> {
                     error(it.exception)
                 }
                 is XSuperResult.Success -> {
@@ -57,7 +57,7 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     ): XSuperLiveData<T> {
         super.observeForever {
             when (it) {
-                is XSuperResult.Error -> {
+                is XSuperResult.Failure -> {
                     error(it.exception)
                 }
                 is XSuperResult.Success -> {
