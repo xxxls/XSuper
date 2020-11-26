@@ -32,6 +32,20 @@ sealed class XSuperResult<out T> {
 
 
 /**
+ * 转换为成功结果
+ */
+fun <T : Any> T.toSuccessResult(): XSuperResult.Success<T> {
+    return XSuperResult.Success<T>(this)
+}
+
+/**
+ * 转换为失败结果
+ */
+fun <T : XSuperException> T.toFailureResult(): XSuperResult.Failure {
+    return XSuperResult.Failure(this)
+}
+
+/**
  * Result to callback
  */
 fun <T> XSuperResult<T>.callback(callBack: XSuperCallBack<T>) {

@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'dagger.hilt.android.plugin'
+
 android {
     compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
     buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
@@ -22,7 +24,7 @@ android {
         flavorDimensions rootProject.ext.versions["flavorDimensions"]
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments += [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -122,8 +124,9 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
     kapt rootProject.ext.dependencies["arouter_compiler"]
     //Hilt
+    kapt rootProject.ext.dependencies["hilt-android-compiler"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
-
+    api rootProject.ext.dependencies["hilt"]
 }
 
 

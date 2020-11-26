@@ -5,6 +5,8 @@ import androidx.lifecycle.*
 import com.xxxxls.example.ui.network.data.bean.ArticleItemBean
 import com.xxxxls.example.ui.network.data.repository.ExampleRepository
 import com.xxxxls.logger.XLogger
+import com.xxxxls.module_base.util.ILog
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -15,7 +17,7 @@ import kotlinx.coroutines.launch
  * @date 2020/11/25.
  */
 class ExampleViewModel @ViewModelInject constructor(private val repository: ExampleRepository) :
-    ViewModel() {
+    ViewModel(), ILog {
 
     val listLiveData: MutableLiveData<List<ArticleItemBean>> =
         MutableLiveData<List<ArticleItemBean>>()
@@ -24,13 +26,14 @@ class ExampleViewModel @ViewModelInject constructor(private val repository: Exam
      * 获取列表数据
      */
     fun fetchListData() {
-        viewModelScope.launch {
-            repository.getArticleList().onStart {
-                XLogger.e("fetchListData.onStart", "ExampleViewModel")
+        viewModelScope.launch(context = Dispatchers.IO) {
+            logD("fetchListData() thread:${Thread.currentThread().name} ,thread:${Thread.currentThread().hashCode()}")
+            repository.getArticleList(1).onStart {
+                logD("fetchListData.onStart")
             }.collectLatest {
                 listLiveData.postValue(it)
+                logD("collectLatest")
             }
         }
     }
-
 }

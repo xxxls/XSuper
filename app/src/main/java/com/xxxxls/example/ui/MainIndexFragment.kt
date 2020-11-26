@@ -7,6 +7,7 @@ import com.xxxxls.module_base.constants.BasePaths
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.constants.HomePaths.HOME_FRAGMENT_HOME_INDEXS
 import com.xxxxls.module_base.util.jump
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * 主页集
@@ -20,7 +21,7 @@ class MainIndexFragment : BaseListFragment() {
     }
 
     override fun getItems(): Array<SimpleItemBean> {
-        return arrayOf(SimpleItemBean("tools"), SimpleItemBean("widget"))
+        return arrayOf(SimpleItemBean("tools"), SimpleItemBean("widget"), SimpleItemBean("network"))
     }
 
     override fun onItemClick(index: Int, item: SimpleItemBean) {
@@ -30,6 +31,9 @@ class MainIndexFragment : BaseListFragment() {
             }
             1 -> {
                 BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_WIDGET_INDEX)
+            }
+            2 -> {
+                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_NETWORK_INDEX)
             }
         }
     }

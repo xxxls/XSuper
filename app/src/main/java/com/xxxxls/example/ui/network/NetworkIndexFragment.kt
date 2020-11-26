@@ -14,8 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
  * @author Max
  * @date 2020/11/25.
  */
-@AndroidEntryPoint
 @Route(path = HomePaths.HOME_FRAGMENT_NETWORK_INDEX)
+@AndroidEntryPoint
 class NetworkIndexFragment : BaseListFragment() {
 
     private val viewModel: ExampleViewModel by viewModels()

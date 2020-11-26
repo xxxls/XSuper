@@ -1,6 +1,7 @@
 package com.xxxxls.example.ui.network.data.api
 
 import com.xxxxls.example.ui.network.data.bean.ArticleItemBean
+import com.xxxxls.module_base.net.response.BaseListResponse
 import retrofit2.http.GET
 
 /**
@@ -14,5 +15,5 @@ interface ExampleApi {
      * 获取文章列表
      */
     @GET("/article/list/1/json")
-    suspend fun getArticleList(): List<ArticleItemBean>
+    suspend fun getArticleList(): BaseListResponse<ArticleItemBean>
 }

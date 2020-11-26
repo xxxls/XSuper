@@ -32,7 +32,7 @@ object XLogger {
         this.isInitialized = true
         val printers: ArrayList<Printer> = ArrayList()
         printers.add(AndroidPrinter())                       // 通过 android.util.Log 打印日志的打印器
-//        printers.add(ConsolePrinter())                       // 通过 System.out 打印日志到控制台的打印器
+//        printers.add(ConsolePrinter())                     // 通过 System.out 打印日志到控制台的打印器
         config.filePath?.let {
             val filePrinter = FilePrinter         // 打印日志到文件的打印器
                 .Builder(it.absolutePath)                    // 指定保存日志文件的路径
@@ -73,9 +73,9 @@ object XLogger {
     fun log(message: String, tag: String? = null, level: Int = LogLevel.DEBUG) {
         checkInitialized()
         if (tag != null) {
-            XLog.log(level, message)
-        } else {
             XLog.tag(tag).log(level, message)
+        } else {
+            XLog.log(level, message)
         }
     }
 
@@ -85,9 +85,9 @@ object XLogger {
     fun log(message: Any, tag: String? = null, level: Int = LogLevel.DEBUG) {
         checkInitialized()
         if (tag != null) {
-            XLog.log(level, message)
-        } else {
             XLog.tag(tag).log(level, message)
+        } else {
+            XLog.log(level, message)
         }
     }
 
@@ -97,9 +97,9 @@ object XLogger {
     fun log(message: Array<Any>, tag: String? = null, level: Int = LogLevel.DEBUG) {
         checkInitialized()
         if (tag != null) {
-            XLog.log(level, message)
-        } else {
             XLog.tag(tag).log(level, message)
+        } else {
+            XLog.log(level, message)
         }
     }
 
@@ -109,9 +109,9 @@ object XLogger {
     fun d(message: String, tag: String? = null) {
         checkInitialized()
         if (tag != null) {
-            XLog.d(message)
-        } else {
             XLog.tag(tag).d(message)
+        } else {
+            XLog.d(message)
         }
     }
 
@@ -121,9 +121,9 @@ object XLogger {
     fun e(message: String, tag: String? = null) {
         checkInitialized()
         if (tag != null) {
-            XLog.e(message)
-        } else {
             XLog.tag(tag).e(message)
+        } else {
+            XLog.e(message)
         }
     }
 
@@ -133,9 +133,9 @@ object XLogger {
     fun w(message: String, tag: String? = null) {
         checkInitialized()
         if (tag != null) {
-            XLog.w(message)
-        } else {
             XLog.tag(tag).w(message)
+        } else {
+            XLog.w(message)
         }
     }
 
@@ -145,9 +145,9 @@ object XLogger {
     fun i(message: String, tag: String? = null) {
         checkInitialized()
         if (tag != null) {
-            XLog.i(message)
-        } else {
             XLog.tag(tag).i(message)
+        } else {
+            XLog.i(message)
         }
     }
 
@@ -157,9 +157,9 @@ object XLogger {
     fun v(message: String, tag: String? = null) {
         checkInitialized()
         if (tag != null) {
-            XLog.v(message)
-        } else {
             XLog.tag(tag).v(message)
+        } else {
+            XLog.v(message)
         }
     }
 
@@ -169,9 +169,9 @@ object XLogger {
     fun json(message: String, tag: String? = null) {
         checkInitialized()
         if (tag != null) {
-            XLog.json(message)
-        } else {
             XLog.tag(tag).json(message)
+        } else {
+            XLog.json(message)
         }
     }
 
@@ -181,9 +181,9 @@ object XLogger {
     fun xml(message: String, tag: String? = null) {
         checkInitialized()
         if (tag != null) {
-            XLog.xml(message)
-        } else {
             XLog.tag(tag).xml(message)
+        } else {
+            XLog.xml(message)
         }
     }
 
@@ -194,10 +194,10 @@ object XLogger {
     fun createDefaultConfig(): LoggerConfig {
         return LoggerConfig().apply {
             this.logLevel = if (BuildConfig.DEBUG) LogLevel.ALL else LogLevel.NONE
-            this.borderEnabled = true
-            this.threadEnabled = true
+            this.borderEnabled = false
+            this.threadEnabled = false
             this.tag = BuildConfig.LIBRARY_PACKAGE_NAME
-            this.depth = 2
+            this.depth = 0
         }
     }
 
@@ -213,7 +213,9 @@ object XLogger {
             this.tag(config.tag)
 
             // 允许打印深度为2的调用栈信息，默认禁止
-            this.st(config.depth)
+            if (config.depth > 0) {
+                this.st(config.depth)
+            }
 
             if (config.threadEnabled) {
                 // 允许打印线程信息，默认禁止
@@ -265,13 +267,13 @@ object XLogger {
         var tag: String = "TAG"
 
         // 启动边框？
-        var borderEnabled: Boolean = true
+        var borderEnabled: Boolean = false
 
         //调用栈深度
-        var depth: Int = 2
+        var depth: Int = 0
 
         // 打印线程信息？
-        var threadEnabled: Boolean = true
+        var threadEnabled: Boolean = false
 
         // 文件记录的存储路径
         var filePath: File? = null

@@ -28,7 +28,7 @@ android {
         flavorDimensions rootProject.ext.versions["flavorDimensions"]
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments += [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -80,6 +80,7 @@ dependencies {
     // ARouter路由
     kapt rootProject.ext.dependencies["arouter_compiler"]
     //Hilt
+    kapt rootProject.ext.dependencies["hilt-android-compiler"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
 
     // exoplayer

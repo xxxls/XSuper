@@ -59,7 +59,6 @@ dependencies {
     api rootProject.ext.dependencies["design"]
     api rootProject.ext.dependencies["lifecycle"]
     api rootProject.ext.dependencies["fragment-ktx"]
-    api rootProject.ext.dependencies["activity-ktx"]
 
     //协程
     api rootProject.ext.dependencies["kotlinx-coroutines"]
@@ -75,6 +74,8 @@ dependencies {
     //Hilt
     api rootProject.ext.dependencies["hilt"]
     api rootProject.ext.dependencies["hilt-viewmodel"]
+    kapt rootProject.ext.dependencies["hilt-android-compiler"]
+    kapt rootProject.ext.dependencies["hilt-compiler"]
 
     /**
      * @好用组件

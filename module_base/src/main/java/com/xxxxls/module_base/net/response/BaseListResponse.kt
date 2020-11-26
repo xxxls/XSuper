@@ -5,4 +5,12 @@ package com.xxxxls.module_base.net.response
  * @author Max
  * @date 2019-11-28.
  */
-class BaseListResponse<out T> : BaseResponse<ListResponse<T>>()
+class BaseListResponse<out T> : BaseResponse<ListResponse<T>>() {
+
+    /**
+     * 获取非空的数据列表
+     */
+    fun getListNoNull(): List<T> {
+        return data?.datas ?: emptyList()
+    }
+}

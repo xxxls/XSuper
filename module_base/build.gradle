@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'dagger.hilt.android.plugin'
 
 
 android {
@@ -21,7 +22,7 @@ android {
         flavorDimensions rootProject.ext.versions["flavorDimensions"]
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments += [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -93,7 +94,10 @@ dependencies {
     //图片加载工具
     api project(path: ':xsuper_image')
 
+
     //Hilt
+    api rootProject.ext.dependencies["hilt"]
+    kapt rootProject.ext.dependencies["hilt-android-compiler"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
 
     //ARouter路由

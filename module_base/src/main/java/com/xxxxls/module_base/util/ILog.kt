@@ -143,41 +143,41 @@ interface ILog {
         if (!isLog(tag)) {
             return
         }
-        XLogger.log(message, tag, level)
+        XLogger.log(message = message, tag = tag, level = level)
     }
 
     fun logE(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.e(tag, message.toString())
+        XLogger.e(tag = tag, message = message.toString())
     }
 
     fun logD(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.d(tag, message.toString())
+        XLogger.d(tag = tag, message = message.toString())
     }
 
     fun logW(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.w(tag, message.toString())
+        XLogger.w(tag = tag, message = message.toString())
     }
 
     fun logI(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.i(tag, message.toString())
+        XLogger.i(tag = tag, message = message.toString())
     }
 
     fun logV(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.v(tag, message.toString())
+        XLogger.v(tag = tag, message = message.toString())
     }
 }
