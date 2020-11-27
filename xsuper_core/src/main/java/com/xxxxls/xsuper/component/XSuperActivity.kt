@@ -6,7 +6,7 @@ import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import com.xxxxls.xsuper.loading.ILoading
-import com.xxxxls.xsuper.net.bridge.ComponentAction
+import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.utils.ktx.toast
 import com.xxxxls.xsuper.support.LifecycleTask
 

@@ -34,7 +34,7 @@ class ViewModelFactory<VM : XSuperViewModel>(private val clazz: KClass<VM>) :
  * 创建VM （方式二）
  */
 @MainThread
-inline fun <reified VM : XSuperViewModel> Fragment.viewModelsFactory(
+inline fun <reified VM : XSuperViewModel> IVmComponent.xsuperViewModelsF(
     noinline ownerProducer: () -> ViewModelStoreOwner = { this },
     noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
 ) = ViewModelFactory(VM::class)

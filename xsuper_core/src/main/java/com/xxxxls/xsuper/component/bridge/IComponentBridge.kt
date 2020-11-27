@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.net.bridge
+package com.xxxxls.xsuper.component.bridge
 
 
 /**

@@ -1,7 +1,6 @@
-package com.xxxxls.xsuper.net.interceptors
+package com.xxxxls.xsuper.interceptors
 
 
-import com.xxxxls.utils.L
 import okhttp3.*
 import okio.Buffer
 

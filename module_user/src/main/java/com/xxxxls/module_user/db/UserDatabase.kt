@@ -1,4 +1,4 @@
-package com.xxxxls.module_user.service.db
+package com.xxxxls.module_user.db
 
 import androidx.room.Database
 import androidx.room.Room
@@ -17,8 +17,9 @@ abstract class UserDatabase : RoomDatabase() {
     companion object {
         private const val DB_NAME = "user_database.db"
 
-        val instance: UserDatabase by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-            Room.databaseBuilder(AppUtils.getApp(), UserDatabase::class.java, DB_NAME).build()
+        fun newInstance(): UserDatabase {
+            return Room.databaseBuilder(AppUtils.getApp(), UserDatabase::class.java, DB_NAME)
+                .build()
         }
     }
 

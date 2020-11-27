@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import com.xxxxls.xsuper.loading.ILoading
-import com.xxxxls.xsuper.net.bridge.ComponentAction
-import com.xxxxls.xsuper.net.bridge.IComponentBridge
+import com.xxxxls.xsuper.component.bridge.ComponentAction
+import com.xxxxls.xsuper.component.bridge.IComponentBridge
 import com.xxxxls.utils.ktx.toast
 import com.xxxxls.xsuper.support.LifecycleTask
 

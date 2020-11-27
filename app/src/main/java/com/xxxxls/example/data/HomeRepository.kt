@@ -5,7 +5,7 @@ import com.xxxxls.module_base.constants.Constants
 import com.xxxxls.module_base.net.BaseApiRepository
 import com.xxxxls.module_base.net.response.ListResponse
 import com.xxxxls.xsuper.exceptions.NetWorkException
-import com.xxxxls.xsuper.net.callback.XSuperCallBack
+import com.xxxxls.xsuper.callback.XSuperCallBack
 import kotlinx.coroutines.delay
 
 /**

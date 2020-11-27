@@ -8,7 +8,7 @@ import com.xxxxls.example.bean.TestPagingBean
 import com.xxxxls.module_base.net.response.ListResponse
 import com.xxxxls.utils.L
 import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.callback.XSuperCallBack
+import com.xxxxls.xsuper.callback.XSuperCallBack
 
 /**
  * ItemKeyedViewModel

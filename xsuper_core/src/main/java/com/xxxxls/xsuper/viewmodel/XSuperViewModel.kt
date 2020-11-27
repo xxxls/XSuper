@@ -3,12 +3,8 @@ package com.xxxxls.xsuper.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xxxxls.utils.data.ConcurrentHashMapStore
-import com.xxxxls.utils.data.XSuperStore
 import com.xxxxls.xsuper.loading.*
-import com.xxxxls.xsuper.net.bridge.ComponentAction
-import com.xxxxls.xsuper.net.bridge.IComponentBridge
-import com.xxxxls.xsuper.net.repository.XSuperRepository
+import com.xxxxls.xsuper.component.bridge.ComponentAction
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -17,32 +13,13 @@ import kotlin.coroutines.CoroutineContext
  * @author Max
  * @date 2019-11-29.
  */
-open class XSuperViewModel : ViewModel(), IComponentBridge, ILoading {
+open class XSuperViewModel : ViewModel(), ILoading {
 
     /**
      * 与组件(activity，fragment)的通信（加载弹窗，toast等）
      */
     val componentBridgeLiveData: MutableLiveData<ComponentAction> by lazy {
         MutableLiveData<ComponentAction>()
-    }
-
-    // 数据仓存储器
-    private val store: XSuperStore<Class<*>, XSuperRepository> by lazy {
-        ConcurrentHashMapStore<Class<*>, XSuperRepository>()
-    }
-
-    /**
-     * 创建Repository
-     */
-    @Deprecated("即将移除")
-    protected fun <T : XSuperRepository> createRepository(
-        clazz: Class<T>, build: (Class<*>) -> T = {
-            (it.newInstance() as T)
-        }
-    ): T {
-        return (store.get(key = clazz, build = build) as T).apply {
-            this.attachComponentBridge(this@XSuperViewModel)
-        }
     }
 
     /**
@@ -84,17 +61,16 @@ open class XSuperViewModel : ViewModel(), IComponentBridge, ILoading {
     /**
      * 中转给组件
      */
-    override fun onAction(action: ComponentAction) {
+    protected open fun postAction(action: ComponentAction) {
         componentBridgeLiveData.postValue(action)
     }
 
     override fun showLoading(id: Int?, message: CharSequence?) {
-        this.onAction(ComponentAction.ShowLoading(id, message))
+        this.postAction(ComponentAction.ShowLoading(id, message))
     }
 
     override fun dismissLoading(id: Int?) {
-        this.onAction(ComponentAction.DismissLoading(id))
+        this.postAction(ComponentAction.DismissLoading(id))
     }
-
 
 }

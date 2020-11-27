@@ -5,9 +5,9 @@ import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.XSuperLiveData
-import com.xxxxls.xsuper.net.bridge.ComponentAction
-import com.xxxxls.xsuper.net.bridge.IComponentBridge
+import com.xxxxls.xsuper.model.XSuperLiveData
+import com.xxxxls.xsuper.component.bridge.ComponentAction
+import com.xxxxls.xsuper.component.bridge.IComponentBridge
 import com.xxxxls.xsuper.viewmodel.XSuperViewModel
 
 /**
@@ -50,8 +50,8 @@ interface IVmComponent : IComponent, ViewModelStoreOwner, HasDefaultViewModelPro
      * 监听liveData
      */
     fun <T> XSuperLiveData<T>.observe(
-        success: (value: T?) -> Unit = {},
-        failure: (e: XSuperException) -> Unit = {}
+        success: (value: T) -> Unit = {},
+        failure: (throwable: Throwable) -> Unit = {}
     ) {
         getLifecycleOwner()?.let { lifecycleOwner ->
             this.observe(lifecycleOwner, success, failure)

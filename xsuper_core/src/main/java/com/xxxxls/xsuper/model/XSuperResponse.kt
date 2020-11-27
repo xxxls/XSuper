@@ -1,4 +1,5 @@
-package com.xxxxls.xsuper.net
+package com.xxxxls.xsuper.model
+
 
 /**
  * Super - 接口请求响应

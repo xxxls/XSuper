@@ -1,7 +1,7 @@
 package com.xxxxls.module_base.net
 
-import com.xxxxls.xsuper.net.XSuperLiveData
-import com.xxxxls.xsuper.net.callback.LoadingCallBack
+import com.xxxxls.xsuper.model.XSuperLiveData
+import com.xxxxls.xsuper.callback.LoadingCallBack
 
 /**
  * liveData 带 loading功能

@@ -1,11 +1,9 @@
 package com.xxxxls.module_base.net
 
 import com.xxxxls.utils.ClassUtils
-import com.xxxxls.xsuper.net.XSuperResponse
-import com.xxxxls.xsuper.net.XSuperResult
-import com.xxxxls.xsuper.net.callback
-import com.xxxxls.xsuper.net.callback.XSuperCallBack
-import com.xxxxls.xsuper.net.repository.ApiRepository
+import com.xxxxls.xsuper.model.XSuperResponse
+import com.xxxxls.xsuper.model.XSuperResult
+import com.xxxxls.xsuper.callback.XSuperCallBack
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 

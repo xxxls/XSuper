@@ -7,8 +7,7 @@ import com.xxxxls.utils.AppUtils
 import com.xxxxls.xsuper.exceptions.CodeException
 import com.xxxxls.xsuper.exceptions.NetWorkException
 import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.engine.XSuperHttpEngine
-import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
+import com.xxxxls.xsuper.network.engine.XSuperHttpEngine
 import okhttp3.OkHttpClient
 import retrofit2.HttpException
 import retrofit2.Retrofit

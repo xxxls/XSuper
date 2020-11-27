@@ -1,4 +1,4 @@
-package com.xxxxls.module_user.service
+package com.xxxxls.module_user.data
 
 import com.xxxxls.module_base.net.response.BaseResponse
 import com.xxxxls.module_user.bean.UserBean
@@ -24,7 +24,7 @@ interface UserApis {
     fun login(
         @Field("username") userName: String,
         @Field("password") passWord: String
-    ): Deferred<BaseResponse<UserBean>>
+    ): BaseResponse<UserBean>
 
 
     /**
@@ -39,7 +39,7 @@ interface UserApis {
         @Field("username") userName: String,
         @Field("password") passWord: String,
         @Field("repassword") rePassWord: String
-    ): Deferred<BaseResponse<UserBean>>
+    ): BaseResponse<UserBean>
 
 
 }

@@ -1,7 +1,6 @@
-package com.xxxxls.xsuper.net.engine
+package com.xxxxls.xsuper.network.engine
 
 import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
 
 /**
  * 网络请求引擎
@@ -19,12 +18,6 @@ interface IHttpEngine {
      * 创建请求Service
      */
     fun <T> createService(service: Class<T>): T
-
-    /**
-     * 获取响应拦截器
-     * @return 响应拦截器（对请求的数据进行全局拦截操作，如：登录失效，版本更新等）
-     */
-    fun getInterceptors(): ArrayList<IResponseInterceptor>?
 
     /**
      * 请求异常转换

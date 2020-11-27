@@ -1,7 +1,6 @@
-package com.xxxxls.xsuper.net.engine
+package com.xxxxls.xsuper.network.engine
 
 import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.interceptors.IResponseInterceptor
 import retrofit2.Retrofit
 
 /**
@@ -10,17 +9,12 @@ import retrofit2.Retrofit
  * @date 2019-11-26.
  */
 open class XSuperHttpEngine(
-    private val retrofit: Retrofit,
-    private val interceptors: ArrayList<IResponseInterceptor>?
+    private val retrofit: Retrofit
 ) :
     IHttpEngine {
 
     override fun getBaseUrl(): String {
         return retrofit.baseUrl().toString()
-    }
-
-    override fun getInterceptors(): ArrayList<IResponseInterceptor>? {
-        return interceptors
     }
 
     /**

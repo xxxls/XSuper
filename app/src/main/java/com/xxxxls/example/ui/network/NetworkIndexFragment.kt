@@ -6,8 +6,8 @@ import com.xxxxls.example.common.BaseListFragment
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_user.ui.login.LoginViewModel
 import com.xxxxls.titlebar.setTitleBarLeftText
-import com.xxxxls.xsuper.viewmodel.viewModelsFactory
 import com.xxxxls.xsuper.viewmodel.xsuperViewModels
+import com.xxxxls.xsuper.viewmodel.xsuperViewModelsF
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -21,7 +21,7 @@ class NetworkIndexFragment : BaseListFragment() {
 
     private val viewModel: ExampleViewModel by xsuperViewModels()
 
-    private val viewModel2 : LoginViewModel by viewModelsFactory()
+    private val viewModel2 : LoginViewModel by xsuperViewModelsF()
 
     override fun onInitObserve() {
         super.onInitObserve()

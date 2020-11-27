@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.net.callback
+package com.xxxxls.xsuper.callback
 
 /**
  * 带loading 功能的回调

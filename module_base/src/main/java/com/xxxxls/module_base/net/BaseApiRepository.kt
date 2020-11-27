@@ -3,9 +3,8 @@ package com.xxxxls.module_base.net
 import com.xxxxls.module_base.constants.NetConfig
 import com.xxxxls.module_base.net.interceptors.ValidResponseInterceptor
 import com.xxxxls.module_base.util.ILog
-import com.xxxxls.xsuper.net.engine.IHttpEngine
-import com.xxxxls.xsuper.net.interceptors.LoggerInterceptor
-import com.xxxxls.xsuper.net.repository.ApiRepository
+import com.xxxxls.xsuper.network.engine.IHttpEngine
+import com.xxxxls.xsuper.interceptors.LoggerInterceptor
 import okhttp3.OkHttpClient
 
 /**

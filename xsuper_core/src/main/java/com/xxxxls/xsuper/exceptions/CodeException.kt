@@ -7,6 +7,7 @@ package com.xxxxls.xsuper.exceptions
  */
 open class CodeException : XSuperException {
 
+
     constructor(message: String, cause: Throwable) : super(-1, message, cause)
     constructor(code: Int, message: String, cause: Throwable?) : super(code, message, cause)
     constructor(
@@ -16,6 +17,10 @@ open class CodeException : XSuperException {
         enableSuppression: Boolean,
         writableStackTrace: Boolean
     ) : super(code, message, cause, enableSuppression, writableStackTrace)
+
+    constructor(cause: Throwable?) : super(cause)
+
+    constructor(code: Int, message: String) : super(code, message)
 
 
 }

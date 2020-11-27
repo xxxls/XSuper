@@ -1,7 +1,7 @@
-package com.xxxxls.xsuper.net
+package com.xxxxls.xsuper.model
 
 import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.callback.XSuperCallBack
+import com.xxxxls.xsuper.callback.XSuperCallBack
 
 /**
  * super - 响应结果类（成功/失败）
@@ -14,27 +14,47 @@ sealed class XSuperResult<out T> {
      * 成功
      * @param data 成功的结果
      */
-    data class Success<T>(val data: T?) : XSuperResult<T>()
+    data class Success<out T>(val data: T) : XSuperResult<T>()
 
     /**
      * 失败
-     * @param exception
+     * @param throwable
      */
-    class Failure(val exception: XSuperException) : XSuperResult<Nothing>()
+    class Failure(val throwable: Throwable) : XSuperResult<Nothing>()
 
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
-            is Failure -> "Failure[exception=$exception]"
+            is Failure -> "Failure[exception=$throwable]"
         }
     }
 }
 
 
 /**
+ * 成功
+ */
+inline fun <reified T> XSuperResult<T>.doSuccess(success: (T) -> Unit): XSuperResult<T> {
+    if (this is XSuperResult.Success) {
+        success(data)
+    }
+    return this
+}
+
+/**
+ * 失败
+ */
+inline fun <reified T> XSuperResult<T>.doFailure(failure: (Throwable?) -> Unit): XSuperResult<T> {
+    if (this is XSuperResult.Failure) {
+        failure(throwable)
+    }
+    return this
+}
+
+/**
  * 转换为成功结果
  */
-fun <T : Any> T.toSuccessResult(): XSuperResult.Success<T> {
+fun <T> T.toSuccessResult(): XSuperResult.Success<T> {
     return XSuperResult.Success<T>(this)
 }
 
@@ -54,7 +74,7 @@ fun <T> XSuperResult<T>.callback(callBack: XSuperCallBack<T>) {
             callBack.onSuccess(this.data)
         }
         is XSuperResult.Failure -> {
-            callBack.onError(this.exception)
+            callBack.onError(this.throwable)
         }
     }
 }

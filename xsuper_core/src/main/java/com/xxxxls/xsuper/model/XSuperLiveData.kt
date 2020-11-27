@@ -1,10 +1,9 @@
-package com.xxxxls.xsuper.net
+package com.xxxxls.xsuper.model
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.net.callback.XSuperCallBack
+import com.xxxxls.xsuper.callback.XSuperCallBack
 
 /**
  * super - LiveData
@@ -14,12 +13,12 @@ import com.xxxxls.xsuper.net.callback.XSuperCallBack
 open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     XSuperCallBack<T> {
 
-    override fun onSuccess(result: T?) {
+    override fun onSuccess(result: T) {
         postValue(XSuperResult.Success(result))
     }
 
-    override fun onError(exception: XSuperException) {
-        postValue(XSuperResult.Failure(exception))
+    override fun onError(throwable: Throwable) {
+        postValue(XSuperResult.Failure(throwable))
     }
 
     /**
@@ -30,13 +29,13 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
      */
     fun observe(
         owner: LifecycleOwner,
-        success: (value: T?) -> Unit = {},
-        failure: (e: XSuperException) -> Unit = {}
+        success: (value: T) -> Unit = {},
+        failure: (e: Throwable) -> Unit = {}
     ): XSuperLiveData<T> {
         super.observe(owner, Observer<XSuperResult<T>> {
             when (it) {
                 is XSuperResult.Failure -> {
-                    failure(it.exception)
+                    failure(it.throwable)
                 }
                 is XSuperResult.Success -> {
                     success(it.data)
@@ -52,13 +51,13 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
      * @param failure 失败回调
      */
     fun observeForever(
-        success: (value: T?) -> Unit = {},
-        failure: (e: XSuperException) -> Unit = {}
+        success: (value: T) -> Unit = {},
+        failure: (e: Throwable) -> Unit = {}
     ): XSuperLiveData<T> {
         super.observeForever {
             when (it) {
                 is XSuperResult.Failure -> {
-                    failure(it.exception)
+                    failure(it.throwable)
                 }
                 is XSuperResult.Success -> {
                     success(it.data)
