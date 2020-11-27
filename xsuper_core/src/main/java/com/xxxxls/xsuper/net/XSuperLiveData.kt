@@ -26,17 +26,17 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
      * 添加观察者
      * @param owner 生命周期
      * @param success 成功回调
-     * @param error 失败回调
+     * @param failure 失败回调
      */
     fun observe(
         owner: LifecycleOwner,
         success: (value: T?) -> Unit = {},
-        error: (e: XSuperException) -> Unit = {}
+        failure: (e: XSuperException) -> Unit = {}
     ): XSuperLiveData<T> {
         super.observe(owner, Observer<XSuperResult<T>> {
             when (it) {
                 is XSuperResult.Failure -> {
-                    error(it.exception)
+                    failure(it.exception)
                 }
                 is XSuperResult.Success -> {
                     success(it.data)
@@ -49,16 +49,16 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     /**
      * 添加观察者
      * @param success 成功回调
-     * @param error 失败回调
+     * @param failure 失败回调
      */
     fun observeForever(
         success: (value: T?) -> Unit = {},
-        error: (e: XSuperException) -> Unit = {}
+        failure: (e: XSuperException) -> Unit = {}
     ): XSuperLiveData<T> {
         super.observeForever {
             when (it) {
                 is XSuperResult.Failure -> {
-                    error(it.exception)
+                    failure(it.exception)
                 }
                 is XSuperResult.Success -> {
                     success(it.data)

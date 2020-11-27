@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.net.viewmodel
+package com.xxxxls.xsuper.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +34,7 @@ open class XSuperViewModel : ViewModel(), IComponentBridge, ILoading {
     /**
      * 创建Repository
      */
+    @Deprecated("即将移除")
     protected fun <T : XSuperRepository> createRepository(
         clazz: Class<T>, build: (Class<*>) -> T = {
             (it.newInstance() as T)

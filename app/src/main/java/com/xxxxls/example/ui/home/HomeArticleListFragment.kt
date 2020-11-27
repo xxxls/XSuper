@@ -7,7 +7,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.xxxxls.example.R
 import com.xxxxls.example.adapter.HomeArticleAdapter
 import com.xxxxls.module_base.base.BaseFragment
-import com.xxxxls.xsuper.net.viewmodel.ViewModelFactory
+import com.xxxxls.xsuper.viewmodel.ViewModelFactory
 import com.xxxxls.utils.ktx.toast
 import kotlinx.android.synthetic.main.fragment_paging_list.*
 
@@ -23,7 +23,7 @@ class HomeArticleListFragment : BaseFragment() {
     }
 
     private val mViewModel by ViewModelFactory(
-        HomeArticleListViewModel::class.java
+        HomeArticleListViewModel::class
     )
 
     override fun getLayoutResId(): Int? {
@@ -44,7 +44,7 @@ class HomeArticleListFragment : BaseFragment() {
             mAdapter.submitList(it?.datas?:ArrayList())
             refreshLayout.finishRefresh()
             refreshLayout.finishLoadMore()
-        }, error = {
+        }, failure = {
             toast(it.displayMessage)
             refreshLayout.state
             refreshLayout.finishRefresh(false)

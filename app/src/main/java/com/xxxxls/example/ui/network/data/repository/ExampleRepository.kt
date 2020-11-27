@@ -39,12 +39,12 @@ class ExampleRepository @Inject constructor(
                 val list = exampleApi.getArticleList()
                 emit(list.getListNoNull().toSuccessResult())
             } else {
-                emit(localList!!)
+                emit(localList!!.toSuccessResult())
             }
         }.catch {
             // 异常
             logE("getArticleList() hashCode:${this.hashCode()} catch :${it.localizedMessage}")
-            emit(emptyList().toSu)
+            emit(ArrayList<ArticleItemBean>().toSuccessResult())
         }.onCompletion {
             // 完成
             logE("getArticleList() hashCode:${this.hashCode()} onCompletion")

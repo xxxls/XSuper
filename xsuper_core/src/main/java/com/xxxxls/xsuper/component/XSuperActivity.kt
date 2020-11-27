@@ -15,7 +15,7 @@ import com.xxxxls.xsuper.support.LifecycleTask
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperActivity : AppCompatActivity(), IComponent, IComponentViewModel, ILoading,
+open class XSuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoading,
     LifecycleTask.LifecycleTaskOwner {
 
     // 生命周期任务

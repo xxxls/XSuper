@@ -4,7 +4,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxxxls.module_base.base.BaseActivity
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_user.R
-import com.xxxxls.xsuper.net.viewmodel.ViewModelFactory
+import com.xxxxls.xsuper.viewmodel.ViewModelFactory
 import com.xxxxls.utils.ktx.singleClick
 import kotlinx.android.synthetic.main.user_activity_login.et_password
 import kotlinx.android.synthetic.main.user_activity_login.et_username
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.user_activity_register.*
 class RegisterActivity : BaseActivity() {
 
     private val mViewModel by ViewModelFactory(
-        RegisterViewModel::class.java
+        RegisterViewModel::class
     )
 
     override fun getLayoutResId(): Int {
@@ -30,7 +30,7 @@ class RegisterActivity : BaseActivity() {
         super.onInitObserve()
         mViewModel.registerLiveData.observe(this, success = {
             com.xxxxls.utils.L.e("registerLiveData:$it")
-        }, error = {
+        }, failure = {
             com.xxxxls.utils.L.e("registerLiveData:$it")
         })
     }

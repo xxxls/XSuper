@@ -25,8 +25,7 @@ import com.xxxxls.status.showContent
 import com.xxxxls.status.showEmpty
 import com.xxxxls.status.showError
 import com.xxxxls.utils.L
-import com.xxxxls.utils.ktx.toast
-import com.xxxxls.xsuper.net.viewmodel.*
+import com.xxxxls.xsuper.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_paging_list.*
 
 /**
@@ -46,7 +45,7 @@ class PagingListFragment : BaseFragment() {
     @Autowired(name = HomePaths.KEY_HOME_FRAGMENT_PAGING_LIST_TYPE)
     var type: Int = 0
 
-    private val mViewModel by ViewModelFactoryLazy {
+    private val mViewModel by XSuperViewModelFactoryLazy {
         when (type) {
             0 -> PositionalViewModel::class.java
             1 -> ItemKeyedViewModel::class.java

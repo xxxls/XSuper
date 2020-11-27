@@ -1,7 +1,7 @@
 package com.xxxxls.module_base.net
 
 import com.xxxxls.module_base.util.ILog
-import com.xxxxls.xsuper.net.viewmodel.XSuperViewModel
+import com.xxxxls.xsuper.viewmodel.XSuperViewModel
 
 /**
  * 项目基础 VM

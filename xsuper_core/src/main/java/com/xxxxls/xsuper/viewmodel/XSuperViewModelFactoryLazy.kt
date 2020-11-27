@@ -1,8 +1,7 @@
-package com.xxxxls.xsuper.net.viewmodel
+package com.xxxxls.xsuper.viewmodel
 
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
-import com.xxxxls.xsuper.component.IComponentViewModel
+import com.xxxxls.xsuper.component.IVmComponent
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -11,12 +10,13 @@ import kotlin.reflect.KProperty
  * @author Max
  * @date 2019-11-30.
  */
-class ViewModelFactoryLazy<VM : XSuperViewModel>(val initializer: () -> Class<VM>) :
-    ReadOnlyProperty<IComponentViewModel, VM> {
+@Deprecated("没什么必要")
+class XSuperViewModelFactoryLazy<VM : XSuperViewModel>(val initializer: () -> Class<VM>) :
+    ReadOnlyProperty<IVmComponent, VM> {
 
     private var mViewModel: VM? = null
 
-    override fun getValue(thisRef: IComponentViewModel, property: KProperty<*>): VM {
+    override fun getValue(thisRef: IVmComponent, property: KProperty<*>): VM {
         if (mViewModel == null) {
             mViewModel = ViewModelProvider(thisRef).get(initializer())
             //建立与组件的关联

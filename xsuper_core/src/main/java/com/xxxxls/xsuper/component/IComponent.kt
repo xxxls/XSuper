@@ -7,7 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 
 
 /**
- * 组件（activity，fragment，dialog）
+ * 基础组件（activity，fragment，dialog）
  * @author Max
  * @date 2019-11-26.
  */

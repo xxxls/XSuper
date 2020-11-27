@@ -1,26 +1,22 @@
 package com.xxxxls.xsuper.component
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
+import android.util.Log
+import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.net.XSuperLiveData
 import com.xxxxls.xsuper.net.bridge.ComponentAction
 import com.xxxxls.xsuper.net.bridge.IComponentBridge
-import com.xxxxls.xsuper.net.viewmodel.XSuperViewModel
+import com.xxxxls.xsuper.viewmodel.XSuperViewModel
 
 /**
  * 组件的viewModel
  * @author Max
  * @date 2019-12-05.
  */
-interface IComponentViewModel : ViewModelStoreOwner, IComponentBridge {
-
-    /**
-     * 组件的LifecycleOwner
-     */
-    fun getLifecycleOwner(): LifecycleOwner
+interface IVmComponent : IComponent, ViewModelStoreOwner, HasDefaultViewModelProviderFactory,
+    IComponentBridge {
 
     /**
      * 初始化LiveData监听（在这个方法里监听liveData）
@@ -34,9 +30,13 @@ interface IComponentViewModel : ViewModelStoreOwner, IComponentBridge {
      */
     fun addViewModel(viewModel: XSuperViewModel?) {
         //建立组件与ViewModel的通信
-        viewModel?.componentBridgeLiveData?.observe(getLifecycleOwner(), Observer<ComponentAction> {
-            onAction(it)
-        })
+        getLifecycleOwner()?.let { lifecycleOwner ->
+            viewModel?.componentBridgeLiveData?.observe(lifecycleOwner, Observer<ComponentAction> {
+                onAction(it)
+            })
+        } ?: let {
+            Log.e("IVmComponent", "warning/警告: lifecycleOwner is NULL")
+        }
     }
 
     /**
@@ -47,13 +47,16 @@ interface IComponentViewModel : ViewModelStoreOwner, IComponentBridge {
     }
 
     /**
-     * 建立关联
+     * 监听liveData
      */
     fun <T> XSuperLiveData<T>.observe(
         success: (value: T?) -> Unit = {},
-        error: (e: XSuperException) -> Unit = {}
+        failure: (e: XSuperException) -> Unit = {}
     ) {
-        this.observe(getLifecycleOwner(), success, error)
+        getLifecycleOwner()?.let { lifecycleOwner ->
+            this.observe(lifecycleOwner, success, failure)
+        } ?: let {
+            Log.e("IVmComponent", "warning/警告: lifecycleOwner is NULL")
+        }
     }
-
 }
