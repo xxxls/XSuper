@@ -5,7 +5,7 @@ import androidx.paging.PagedList
 import com.xxxxls.adapter.paging.XSuperPaging
 import com.xxxxls.adapter.paging.item_keyed.*
 import com.xxxxls.example.bean.TestPagingBean
-import com.xxxxls.module_base.net.response.ListResponse
+import com.xxxxls.module_base.response.ListResponse
 import com.xxxxls.utils.L
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.callback.XSuperCallBack

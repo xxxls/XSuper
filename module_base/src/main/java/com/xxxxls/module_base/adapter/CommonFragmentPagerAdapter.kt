@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.adapter
+package com.xxxxls.module_base.adapter
 
 
 import androidx.fragment.app.Fragment

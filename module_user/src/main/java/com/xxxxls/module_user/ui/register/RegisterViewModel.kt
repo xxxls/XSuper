@@ -3,7 +3,6 @@ package com.xxxxls.module_user.ui.register
 import com.xxxxls.module_base.net.BaseLiveData
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.data.UserApis
-import com.xxxxls.module_base.net.FastApiViewModel
 
 /**
  * 注册VM

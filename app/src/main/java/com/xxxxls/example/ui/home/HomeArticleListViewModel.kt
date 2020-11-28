@@ -2,8 +2,7 @@ package com.xxxxls.example.ui.home
 import com.xxxxls.example.bean.ArticleBean
 import com.xxxxls.example.data.HomeApis
 import com.xxxxls.module_base.net.BaseLiveData
-import com.xxxxls.module_base.net.FastApiViewModel
-import com.xxxxls.module_base.net.response.ListResponse
+import com.xxxxls.module_base.response.ListResponse
 
 /**
  * 首页文章列表

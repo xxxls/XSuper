@@ -23,7 +23,7 @@ sealed class ComponentAction {
     /**
      * 展示弹窗
      */
-    class BuildDialog(val build: (activity: Activity?) -> Dialog) : ComponentAction()
+    class BuildDialog(val build: (activity: Activity?) -> Dialog?) : ComponentAction()
 
     /**
      * toast

@@ -5,7 +5,7 @@ import com.xxxxls.example.R
 import com.xxxxls.module_base.base.BaseFragment
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.util.newFragment
-import com.xxxxls.xsuper.adapter.CommonFragmentPagerAdapter
+import com.xxxxls.module_base.adapter.CommonFragmentPagerAdapter
 import kotlinx.android.synthetic.main.fragment_paging_index.*
 import kotlinx.android.synthetic.main.fragment_paging_index.viewPager
 
@@ -32,11 +32,12 @@ class PagingIndexFragment : BaseFragment() {
 
         val tabs = arrayListOf("positional", "itemKeyed", "pageKeyed")
 
-        viewPager.adapter = CommonFragmentPagerAdapter(
-            fragmentManager = childFragmentManager,
-            fragments = fragments,
-            titles = tabs
-        )
+        viewPager.adapter =
+            CommonFragmentPagerAdapter(
+                fragmentManager = childFragmentManager,
+                fragments = fragments,
+                titles = tabs
+            )
         tabLayout.setupWithViewPager(viewPager)
 //        viewPager.offscreenPageLimit = fragments.size
     }

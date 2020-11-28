@@ -1,11 +1,8 @@
 package com.xxxxls.module_user.data
 
-import com.xxxxls.module_base.net.response.BaseResponse
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.db.UserDao
 import com.xxxxls.xsuper.exceptions.XSuperException
-import com.xxxxls.xsuper.mvvm.DefaultResponseAdapter
-import com.xxxxls.xsuper.mvvm.ResponseAdapter
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toFailureResult
 import com.xxxxls.xsuper.model.toSuccessResult
@@ -13,7 +10,6 @@ import com.xxxxls.xsuper.repository.apiFlow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 /**
  * 用户模块Repository
@@ -24,23 +20,19 @@ class UserRepository @Inject constructor(
     private val userApis: UserApis,
     private val userDao: UserDao
 ) {
-
     /**
      * 登录
      * @param userName 用户名
      * @param password 密码
      */
     suspend fun login(userName: String, password: String): Flow<XSuperResult<UserBean>> {
-        val flow1 = flow<XSuperResult<UserBean>> {
-            val result = userApis.login(userName, password)
-            saveLoginRecord(result.data!!)
-            emit(result.data!!.toSuccessResult())
-        }.catch {
-            emit(XSuperException(it).toFailureResult())
-        }.flowOn(Dispatchers.IO)
-
         return apiFlow {
-            userApis.login(userName, password)
+            // 请求接口获取到结果
+            val result = userApis.login(userName, password)
+            // 模拟保存到本地记录
+            saveLoginRecord(result.data!!)
+            // 返回出去
+            result
         }
 //        return flow<XSuperResult<UserBean>> {
 //            val result = userApis.login(userName, password)

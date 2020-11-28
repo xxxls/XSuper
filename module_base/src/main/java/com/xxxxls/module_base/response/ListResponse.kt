@@ -1,4 +1,4 @@
-package com.xxxxls.module_base.net.response
+package com.xxxxls.module_base.response
 
 /**
  * 列表响应体

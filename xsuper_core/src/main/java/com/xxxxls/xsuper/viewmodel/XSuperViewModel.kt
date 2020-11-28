@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xxxxls.xsuper.loading.*
 import com.xxxxls.xsuper.component.bridge.ComponentAction
+import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -13,7 +14,7 @@ import kotlin.coroutines.CoroutineContext
  * @author Max
  * @date 2019-11-29.
  */
-open class XSuperViewModel : ViewModel(), ILoading {
+open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
 
     /**
      * 与组件(activity，fragment)的通信（加载弹窗，toast等）
@@ -55,22 +56,20 @@ open class XSuperViewModel : ViewModel(), ILoading {
 
     override fun onCleared() {
         super.onCleared()
-        store.clear()
+    }
+
+    override fun showLoading(id: Int?, message: CharSequence?) {
+        this.sendAction(ComponentAction.ShowLoading(id, message))
+    }
+
+    override fun dismissLoading(id: Int?) {
+        this.sendAction(ComponentAction.DismissLoading(id))
     }
 
     /**
      * 中转给组件
      */
-    protected open fun postAction(action: ComponentAction) {
+    override fun sendAction(action: ComponentAction) {
         componentBridgeLiveData.postValue(action)
     }
-
-    override fun showLoading(id: Int?, message: CharSequence?) {
-        this.postAction(ComponentAction.ShowLoading(id, message))
-    }
-
-    override fun dismissLoading(id: Int?) {
-        this.postAction(ComponentAction.DismissLoading(id))
-    }
-
 }

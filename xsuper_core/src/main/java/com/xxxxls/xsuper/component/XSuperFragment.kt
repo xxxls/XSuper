@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.component.bridge.ComponentAction
-import com.xxxxls.xsuper.component.bridge.IComponentBridge
+import com.xxxxls.xsuper.component.bridge.ComponentActionHandler
 import com.xxxxls.utils.ktx.toast
 import com.xxxxls.xsuper.support.LifecycleTask
 
@@ -74,7 +74,7 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IVmComponent, ILoa
         super.onAction(action)
         com.xxxxls.utils.L.e("${javaClass.simpleName} -> onAction() action:${action}")
 
-        (activity as? IComponentBridge)?.run {
+        (activity as? ComponentActionHandler)?.run {
             //转至activity处理
             this.onAction(action)
         } ?: let {

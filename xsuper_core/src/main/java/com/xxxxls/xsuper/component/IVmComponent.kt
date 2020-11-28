@@ -4,10 +4,9 @@ import android.util.Log
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
-import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.model.XSuperLiveData
 import com.xxxxls.xsuper.component.bridge.ComponentAction
-import com.xxxxls.xsuper.component.bridge.IComponentBridge
+import com.xxxxls.xsuper.component.bridge.ComponentActionHandler
 import com.xxxxls.xsuper.viewmodel.XSuperViewModel
 
 /**
@@ -16,7 +15,7 @@ import com.xxxxls.xsuper.viewmodel.XSuperViewModel
  * @date 2019-12-05.
  */
 interface IVmComponent : IComponent, ViewModelStoreOwner, HasDefaultViewModelProviderFactory,
-    IComponentBridge {
+    ComponentActionHandler {
 
     /**
      * 初始化LiveData监听（在这个方法里监听liveData）

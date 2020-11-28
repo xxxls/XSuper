@@ -1,8 +1,7 @@
 package com.xxxxls.module_user.data
 
-import com.xxxxls.module_base.net.response.BaseResponse
+import com.xxxxls.module_base.response.BaseResponse
 import com.xxxxls.module_user.bean.UserBean
-import kotlinx.coroutines.Deferred
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

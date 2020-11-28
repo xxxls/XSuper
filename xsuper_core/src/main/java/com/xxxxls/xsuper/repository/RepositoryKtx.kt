@@ -1,7 +1,7 @@
 package com.xxxxls.xsuper.repository
 
-import com.xxxxls.xsuper.mvvm.DefaultResponseAdapter
-import com.xxxxls.xsuper.mvvm.ResponseAdapter
+import com.xxxxls.xsuper.adapter.DefaultResponseAdapter
+import com.xxxxls.xsuper.adapter.ResponseAdapter
 import com.xxxxls.xsuper.model.XSuperResponse
 import com.xxxxls.xsuper.model.XSuperResult
 import kotlinx.coroutines.Dispatchers
@@ -20,11 +20,11 @@ import kotlin.coroutines.CoroutineContext
 inline fun <T> apiFlow(
     responseAdapter: ResponseAdapter = DefaultResponseAdapter(),
     context: CoroutineContext = Dispatchers.IO,
-    crossinline block: () -> XSuperResponse<T>
+    crossinline block: suspend () -> XSuperResponse<T>
 ): Flow<XSuperResult<T>> {
     return flow {
-        emit(responseAdapter.toResult(block.invoke()))
+        emit(responseAdapter.responseToResult(block.invoke()))
     }.catch {
-        emit(responseAdapter.toResult(it))
+        emit(responseAdapter.throwableToResult(it))
     }.flowOn(context)
 }

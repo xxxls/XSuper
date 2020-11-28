@@ -44,7 +44,7 @@ inline fun <reified T> XSuperResult<T>.doSuccess(success: (T) -> Unit): XSuperRe
 /**
  * 失败
  */
-inline fun <reified T> XSuperResult<T>.doFailure(failure: (Throwable?) -> Unit): XSuperResult<T> {
+inline fun <reified T> XSuperResult<T>.doFailure(failure: (Throwable) -> Unit): XSuperResult<T> {
     if (this is XSuperResult.Failure) {
         failure(throwable)
     }
