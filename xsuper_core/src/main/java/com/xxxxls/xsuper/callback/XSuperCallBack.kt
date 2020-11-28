@@ -19,7 +19,7 @@ interface XSuperCallBack<T> {
      * 失败
      * @param throwable 错误信息
      */
-    fun onError(throwable: Throwable)
+    fun onFailure(throwable: Throwable)
 }
 
 /**
@@ -32,8 +32,8 @@ fun <T, R> XSuperCallBack<T>.map(@NonNull mapFunction: (R) -> T): XSuperCallBack
             this@map.onSuccess(mapFunction(result))
         }
 
-        override fun onError(throwable: Throwable) {
-            this@map.onError(throwable)
+        override fun onFailure(throwable: Throwable) {
+            this@map.onFailure(throwable)
         }
     }
 }

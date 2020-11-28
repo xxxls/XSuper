@@ -1,7 +1,7 @@
 package com.xxxxls.module_user.ui.login
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.xxxxls.module_base.base.BaseActivity
+import com.xxxxls.module_base.component.BaseActivity
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_user.R
 import com.xxxxls.xsuper.viewmodel.ViewModelFactory

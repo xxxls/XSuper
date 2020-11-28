@@ -1,4 +1,4 @@
-package com.xxxxls.module_base.base
+package com.xxxxls.module_base.component
 
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter

@@ -1,4 +1,4 @@
-package com.xxxxls.module_base.net
+package com.xxxxls.module_base.mvvm
 
 import com.xxxxls.xsuper.model.XSuperLiveData
 import com.xxxxls.xsuper.callback.LoadingCallBack

@@ -3,7 +3,7 @@ package com.xxxxls.example.ui
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.xxxxls.example.R
-import com.xxxxls.module_base.base.BaseActivity
+import com.xxxxls.module_base.component.BaseActivity
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_base.util.newFragment

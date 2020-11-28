@@ -7,7 +7,7 @@ import com.xxxxls.adapter.listener.OnItemClickListener
 import com.xxxxls.example.R
 import com.xxxxls.example.adapter.SimpleListItemAdapter
 import com.xxxxls.example.bean.SimpleItemBean
-import com.xxxxls.module_base.base.BaseFragment
+import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.titlebar.setTitleBarTitle
 import kotlinx.android.synthetic.main.fragment_simple_list.*
 

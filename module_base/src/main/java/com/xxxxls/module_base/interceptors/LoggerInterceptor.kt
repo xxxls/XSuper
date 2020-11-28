@@ -8,12 +8,11 @@ import java.io.IOException
 import java.nio.charset.Charset
 
 /**
- * okhttp 日志拦截器
+ * OkHttp 日志拦截器
  * @author Max
  * @date 2019-12-06.
  */
 class LoggerInterceptor(private val TAG: String = "LoggerInterceptor") : Interceptor {
-
     @Synchronized
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {

@@ -6,21 +6,8 @@ package com.xxxxls.xsuper.exceptions
  * @date 2019-12-04.
  */
 open class CodeException : XSuperException {
-
-
-    constructor(message: String, cause: Throwable) : super(-1, message, cause)
-    constructor(code: Int, message: String, cause: Throwable?) : super(code, message, cause)
-    constructor(
-        code: Int,
-        message: String,
-        cause: Throwable?,
-        enableSuppression: Boolean,
-        writableStackTrace: Boolean
-    ) : super(code, message, cause, enableSuppression, writableStackTrace)
-
-    constructor(cause: Throwable?) : super(cause)
-
-    constructor(code: Int, message: String) : super(code, message)
-
-
+    constructor(code: Int = 0) : super(code)
+    constructor(message: String?, code: Int = 0) : super(message, code)
+    constructor(message: String?, cause: Throwable?, code: Int = 0) : super(message, cause, code)
+    constructor(cause: Throwable?, code: Int = 0) : super(cause, code)
 }

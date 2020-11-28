@@ -2,7 +2,7 @@ package com.xxxxls.example.data
 
 import com.xxxxls.example.bean.ArticleBean
 import com.xxxxls.example.bean.TestPagingBean
-import com.xxxxls.module_base.response.BaseListResponse
+import com.xxxxls.module_base.network.response.BaseListResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.*
 

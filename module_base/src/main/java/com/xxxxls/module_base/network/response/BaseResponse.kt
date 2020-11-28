@@ -1,4 +1,4 @@
-package com.xxxxls.module_base.response
+package com.xxxxls.module_base.network.response
 
 import com.google.gson.annotations.SerializedName
 import com.xxxxls.xsuper.model.XSuperResponse

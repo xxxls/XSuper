@@ -1,7 +1,7 @@
 package com.xxxxls.example.ui.network.data.api
 
 import com.xxxxls.example.ui.network.data.bean.ArticleItemBean
-import com.xxxxls.module_base.response.BaseListResponse
+import com.xxxxls.module_base.network.response.BaseListResponse
 import retrofit2.http.GET
 
 /**

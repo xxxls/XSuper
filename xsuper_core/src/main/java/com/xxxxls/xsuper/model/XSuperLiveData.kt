@@ -17,7 +17,7 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
         postValue(XSuperResult.Success(result))
     }
 
-    override fun onError(throwable: Throwable) {
+    override fun onFailure(throwable: Throwable) {
         postValue(XSuperResult.Failure(throwable))
     }
 

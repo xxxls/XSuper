@@ -2,7 +2,7 @@ package com.xxxxls.example.ui.tools.status
 
 import androidx.fragment.app.Fragment
 import com.xxxxls.example.R
-import com.xxxxls.module_base.base.BaseActivity
+import com.xxxxls.module_base.component.BaseActivity
 import com.xxxxls.module_base.adapter.CommonFragmentPagerAdapter
 import kotlinx.android.synthetic.main.activity_status.*
 

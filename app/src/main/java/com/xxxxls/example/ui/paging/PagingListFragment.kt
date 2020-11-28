@@ -18,7 +18,7 @@ import com.xxxxls.example.ui.paging.vm.BasePagingListViewModel
 import com.xxxxls.example.ui.paging.vm.ItemKeyedViewModel
 import com.xxxxls.example.ui.paging.vm.PageKeyedViewModel
 import com.xxxxls.example.ui.paging.vm.PositionalViewModel
-import com.xxxxls.module_base.base.BaseFragment
+import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.util.status
 import com.xxxxls.status.showContent

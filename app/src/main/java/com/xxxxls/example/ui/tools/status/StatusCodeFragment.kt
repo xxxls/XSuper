@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.xxxxls.example.R
 import com.xxxxls.module_base.adapter.SimpleAdapter
-import com.xxxxls.module_base.base.BaseFragment
+import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.status.*
 import com.xxxxls.utils.L
 import com.xxxxls.utils.ktx.singleClick

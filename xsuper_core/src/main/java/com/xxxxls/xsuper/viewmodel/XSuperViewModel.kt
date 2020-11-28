@@ -3,10 +3,14 @@ package com.xxxxls.xsuper.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.xxxxls.xsuper.callback.XSuperCallBack
 import com.xxxxls.xsuper.loading.*
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
+import com.xxxxls.xsuper.model.XSuperLiveData
+import com.xxxxls.xsuper.model.XSuperResult
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -24,7 +28,7 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
     }
 
     /**
-     * 启动一个协程任务
+     * 启动一个协程任务 (普通)
      * @param context 默认IO
      * @param start 默认启动方式
      * @param loading 执行进度弹窗，null表示不使用弹窗
@@ -32,9 +36,9 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
      */
     @UseExperimental(InternalCoroutinesApi::class)
     fun launch(
+        loading: ILoading? = this,
         context: CoroutineContext = Dispatchers.IO,
         start: CoroutineStart = CoroutineStart.DEFAULT,
-        loading: ILoading? = this,
         block: suspend CoroutineScope.() -> Unit
     ): Job {
         return viewModelScope.launch(context, start, block = {
@@ -52,6 +56,67 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
                 })
             }
         }
+    }
+
+    /**
+     *
+     * 启动一个协程任务，Flow将会与liveData连接起来（Flow<XSuperResult<T>>）
+     * @param context 默认IO
+     * @param start 默认启动方式
+     * @param loading 执行进度弹窗
+     * @param block 执行的任务
+     */
+    fun <T> launchL(
+        liveData: XSuperLiveData<T>,
+        loading: ILoading? = this,
+        context: CoroutineContext = Dispatchers.IO,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend () -> Flow<XSuperResult<T>>
+    ): Job {
+        return viewModelScope.launch(
+            context = context,
+            start = start,
+            block = {
+                block.invoke().onStart {
+                    loading.showLoadingInMain(this.hashCode())
+                }.onCompletion {
+                    loading.dismissLoadingInMain(this.hashCode())
+                }.collectLatest {
+                    liveData.postValue(it)
+                }
+            })
+    }
+
+
+    /**
+     *
+     * 启动一个协程任务，Flow将会与callBack连接起来 （Flow<T>）
+     * @param context 默认IO
+     * @param start 默认启动方式
+     * @param loading 执行进度弹窗
+     * @param block 执行的任务
+     */
+    fun <T> launchC(
+        loading: ILoading? = this,
+        callBack: XSuperCallBack<T>,
+        context: CoroutineContext = Dispatchers.IO,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend () -> Flow<T>
+    ): Job {
+        return viewModelScope.launch(
+            context = context,
+            start = start,
+            block = {
+                block.invoke().onStart {
+                    loading.showLoadingInMain(this.hashCode())
+                }.onCompletion {
+                    loading.dismissLoadingInMain(this.hashCode())
+                }.catch {
+                    callBack.onFailure(it)
+                }.collectLatest {
+                    callBack.onSuccess(it)
+                }
+            })
     }
 
     override fun onCleared() {

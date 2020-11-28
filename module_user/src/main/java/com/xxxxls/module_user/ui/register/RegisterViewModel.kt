@@ -1,6 +1,6 @@
 package com.xxxxls.module_user.ui.register
 
-import com.xxxxls.module_base.net.BaseLiveData
+import com.xxxxls.module_base.mvvm.BaseLiveData
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.data.UserApis
 

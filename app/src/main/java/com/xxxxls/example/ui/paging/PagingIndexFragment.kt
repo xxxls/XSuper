@@ -2,7 +2,7 @@ package com.xxxxls.example.ui.paging
 
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxxxls.example.R
-import com.xxxxls.module_base.base.BaseFragment
+import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.util.newFragment
 import com.xxxxls.module_base.adapter.CommonFragmentPagerAdapter

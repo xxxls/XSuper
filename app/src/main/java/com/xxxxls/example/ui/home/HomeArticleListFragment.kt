@@ -6,7 +6,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.xxxxls.example.R
 import com.xxxxls.example.adapter.HomeArticleAdapter
-import com.xxxxls.module_base.base.BaseFragment
+import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.xsuper.viewmodel.ViewModelFactory
 import com.xxxxls.utils.ktx.toast
 import kotlinx.android.synthetic.main.fragment_paging_list.*

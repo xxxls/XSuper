@@ -1,4 +1,4 @@
-package com.xxxxls.module_base.support
+package com.xxxxls.module_base.network
 
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import com.xxxxls.xsuper.exceptions.ApiException
@@ -52,10 +52,11 @@ class ApiResponseAdapter : ResponseAdapter {
             result
         } else {
             // 失败的响应，交给异常分析器处理
-            val exception = ExceptionAnalyzer.analysisException(
-                bridge,
-                (result as XSuperResult.Failure).throwable
-            )
+            val exception =
+                ExceptionAnalyzer.analysisException(
+                    bridge,
+                    (result as XSuperResult.Failure).throwable
+                )
             if (exception is XSuperException) {
                 exception.toFailureResult()
             } else {

@@ -1,6 +1,6 @@
 package com.xxxxls.module_user.data
 
-import com.xxxxls.module_base.response.BaseResponse
+import com.xxxxls.module_base.network.response.BaseResponse
 import com.xxxxls.module_user.bean.UserBean
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

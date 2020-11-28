@@ -9,7 +9,7 @@ import com.xxxxls.adapter.paging.positional.PositionalLoadInitialCallback
 import com.xxxxls.adapter.paging.positional.PositionalLoadRangeCallback
 import com.xxxxls.example.bean.TestPagingBean
 import com.xxxxls.module_base.constants.Constants
-import com.xxxxls.module_base.response.ListResponse
+import com.xxxxls.module_base.network.response.ListResponse
 import com.xxxxls.utils.L
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.callback.XSuperCallBack

@@ -1,11 +1,11 @@
-package com.xxxxls.module_base.support
+package com.xxxxls.module_base.network
 
 import android.app.Activity
 import android.app.Dialog
 import android.net.ParseException
 import com.google.gson.JsonParseException
 import com.xxxxls.module_base.R
-import com.xxxxls.module_base.response.BaseResponse
+import com.xxxxls.module_base.network.response.BaseResponse
 import com.xxxxls.utils.AppUtils
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
@@ -41,7 +41,10 @@ object ExceptionAnalyzer {
         return when (throwable) {
             is ApiException -> {
                 /*接口异常*/
-                analysisApiException(bridge, throwable)
+                analysisApiException(
+                    bridge,
+                    throwable
+                )
             }
             is HttpException -> {
                 /*网络异常*/
@@ -82,7 +85,9 @@ object ExceptionAnalyzer {
                         if (activity == null) {
                             return@BuildDialog null
                         }
-                        return@BuildDialog createDialog(activity)
+                        return@BuildDialog createDialog(
+                            activity
+                        )
                     })
                 }
                 2 -> {
@@ -91,7 +96,9 @@ object ExceptionAnalyzer {
                         if (activity == null) {
                             return@BuildDialog null
                         }
-                        return@BuildDialog createDialog(activity)
+                        return@BuildDialog createDialog(
+                            activity
+                        )
                     })
                 }
             }

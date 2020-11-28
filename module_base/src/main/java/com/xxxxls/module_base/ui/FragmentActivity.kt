@@ -3,7 +3,7 @@ package com.xxxxls.module_base.ui
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxxxls.module_base.R
-import com.xxxxls.module_base.base.BaseActivity
+import com.xxxxls.module_base.component.BaseActivity
 import com.xxxxls.module_base.constants.BasePaths
 import com.xxxxls.module_base.util.newFragment
 import com.xxxxls.utils.ktx.showFragment

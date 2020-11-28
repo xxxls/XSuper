@@ -1,12 +1,12 @@
 package com.xxxxls.module_user.data
 
+import com.xxxxls.module_base.mvvm.BaseRepository
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.db.UserDao
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toFailureResult
 import com.xxxxls.xsuper.model.toSuccessResult
-import com.xxxxls.xsuper.repository.apiFlow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -19,7 +19,8 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(
     private val userApis: UserApis,
     private val userDao: UserDao
-) {
+) : BaseRepository() {
+
     /**
      * 登录
      * @param userName 用户名
@@ -59,7 +60,7 @@ class UserRepository @Inject constructor(
     /**
      * 保存登录记录
      */
-    suspend fun getAllLoginRecord(): Flow<XSuperResult<List<UserBean>>> {
+    suspend fun getLoginRecord(): Flow<XSuperResult<List<UserBean>>> {
         return flow<XSuperResult<List<UserBean>>> {
             emit(userDao.getAll()!!.toSuccessResult())
         }.catch {

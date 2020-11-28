@@ -74,7 +74,7 @@ fun <T> XSuperResult<T>.callback(callBack: XSuperCallBack<T>) {
             callBack.onSuccess(this.data)
         }
         is XSuperResult.Failure -> {
-            callBack.onError(this.throwable)
+            callBack.onFailure(this.throwable)
         }
     }
 }

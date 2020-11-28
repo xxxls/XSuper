@@ -1,8 +1,8 @@
 package com.xxxxls.example.ui.home
 import com.xxxxls.example.bean.ArticleBean
 import com.xxxxls.example.data.HomeApis
-import com.xxxxls.module_base.net.BaseLiveData
-import com.xxxxls.module_base.response.ListResponse
+import com.xxxxls.module_base.mvvm.BaseLiveData
+import com.xxxxls.module_base.network.response.ListResponse
 
 /**
  * 首页文章列表

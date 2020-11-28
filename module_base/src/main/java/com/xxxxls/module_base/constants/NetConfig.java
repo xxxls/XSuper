@@ -9,7 +9,6 @@ import com.xxxxls.module_base.BuildConfig;
  */
 public interface NetConfig {
 
-
     /**
      * 接口地址
      */

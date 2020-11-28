@@ -1,8 +1,8 @@
 package com.xxxxls.module_user.ui.login
 
 import androidx.hilt.lifecycle.ViewModelInject
-import com.xxxxls.module_base.net.BaseLiveData
-import com.xxxxls.module_base.net.BaseViewModel
+import com.xxxxls.module_base.mvvm.BaseLiveData
+import com.xxxxls.module_base.mvvm.BaseViewModel
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.data.UserRepository
 import com.xxxxls.xsuper.model.*
@@ -26,28 +26,26 @@ class LoginViewModel @ViewModelInject constructor(
      */
     fun login(userName: String, password: String) {
         // 模拟获取本地记录
-        getAllLoginRecord()
-        launch(loading = null) {
-            userRepository.login(userName, password).collectLatest {
-                loginLiveData.postValue(it)
-            }
+        getLoginRecord()
+
+        launchL(loginLiveData, null) {
+            userRepository.login(userName, password)
         }
     }
 
     /**
      * 获取登录记录
      */
-    fun getAllLoginRecord() {
+    fun getLoginRecord() {
         launch(loading = null) {
-            logD("getAllLoginRecord()")
-            userRepository.getAllLoginRecord().collectLatest {
+            userRepository.getLoginRecord().collectLatest {
                 it.doSuccess {
-                    logD("getAllLoginRecord() old-count:${it.size}")
+                    logD("getLoginRecord() old-count:${it.size}")
                     it.forEachIndexed { index, userBean ->
                         logD("index:$index,user:$userBean")
                     }
                 }.doFailure {
-                    logE("getAllLoginRecord() it:${it}")
+                    logE("getLoginRecord() it:${it}")
                 }
             }
         }

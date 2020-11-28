@@ -7,7 +7,7 @@ import com.xxxxls.adapter.paging.XSuperListStatus
 import com.xxxxls.adapter.paging.XSuperPaging
 import com.xxxxls.example.bean.TestPagingBean
 import com.xxxxls.example.data.HomeRepository
-import com.xxxxls.module_base.net.BaseViewModel
+import com.xxxxls.module_base.mvvm.BaseViewModel
 import com.xxxxls.utils.L
 
 /**
