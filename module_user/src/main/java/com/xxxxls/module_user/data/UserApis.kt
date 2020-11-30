@@ -20,7 +20,7 @@ interface UserApis {
      */
     @FormUrlEncoded
     @POST("/user/login")
-    fun login(
+    suspend fun login(
         @Field("username") userName: String,
         @Field("password") passWord: String
     ): BaseResponse<UserBean>
@@ -34,7 +34,7 @@ interface UserApis {
      */
     @FormUrlEncoded
     @POST("/user/register")
-    fun register(
+    suspend fun register(
         @Field("username") userName: String,
         @Field("password") passWord: String,
         @Field("repassword") rePassWord: String

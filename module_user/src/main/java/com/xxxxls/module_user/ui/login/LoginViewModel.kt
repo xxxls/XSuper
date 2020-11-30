@@ -29,7 +29,7 @@ class LoginViewModel @ViewModelInject constructor(
      */
     fun login(userName: String, password: String) {
         // 模拟获取本地记录
-        getLoginRecord()
+//        getLoginRecord()
 
         launchL(loginLiveData, null) {
             userRepository.login(userName, password)

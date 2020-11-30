@@ -83,6 +83,7 @@ dependencies {
 
     //OkHttp
     api rootProject.ext.dependencies["okhttp3"]
+    api "com.squareup.okhttp3:logging-interceptor:4.9.0"
     //retrofit
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["retrofit2_kotlin"]

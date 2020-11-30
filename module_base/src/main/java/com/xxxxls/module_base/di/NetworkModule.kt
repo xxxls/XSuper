@@ -1,17 +1,17 @@
 package com.xxxxls.module_base.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.xxxxls.module_base.BuildConfig
 import com.xxxxls.module_base.constants.NetConfig
-import com.xxxxls.module_base.interceptors.LoggerInterceptor
-import com.xxxxls.module_base.network.ApiResponseAdapter
-import com.xxxxls.xsuper.adapter.ResponseAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
@@ -23,13 +23,30 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    private const val TIME_OUT_SECONDS = 15
+
     /**
      * 提供 - OkHttp
      */
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient().newBuilder().addInterceptor(LoggerInterceptor()).build()
+        return OkHttpClient().newBuilder()
+            .connectTimeout(
+                TIME_OUT_SECONDS.toLong(),
+                TimeUnit.SECONDS
+            )
+            .readTimeout(
+                TIME_OUT_SECONDS.toLong(),
+                TimeUnit.SECONDS
+            )
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = when (BuildConfig.DEBUG) {
+                    true -> HttpLoggingInterceptor.Level.BODY
+                    false -> HttpLoggingInterceptor.Level.NONE
+                }
+            })
+            .build()
     }
 
     /**
@@ -41,7 +58,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(NetConfig.BASE_URL)
             .client(okHttpClient)
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

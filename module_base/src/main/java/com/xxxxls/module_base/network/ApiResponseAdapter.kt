@@ -1,5 +1,6 @@
 package com.xxxxls.module_base.network
 
+import com.xxxxls.module_base.util.ILog
 import com.xxxxls.xsuper.exceptions.ApiException
 import com.xxxxls.xsuper.exceptions.CodeException
 import com.xxxxls.xsuper.exceptions.XSuperException
@@ -12,9 +13,9 @@ import java.lang.NullPointerException
  * @author Max
  * @date 2020/11/27.
  */
-class ApiResponseAdapter private constructor() : ResponseAdapter {
+class ApiResponseAdapter private constructor() : ResponseAdapter, ILog {
 
-    companion object{
+    companion object {
 
         val instance: ApiResponseAdapter by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             ApiResponseAdapter()
@@ -41,6 +42,7 @@ class ApiResponseAdapter private constructor() : ResponseAdapter {
      * 异常转换为响应结果
      */
     override fun throwableToResult(throwable: Throwable): XSuperResult<Nothing> {
+        logE("throwableToResult() $throwable")
         return XSuperResult.Failure(CodeException(throwable))
     }
 

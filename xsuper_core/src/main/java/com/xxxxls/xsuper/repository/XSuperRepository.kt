@@ -32,10 +32,10 @@ open class XSuperRepository {
      * @param responseAdapter 响应转换器
      * @param block 发起请求
      */
-    inline fun <T> apiFlow(
+    fun <T> apiFlow(
         responseAdapter: ResponseAdapter = getResponseAdapter(),
         context: CoroutineContext = Dispatchers.IO,
-        crossinline block: suspend () -> XSuperResponse<T>
+        block: suspend () -> XSuperResponse<T>
     ): Flow<XSuperResult<T>> {
         return flow {
             emit(responseAdapter.responseToResult(block.invoke()))
@@ -47,9 +47,9 @@ open class XSuperRepository {
     /**
      * 发起接口请求
      */
-    suspend inline fun <T> apiCall(
+    suspend fun <T> apiCall(
         responseAdapter: ResponseAdapter = getResponseAdapter(),
-        crossinline block: suspend () -> XSuperResponse<T>
+        block: suspend () -> XSuperResponse<T>
     ): XSuperResult<T> {
         return try {
             responseAdapter.responseToResult(block.invoke())

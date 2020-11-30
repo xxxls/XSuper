@@ -1,10 +1,9 @@
 package com.xxxxls.module_user.data
 
-import com.xxxxls.logger.XLogger
 import com.xxxxls.module_base.mvvm.BaseRepository
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.db.UserDao
-import com.xxxxls.xsuper.adapter.ResponseAdapter
+import com.xxxxls.xsuper.adapter.ExceptionAnalyzer
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toFailureResult
