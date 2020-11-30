@@ -5,10 +5,7 @@ import com.xxxxls.xsuper.adapter.ResponseAdapter
 import com.xxxxls.xsuper.model.XSuperResponse
 import com.xxxxls.xsuper.model.XSuperResult
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -45,5 +42,19 @@ open class XSuperRepository {
         }.catch {
             emit(responseAdapter.throwableToResult(it))
         }.flowOn(context)
+    }
+
+    /**
+     * 发起接口请求
+     */
+    suspend inline fun <T> apiCall(
+        responseAdapter: ResponseAdapter = getResponseAdapter(),
+        crossinline block: suspend () -> XSuperResponse<T>
+    ): XSuperResult<T> {
+        return try {
+            responseAdapter.responseToResult(block.invoke())
+        } catch (e: Exception) {
+            responseAdapter.throwableToResult(e)
+        }
     }
 }

@@ -46,13 +46,13 @@ object NetworkModule {
             .build()
     }
 
-    /**
-     * 提供 - ResponseAdapter
-     */
-    @Singleton
-    @Provides
-    fun provideResponseAdapter(): ApiResponseAdapter {
-        return ApiResponseAdapter()
-    }
+//    /**
+//     * 提供 - ResponseAdapter
+//     */
+//    @Singleton
+//    @Provides
+//    fun provideResponseAdapter(): ApiResponseAdapter {
+//        return ApiResponseAdapter()
+//    }
 
 }

@@ -3,6 +3,10 @@ package com.xxxxls.xsuper.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.xxxxls.xsuper.adapter.DefaultResponseAdapter
+import com.xxxxls.xsuper.adapter.DefaultResultAnalyzer
+import com.xxxxls.xsuper.adapter.ResponseAdapter
+import com.xxxxls.xsuper.adapter.ResultAnalyzer
 import com.xxxxls.xsuper.callback.XSuperCallBack
 import com.xxxxls.xsuper.loading.*
 import com.xxxxls.xsuper.component.bridge.ComponentAction
@@ -25,6 +29,18 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
      */
     val componentBridgeLiveData: MutableLiveData<ComponentAction> by lazy {
         MutableLiveData<ComponentAction>()
+    }
+
+    // 默认分析器
+    private val defaultResultAnalyzer: ResultAnalyzer by lazy {
+        DefaultResultAnalyzer()
+    }
+
+    /**
+     * 获取分析器
+     */
+    open fun getResultAnalyzer(): ResultAnalyzer {
+        return defaultResultAnalyzer
     }
 
     /**
@@ -62,6 +78,7 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
      *
      * 启动一个协程任务，Flow将会与liveData连接起来（Flow<XSuperResult<T>>）
      * @param context 默认IO
+     * @param analyzer 响应结果分析处理器
      * @param start 默认启动方式
      * @param loading 执行进度弹窗
      * @param block 执行的任务
@@ -69,6 +86,7 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
     fun <T> launchL(
         liveData: XSuperLiveData<T>,
         loading: ILoading? = this,
+        analyzer: ResultAnalyzer = getResultAnalyzer(),
         context: CoroutineContext = Dispatchers.IO,
         start: CoroutineStart = CoroutineStart.DEFAULT,
         block: suspend () -> Flow<XSuperResult<T>>
@@ -82,11 +100,16 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
                 }.onCompletion {
                     loading.dismissLoadingInMain(this.hashCode())
                 }.collectLatest {
-                    liveData.postValue(it)
+                    liveData.postValue(
+                        analysisResult(
+                            analyzer = analyzer,
+                            bridge = this@XSuperViewModel,
+                            result = it
+                        )
+                    )
                 }
             })
     }
-
 
     /**
      *
@@ -119,8 +142,48 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
             })
     }
 
-    override fun onCleared() {
-        super.onCleared()
+    /**
+     *
+     * 启动一个协程任务，Flow将会与callBack连接起来 （Flow<T>）
+     * @param context 默认IO
+     * @param start 默认启动方式
+     * @param loading 执行进度弹窗
+     * @param block 执行的任务
+     */
+    fun <T> launchC(
+        loading: ILoading? = this,
+        callBack: XSuperCallBack<XSuperResult<T>>,
+        analyzer: ResultAnalyzer = getResultAnalyzer(),
+        context: CoroutineContext = Dispatchers.IO,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend () -> Flow<XSuperResult<T>>
+    ): Job {
+        return viewModelScope.launch(
+            context = context,
+            start = start,
+            block = {
+                block.invoke().onStart {
+                    loading.showLoadingInMain(this.hashCode())
+                }.onCompletion {
+                    loading.dismissLoadingInMain(this.hashCode())
+                }.catch {
+                    callBack.onFailure(
+                        analysisException(
+                            throwable = it,
+                            analyzer = analyzer,
+                            bridge = this@XSuperViewModel
+                        )
+                    )
+                }.collectLatest {
+                    callBack.onSuccess(
+                        analysisResult(
+                            result = it,
+                            analyzer = analyzer,
+                            bridge = this@XSuperViewModel
+                        )
+                    )
+                }
+            })
     }
 
     override fun showLoading(id: Int?, message: CharSequence?) {
@@ -136,5 +199,35 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
      */
     override fun sendAction(action: ComponentAction) {
         componentBridgeLiveData.postValue(action)
+    }
+
+    /**
+     * 对响应结果 进行分析处理
+     * @param analyzer 响应结果分析处理器
+     * @param bridge 与组件通信
+     */
+    protected fun <T> analysisResult(
+        result: XSuperResult<T>,
+        analyzer: ResultAnalyzer = getResultAnalyzer(),
+        bridge: ComponentActionBridge = this
+    ): XSuperResult<T> {
+        return analyzer.analysisResult(bridge, result)
+    }
+
+    /**
+     * 对异常 进行分析处理
+     * @param analyzer 响应结果分析处理器
+     * @param bridge 与组件通信
+     */
+    protected fun analysisException(
+        throwable: Throwable,
+        analyzer: ResultAnalyzer = getResultAnalyzer(),
+        bridge: ComponentActionBridge = this
+    ): Exception {
+        return analyzer.analysisException(bridge, throwable)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }

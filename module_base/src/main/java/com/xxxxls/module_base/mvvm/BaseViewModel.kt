@@ -1,6 +1,8 @@
 package com.xxxxls.module_base.mvvm
 
+import com.xxxxls.module_base.network.ApiResultAnalyzer
 import com.xxxxls.module_base.util.ILog
+import com.xxxxls.xsuper.adapter.ResultAnalyzer
 import com.xxxxls.xsuper.viewmodel.XSuperViewModel
 
 /**
@@ -10,5 +12,7 @@ import com.xxxxls.xsuper.viewmodel.XSuperViewModel
  */
 open class BaseViewModel : XSuperViewModel(), ILog {
 
-
+    override fun getResultAnalyzer(): ResultAnalyzer {
+        return ApiResultAnalyzer.instance
+    }
 }

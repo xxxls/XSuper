@@ -7,6 +7,7 @@ import com.google.gson.JsonParseException
 import com.xxxxls.module_base.R
 import com.xxxxls.module_base.network.response.BaseResponse
 import com.xxxxls.utils.AppUtils
+import com.xxxxls.xsuper.adapter.ExceptionAnalyzer
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import com.xxxxls.xsuper.exceptions.ApiException
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeoutException
  * @author Max
  * @date 2020/11/28.
  */
-object ExceptionAnalyzer {
+object ApiExceptionAnalyzer : ExceptionAnalyzer {
 
     private val httpExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_network)
     private val connectExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_connect)
@@ -35,7 +36,7 @@ object ExceptionAnalyzer {
     /**
      * 解析异常
      */
-    fun analysisException(
+    override fun analysisException(
         bridge: ComponentActionBridge, throwable: Throwable
     ): Exception {
         return when (throwable) {

@@ -1,6 +1,5 @@
 package com.xxxxls.xsuper.adapter
 
-import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import com.xxxxls.xsuper.exceptions.ApiException
 import com.xxxxls.xsuper.exceptions.CodeException
 import com.xxxxls.xsuper.exceptions.XSuperException
@@ -34,17 +33,5 @@ open class DefaultResponseAdapter : ResponseAdapter {
      */
     override fun throwableToResult(throwable: Throwable): XSuperResult<Nothing> {
         return XSuperResult.Failure(CodeException(throwable))
-    }
-
-    /**
-     * 分析结果
-     * @param bridge 与组件的通信桥梁
-     * @param result 结果
-     */
-    override fun <T> analysisResult(
-        bridge: ComponentActionBridge,
-        result: XSuperResult<T>
-    ): XSuperResult<T> {
-        return result
     }
 }

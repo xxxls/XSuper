@@ -1,7 +1,7 @@
 package com.xxxxls.module_user.data
 
+import com.xxxxls.logger.XLogger
 import com.xxxxls.module_base.mvvm.BaseRepository
-import com.xxxxls.module_base.network.ApiResponseAdapter
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.db.UserDao
 import com.xxxxls.xsuper.adapter.ResponseAdapter
@@ -20,17 +20,9 @@ import javax.inject.Inject
  */
 class UserRepository @Inject constructor(
     private val userApis: UserApis,
-    private val userDao: UserDao,
-    private var adapter: ApiResponseAdapter
+    private val userDao: UserDao
 ) : BaseRepository() {
 
-    override fun getResponseAdapter(): ResponseAdapter {
-        adapter.let {
-            return it
-        } ?: let {
-            return super.getResponseAdapter()
-        }
-    }
 
     /**
      * 登录
@@ -46,19 +38,12 @@ class UserRepository @Inject constructor(
             // 返回出去
             result
         }
-//        return flow<XSuperResult<UserBean>> {
-//            val result = userApis.login(userName, password)
-//            saveLoginRecord(result.data!!)
-//            emit(result.data!!.toSuccessResult())
-//        }.catch {
-//            emit(XSuperException(it).toFailureResult())
-//        }.flowOn(Dispatchers.IO)
     }
 
     /**
      * 保存登录记录
      */
-    suspend fun saveLoginRecord(user: UserBean): Boolean {
+    private suspend fun saveLoginRecord(user: UserBean): Boolean {
         return try {
             userDao.insert(user)
             true
@@ -69,7 +54,7 @@ class UserRepository @Inject constructor(
     }
 
     /**
-     * 保存登录记录
+     * 获取登录记录
      */
     suspend fun getLoginRecord(): Flow<XSuperResult<List<UserBean>>> {
         return flow<XSuperResult<List<UserBean>>> {
