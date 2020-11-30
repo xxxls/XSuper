@@ -6,11 +6,11 @@ import androidx.lifecycle.Observer
 import com.xxxxls.xsuper.callback.XSuperCallBack
 
 /**
- * super - LiveData
+ * result - LiveData
  * @author Max
  * @date 2019-11-30.
  */
-open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
+open class ResultLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     XSuperCallBack<T> {
 
     override fun onSuccess(result: T) {
@@ -31,7 +31,7 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
         owner: LifecycleOwner,
         success: (value: T) -> Unit = {},
         failure: (e: Throwable) -> Unit = {}
-    ): XSuperLiveData<T> {
+    ): ResultLiveData<T> {
         super.observe(owner, Observer<XSuperResult<T>> {
             when (it) {
                 is XSuperResult.Failure -> {
@@ -53,7 +53,7 @@ open class XSuperLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     fun observeForever(
         success: (value: T) -> Unit = {},
         failure: (e: Throwable) -> Unit = {}
-    ): XSuperLiveData<T> {
+    ): ResultLiveData<T> {
         super.observeForever {
             when (it) {
                 is XSuperResult.Failure -> {

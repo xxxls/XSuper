@@ -5,7 +5,7 @@ import androidx.lifecycle.*
 import com.xxxxls.example.ui.network.data.bean.ArticleItemBean
 import com.xxxxls.example.ui.network.data.repository.ExampleRepository
 import com.xxxxls.module_base.util.ILog
-import com.xxxxls.xsuper.model.XSuperLiveData
+import com.xxxxls.xsuper.model.ResultLiveData
 import com.xxxxls.xsuper.viewmodel.XSuperViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -20,8 +20,8 @@ import kotlinx.coroutines.launch
 class ExampleViewModel @ViewModelInject constructor(private val repository: ExampleRepository) :
     XSuperViewModel(), ILog {
 
-    val listLiveData: XSuperLiveData<List<ArticleItemBean>> =
-        XSuperLiveData<List<ArticleItemBean>>()
+    val listLiveData: ResultLiveData<List<ArticleItemBean>> =
+        ResultLiveData<List<ArticleItemBean>>()
 
     /**
      * 获取列表数据

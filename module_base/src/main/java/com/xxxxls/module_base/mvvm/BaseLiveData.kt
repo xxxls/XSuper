@@ -1,6 +1,6 @@
 package com.xxxxls.module_base.mvvm
 
-import com.xxxxls.xsuper.model.XSuperLiveData
+import com.xxxxls.xsuper.model.ResultLiveData
 import com.xxxxls.xsuper.callback.LoadingCallBack
 
 /**
@@ -11,7 +11,7 @@ import com.xxxxls.xsuper.callback.LoadingCallBack
 class BaseLiveData<T>(
     //是否展示loading
     private var isShowLoading: Boolean = true
-) : XSuperLiveData<T>(), LoadingCallBack<T> {
+) : ResultLiveData<T>(), LoadingCallBack<T> {
 
     override fun isShowLoading(): Boolean {
         return isShowLoading

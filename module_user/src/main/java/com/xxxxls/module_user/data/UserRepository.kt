@@ -24,7 +24,7 @@ class UserRepository @Inject constructor(
 
 
     /**
-     * 登录
+     * 登录  (方式一)
      * @param userName 用户名
      * @param password 密码
      */
@@ -33,22 +33,69 @@ class UserRepository @Inject constructor(
             // 请求接口获取到结果
             val result = userApis.login(userName, password)
             // 模拟保存到本地记录
-            saveLoginRecord(result.data!!)
+            saveLoginRecord(result.data!!).collectLatest {
+                logE("saveLoginRecord() $it")
+            }
             // 返回出去
-            result
+            return@apiFlow result
         }
+    }
+
+    /**
+     * 登录 (方式二)
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun login2(userName: String, password: String): Flow<XSuperResult<UserBean>> {
+        return userApis.login(userName, password).asApiFlow()
+    }
+
+    /**
+     * 登录 (方式三)
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun login3(userName: String, password: String): Flow<XSuperResult<UserBean>> {
+        return resultFlow {
+            userApis.login(userName, password).data!!
+        }
+    }
+
+    /**
+     * 登录 (方式四) (等同与方式三)
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun login4(userName: String, password: String): Flow<XSuperResult<UserBean>> {
+        return flow {
+            emit(userApis.login(userName, password).asApiResult())
+        }.catch {
+            emit(XSuperException(it).toFailureResult())
+        }.flowOn(Dispatchers.IO)
+    }
+
+    /**
+     * 登录 (方式五)
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun login5(userName: String, password: String): Flow<XSuperResult<UserBean>> {
+        return flow {
+            emit(apiResult {
+                userApis.login(userName, password)
+            })
+        }.catch {
+            emit(XSuperException(it).toFailureResult())
+        }.flowOn(Dispatchers.IO)
     }
 
     /**
      * 保存登录记录
      */
-    private suspend fun saveLoginRecord(user: UserBean): Boolean {
-        return try {
+    fun saveLoginRecord(user: UserBean): Flow<XSuperResult<Boolean>> {
+        return resultFlow {
             userDao.insert(user)
             true
-        } catch (e: Exception) {
-            e.printStackTrace()
-            false
         }
     }
 
@@ -56,11 +103,9 @@ class UserRepository @Inject constructor(
      * 获取登录记录
      */
     suspend fun getLoginRecord(): Flow<XSuperResult<List<UserBean>>> {
-        return flow<XSuperResult<List<UserBean>>> {
-            emit(userDao.getAll()!!.toSuccessResult())
-        }.catch {
-            emit(XSuperException(it).toFailureResult())
-        }.flowOn(Dispatchers.IO)
+        return resultFlow {
+            userDao.getAll() ?: emptyList()
+        }
     }
 
     /**
@@ -69,7 +114,5 @@ class UserRepository @Inject constructor(
      * @param password 密码
      */
     suspend fun register(userName: String, password: String) =
-        apiFlow {
-            userApis.register(userName, password, password)
-        }
+        userApis.register(userName, password, password).asApiFlow()
 }

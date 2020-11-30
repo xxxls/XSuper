@@ -1,6 +1,5 @@
 package com.xxxxls.xsuper.model
 
-import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.callback.XSuperCallBack
 
 /**
@@ -61,7 +60,7 @@ fun <T> T.toSuccessResult(): XSuperResult.Success<T> {
 /**
  * 转换为失败结果
  */
-fun <T : XSuperException> T.toFailureResult(): XSuperResult.Failure {
+fun <T : Throwable> T.toFailureResult(): XSuperResult.Failure {
     return XSuperResult.Failure(this)
 }
 

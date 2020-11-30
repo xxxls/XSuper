@@ -3,15 +3,13 @@ package com.xxxxls.xsuper.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xxxxls.xsuper.adapter.DefaultResponseAdapter
 import com.xxxxls.xsuper.adapter.DefaultResultAnalyzer
-import com.xxxxls.xsuper.adapter.ResponseAdapter
 import com.xxxxls.xsuper.adapter.ResultAnalyzer
 import com.xxxxls.xsuper.callback.XSuperCallBack
 import com.xxxxls.xsuper.loading.*
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
-import com.xxxxls.xsuper.model.XSuperLiveData
+import com.xxxxls.xsuper.model.ResultLiveData
 import com.xxxxls.xsuper.model.XSuperResult
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -76,7 +74,7 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
 
     /**
      *
-     * 启动一个协程任务，Flow将会与liveData连接起来（Flow<XSuperResult<T>>）
+     * 启动一个协程任务 (Result - Flow)
      * @param context 默认IO
      * @param analyzer 响应结果分析处理器
      * @param start 默认启动方式
@@ -84,7 +82,7 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
      * @param block 执行的任务
      */
     fun <T> launchL(
-        liveData: XSuperLiveData<T>,
+        liveData: ResultLiveData<T>,
         loading: ILoading? = this,
         analyzer: ResultAnalyzer = getResultAnalyzer(),
         context: CoroutineContext = Dispatchers.IO,
@@ -113,7 +111,36 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
 
     /**
      *
-     * 启动一个协程任务，Flow将会与callBack连接起来 （Flow<T>）
+     * 启动一个协程任务 (T - Flow)
+     * @param context 默认IO
+     * @param start 默认启动方式
+     * @param loading 执行进度弹窗
+     * @param block 执行的任务
+     */
+    fun <T> launchL(
+        liveData: MutableLiveData<T>,
+        loading: ILoading? = this,
+        context: CoroutineContext = Dispatchers.IO,
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend () -> Flow<T>
+    ): Job {
+        return viewModelScope.launch(
+            context = context,
+            start = start,
+            block = {
+                block.invoke().onStart {
+                    loading.showLoadingInMain(this.hashCode())
+                }.onCompletion {
+                    loading.dismissLoadingInMain(this.hashCode())
+                }.collectLatest {
+                    liveData.postValue(it)
+                }
+            })
+    }
+
+    /**
+     *
+     * 启动一个协程任务 (T - CallBack)
      * @param context 默认IO
      * @param start 默认启动方式
      * @param loading 执行进度弹窗
@@ -144,7 +171,7 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading {
 
     /**
      *
-     * 启动一个协程任务，Flow将会与callBack连接起来 （Flow<T>）
+     * 启动一个协程任务 (Result - CallBack)
      * @param context 默认IO
      * @param start 默认启动方式
      * @param loading 执行进度弹窗

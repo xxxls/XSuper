@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelStoreOwner
-import com.xxxxls.xsuper.model.XSuperLiveData
+import com.xxxxls.xsuper.model.ResultLiveData
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionHandler
 import com.xxxxls.xsuper.viewmodel.XSuperViewModel
@@ -48,7 +48,7 @@ interface IVmComponent : IComponent, ViewModelStoreOwner, HasDefaultViewModelPro
     /**
      * 监听liveData
      */
-    fun <T> XSuperLiveData<T>.observe(
+    fun <T> ResultLiveData<T>.observe(
         success: (value: T) -> Unit = {},
         failure: (throwable: Throwable) -> Unit = {}
     ) {

@@ -13,6 +13,7 @@ import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import com.xxxxls.xsuper.exceptions.ApiException
 import com.xxxxls.xsuper.exceptions.CodeException
 import com.xxxxls.xsuper.exceptions.NetWorkException
+import com.xxxxls.xsuper.exceptions.XSuperException
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.*
@@ -24,14 +25,6 @@ import java.util.concurrent.TimeoutException
  * @date 2020/11/28.
  */
 object ApiExceptionAnalyzer : ExceptionAnalyzer {
-
-    private val httpExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_network)
-    private val connectExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_connect)
-    private val jsonExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_parse_json)
-    private val unknownHostExceptionMsg =
-        AppUtils.getApp().getString(R.string.base_exception_parse_host)
-    private val codeExceptionMsg = AppUtils.getApp().getString(R.string.base_exception_code)
-
 
     /**
      * 解析异常
@@ -47,26 +40,13 @@ object ApiExceptionAnalyzer : ExceptionAnalyzer {
                     throwable
                 )
             }
-            is HttpException -> {
-                /*网络异常*/
-                NetWorkException(httpExceptionMsg, throwable)
-            }
-            is TimeoutException, is SocketTimeoutException, is ConnectException, is SocketException -> {
-                /*网络超时异常*/
-                /*链接异常*/
-                NetWorkException(connectExceptionMsg, throwable)
-            }
-            is UnknownHostException -> {
-                /*无法解析该域名异常*/
-                NetWorkException(unknownHostExceptionMsg, throwable)
-            }
-            is JsonParseException, is JSONException, is ParseException -> {
-                /*json解析异常*/
-                CodeException(jsonExceptionMsg, throwable)
-            }
             else -> {
-                /*其他异常*/
-                CodeException(codeExceptionMsg, throwable)
+                val throwable = SafeExceptionConverter.instance.convert(throwable)
+                if (throwable is Exception) {
+                    throwable
+                } else {
+                    XSuperException(throwable)
+                }
             }
         }
     }
