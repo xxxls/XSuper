@@ -29,13 +29,13 @@ class NetworkIndexFragment : BaseListFragment() {
             success = {
                 logE("listLiveData success list:${it!!.size}")
             }, failure = {
-                logE("listLiveData failure error:${it.displayMessage}")
+                logE("listLiveData failure error:${it.message}")
             })
 
         viewModel2.loginLiveData.observe(this,success = {
             logE("loginLiveData success list:${it}")
         },failure = {
-            logE("loginLiveData failure error:${it.displayMessage}")
+            logE("loginLiveData failure error:${it.message}")
         })
 
     }

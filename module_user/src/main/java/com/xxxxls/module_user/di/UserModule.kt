@@ -1,13 +1,13 @@
 package com.xxxxls.module_user.di
 
 import com.xxxxls.module_user.data.UserApis
+import com.xxxxls.module_user.data.UserRepository
 import com.xxxxls.module_user.db.UserDao
 import com.xxxxls.module_user.db.UserDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -17,6 +17,7 @@ import javax.inject.Singleton
  * @date 2020/11/27.
  */
 @Module
+@InstallIn(SingletonComponent::class)
 class UserModule {
 
     /**

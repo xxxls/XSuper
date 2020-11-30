@@ -51,7 +51,7 @@ object NetworkModule {
      */
     @Singleton
     @Provides
-    fun provideResponseAdapter(): ResponseAdapter {
+    fun provideResponseAdapter(): ApiResponseAdapter {
         return ApiResponseAdapter()
     }
 

@@ -7,6 +7,7 @@ if (isModule) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 
 android {
@@ -82,6 +83,7 @@ dependencies {
     //Hilt
     kapt rootProject.ext.dependencies["hilt-android-compiler"]
     kapt rootProject.ext.dependencies["hilt-compiler"]
+    api rootProject.ext.dependencies["hilt"]
 
     // exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.10.4'

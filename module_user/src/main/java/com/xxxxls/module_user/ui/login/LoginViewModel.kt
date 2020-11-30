@@ -3,10 +3,13 @@ package com.xxxxls.module_user.ui.login
 import androidx.hilt.lifecycle.ViewModelInject
 import com.xxxxls.module_base.mvvm.BaseLiveData
 import com.xxxxls.module_base.mvvm.BaseViewModel
+import com.xxxxls.module_base.network.ApiResponseAdapter
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.data.UserRepository
+import com.xxxxls.xsuper.adapter.ResponseAdapter
 import com.xxxxls.xsuper.model.*
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 /**
  * 登录VM

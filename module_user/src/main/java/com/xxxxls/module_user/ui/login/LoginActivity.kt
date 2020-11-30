@@ -4,8 +4,9 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxxxls.module_base.component.BaseActivity
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_user.R
-import com.xxxxls.xsuper.viewmodel.ViewModelFactory
 import com.xxxxls.utils.ktx.singleClick
+import com.xxxxls.xsuper.viewmodel.xsuperViewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.user_activity_login.*
 
 /**
@@ -14,11 +15,10 @@ import kotlinx.android.synthetic.main.user_activity_login.*
  * @date 2019-11-28.
  */
 @Route(path = UserPaths.USER_ACTIVITY_LOGIN)
+@AndroidEntryPoint
 class LoginActivity : BaseActivity() {
 
-    private val mViewModel by ViewModelFactory(
-        LoginViewModel::class
-    )
+    private val mViewModel: LoginViewModel by xsuperViewModels()
 
     override fun getLayoutResId(): Int {
         return R.layout.user_activity_login

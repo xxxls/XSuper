@@ -1,8 +1,10 @@
 package com.xxxxls.module_user.data
 
 import com.xxxxls.module_base.mvvm.BaseRepository
+import com.xxxxls.module_base.network.ApiResponseAdapter
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.db.UserDao
+import com.xxxxls.xsuper.adapter.ResponseAdapter
 import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toFailureResult
@@ -18,8 +20,17 @@ import javax.inject.Inject
  */
 class UserRepository @Inject constructor(
     private val userApis: UserApis,
-    private val userDao: UserDao
+    private val userDao: UserDao,
+    private var adapter: ApiResponseAdapter
 ) : BaseRepository() {
+
+    override fun getResponseAdapter(): ResponseAdapter {
+        adapter.let {
+            return it
+        } ?: let {
+            return super.getResponseAdapter()
+        }
+    }
 
     /**
      * 登录
@@ -67,4 +78,14 @@ class UserRepository @Inject constructor(
             emit(XSuperException(it).toFailureResult())
         }.flowOn(Dispatchers.IO)
     }
+
+    /**
+     * 注册账号
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun register(userName: String, password: String) =
+        apiFlow {
+            userApis.register(userName, password, password)
+        }
 }

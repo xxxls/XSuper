@@ -22,7 +22,6 @@ class ExampleModule {
     /**
      * 提供 - API
      */
-    @Singleton
     @Provides
     fun provideApi(retrofit: Retrofit): ExampleApi {
         return retrofit.create(ExampleApi::class.java)
@@ -31,7 +30,6 @@ class ExampleModule {
     /**
      * 提供 - Dao
      */
-    @Singleton
     @Provides
     fun provideDao(): ExampleDao {
         return ExampleDaoImpl()
