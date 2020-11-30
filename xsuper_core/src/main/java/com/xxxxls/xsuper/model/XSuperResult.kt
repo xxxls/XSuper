@@ -19,7 +19,7 @@ sealed class XSuperResult<out T> {
      * 失败
      * @param throwable
      */
-    class Failure(val throwable: Throwable) : XSuperResult<Nothing>()
+    data class Failure(val throwable: Throwable) : XSuperResult<Nothing>()
 
     override fun toString(): String {
         return when (this) {
