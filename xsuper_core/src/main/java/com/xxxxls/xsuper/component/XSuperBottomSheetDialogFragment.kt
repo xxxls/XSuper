@@ -133,7 +133,10 @@ open class XSuperBottomSheetDialogFragment : BottomSheetDialogFragment(),
     }
 
     protected fun getBottomSheetBehavior(): BottomSheetBehavior<View>? {
-        return BottomSheetBehavior.from(getBottomSheetLayout())
+        getBottomSheetLayout()?.let {
+            return BottomSheetBehavior.from(it)
+        }
+        return null
     }
 
     /**

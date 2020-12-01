@@ -1,14 +1,4 @@
-//apply plugin: 'com.android.application'
-//
-//apply plugin: 'kotlin-android'
-//
-//apply plugin: 'kotlin-android-extensions'
-//
-//apply plugin: 'kotlin-kapt'
-//
-//apply plugin: 'dagger.hilt.android.plugin'
-//
-//apply plugin: 'com.xxxxls.version.plugin'
+import com.xxxxls.versionplugin.BuildConfig
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -21,19 +11,19 @@ plugins {
 
 
 android {
-    compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.xxxxls.xsuper"
-        minSdkVersion rootProject.ext.versions["minSdkVersion"]
-        targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
-        versionCode rootProject.ext.versions["versionCode"]
-        versionName rootProject.ext.versions["versionName"]
+        applicationId BuildConfig.applicationId
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        flavorDimensions BuildConfig.flavorDimensions
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        flavorDimensions rootProject.ext.versions["flavorDimensions"]
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += [AROUTER_MODULE_NAME: project.getName()]

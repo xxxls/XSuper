@@ -1,21 +1,33 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+import com.xxxxls.versionplugin.Android
+import com.xxxxls.versionplugin.AndroidX
+import com.xxxxls.versionplugin.BuildConfig
+import com.xxxxls.versionplugin.Hilt
+import com.xxxxls.versionplugin.Kt
+import com.xxxxls.versionplugin.Lifecycle
+import com.xxxxls.versionplugin.Retrofit
+
+plugins {
+    id "com.xxxxls.version.plugin"
+    id "com.android.library"
+    id "kotlin-android"
+    id "kotlin-android-extensions"
+    id "kotlin-kapt"
+}
+
 
 android {
-    compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.versions["minSdkVersion"]
-        targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
-        versionCode rootProject.ext.versions["versionCode"]
-        versionName rootProject.ext.versions["versionName"]
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        flavorDimensions BuildConfig.flavorDimensions
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        flavorDimensions rootProject.ext.versions["flavorDimensions"]
     }
     buildTypes {
         release {
@@ -42,9 +54,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testApi rootProject.ext.dependencies["junit"]
-    androidTestApi rootProject.ext.dependencies["runner"]
-    androidTestApi rootProject.ext.dependencies["espresso_core"]
+    testApi Android.junit
+    androidTestApi Android.runner
+    androidTestApi Android.espressoCore
 
     //工具集
     api project(path: ':xsuper_utils')
@@ -52,48 +64,30 @@ dependencies {
     /**
      * @官方组件
      */
-    api rootProject.ext.dependencies["kotlin"]
-    api rootProject.ext.dependencies["appcompat"]
-    api rootProject.ext.dependencies["core-ktx"]
-    api rootProject.ext.dependencies["constraint_layout"]
-    api rootProject.ext.dependencies["design"]
-    api rootProject.ext.dependencies["lifecycle"]
-    api rootProject.ext.dependencies["fragment-ktx"]
+    api Kt.stdlibJdk8
+    api AndroidX.appcompat
+    api AndroidX.coreKtx
+    api AndroidX.constraintLayout
+    api Android.meteria
+    api Lifecycle.lifecycleExtensions
+    api AndroidX.fragmentKtx
+    api Kt.coroutinesAndroid
+    api Lifecycle.viewModelKtx
+    api Lifecycle.runtimeKtx
+    api Lifecycle.liveDataKtx
 
-    //协程
-    api rootProject.ext.dependencies["kotlinx-coroutines"]
-
-    //view-model，live-data
-    api rootProject.ext.dependencies["viewmodel-ktx"]
-    api rootProject.ext.dependencies["runtime-ktx"]
-    api rootProject.ext.dependencies["livedata-ktx"]
-
-    //分页
     api rootProject.ext.dependencies["paging"]
 
-    //Hilt
-    api rootProject.ext.dependencies["hilt"]
-    api rootProject.ext.dependencies["hilt-viewmodel"]
-    kapt rootProject.ext.dependencies["hilt-android-compiler"]
-    kapt rootProject.ext.dependencies["hilt-compiler"]
-
-    /**
-     * @好用组件
-     */
-
-    //OkHttp
-    api rootProject.ext.dependencies["okhttp3"]
-    api "com.squareup.okhttp3:logging-interceptor:4.9.0"
-    //retrofit
-    api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["retrofit2_kotlin"]
-    api rootProject.ext.dependencies["converter-gson"]
-    //Gson
-    api rootProject.ext.dependencies["gson"]
+    api Hilt.hilt
+    api Hilt.viewModel
+    kapt Hilt.androidCompiler
+    kapt Hilt.compiler
 
 
-    /**
-     * @其他组件
-     */
-
+    api Retrofit.okHttp
+    api Retrofit.logging
+    api Retrofit.retrofit
+    api Retrofit.coroutinesAdapter
+    api Retrofit.gson
+    api Android.gson
 }

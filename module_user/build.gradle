@@ -1,32 +1,42 @@
-def isModule = module_user_enabled as Boolean
-if (isModule) {
-    apply plugin: 'com.android.library'
-} else {
-    apply plugin: 'com.android.application'
-}
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
+import com.xxxxls.versionplugin.ARouter
+import com.xxxxls.versionplugin.BuildConfig
+import com.xxxxls.versionplugin.Hilt
+import com.xxxxls.versionplugin.Room
 
+plugins {
+    id "com.xxxxls.version.plugin"
+    id 'com.android.application'
+    id "kotlin-android"
+    id "kotlin-android-extensions"
+    id "kotlin-kapt"
+    id 'org.greenrobot.greendao'
+    id 'dagger.hilt.android.plugin'
+}
+
+//def isModule = module_user_enabled as Boolean
+//if (isModule) {
+//    apply plugin: 'com.android.library'
+//} else {
+//    apply plugin: 'com.android.application'
+//}
 
 android {
-    compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
         if (!isModule) {
             applicationId "com.xxxxls.example.user"
         }
 
-        minSdkVersion rootProject.ext.versions["minSdkVersion"]
-        targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
-        versionCode rootProject.ext.versions["versionCode"]
-        versionName rootProject.ext.versions["versionName"]
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        flavorDimensions BuildConfig.flavorDimensions
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        flavorDimensions rootProject.ext.versions["flavorDimensions"]
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += [AROUTER_MODULE_NAME: project.getName()]
@@ -78,12 +88,11 @@ dependencies {
     implementation project(path: ':module_base')
 
     // ARouter路由
-    kapt rootProject.ext.dependencies["arouter_compiler"]
-
+    kapt ARouter.compiler
     //room
-    kapt rootProject.ext.dependencies["room-compiler"]
+    kapt Room.compiler
     //Hilt
-    kapt rootProject.ext.dependencies["hilt-android-compiler"]
-    kapt rootProject.ext.dependencies["hilt-compiler"]
-    api rootProject.ext.dependencies["hilt"]
+    api Hilt.hilt
+    kapt Hilt.androidCompiler
+    kapt Hilt.compiler
 }
