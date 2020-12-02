@@ -2,8 +2,8 @@ package com.xxxxls.example.ui.tools
 
 import android.content.Intent
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.xxxxls.example.bean.IndexItemBean
-import com.xxxxls.example.ui.indexs.BaseIndexFragment
+import com.xxxxls.example.bean.SimpleItemBean
+import com.xxxxls.example.common.BaseListFragment
 import com.xxxxls.example.ui.tools.glide.GlideActivity
 import com.xxxxls.example.ui.tools.status.StatusActivity
 import com.xxxxls.example.ui.tools.titlebar.TitleBarActivity
@@ -19,7 +19,7 @@ import com.xxxxls.module_base.constants.ExamplePaths.EXAMPLE_ACTIVITY_MULTI_VIDE
  * @date 2020-01-02.
  */
 @Route(path = HomePaths.HOME_FRAGMENT_TOOLS_INDEX)
-class ToolsIndexFragment : BaseIndexFragment() {
+class ToolsIndexFragment : BaseListFragment() {
 
     override fun onInitialize() {
         super.onInitialize()
@@ -32,21 +32,22 @@ class ToolsIndexFragment : BaseIndexFragment() {
         return "Tools"
     }
 
-    override fun getItems(): Array<IndexItemBean> {
+    override fun getItems(): Array<SimpleItemBean> {
         return arrayOf(
-            IndexItemBean("toolsList"),
-            IndexItemBean("status"),
-            IndexItemBean("glide"),
-            IndexItemBean("titleBar"),
-            IndexItemBean("logger"),
-            IndexItemBean("multiVideo")
+            SimpleItemBean("toolsList"),
+            SimpleItemBean("status"),
+            SimpleItemBean("glide"),
+            SimpleItemBean("titleBar"),
+            SimpleItemBean("logger"),
+            SimpleItemBean("multiVideo"),
+            SimpleItemBean("lifecycleTask")
         )
     }
 
-    override fun onItemClick(index: Int, item: IndexItemBean) {
+    override fun onItemClick(index: Int, item: SimpleItemBean) {
         when (index) {
             0 -> {
-                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_BASE_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_TIMER_INDEX)
+                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_TIMER_INDEX)
             }
             1 -> {
                 startActivity(Intent(context, StatusActivity::class.java))
@@ -58,10 +59,13 @@ class ToolsIndexFragment : BaseIndexFragment() {
                 startActivity(Intent(context, TitleBarActivity::class.java))
             }
             4 -> {
-                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_BASE_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_LOGGER_INDEX)
+                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_LOGGER_INDEX)
             }
             5 -> {
                 EXAMPLE_ACTIVITY_MULTI_VIDEO.jump()
+            }
+            6-> {
+                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_LIFECYCLE_TASK_INDEX)
             }
         }
     }

@@ -2,8 +2,8 @@ package com.xxxxls.module_base.util
 
 import android.util.ArrayMap
 import com.xxxxls.logger.BuildConfig
-import com.xxxxls.logger.LogLevel
 import com.xxxxls.logger.XLogger
+import com.xxxxls.logger.XLoggerLevel
 
 /**
  * log 日志扩展（方便灵活的控制某个实例下日志功能）
@@ -125,8 +125,8 @@ interface ILog {
     /**
      * 默认日志级别
      */
-    fun getLogDefaultLevel(): LogLevel {
-        return LogLevel.INFO
+    fun getLogDefaultLevel(): Int {
+        return XLoggerLevel.INFO
     }
 
     /**
@@ -138,62 +138,46 @@ interface ILog {
     fun log(
         message: CharSequence,
         tag: String = getLogTag(),
-        level: LogLevel = getLogDefaultLevel()
+        level: Int = getLogDefaultLevel()
     ) {
         if (!isLog(tag)) {
             return
         }
-        when (level) {
-            LogLevel.INFO -> {
-                logI(message, tag)
-            }
-            LogLevel.WARN -> {
-                logW(message, tag)
-            }
-            LogLevel.DEBUG -> {
-                logD(message, tag)
-            }
-            LogLevel.VERBOSE -> {
-                logV(message, tag)
-            }
-            LogLevel.ERROR -> {
-                logE(message, tag)
-            }
-        }
+        XLogger.log(message = message, tag = tag, level = level)
     }
 
     fun logE(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.e(tag, message.toString())
+        XLogger.e(tag = tag, message = message.toString())
     }
 
     fun logD(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.d(tag, message.toString())
+        XLogger.d(tag = tag, message = message.toString())
     }
 
     fun logW(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.w(tag, message.toString())
+        XLogger.w(tag = tag, message = message.toString())
     }
 
     fun logI(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.i(tag, message.toString())
+        XLogger.i(tag = tag, message = message.toString())
     }
 
     fun logV(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.v(tag, message.toString())
+        XLogger.v(tag = tag, message = message.toString())
     }
 }

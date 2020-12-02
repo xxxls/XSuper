@@ -6,7 +6,7 @@ import com.google.android.exoplayer2.DefaultRenderersFactory
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
-import com.xxxxls.module_base.base.BaseActivity
+import com.xxxxls.module_base.component.BaseActivity
 
 
 /**

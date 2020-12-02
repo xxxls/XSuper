@@ -1,28 +1,32 @@
-apply plugin: 'com.android.application'
+import com.xxxxls.versionplugin.BuildConfig
 
-apply plugin: 'kotlin-android'
+plugins {
+    id "com.xxxxls.version.plugin"
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-android-extensions"
+    id "kotlin-kapt"
+    id "dagger.hilt.android.plugin"
+}
 
-apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.xxxxls.xsuper"
-        minSdkVersion rootProject.ext.versions["minSdkVersion"]
-        targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
-        versionCode rootProject.ext.versions["versionCode"]
-        versionName rootProject.ext.versions["versionName"]
+        applicationId BuildConfig.applicationId
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        flavorDimensions BuildConfig.flavorDimensions
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        flavorDimensions rootProject.ext.versions["flavorDimensions"]
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments += [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -49,6 +53,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     //多渠道打包
@@ -117,7 +125,10 @@ dependencies {
     // ARouter路由
     annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
     kapt rootProject.ext.dependencies["arouter_compiler"]
-
+    //Hilt
+    kapt rootProject.ext.dependencies["hilt-android-compiler"]
+    kapt rootProject.ext.dependencies["hilt-compiler"]
+    api rootProject.ext.dependencies["hilt"]
 }
 
 

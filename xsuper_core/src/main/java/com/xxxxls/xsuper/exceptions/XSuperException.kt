@@ -13,30 +13,19 @@ open class XSuperException : Exception {
      */
     var code: Int = 0
 
-    /**
-     * 显示的异常信息
-     */
-    var displayMessage: String
-
-    constructor(code: Int = 0, message: String = "") : super(message) {
+    constructor(code: Int = 0) : super() {
         this.code = code
-        this.displayMessage = message
     }
 
-    constructor(code: Int = 0, message: String = "", cause: Throwable?) : super(message, cause) {
+    constructor(message: String?, code: Int = 0) : super(message) {
         this.code = code
-        this.displayMessage = message
     }
 
-    constructor(
-        code: Int = 0,
-        message: String = "",
-        cause: Throwable?,
-        enableSuppression: Boolean,
-        writableStackTrace: Boolean
-    ) : super(message, cause, enableSuppression, writableStackTrace) {
+    constructor(message: String?, cause: Throwable?, code: Int = 0) : super(message, cause) {
         this.code = code
-        this.displayMessage = message
     }
 
+    constructor(cause: Throwable?, code: Int = 0) : super(cause) {
+        this.code = code
+    }
 }

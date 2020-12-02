@@ -1,21 +1,29 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+import com.xxxxls.versionplugin.Android
+import com.xxxxls.versionplugin.AndroidX
+import com.xxxxls.versionplugin.BuildConfig
+
+plugins {
+    id "com.xxxxls.version.plugin"
+    id 'com.android.library'
+    id "kotlin-android"
+    id "kotlin-android-extensions"
+    id "kotlin-kapt"
+}
+
 
 android {
-    compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.versions["minSdkVersion"]
-        targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
-        versionCode rootProject.ext.versions["versionCode"]
-        versionName rootProject.ext.versions["versionName"]
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        flavorDimensions BuildConfig.flavorDimensions
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        flavorDimensions rootProject.ext.versions["flavorDimensions"]
     }
     buildTypes {
         release {
@@ -39,10 +47,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testApi rootProject.ext.dependencies["junit"]
-    androidTestApi rootProject.ext.dependencies["runner"]
-    androidTestApi rootProject.ext.dependencies["espresso_core"]
+    testApi Android.junit
+    androidTestApi Android.runner
+    androidTestApi Android.espressoCore
 
-    api rootProject.ext.dependencies["appcompat"]
-
+    api AndroidX.appcompat
 }

@@ -6,15 +6,22 @@ import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import com.xxxxls.xsuper.loading.ILoading
-import com.xxxxls.xsuper.net.bridge.ComponentAction
+import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.utils.ktx.toast
+import com.xxxxls.xsuper.support.LifecycleTask
 
 /**
  * Super-Activity
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperActivity : AppCompatActivity(), IComponent, IComponentViewModel, ILoading {
+open class XSuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoading,
+    LifecycleTask.LifecycleTaskOwner {
+
+    // 生命周期任务
+    private val lifecycleTask: LifecycleTask.LifecycleTaskImpl by lazy {
+        LifecycleTask.LifecycleTaskImpl(lifecycle)
+    }
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +77,10 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IComponentViewModel
 
     override fun dismissLoading(id: Int?) {
         com.xxxxls.utils.L.e("${javaClass.simpleName} -> dismissLoading()")
+    }
+
+    override fun getLifecycleTask(): LifecycleTask {
+        return lifecycleTask
     }
 
 }

@@ -1,29 +1,48 @@
-apply plugin: 'com.android.library'
+import com.xxxxls.versionplugin.ARouter
+import com.xxxxls.versionplugin.BuildConfig
+import com.xxxxls.versionplugin.Depend
+import com.xxxxls.versionplugin.GreenDao
+import com.xxxxls.versionplugin.Hilt
+import com.xxxxls.versionplugin.Room
 
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'org.greenrobot.greendao'
+plugins {
+    id "com.xxxxls.version.plugin"
+    id "com.android.library"
+    id "kotlin-android"
+    id "kotlin-android-extensions"
+    id "kotlin-kapt"
+    id 'org.greenrobot.greendao'
+    id 'dagger.hilt.android.plugin'
+}
 
 
 android {
-    compileSdkVersion rootProject.ext.versions["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.versions["buildToolsVersion"]
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.versions["minSdkVersion"]
-        targetSdkVersion rootProject.ext.versions["targetSdkVersion"]
-        versionCode rootProject.ext.versions["versionCode"]
-        versionName rootProject.ext.versions["versionName"]
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        flavorDimensions BuildConfig.flavorDimensions
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        flavorDimensions rootProject.ext.versions["flavorDimensions"]
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments += [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     buildTypes {
@@ -85,23 +104,28 @@ dependencies {
     api project(path: ':xsuper_image')
 
 
-    //ARouter路由
-    kapt rootProject.ext.dependencies["arouter_compiler"]
-    api rootProject.ext.dependencies["arouter_api"]
-    api rootProject.ext.dependencies["arouter_annotation"]
+    //Hilt
+    api Hilt.hilt
+    kapt Hilt.androidCompiler
+    kapt Hilt.compiler
 
-    //EventBus
-    api rootProject.ext.dependencies["eventbus"]
+    //ARouter路由
+    api ARouter.api
+    api ARouter.annotation
+    kapt ARouter.compiler
+
+    api Depend.eventBus
 
     //greenDao
-    api rootProject.ext.dependencies["greenDao"]
-    api rootProject.ext.dependencies["greenDaoHelper"]
+    api GreenDao.greenDao
+    api GreenDao.upgradeHelper
 
     //下拉刷新
-    api rootProject.ext.dependencies["SmartRefresh"]
+    api Depend.smartRefresh
+    api Depend.smartRefreshHeader
 
     //room
-    api rootProject.ext.dependencies["room"]
-    api rootProject.ext.dependencies["room-coroutines"]
-    kapt rootProject.ext.dependencies["room-compiler"]
+    api Room.runtime
+    api Room.coroutines
+    api Room.compiler
 }

@@ -1,7 +1,7 @@
 package com.xxxxls.example.ui.widget
 
 import com.xxxxls.example.R
-import com.xxxxls.module_base.base.BaseActivity
+import com.xxxxls.module_base.component.BaseActivity
 
 /**
  * 半圆环形 进度视图

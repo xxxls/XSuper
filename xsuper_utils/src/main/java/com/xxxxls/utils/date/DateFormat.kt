@@ -103,13 +103,13 @@ sealed class DateFormat(val format: String) {
     object HM : DateFormat("HH:mm")
 
     //时:分 (12小时制)
-    object hm : DateFormat("hh:mm")
+    object hm_12 : DateFormat("hh:mm")
 
     //时:分:秒 (24小时制)
     object HMS : DateFormat("HH:mm:ss")
 
     //时:分:秒(12小时制)
-    object hms : DateFormat("hh:mm:ss")
+    object hms_12 : DateFormat("hh:mm:ss")
 
     //分:秒
     object ms : DateFormat("mm:ss")
@@ -118,13 +118,13 @@ sealed class DateFormat(val format: String) {
     object YMD_HMS : DateFormat("yyyy-MM-dd HH:mm:ss")
 
     //年-月-日 时:分:秒(12小时制)
-    object YMD_hms : DateFormat("yyyy-MM-dd hh:mm:ss")
+    object YMD_hms_12 : DateFormat("yyyy-MM-dd hh:mm:ss")
 
     //年-月-日 时:分:秒|毫秒(24小时制)
     object YMD_HMS_SS : DateFormat("yyyy-MM-dd HH:mm:ss|SS")
 
     //年-月-日 时:分:秒|毫秒(12小时制)
-    object YMD_hms_SS : DateFormat("yyyy-MM-dd HH:mm:ss|SS")
+    object YMD_hms_SS_12 : DateFormat("yyyy-MM-dd HH:mm:ss|SS")
 
     //年-月-日 时:分:秒:毫秒(24小时制)
     object YMD_HMS_SSS : DateFormat("yyyy-MM-dd HH:mm:ss|SSS")

@@ -1,7 +1,7 @@
 package com.xxxxls.module_user.ui.index
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.xxxxls.module_base.base.BaseFragment
+import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_base.util.jump
 import com.xxxxls.module_user.R

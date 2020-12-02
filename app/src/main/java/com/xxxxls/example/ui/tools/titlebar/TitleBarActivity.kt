@@ -2,7 +2,7 @@ package com.xxxxls.example.ui.tools.titlebar
 
 import android.view.View
 import com.xxxxls.example.R
-import com.xxxxls.module_base.base.BaseActivity
+import com.xxxxls.module_base.component.BaseActivity
 import com.xxxxls.titlebar.OnLeftTitleClickListener
 import com.xxxxls.titlebar.OnTitleBarClickListener
 import com.xxxxls.utils.ktx.toast

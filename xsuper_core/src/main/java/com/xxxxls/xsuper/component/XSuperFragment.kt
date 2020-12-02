@@ -6,16 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import com.xxxxls.xsuper.loading.ILoading
-import com.xxxxls.xsuper.net.bridge.ComponentAction
-import com.xxxxls.xsuper.net.bridge.IComponentBridge
+import com.xxxxls.xsuper.component.bridge.ComponentAction
+import com.xxxxls.xsuper.component.bridge.ComponentActionHandler
 import com.xxxxls.utils.ktx.toast
+import com.xxxxls.xsuper.support.LifecycleTask
 
 /**
  * Super-Fragment
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewModel, ILoading {
+open class XSuperFragment : XSuperLazyFragment(), IComponent, IVmComponent, ILoading,
+    LifecycleTask.LifecycleTaskOwner {
+
+    // 生命周期任务
+    private val lifecycleTask: LifecycleTask.LifecycleTaskImpl by lazy {
+        LifecycleTask.LifecycleTaskImpl(lifecycle)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,7 +74,7 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewMode
         super.onAction(action)
         com.xxxxls.utils.L.e("${javaClass.simpleName} -> onAction() action:${action}")
 
-        (activity as? IComponentBridge)?.run {
+        (activity as? ComponentActionHandler)?.run {
             //转至activity处理
             this.onAction(action)
         } ?: let {
@@ -103,6 +110,10 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IComponentViewMode
             //转至activity处理
             this.dismissLoading(id)
         }
+    }
+
+    override fun getLifecycleTask(): LifecycleTask {
+        return lifecycleTask
     }
 
 }

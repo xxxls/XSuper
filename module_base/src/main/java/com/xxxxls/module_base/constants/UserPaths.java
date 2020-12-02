@@ -6,7 +6,6 @@ package com.xxxxls.module_base.constants;
  */
 public interface UserPaths {
 
-
     //用户首页
     String USER_FRAGMENT_INDEX= "/user/fragment/index";
 

@@ -5,7 +5,7 @@ import android.media.MediaPlayer
 import android.view.Surface
 import android.view.TextureView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.xxxxls.module_base.base.BaseActivity
+import com.xxxxls.module_base.component.BaseActivity
 import com.xxxxls.module_base.constants.ExamplePaths.EXAMPLE_ACTIVITY_MULTI_VIDEO
 import com.xxxxls.module_example.R
 import kotlinx.android.synthetic.main.example_activity_multi_video.*

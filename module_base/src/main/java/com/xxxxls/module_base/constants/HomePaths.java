@@ -23,6 +23,9 @@ public interface HomePaths {
     //工具主页
     String HOME_FRAGMENT_TOOLS_INDEX = "/home/fragment/tools/index";
 
+    //网络请求主页
+    String HOME_FRAGMENT_NETWORK_INDEX = "/home/fragment/network/index";
+
     //widget主页
     String HOME_FRAGMENT_WIDGET_INDEX = "/home/fragment/widget/index";
 
@@ -34,4 +37,7 @@ public interface HomePaths {
 
     //LOGGER主页
     String HOME_FRAGMENT_LOGGER_INDEX = "/home/fragment/logger/index";
+
+    //感知生命周期-TASK
+    String HOME_FRAGMENT_LIFECYCLE_TASK_INDEX = "/home/fragment/lifecycle/task/index";
 }
