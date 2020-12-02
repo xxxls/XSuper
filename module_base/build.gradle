@@ -126,6 +126,5 @@ dependencies {
 
     //room
     api Room.runtime
-    api Room.coroutines
-    api Room.compiler
+    kapt Room.compiler
 }

@@ -19,7 +19,7 @@ object Versions {
     const val paging = "3.0.0-alpha01"
     const val work = "2.2.0"
     const val lifecycle = "2.2.0-rc02"
-    const val room = "2.1.0-alpha03"
+    const val room = "2.3.0-alpha01"
     const val hilt = "2.30-alpha"
     const val hiltViewModule = "1.0.0-alpha02"
     const val kotlin = "1.3.72"

@@ -1,4 +1,6 @@
+import com.xxxxls.versionplugin.ARouter
 import com.xxxxls.versionplugin.BuildConfig
+import com.xxxxls.versionplugin.Hilt
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -123,12 +125,11 @@ dependencies {
     implementation project(path: ':module_example')
 
     // ARouter路由
-    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
-    kapt rootProject.ext.dependencies["arouter_compiler"]
+    kapt ARouter.compiler
     //Hilt
-    kapt rootProject.ext.dependencies["hilt-android-compiler"]
-    kapt rootProject.ext.dependencies["hilt-compiler"]
-    api rootProject.ext.dependencies["hilt"]
+    api Hilt.hilt
+    kapt Hilt.androidCompiler
+    kapt Hilt.compiler
 }
 
 

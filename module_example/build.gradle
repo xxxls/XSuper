@@ -6,14 +6,14 @@ import com.xxxxls.versionplugin.Room
 
 plugins {
     id "com.xxxxls.version.plugin"
-    id 'com.android.application'
+    id 'com.android.library'
     id "kotlin-android"
     id "kotlin-android-extensions"
     id "kotlin-kapt"
     id 'org.greenrobot.greendao'
     id 'dagger.hilt.android.plugin'
 }
-//def isModule = module_example_enabled as Boolean
+def isModule = module_example_enabled as Boolean
 //if (isModule) {
 //    apply plugin: 'com.android.library'
 //} else {
