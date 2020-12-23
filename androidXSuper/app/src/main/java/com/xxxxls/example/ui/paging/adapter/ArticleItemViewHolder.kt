@@ -10,7 +10,7 @@ import com.xxxxls.example.ui.paging.data.bean.PagingItemBean
  */
 class ArticleItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bindData(item:PagingItemBean){
+    fun bindData(item: PagingItemBean, position: Int) {
 
     }
 }

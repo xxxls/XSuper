@@ -1,8 +1,8 @@
 package com.xxxxls.example.ui.network.data.repository
 
+import com.xxxxls.example.ui.network.data.api.ExampleApi
 import com.xxxxls.example.ui.network.data.local.ExampleDao
 import com.xxxxls.example.ui.network.data.bean.ArticleItemBean
-import com.xxxxls.example.ui.network.data.api.PagingApi
 import com.xxxxls.module_base.util.ILog
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toSuccessResult
@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @date 2020/11/25.
  */
 class ExampleRepository @Inject constructor(
-    private val exampleApi: PagingApi,
+    private val exampleApi: ExampleApi,
     private val exampleDao: ExampleDao
 ) : ILog {
 

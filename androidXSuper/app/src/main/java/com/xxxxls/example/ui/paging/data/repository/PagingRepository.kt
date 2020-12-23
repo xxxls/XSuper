@@ -23,7 +23,7 @@ class PagingRepository @Inject constructor(
     /**
      * 获取文章列表
      */
-    suspend fun getArticleList(page: Int): Flow<PagingData<PagingItemBean>> {
+    fun getArticleList(): Flow<PagingData<PagingItemBean>> {
         return Pager(pagingConfig) {
             // 加载数据库的数据
             PagingDataSource(pagingApi)

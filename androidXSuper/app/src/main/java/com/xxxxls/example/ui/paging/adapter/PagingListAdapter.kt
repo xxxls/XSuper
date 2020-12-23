@@ -16,7 +16,9 @@ import com.xxxxls.example.ui.paging.data.bean.PagingItemBean
 class PagingListAdapter :
     PagingDataAdapter<PagingItemBean, ArticleItemViewHolder>(PagingItemBean.newDiffCallback()) {
     override fun onBindViewHolder(holder: ArticleItemViewHolder, position: Int) {
-        holder.bindData(getItem(position)!!)
+        getItem(position)?.let {
+            holder.bindData(it, position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleItemViewHolder {

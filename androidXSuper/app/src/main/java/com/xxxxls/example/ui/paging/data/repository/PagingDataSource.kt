@@ -24,7 +24,7 @@ class PagingDataSource @Inject constructor(
             LoadResult.Page(
                 data = items, // 返回获取到的数据
                 prevKey = null, // 上一页，设置为空就没有上一页的效果，这需要注意的是，如果是第一页需要返回 null，否则会出现多次请求
-                nextKey = items.lastOrNull()?.id// 下一页，设置为空就没有加载更多效果，需要注意的是，如果是最后一页返回 null
+                nextKey = null// 下一页，设置为空就没有加载更多效果，需要注意的是，如果是最后一页返回 null
             )
         } catch (e: Exception) {
             e.printStackTrace()

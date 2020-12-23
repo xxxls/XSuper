@@ -6,6 +6,7 @@ import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.util.newFragment
 import com.xxxxls.module_base.adapter.CommonFragmentPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_paging_index.*
 import kotlinx.android.synthetic.main.fragment_paging_index.viewPager
 
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_paging_index.viewPager
  * @author Max
  * @date 2019-12-23.
  */
+@AndroidEntryPoint
 @Route(path = HomePaths.HOME_FRAGMENT_PAGING_INDEX)
 class PagingIndexFragment : BaseFragment() {
 
