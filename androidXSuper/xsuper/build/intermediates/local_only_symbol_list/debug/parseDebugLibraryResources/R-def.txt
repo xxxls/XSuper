@@ -1,0 +1,9 @@
+R_DEF: Internal format may change without notice
+local
+color super_colorAccent
+color super_colorPrimary
+color super_colorPrimaryDark
+mipmap super_ic_launcher
+mipmap super_ic_launcher_round
+string super_app_name
+style super_AppTheme

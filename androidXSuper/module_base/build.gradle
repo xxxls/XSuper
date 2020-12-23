@@ -1,0 +1,134 @@
+import com.xxxxls.versionplugin.ARouter
+import com.xxxxls.versionplugin.AndroidX
+import com.xxxxls.versionplugin.BuildConfig
+import com.xxxxls.versionplugin.Depend
+import com.xxxxls.versionplugin.GreenDao
+import com.xxxxls.versionplugin.Hilt
+import com.xxxxls.versionplugin.Room
+
+plugins {
+    id "com.xxxxls.version.plugin"
+    id "com.android.library"
+    id "kotlin-android"
+    id "kotlin-android-extensions"
+    id "kotlin-kapt"
+    id 'org.greenrobot.greendao'
+    id 'dagger.hilt.android.plugin'
+}
+
+
+android {
+    compileSdkVersion BuildConfig.compileSdkVersion
+    buildToolsVersion BuildConfig.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion BuildConfig.minSdkVersion
+        targetSdkVersion BuildConfig.targetSdkVersion
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        flavorDimensions BuildConfig.flavorDimensions
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildTypes {
+
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", project.BASE_URL_RELEASE)
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", project.BASE_URL_DEV)
+        }
+
+        devTest {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", project.BASE_URL_TEST)
+        }
+
+    }
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.xxxxls.xsuper.db'
+        targetGenDir 'src/main/java'
+    }
+
+    resourcePrefix "base"
+}
+
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //super
+    api project(path: ':xsuper_core')
+    //列表适配器
+    api project(path: ':xsuper_adapter')
+    //标题栏
+    api project(path: ':xsuper_titlebar')
+    //多状态
+    api project(path: ':xsuper_status')
+    //控件集
+    api project(path: ':xsuper_widget')
+    //日志
+    api project(path: ':xsuper_logger')
+    //图片加载工具
+    api project(path: ':xsuper_image')
+
+
+    //Hilt
+    api Hilt.hilt
+    kapt Hilt.androidCompiler
+    kapt Hilt.compiler
+
+    //ARouter路由
+    api ARouter.api
+    api ARouter.annotation
+    kapt ARouter.compiler
+
+    api Depend.eventBus
+
+    //greenDao
+    api GreenDao.greenDao
+    api GreenDao.upgradeHelper
+
+    //下拉刷新
+    api Depend.smartRefresh
+    api Depend.smartRefreshHeader
+
+    //room
+    api Room.runtime
+    kapt Room.compiler
+
+    //paging
+    api AndroidX.pagingRuntime
+}
