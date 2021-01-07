@@ -11,7 +11,7 @@ plugins {
     id "kotlin-android-extensions"
     id "kotlin-kapt"
 }
-group='com.github.xxxls'
+group='com.github.mxruan'
 
 android {
     compileSdkVersion BuildConfig.compileSdkVersion

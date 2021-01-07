@@ -13,7 +13,7 @@ plugins {
     id "com.github.dcendents.android-maven"
 }
 
-group='com.github.xxxls'
+group='com.github.mxruan'
 
 android {
     compileSdkVersion BuildConfig.compileSdkVersion
