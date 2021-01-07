@@ -2,7 +2,6 @@ package com.xxxxls.titlebar
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.AttributeSet
@@ -14,7 +13,7 @@ import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatTextView
-import com.xxxxls.titlebar.utils.getDrawableById
+import com.xxxxls.utils.ktx.getDrawableById
 
 /**
  * TitleBar

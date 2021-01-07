@@ -53,4 +53,7 @@ dependencies {
 
     api AndroidX.appcompat
     api Lifecycle.lifecycleExtensions
+
+    //工具集
+    api project(path: ':xsuper_utils')
 }

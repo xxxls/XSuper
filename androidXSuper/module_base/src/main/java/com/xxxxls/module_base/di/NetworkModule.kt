@@ -1,6 +1,5 @@
 package com.xxxxls.module_base.di
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.xxxxls.module_base.BuildConfig
 import com.xxxxls.module_base.constants.NetConfig
 import dagger.Module

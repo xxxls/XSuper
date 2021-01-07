@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import com.xxxxls.titlebar.utils.UiUtils
-import com.xxxxls.titlebar.utils.getDrawableById
+import com.xxxxls.utils.UiUtils
+import com.xxxxls.utils.ktx.getDrawableById
 
 /**
  * 默认标题栏样式

@@ -9,7 +9,7 @@ import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionHandler
 import com.xxxxls.utils.ktx.toast
-import com.xxxxls.xsuper.support.LifecycleTask
+import com.xxxxls.utils.LifecycleTask
 
 /**
  * Super-Fragment

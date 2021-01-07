@@ -5,10 +5,11 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
+import com.xxxxls.utils.L
 import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.utils.ktx.toast
-import com.xxxxls.xsuper.support.LifecycleTask
+import com.xxxxls.utils.LifecycleTask
 
 /**
  * Super-Activity
@@ -54,7 +55,7 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoad
 
     override fun onAction(action: ComponentAction) {
         super.onAction(action)
-        com.xxxxls.utils.L.e("${javaClass.simpleName} -> onAction() action:${action}")
+        L.e("${javaClass.simpleName} -> onAction() action:${action}")
         when (action) {
             is ComponentAction.ShowLoading -> {
                 showLoading(message = action.message)
@@ -72,11 +73,11 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoad
     }
 
     override fun showLoading(id: Int?, message: CharSequence?) {
-        com.xxxxls.utils.L.e("${javaClass.simpleName} -> showLoading()")
+        L.e("${javaClass.simpleName} -> showLoading()")
     }
 
     override fun dismissLoading(id: Int?) {
-        com.xxxxls.utils.L.e("${javaClass.simpleName} -> dismissLoading()")
+        L.e("${javaClass.simpleName} -> dismissLoading()")
     }
 
     override fun getLifecycleTask(): LifecycleTask {

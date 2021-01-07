@@ -130,37 +130,4 @@ object PathHelper {
             FileUtils.createOrExistsFile(this)
         }
     }
-
-
-    //------------------------------ 分割线 ------------------------------ （上面是公共路径 ，下面是业务路径）
-
-
-    /**
-     * 获取视频草稿存储目录路径
-     */
-    fun getVideoDraftDirPath(): String {
-        return (getFilesDirPath() + File.separator + "video_draft").apply {
-            FileUtils.createOrExistsDir(this)
-        }
-    }
-
-    /**
-     * 获取一个新的 视频草稿文件路径
-     */
-    fun getNewVideoDraftFilePath(name: String = System.currentTimeMillis().toString() + ".mp4"): String {
-        return (getVideoDraftDirPath() + File.separator + name).apply {
-            FileUtils.createOrExistsFile(this)
-        }
-    }
-
-
-    /**
-     * 获取一个新的 视频草稿封面文件路径
-     */
-    fun getNewVideoDraftCoverFilePath(name: String = System.currentTimeMillis().toString() + ".jpg"): String {
-        return (getVideoDraftDirPath() + File.separator + name).apply {
-            FileUtils.createOrExistsFile(this)
-        }
-    }
-
 }

@@ -52,4 +52,7 @@ dependencies {
     androidTestApi Android.espressoCore
 
     api AndroidX.appcompat
+
+    //工具集
+    api project(path: ':xsuper_utils')
 }

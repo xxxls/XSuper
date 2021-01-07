@@ -1,7 +1,6 @@
 package com.xxxxls.xsuper.repository
 
 import com.xxxxls.xsuper.adapter.*
-import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.model.XSuperResponse
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toFailureResult

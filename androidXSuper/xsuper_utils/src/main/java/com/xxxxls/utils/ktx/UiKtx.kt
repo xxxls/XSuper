@@ -1,6 +1,5 @@
 package com.xxxxls.utils.ktx
 
-import android.content.res.Resources
 import com.xxxxls.utils.UiUtils
 import kotlin.math.roundToInt
 

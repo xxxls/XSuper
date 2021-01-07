@@ -1,4 +1,4 @@
-package com.xxxxls.xsuper.support
+package com.xxxxls.utils
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver

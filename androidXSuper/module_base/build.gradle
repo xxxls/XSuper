@@ -1,9 +1,11 @@
 import com.xxxxls.versionplugin.ARouter
+import com.xxxxls.versionplugin.Android
 import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
 import com.xxxxls.versionplugin.Depend
 import com.xxxxls.versionplugin.GreenDao
 import com.xxxxls.versionplugin.Hilt
+import com.xxxxls.versionplugin.Retrofit
 import com.xxxxls.versionplugin.Room
 
 plugins {
@@ -131,4 +133,12 @@ dependencies {
 
     //paging
     api AndroidX.pagingRuntime
+
+    //网络请求
+    api Retrofit.okHttp
+    api Retrofit.logging
+    api Retrofit.retrofit
+    api Retrofit.coroutinesAdapter
+    api Retrofit.gson
+    api Android.gson
 }

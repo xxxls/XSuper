@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import com.xxxxls.widget.utils.UiUtils.dip2px
+import com.xxxxls.utils.UiUtils.dip2px
 
 /**
  * 半圆环形进度视图
