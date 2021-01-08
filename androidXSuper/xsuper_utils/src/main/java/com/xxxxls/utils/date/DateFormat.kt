@@ -130,7 +130,7 @@ sealed class DateFormat(val format: String) {
     object YMD_HMS_SSS : DateFormat("yyyy-MM-dd HH:mm:ss|SSS")
 
     //年-月-日 时:分:秒|毫秒(12小时制)
-    object YMD_hms_SSS : DateFormat("yyyy-MM-dd HH:mm:ss|SSS")
+    object YMD_hms_SSS_12 : DateFormat("yyyy-MM-dd hh:mm:ss|SSS")
 
     //自定义格式
     class DIY(format: String) : DateFormat(format)

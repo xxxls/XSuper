@@ -10,6 +10,7 @@ plugins {
     id "kotlin-android"
     id "kotlin-android-extensions"
     id "kotlin-kapt"
+//    id "com.novoda.bintray-release"
 }
 group='com.github.mxruan'
 
@@ -44,9 +45,26 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     resourcePrefix "logger"
 }
 
+
+//publish {
+//    userOrg = 'xxxls' //bintray注册的用户名/组织名
+//    groupId = 'com.xxxls'////jcenter上的路径
+//    artifactId = 'xsuper-logger' //项目名称
+//    publishVersion = '1.0.0' //版本号
+//    desc = '' //项目描述。可空。
+//    website = '' //项目地址，一般填github地址。可空。
+//}
+
+tasks.withType(Javadoc).all {
+    enabled = false
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

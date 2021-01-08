@@ -2,6 +2,7 @@ import com.xxxxls.versionplugin.Android
 import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
 import com.xxxxls.versionplugin.Lifecycle
+import com.xxxxls.versionplugin.XSuper
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -44,7 +45,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    resourcePrefix "widget"
+//    resourcePrefix "widget"
 }
 
 
@@ -58,5 +59,6 @@ dependencies {
     api Lifecycle.lifecycleExtensions
 
     //工具集
-    api project(path: ':xsuper_utils')
+//    api project(path: ':xsuper_utils')
+    api XSuper.utils
 }

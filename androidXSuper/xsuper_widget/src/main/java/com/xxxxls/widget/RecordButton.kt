@@ -178,7 +178,7 @@ class RecordButton : View {
         attrs: AttributeSet?,
         defStyleAttr: Int,
         defStyleRes: Int
-    ) : super(context, attrs, defStyleAttr, defStyleRes) {
+    ) : super(context, attrs, defStyleAttr) {
         val typedArray = context?.obtainStyledAttributes(attrs, R.styleable.RecordButton)
 
         val progressRingBackgroundStartColor = typedArray?.getColor(

@@ -54,6 +54,7 @@ object Versions {
     const val xLog = "1.6.1"
     const val junit = "4.12"
     const val coroutinesAdapter = "0.9.2"
+    const val xsuper = "1.0.0"
 }
 
 object AndroidX {
@@ -137,7 +138,8 @@ object Retrofit {
     const val logging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttpLogging}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val rxjava = "com.squareup.retrofit2:adapter-rxjava:${Versions.rxjavaAdapter}"
-    const val coroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.coroutinesAdapter}"
+    const val coroutinesAdapter =
+        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.coroutinesAdapter}"
 
 }
 
@@ -175,4 +177,15 @@ object Depend {
     const val pictureSelector = "com.github.ltyhome:PictureSelector:${Versions.pictureSelector}"
     const val rxFFmpeg = "com.github.microshow:RxFFmpeg:${Versions.rxFFmpeg}"
     const val xLog = "com.elvishew:xlog:${Versions.xLog}"
+}
+
+object XSuper {
+    const val utils = "com.xxxls:xsuper-utils:${Versions.xsuper}"
+    const val image = "com.xxxls:xsuper-image:${Versions.xsuper}"
+    const val core = "com.xxxls:xsuper-core:${Versions.xsuper}"
+    const val status = "com.xxxls:xsuper-status:${Versions.xsuper}"
+    const val titleBar = "com.xxxls:xsuper-titleBar:${Versions.xsuper}"
+    const val logger = "com.xxxls:xsuper-logger:${Versions.xsuper}"
+    const val adapter = "com.xxxls:xsuper-adapter:${Versions.xsuper}"
+    const val widget = "com.xxxls:xsuper-widget:${Versions.xsuper}"
 }

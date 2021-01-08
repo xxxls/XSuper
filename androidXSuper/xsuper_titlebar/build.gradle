@@ -1,6 +1,7 @@
 import com.xxxxls.versionplugin.Android
 import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
+import com.xxxxls.versionplugin.XSuper
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -9,6 +10,7 @@ plugins {
     id "kotlin-android-extensions"
     id "kotlin-kapt"
     id "com.github.dcendents.android-maven"
+    id "com.novoda.bintray-release"
 }
 
 group='com.github.mxruan'
@@ -43,9 +45,25 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     resourcePrefix "titlebar"
 }
 
+publish {
+    userOrg = 'xxxls' //bintray注册的用户名/组织名
+    groupId = 'com.xxxls'////jcenter上的路径
+    artifactId = 'xsuper-titlebar' //项目名称
+    publishVersion = '1.0.0' //版本号
+    desc = '' //项目描述。可空。
+    website = '' //项目地址，一般填github地址。可空。
+}
+
+tasks.withType(Javadoc).all {
+    enabled = false
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -56,5 +74,6 @@ dependencies {
     api AndroidX.appcompat
 
     //工具集
-    api project(path: ':xsuper_utils')
+//    api project(path: ':xsuper_utils')
+//    api XSuper.utils
 }

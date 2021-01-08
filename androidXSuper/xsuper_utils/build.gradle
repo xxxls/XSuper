@@ -11,6 +11,7 @@ plugins {
     id "kotlin-android-extensions"
     id "kotlin-kapt"
     id "com.github.dcendents.android-maven"
+//    id "com.novoda.bintray-release"
 }
 
 group='com.github.mxruan'
@@ -44,10 +45,26 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    resourcePrefix "utils"
+    lintOptions {
+        abortOnError false
+    }
 }
 
+//publish {
+//    userOrg = 'xxxls'  //bintray注册的用户名/组织名
+//    groupId = 'com.xxxls'////jcenter上的路径
+//    artifactId = 'xsuper-utils' //项目名称
+//    publishVersion = '1.0.0' //版本号
+//    desc = '' //项目描述。可空。
+//    website = '' //项目地址，一般填github地址。可空。
+//}
+
+//发布命令: ./gradlew clean build bintrayUpload -PbintrayUser=xxxxls -PbintrayKey=自己的Key -PdryRun=false
+
+
+tasks.withType(Javadoc).all {
+    enabled = false
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

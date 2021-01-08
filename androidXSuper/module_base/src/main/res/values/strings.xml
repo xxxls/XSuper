@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">module_base</string>
+    <string name="base_app_name">module_base</string>
 
 
     <!--  异常信息  -->

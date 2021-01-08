@@ -4,6 +4,7 @@ import com.xxxxls.versionplugin.BuildConfig
 import com.xxxxls.versionplugin.Hilt
 import com.xxxxls.versionplugin.Kt
 import com.xxxxls.versionplugin.Lifecycle
+import com.xxxxls.versionplugin.XSuper
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -56,12 +57,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testApi Android.junit
+    api Android.junit
     androidTestApi Android.runner
     androidTestApi Android.espressoCore
 
     //工具集
-    api project(path: ':xsuper_utils')
+//    api project(path: ':xsuper_utils')
+    api XSuper.utils
 
     /**
      * @官方组件
