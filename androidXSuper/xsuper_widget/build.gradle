@@ -59,6 +59,6 @@ dependencies {
     api Lifecycle.lifecycleExtensions
 
     //工具集
-//    api project(path: ':xsuper_utils')
-    api XSuper.utils
+    api project(path: ':xsuper_utils')
+//    api XSuper.utils
 }

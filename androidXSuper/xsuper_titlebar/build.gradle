@@ -74,6 +74,6 @@ dependencies {
     api AndroidX.appcompat
 
     //工具集
-//    api project(path: ':xsuper_utils')
+    api project(path: ':xsuper_utils')
 //    api XSuper.utils
 }
