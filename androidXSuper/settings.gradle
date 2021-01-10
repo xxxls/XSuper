@@ -1,4 +1,4 @@
 include ':VersionPlugin'
-include ':app', ':xsuper_core', ':module_example', ':module_user', ':module_base', ':xsuper_adapter', ':xsuper_utils', ':xsuper_status', ':xsuper_titlebar', ':xsuper_widget', ':xsuper_logger', ':xsuper_image'
-rootProject.name='XSuper'
+include ':app', ':core', ':module_example', ':module_user', ':module_base', ':adapter', ':utils', ':status', ':titlebar', ':widget', ':logger', ':image'
+rootProject.name='xsuper'
 includeBuild '../versionPlugin'

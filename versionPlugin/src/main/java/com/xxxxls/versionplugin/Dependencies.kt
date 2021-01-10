@@ -54,7 +54,7 @@ object Versions {
     const val xLog = "1.6.1"
     const val junit = "4.12"
     const val coroutinesAdapter = "0.9.2"
-    const val xsuper = "v1.0.4"
+    const val xsuper = "1.0.5"
 }
 
 object AndroidX {
@@ -180,12 +180,12 @@ object Depend {
 }
 
 object XSuper {
-    const val utils = "com.github.mxruan.XSuper:xsuper_utils:${Versions.xsuper}"
-    const val image = "com.github.mxruan.XSuper:xsuper_image:${Versions.xsuper}"
-    const val core = "com.github.mxruan.XSuper:xsuper_core:${Versions.xsuper}"
-    const val status = "com.github.mxruan.XSuper:xsuper_status:${Versions.xsuper}"
-    const val titleBar = "com.github.mxruan.XSuper:xsuper_titlebar:${Versions.xsuper}"
-    const val logger = "com.github.mxruan.XSuper:xsuper_logger:${Versions.xsuper}"
-    const val adapter = "com.github.mxruan.XSuper:xsuper_adapter:${Versions.xsuper}"
-    const val widget = "com.github.mxruan.XSuper:xsuper_widget:${Versions.xsuper}"
+    const val utils = "com.github.xxxls.XSuper:xsuper_utils:${Versions.xsuper}"
+    const val image = "com.github.xxxls.XSuper:xsuper_image:${Versions.xsuper}"
+    const val core = "com.github.xxxls.XSuper:xsuper_core:${Versions.xsuper}"
+    const val status = "com.github.xxxls.XSuper:xsuper_status:${Versions.xsuper}"
+    const val titleBar = "com.github.xxxls.XSuper:xsuper_titlebar:${Versions.xsuper}"
+    const val logger = "com.github.xxxls.XSuper:xsuper_logger:${Versions.xsuper}"
+    const val adapter = "com.github.xxxls.XSuper:xsuper_adapter:${Versions.xsuper}"
+    const val widget = "com.github.xxxls.XSuper:xsuper_widget:${Versions.xsuper}"
 }

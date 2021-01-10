@@ -11,7 +11,7 @@ plugins {
     id "com.github.dcendents.android-maven"
 }
 
-group='com.xxxls'
+group='com.github.xxxls'
 
 android {
     compileSdkVersion BuildConfig.compileSdkVersion

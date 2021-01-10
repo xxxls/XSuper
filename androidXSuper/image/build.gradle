@@ -14,7 +14,7 @@ plugins {
 //    id "com.novoda.bintray-release"
 }
 
-group='com.xxxls'
+group='com.github.xxxls'
 
 android {
     compileSdkVersion BuildConfig.compileSdkVersion
