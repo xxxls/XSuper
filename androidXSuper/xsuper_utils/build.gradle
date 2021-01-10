@@ -14,7 +14,7 @@ plugins {
 //    id "com.novoda.bintray-release"
 }
 
-group='com.github.mxruan'
+group='com.xxxls'
 
 android {
     compileSdkVersion BuildConfig.compileSdkVersion
@@ -62,10 +62,6 @@ android {
 //发布命令: ./gradlew clean build bintrayUpload -PbintrayUser=xxxxls -PbintrayKey=自己的Key -PdryRun=false
 
 
-tasks.withType(Javadoc).all {
-    enabled = false
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testApi Android.junit
@@ -75,4 +71,37 @@ dependencies {
     api AndroidX.appcompat
     api Lifecycle.lifecycleExtensions
     api Kt.coroutinesAndroid
+}
+
+
+tasks.withType(Javadoc).all {
+    enabled = false
+}
+// 指定编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// 打包源码
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// 制作文档(Javadoc)
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
