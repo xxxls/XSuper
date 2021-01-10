@@ -5,7 +5,6 @@ import com.xxxxls.versionplugin.BuildConfig
 import com.xxxxls.versionplugin.Depend
 import com.xxxxls.versionplugin.GreenDao
 import com.xxxxls.versionplugin.Hilt
-import com.xxxxls.versionplugin.Lifecycle
 import com.xxxxls.versionplugin.Retrofit
 import com.xxxxls.versionplugin.Room
 import com.xxxxls.versionplugin.XSuper
