@@ -54,7 +54,7 @@ object Versions {
     const val xLog = "1.6.1"
     const val junit = "4.12"
     const val coroutinesAdapter = "0.9.2"
-    const val xsuper = "1.0.6"
+    const val xsuper = "1.1.1"
 }
 
 object AndroidX {
