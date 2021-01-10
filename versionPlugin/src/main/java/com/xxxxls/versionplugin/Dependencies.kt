@@ -7,7 +7,7 @@ package com.xxxxls.versionplugin
  */
 
 object Versions {
-    const val appcompat = "1.3.0"
+    const val appcompat = "1.3.0-alpha02"
     const val coreKtx = "1.3.0"
     const val constraintLayout = "1.1.3"
     const val cardView = "1.0.0"
@@ -28,9 +28,9 @@ object Versions {
     const val retrofit = "2.9.0"
     const val okHttp = "4.0.1"
     const val okHttpLogging = "4.9.0"
-    const val fragment = "1.3.0-alpha06"
-    const val activity = "1.3.0-alpha06"
     const val material = "1.2.0-alpha06"
+    const val fragment = "1.2.4"
+    const val activity = "1.1.0"
     const val flexBox = "1.1.0"
     const val aRouterApi = "1.4.0"
     const val aRouterCompiler = "1.2.1"
@@ -70,7 +70,8 @@ object AndroidX {
 
     const val fragment = "androidx.fragment:fragment:${Versions.fragment}"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragment}"
-    const val activity = "androidx.activity:activity-ktx:${Versions.activity}"
+    const val activityKtx = "androidx.activity:activity-ktx:${Versions.activity}"
+    const val activity = "androidx.activity:activity:${Versions.activity}"
 }
 
 object Android {

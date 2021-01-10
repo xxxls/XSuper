@@ -5,11 +5,13 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.lifecycle.ViewModelProvider
 import com.xxxxls.utils.L
-import com.xxxxls.xsuper.loading.ILoading
-import com.xxxxls.xsuper.component.bridge.ComponentAction
-import com.xxxxls.utils.ktx.toast
 import com.xxxxls.utils.LifecycleTask
+import com.xxxxls.utils.ktx.toast
+import com.xxxxls.xsuper.component.bridge.ComponentAction
+import com.xxxxls.xsuper.loading.ILoading
 
 /**
  * Super-Activity
@@ -51,6 +53,23 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoad
 
     override fun getLifecycleOwner(): LifecycleOwner {
         return this
+    }
+
+    //TODO 依赖版本错乱导致此方法没有被实现（应该由activity默认实现该方法的）待解决...
+    private var mDefaultFactory: ViewModelProvider.Factory? = null
+    override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory {
+        checkNotNull(application) {
+            ("Your activity is not yet attached to the "
+                    + "Application instance. You can't request ViewModel before onCreate call.")
+        }
+        if (mDefaultFactory == null) {
+            mDefaultFactory = SavedStateViewModelFactory(
+                application,
+                this,
+                if (intent != null) intent.extras else null
+            )
+        }
+        return mDefaultFactory!!
     }
 
     override fun onAction(action: ComponentAction) {

@@ -68,7 +68,7 @@ dependencies {
     androidTestApi Android.runner
     androidTestApi Android.espressoCore
 
-    api AndroidX.appcompat
+//    implementation AndroidX.appcompat
     api Lifecycle.lifecycleExtensions
     api Kt.coroutinesAndroid
 }

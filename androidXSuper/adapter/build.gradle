@@ -52,7 +52,7 @@ dependencies {
     testApi Android.junit
     androidTestApi Android.runner
     androidTestApi Android.espressoCore
-    api AndroidX.appcompat
+    implementation AndroidX.appcompat
     //分页
     api rootProject.ext.dependencies["paging"]
 }

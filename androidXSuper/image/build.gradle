@@ -68,8 +68,8 @@ dependencies {
     androidTestApi Android.runner
     androidTestApi Android.espressoCore
 
-    api AndroidX.appcompat
-    api Lifecycle.lifecycleExtensions
+//    implementation AndroidX.appcompat
+    implementation Lifecycle.lifecycleExtensions
     api Glide.glide
 }
 

@@ -65,16 +65,23 @@ dependencies {
     api project(path: ':utils')
 //    api XSuper.utils
 
+    // ViewModel and LiveData
+//    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+//    // Java8 support for Lifecycles
+//    api 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+
+
     /**
      * @官方组件
      */
     api Kt.stdlibJdk8
     api AndroidX.appcompat
-    api AndroidX.coreKtx
+//    api AndroidX.coreKtx
     api AndroidX.constraintLayout
     api Android.meteria
-    api Lifecycle.lifecycleExtensions
-    api AndroidX.fragmentKtx
+//    api Lifecycle.lifecycleExtensions
+//    api AndroidX.fragmentKtx
+    api AndroidX.activityKtx
     api Kt.coroutinesAndroid
     api Lifecycle.viewModelKtx
     api Lifecycle.runtimeKtx
