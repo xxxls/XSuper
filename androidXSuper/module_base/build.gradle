@@ -93,20 +93,20 @@ kapt {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //super
-    api project(path: ':xsuper_core')
-//    api XSuper.core
+//    api project(path: ':xsuper_core')
+    api XSuper.core
     //列表适配器
     api project(path: ':xsuper_adapter')
 //    api XSuper.adapter
     //标题栏
-    api project(path: ':xsuper_titlebar')
-//    api XSuper.titleBar
+//    api project(path: ':xsuper_titlebar')
+    api XSuper.titleBar
     //多状态
-    api project(path: ':xsuper_status')
-//    api XSuper.status
+//    api project(path: ':xsuper_status')
+    api XSuper.status
     //控件集
-    api project(path: ':xsuper_widget')
-//    api XSuper.widget
+//    api project(path: ':xsuper_widget')
+    api XSuper.widget
     //日志
     api project(path: ':xsuper_logger')
 //    api XSuper.logger
