@@ -7,7 +7,7 @@ package com.xxxxls.versionplugin
  */
 
 object Versions {
-    const val appcompat = "1.1.0"
+    const val appcompat = "1.3.0"
     const val coreKtx = "1.3.0"
     const val constraintLayout = "1.1.3"
     const val cardView = "1.0.0"
@@ -54,7 +54,7 @@ object Versions {
     const val xLog = "1.6.1"
     const val junit = "4.12"
     const val coroutinesAdapter = "0.9.2"
-    const val xsuper = "1.0.5"
+    const val xsuper = "1.0.6"
 }
 
 object AndroidX {
@@ -112,6 +112,7 @@ object Lifecycle {
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val lifecycleJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
 }
 
 object ARouter {
@@ -180,12 +181,12 @@ object Depend {
 }
 
 object XSuper {
-    const val utils = "com.github.xxxls.XSuper:xsuper_utils:${Versions.xsuper}"
-    const val image = "com.github.xxxls.XSuper:xsuper_image:${Versions.xsuper}"
-    const val core = "com.github.xxxls.XSuper:xsuper_core:${Versions.xsuper}"
-    const val status = "com.github.xxxls.XSuper:xsuper_status:${Versions.xsuper}"
-    const val titleBar = "com.github.xxxls.XSuper:xsuper_titlebar:${Versions.xsuper}"
-    const val logger = "com.github.xxxls.XSuper:xsuper_logger:${Versions.xsuper}"
-    const val adapter = "com.github.xxxls.XSuper:xsuper_adapter:${Versions.xsuper}"
-    const val widget = "com.github.xxxls.XSuper:xsuper_widget:${Versions.xsuper}"
+    const val utils = "com.github.xxxls.XSuper:utils:${Versions.xsuper}"
+    const val image = "com.github.xxxls.XSuper:image:${Versions.xsuper}"
+    const val core = "com.github.xxxls.XSuper:core:${Versions.xsuper}"
+    const val status = "com.github.xxxls.XSuper:status:${Versions.xsuper}"
+    const val titleBar = "com.github.xxxls.XSuper:titlebar:${Versions.xsuper}"
+    const val logger = "com.github.xxxls.XSuper:logger:${Versions.xsuper}"
+    const val adapter = "com.github.xxxls.XSuper:adapter:${Versions.xsuper}"
+    const val widget = "com.github.xxxls.XSuper:widget:${Versions.xsuper}"
 }
