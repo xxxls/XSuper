@@ -17,7 +17,7 @@ import com.xxxxls.utils.LifecycleTask
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperFragment : XSuperLazyFragment(), IComponent, IVmComponent, ILoading,
+open class SuperFragment : SuperLazyFragment(), IComponent, IVmComponent, ILoading,
     LifecycleTask.LifecycleTaskOwner {
 
     // 生命周期任务

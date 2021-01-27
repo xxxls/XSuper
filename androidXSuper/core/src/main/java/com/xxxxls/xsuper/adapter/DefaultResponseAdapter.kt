@@ -1,8 +1,6 @@
 package com.xxxxls.xsuper.adapter
 
 import com.xxxxls.xsuper.exceptions.ApiException
-import com.xxxxls.xsuper.exceptions.CodeException
-import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.model.*
 import java.lang.NullPointerException
 
@@ -15,7 +13,7 @@ open class DefaultResponseAdapter : ResponseAdapter {
     /**
      * 获取接口响应体
      */
-    override fun <T> getResponseBody(response: XSuperResponse<T>): T {
+    override fun <T> getResponseBody(response: SuperResponse<T>): T {
         if (response.isSuccess()) {
             return response.getBody()?.let {
                 return@let it
@@ -32,7 +30,7 @@ open class DefaultResponseAdapter : ResponseAdapter {
     /**
      * 接口响应转换为响应结果保证体
      */
-    override fun <T> responseToResult(response: XSuperResponse<T>): XSuperResult<T> {
+    override fun <T> responseToResult(response: SuperResponse<T>): XSuperResult<T> {
         return try {
             val body = getResponseBody(response)
             XSuperResult.Success(data = body)

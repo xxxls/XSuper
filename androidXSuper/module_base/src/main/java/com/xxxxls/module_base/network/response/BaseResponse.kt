@@ -1,14 +1,14 @@
 package com.xxxxls.module_base.network.response
 
 import com.google.gson.annotations.SerializedName
-import com.xxxxls.xsuper.model.XSuperResponse
+import com.xxxxls.xsuper.model.SuperResponse
 
 /**
  * 基础响应体
  * @author Max
  * @date 2019-11-28.
  */
-open class BaseResponse<out T> : XSuperResponse<T> {
+open class BaseResponse<out T> : SuperResponse<T> {
 
     //响应体
     val data: T? = null

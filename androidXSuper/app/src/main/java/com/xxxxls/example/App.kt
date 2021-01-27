@@ -2,7 +2,7 @@ package com.xxxxls.example
 
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
-import com.xxxxls.xsuper.component.application.XSuperApplication
+import com.xxxxls.xsuper.component.application.SuperApplication
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -11,7 +11,7 @@ import dagger.hilt.android.HiltAndroidApp
  * @date 2019-11-26.
  */
 @HiltAndroidApp
-class App : XSuperApplication() {
+class App : SuperApplication() {
 
     override fun onInitialize() {
         super.onInitialize()

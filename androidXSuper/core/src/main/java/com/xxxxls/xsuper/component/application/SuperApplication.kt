@@ -14,7 +14,7 @@ import java.io.IOException
  * @author Max
  * @date 2019-12-01.
  */
-open class XSuperApplication : Application() {
+open class SuperApplication : Application() {
 
 
     private val ROOT_PACKAGE = "com.xxxxls"

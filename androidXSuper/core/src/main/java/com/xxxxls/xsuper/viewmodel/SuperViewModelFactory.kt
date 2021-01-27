@@ -1,7 +1,6 @@
 package com.xxxxls.xsuper.viewmodel
 
 import androidx.annotation.MainThread
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import com.xxxxls.xsuper.component.IVmComponent
@@ -14,7 +13,7 @@ import kotlin.reflect.KProperty
  * @author Max
  * @date 2019-11-30.
  */
-class ViewModelFactory<VM : XSuperViewModel>(private val clazz: KClass<VM>) :
+class ViewModelFactory<VM : SuperViewModel>(private val clazz: KClass<VM>) :
     ReadOnlyProperty<IVmComponent, VM> {
 
     private var viewModel: VM? = null
@@ -34,7 +33,7 @@ class ViewModelFactory<VM : XSuperViewModel>(private val clazz: KClass<VM>) :
  * 创建VM （方式二）
  */
 @MainThread
-inline fun <reified VM : XSuperViewModel> IVmComponent.xsuperViewModelsF(
+inline fun <reified VM : SuperViewModel> IVmComponent.xsuperViewModelsF(
     noinline ownerProducer: () -> ViewModelStoreOwner = { this },
     noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
 ) = ViewModelFactory(VM::class)

@@ -6,18 +6,15 @@ import androidx.lifecycle.viewModelScope
 import com.xxxxls.xsuper.adapter.DefaultResultAnalyzer
 import com.xxxxls.xsuper.adapter.ExceptionAnalyzer
 import com.xxxxls.xsuper.adapter.ResultAnalyzer
-import com.xxxxls.xsuper.callback.XSuperCallBack
+import com.xxxxls.xsuper.callback.SuperCallBack
 import com.xxxxls.xsuper.component.ICleared
 import com.xxxxls.xsuper.loading.*
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import com.xxxxls.xsuper.model.ResultLiveData
 import com.xxxxls.xsuper.model.XSuperResult
-import com.xxxxls.xsuper.model.toFailureResult
-import com.xxxxls.xsuper.model.toSuccessResult
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import java.util.concurrent.ExecutionException
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -25,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
  * @author Max
  * @date 2019-11-29.
  */
-open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading, ICleared {
+open class SuperViewModel : ViewModel(), ComponentActionBridge, ILoading, ICleared {
 
     /**
      * 与组件(activity，fragment)的通信（加载弹窗，toast等）
@@ -57,7 +54,7 @@ open class XSuperViewModel : ViewModel(), ComponentActionBridge, ILoading, IClea
      * @param block 执行的任务
      */
     fun <T> launchF(
-        callBack: XSuperCallBack<T>,
+        callBack: SuperCallBack<T>,
         loading: ILoading? = this,
         analyzer: ExceptionAnalyzer = getResultAnalyzer(),
         context: CoroutineContext = Dispatchers.IO,

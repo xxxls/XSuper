@@ -7,7 +7,7 @@ import androidx.annotation.NonNull
  * @author Max
  * @date 2019-11-26.
  */
-interface XSuperCallBack<T> {
+interface SuperCallBack<T> {
 
     /**
      * 成功
@@ -25,9 +25,9 @@ interface XSuperCallBack<T> {
 /**
  * 转换
  */
-fun <T, R> XSuperCallBack<T>.map(@NonNull mapFunction: (R) -> T): XSuperCallBack<R> {
+fun <T, R> SuperCallBack<T>.map(@NonNull mapFunction: (R) -> T): SuperCallBack<R> {
 
-    return object : XSuperCallBack<R> {
+    return object : SuperCallBack<R> {
         override fun onSuccess(result: R) {
             this@map.onSuccess(mapFunction(result))
         }

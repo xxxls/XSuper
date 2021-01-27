@@ -21,7 +21,7 @@ import androidx.lifecycle.LifecycleOwner
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperDialog : Dialog, IComponent {
+open class SuperDialog : Dialog, IComponent {
 
     constructor(context: Context) : super(context) {
         init()

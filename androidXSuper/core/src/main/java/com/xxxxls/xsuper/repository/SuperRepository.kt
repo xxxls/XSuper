@@ -2,7 +2,7 @@ package com.xxxxls.xsuper.repository
 
 import com.xxxxls.xsuper.adapter.*
 import com.xxxxls.xsuper.component.ICleared
-import com.xxxxls.xsuper.model.XSuperResponse
+import com.xxxxls.xsuper.model.SuperResponse
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toFailureResult
 import com.xxxxls.xsuper.model.toSuccessResult
@@ -15,7 +15,7 @@ import kotlin.coroutines.CoroutineContext
  * @author Max
  * @date 2020/11/28.
  */
-open class XSuperRepository : ICleared {
+open class SuperRepository : ICleared {
 
     // 默认适配器
     private val defaultResponseAdapter: ResponseAdapter by lazy {
@@ -52,7 +52,7 @@ open class XSuperRepository : ICleared {
         adapter: ResponseAdapter = getResponseAdapter(),
         converter: ExceptionConverter = getExceptionConverter(),
         context: CoroutineContext = Dispatchers.IO,
-        block: suspend () -> XSuperResponse<T>
+        block: suspend () -> SuperResponse<T>
     ): Flow<T> {
         return flow {
             // 拿取响应体
@@ -75,7 +75,7 @@ open class XSuperRepository : ICleared {
         adapter: ResponseAdapter = getResponseAdapter(),
         converter: ExceptionConverter = getExceptionConverter(),
         context: CoroutineContext = Dispatchers.IO,
-        block: suspend () -> XSuperResponse<T>
+        block: suspend () -> SuperResponse<T>
     ): Flow<XSuperResult<T>> {
         return flow {
             emit(adapter.responseToResult(block.invoke()))
@@ -91,7 +91,7 @@ open class XSuperRepository : ICleared {
     suspend fun <T> apiResult(
         converter: ExceptionConverter = getExceptionConverter(),
         adapter: ResponseAdapter = getResponseAdapter(),
-        block: suspend () -> XSuperResponse<T>
+        block: suspend () -> SuperResponse<T>
     ): XSuperResult<T> {
         return try {
             adapter.responseToResult(block.invoke())
@@ -105,7 +105,7 @@ open class XSuperRepository : ICleared {
      * @param converter 异常转换器
      * @param adapter 响应适配器
      */
-    fun <T> XSuperResponse<T>.asApiResult(
+    fun <T> SuperResponse<T>.asApiResult(
         converter: ExceptionConverter = getExceptionConverter(),
         adapter: ResponseAdapter = getResponseAdapter()
     ): XSuperResult<T> {

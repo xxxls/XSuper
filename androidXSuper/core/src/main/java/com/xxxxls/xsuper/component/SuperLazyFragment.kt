@@ -10,7 +10,7 @@ import com.xxxxls.utils.logE
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperLazyFragment : Fragment() {
+open class SuperLazyFragment : Fragment() {
 
     @Volatile
     private var mIsFirstVisible = true
@@ -133,7 +133,7 @@ open class XSuperLazyFragment : Fragment() {
      */
     private fun isParentInvisible(): Boolean {
         val parentFragment = parentFragment
-        return if (parentFragment is XSuperLazyFragment) {
+        return if (parentFragment is SuperLazyFragment) {
             !parentFragment.isSupportVisible()
         } else {
             false
@@ -163,7 +163,7 @@ open class XSuperLazyFragment : Fragment() {
         val fragments = childFragmentManager.fragments
         if (fragments.isNotEmpty()) {
             for (child in fragments) {
-                if (child is XSuperLazyFragment && !child.isHidden() && child.getUserVisibleHint()) {
+                if (child is SuperLazyFragment && !child.isHidden() && child.getUserVisibleHint()) {
                     child.dispatchUserVisibleHint(visible)
                 }
             }

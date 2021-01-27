@@ -2,14 +2,14 @@ package com.xxxxls.module_base.widget
 
 import android.content.Context
 import com.xxxxls.module_base.R
-import com.xxxxls.xsuper.component.XSuperDialog
+import com.xxxxls.xsuper.component.SuperDialog
 
 /**
  * 加载弹窗
  * @author Max
  * @date 2019-12-05.
  */
-open class LoadingDialog(context: Context, val cancelable: Boolean = true) : XSuperDialog(context) {
+open class LoadingDialog(context: Context, val cancelable: Boolean = true) : SuperDialog(context) {
 
     override fun onInitialize() {
         super.onInitialize()

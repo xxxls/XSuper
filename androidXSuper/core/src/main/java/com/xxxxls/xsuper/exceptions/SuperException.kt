@@ -6,7 +6,7 @@ package com.xxxxls.xsuper.exceptions
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperException : Exception {
+open class SuperException : Exception {
 
     /**
      * 错误码

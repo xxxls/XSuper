@@ -6,7 +6,7 @@ package com.xxxxls.xsuper.model
  * @author Max
  * @date 2019-11-28.
  */
-interface XSuperResponse<out T> {
+interface SuperResponse<out T> {
 
     /**
      * 是否成功

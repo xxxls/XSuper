@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import com.xxxxls.xsuper.model.ResultLiveData
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionHandler
-import com.xxxxls.xsuper.viewmodel.XSuperViewModel
+import com.xxxxls.xsuper.viewmodel.SuperViewModel
 
 /**
  * 组件的viewModel
@@ -27,7 +27,7 @@ interface IVmComponent : IComponent, ViewModelStoreOwner, HasDefaultViewModelPro
     /**
      * 添加ViewModel（关联组件与vm的通信）
      */
-    fun addViewModel(viewModel: XSuperViewModel?) {
+    fun addViewModel(viewModel: SuperViewModel?) {
         //建立组件与ViewModel的通信
         getLifecycleOwner()?.let { lifecycleOwner ->
             viewModel?.componentBridgeLiveData?.observe(lifecycleOwner, Observer<ComponentAction> {

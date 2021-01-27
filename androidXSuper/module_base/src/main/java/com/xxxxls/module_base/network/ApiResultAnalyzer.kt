@@ -2,7 +2,6 @@ package com.xxxxls.module_base.network
 
 import com.xxxxls.xsuper.adapter.ResultAnalyzer
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
-import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.isSuccess
 import com.xxxxls.xsuper.model.toFailureResult

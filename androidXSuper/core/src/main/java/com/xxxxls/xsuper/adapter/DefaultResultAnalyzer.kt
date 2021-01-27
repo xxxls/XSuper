@@ -1,7 +1,6 @@
 package com.xxxxls.xsuper.adapter
 
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
-import com.xxxxls.xsuper.exceptions.XSuperException
 import com.xxxxls.xsuper.model.XSuperResult
 
 /**

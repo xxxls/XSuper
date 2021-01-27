@@ -13,7 +13,7 @@ import androidx.lifecycle.LifecycleOwner
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperDialogFragment : DialogFragment(), IComponent {
+open class SuperDialogFragment : DialogFragment(), IComponent {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

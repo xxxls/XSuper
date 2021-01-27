@@ -1,6 +1,6 @@
 package com.xxxxls.xsuper.model
 
-import com.xxxxls.xsuper.callback.XSuperCallBack
+import com.xxxxls.xsuper.callback.SuperCallBack
 
 /**
  * super - 响应结果类（成功/失败）
@@ -67,7 +67,7 @@ fun <T : Throwable> T.toFailureResult(): XSuperResult.Failure {
 /**
  * Result to callback
  */
-fun <T> XSuperResult<T>.callback(callBack: XSuperCallBack<T>) {
+fun <T> XSuperResult<T>.callback(callBack: SuperCallBack<T>) {
     when (this) {
         is XSuperResult.Success<T> -> {
             callBack.onSuccess(this.data)

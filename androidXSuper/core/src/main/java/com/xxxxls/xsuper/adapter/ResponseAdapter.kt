@@ -1,6 +1,6 @@
 package com.xxxxls.xsuper.adapter
 
-import com.xxxxls.xsuper.model.XSuperResponse
+import com.xxxxls.xsuper.model.SuperResponse
 import com.xxxxls.xsuper.model.XSuperResult
 
 /**
@@ -13,13 +13,13 @@ interface ResponseAdapter {
     /**
      * 获取接口响应体
      */
-    fun <T> getResponseBody(response: XSuperResponse<T>): T
+    fun <T> getResponseBody(response: SuperResponse<T>): T
 
     /**
      * 接口响应转换为响应结果
      * (根据状态码等区分出成功与失败)
      */
-    fun <T> responseToResult(response: XSuperResponse<T>): XSuperResult<T>
+    fun <T> responseToResult(response: SuperResponse<T>): XSuperResult<T>
 
     /**
      * 请求过程的异常转换为响应结果

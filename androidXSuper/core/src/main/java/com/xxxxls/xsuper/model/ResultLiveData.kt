@@ -3,7 +3,7 @@ package com.xxxxls.xsuper.model
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.xxxxls.xsuper.callback.XSuperCallBack
+import com.xxxxls.xsuper.callback.SuperCallBack
 
 /**
  * result - LiveData
@@ -11,7 +11,7 @@ import com.xxxxls.xsuper.callback.XSuperCallBack
  * @date 2019-11-30.
  */
 open class ResultLiveData<T> : MutableLiveData<XSuperResult<T>>(),
-    XSuperCallBack<T> {
+    SuperCallBack<T> {
 
     override fun onSuccess(result: T) {
         postValue(XSuperResult.Success(result))

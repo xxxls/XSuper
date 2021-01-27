@@ -11,7 +11,7 @@ import kotlin.reflect.KProperty
  * @date 2019-11-30.
  */
 @Deprecated("没什么必要")
-class XSuperViewModelFactoryLazy<VM : XSuperViewModel>(val initializer: () -> Class<VM>) :
+class SuperViewModelFactoryLazy<VM : SuperViewModel>(val initializer: () -> Class<VM>) :
     ReadOnlyProperty<IVmComponent, VM> {
 
     private var mViewModel: VM? = null

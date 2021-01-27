@@ -2,22 +2,12 @@ package com.xxxxls.module_base.network
 
 import android.app.Activity
 import android.app.Dialog
-import android.net.ParseException
-import com.google.gson.JsonParseException
-import com.xxxxls.module_base.R
 import com.xxxxls.module_base.network.response.BaseResponse
-import com.xxxxls.utils.AppUtils
 import com.xxxxls.xsuper.adapter.ExceptionAnalyzer
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import com.xxxxls.xsuper.exceptions.ApiException
-import com.xxxxls.xsuper.exceptions.CodeException
-import com.xxxxls.xsuper.exceptions.NetWorkException
-import com.xxxxls.xsuper.exceptions.XSuperException
-import org.json.JSONException
-import retrofit2.HttpException
 import java.net.*
-import java.util.concurrent.TimeoutException
 
 /**
  * 异常分析器

@@ -5,7 +5,7 @@ package com.xxxxls.xsuper.callback
  * @author Max
  * @date 2019-12-04.
  */
-interface LoadingCallBack<T> : XSuperCallBack<T> {
+interface LoadingCallBack<T> : SuperCallBack<T> {
 
     /**
      * 是否展示loading

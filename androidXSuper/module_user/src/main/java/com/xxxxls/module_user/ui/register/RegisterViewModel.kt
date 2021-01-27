@@ -3,11 +3,8 @@ package com.xxxxls.module_user.ui.register
 import androidx.hilt.lifecycle.ViewModelInject
 import com.xxxxls.module_base.mvvm.BaseLiveData
 import com.xxxxls.module_base.mvvm.BaseViewModel
-import com.xxxxls.module_base.network.ApiResponseAdapter
 import com.xxxxls.module_user.bean.UserBean
-import com.xxxxls.module_user.data.UserApis
 import com.xxxxls.module_user.data.UserRepository
-import com.xxxxls.xsuper.viewmodel.XSuperViewModel
 
 /**
  * 注册VM

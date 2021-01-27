@@ -1,18 +1,18 @@
 package com.xxxxls.xsuper.exceptions
 
-import com.xxxxls.xsuper.model.XSuperResponse
+import com.xxxxls.xsuper.model.SuperResponse
 
 /**
  * 接口请求异常（这里指请求成功，但响应错误）
  * @author Max
  * @date 2019-11-26.
  */
-open class ApiException : XSuperException {
+open class ApiException : SuperException {
 
     // 接口响应体
-    var response: XSuperResponse<*>? = null
+    var response: SuperResponse<*>? = null
 
-    constructor(response: XSuperResponse<*>) : super() {
+    constructor(response: SuperResponse<*>) : super() {
         this.response = response
     }
 }

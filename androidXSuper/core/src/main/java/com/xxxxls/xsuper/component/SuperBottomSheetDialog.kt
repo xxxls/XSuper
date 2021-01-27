@@ -1,58 +1,60 @@
 package com.xxxxls.xsuper.component
 
-import android.annotation.SuppressLint
-import android.app.Dialog
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.xxxxls.xsuper.R
 
+
 /**
- * Super - BottomSheetDialogFragment
+ * Super - BottomSheetDialog
  * @author Max
  * @date 2019-11-26.
  */
-open class XSuperBottomSheetDialogFragment : BottomSheetDialogFragment(),
-    IComponent {
+open class SuperBottomSheetDialog : BottomSheetDialog {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    constructor(context: Context) : super(context) {
+        init()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    constructor(context: Context, theme: Int) : super(context, theme) {
+        init()
+    }
+
+    constructor(
+        context: Context,
+        cancelable: Boolean,
+        cancelListener: DialogInterface.OnCancelListener?
+    ) : super(context, cancelable, cancelListener) {
+        init()
+    }
+
+    private fun init() {
         getLayoutResId()?.let {
-            return layoutInflater.inflate(it, container, false)
+            setContentView(it)
         } ?: let {
-            return createView()
+            createView()?.let {
+                setContentView(it)
+            }
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    @CallSuper
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         onInitialize()
-        initBottomSheetBehavior()
     }
 
     //初始化
     private fun initBottomSheetBehavior() {
-
-        val dialog = dialog as BottomSheetDialog
         // 外部点击取消
-        dialog.setCanceledOnTouchOutside(getCanceled())
+        setCanceledOnTouchOutside(getCanceled())
 
         val bottomSheetLayout = getBottomSheetLayout()
         if (bottomSheetLayout != null) {
@@ -95,9 +97,9 @@ open class XSuperBottomSheetDialogFragment : BottomSheetDialogFragment(),
     }
 
     /**
-     * 初始化方法，只会调用一次
+     * 初始化逻辑
      */
-    protected open fun onInitialize() {
+    protected open fun onInitialize(){
 
     }
 
@@ -116,50 +118,6 @@ open class XSuperBottomSheetDialogFragment : BottomSheetDialogFragment(),
         return null
     }
 
-    override fun getLifecycleOwner(): LifecycleOwner {
-        return this
-    }
-
-    override fun <T : View> findViewById(id: Int): T? {
-        return view?.findViewById<T>(id)
-    }
-
-    /**
-     * 获取显示布局
-     */
-    protected fun getBottomSheetLayout(): View? {
-        val dialog = dialog as? BottomSheetDialog
-        return dialog?.delegate?.findViewById(R.id.design_bottom_sheet)
-    }
-
-    protected fun getBottomSheetBehavior(): BottomSheetBehavior<View>? {
-        getBottomSheetLayout()?.let {
-            return BottomSheetBehavior.from(it)
-        }
-        return null
-    }
-
-    /**
-     * 获取要显示的Peek高度（中途停顿高度）
-     */
-    protected open fun getPeekHeight(): Int {
-        return -1
-    }
-
-    /**
-     * 获取要显示的最大高度（最大展开高度）
-     */
-    protected open fun getMaxHeight(): Int {
-        return -1
-    }
-
-    /**
-     * 是否展开状态
-     */
-    protected open fun isExpandedState(): Boolean {
-        return true
-    }
-
     /**
      * 是否可点击阴影部分取消
      */
@@ -173,4 +131,33 @@ open class XSuperBottomSheetDialogFragment : BottomSheetDialogFragment(),
     protected open fun isCanSlideClose(): Boolean {
         return true
     }
+
+    /**
+     * 获取要显示的最大高度（最大展开高度）
+     */
+    protected open fun getMaxHeight(): Int {
+        return -1
+    }
+
+    /**
+     * 获取要显示的Peek高度（中途停顿高度）
+     */
+    protected open fun getPeekHeight(): Int {
+        return -1
+    }
+
+    /**
+     * 是否展开状态
+     */
+    protected open fun isExpandedState(): Boolean {
+        return true
+    }
+
+    /**
+     * 获取显示布局
+     */
+    protected open fun getBottomSheetLayout(): View? {
+        return delegate?.findViewById(R.id.design_bottom_sheet)
+    }
+
 }
