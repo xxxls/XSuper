@@ -37,6 +37,12 @@ interface IStatusView {
     fun addStatus(status: Status, @LayoutRes statusLayoutId: Int)
 
     /**
+     * 移除状态
+     * @return 是否移除成功
+     */
+    fun removeStatus(status: Status): Boolean
+
+    /**
      * 设置状态更新时间
      */
     fun setOnStatusChangeListener(listener: OnStatusChangeListener?)
@@ -57,10 +63,10 @@ interface IStatusView {
 
         /**
          * 改变状态
-         * @param oldStatus 旧状态
          * @param newStatus 新状态
+         * @param oldStatus 旧状态
          */
-        fun onChange(oldStatus: Status, newStatus: Status)
+        fun onChange(newStatus: Status,oldStatus: Status)
     }
 
     //重试事件

@@ -7,9 +7,11 @@ import com.xxxxls.module_base.adapter.SimpleAdapter
 import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.status.*
 import com.xxxxls.utils.L
+import com.xxxxls.utils.date.DateUtils
+import com.xxxxls.utils.date.toDate
 import com.xxxxls.utils.ktx.singleClick
 import com.xxxxls.utils.ktx.toast
-import kotlinx.android.synthetic.main.fragment_status_xml.recyclerView
+import kotlinx.android.synthetic.main.fragment_status_xml.*
 import kotlinx.android.synthetic.main.layout_status_operation.*
 
 /**
@@ -79,6 +81,9 @@ class StatusCodeFragment : BaseFragment() {
                 loading()
             })
 
+        // 添加自定义状态
+        recyclerView.getStatusView()?.addStatus(CustomStatus, R.layout.layout_status_custom)
+
         //设置某个状态下的子view文本
         recyclerView.setStatusText(Status.NoNetwork, R.id.base_status_hint_content, "没有网络吗？")
 
@@ -93,6 +98,12 @@ class StatusCodeFragment : BaseFragment() {
 
     private fun initEvent() {
 
+        recyclerView.getStatusView()?.setOnStatusChangeListener(object : IStatusView.OnStatusChangeListener {
+            override fun onChange(newStatus: Status, oldStatus: Status) {
+                L.e("状态改变：$newStatus -#- $oldStatus")
+            }
+        })
+
         tv_content.singleClick {
             recyclerView?.showContent()
         }
@@ -106,13 +117,20 @@ class StatusCodeFragment : BaseFragment() {
         }
 
         tv_error.singleClick {
-            recyclerView?.showError()
+            val time = 4000L
+            toast("延时${time}毫秒再切换")
+            recyclerView?.showError(time)
         }
 
         tv_no_work.singleClick {
             recyclerView?.showNoNetwork()
         }
 
+        tv_custom.singleClick {
+            val time = 2000L
+            toast("延时${time}毫秒再切换")
+            recyclerView?.switchStatus(CustomStatus, time)
+        }
     }
 
     private fun loading() {

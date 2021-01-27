@@ -5,7 +5,7 @@ package com.xxxxls.status
  * @author Max
  * @date 2019-12-14.
  */
-sealed class Status {
+open class Status {
 
     //默认
     internal object Default : Status()
@@ -24,4 +24,8 @@ sealed class Status {
 
     //无网络
     object NoNetwork : Status()
+
+    fun equals(status: Status): Boolean {
+        return status.javaClass == this.javaClass
+    }
 }

@@ -12,7 +12,7 @@ import androidx.annotation.LayoutRes
  * @author Max
  * @date 2019-12-14.
  */
-class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
+class SuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
 
     //当前类型
     protected var statusType: Status = Status.Default
@@ -39,12 +39,15 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     protected var retryClickListener: IStatusView.OnRetryClickListener? = null
 
     //默认布局参数
-    protected val DEFAULT_LAYOUT_PARAMS: RelativeLayout.LayoutParams by lazy {
-        RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.MATCH_PARENT
+    protected val defaultLayoutParams: LayoutParams by lazy {
+        LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            LayoutParams.MATCH_PARENT
         )
     }
+
+    // 延时设置-处理器
+    private var delaySetRunnable: Runnable? = null
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -102,10 +105,16 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
      * 设置更新状态
      */
     override fun switchStatus(status: Status, delayMillis: Long) {
+        delaySetRunnable?.let {
+            removeCallbacks(it)
+            delaySetRunnable = null
+        }
         if (delayMillis > 0) {
-            postDelayed({
+            delaySetRunnable = Runnable {
+                delaySetRunnable = null
                 switchStatus(status)
-            }, delayMillis)
+            }
+            postDelayed(delaySetRunnable, delayMillis)
         } else {
             switchStatus(status)
         }
@@ -160,11 +169,24 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     }
 
     /**
+     * 移除状态
+     */
+    override fun removeStatus(status: Status): Boolean {
+        if (getStatus().equals(status) || status.equals(Status.Default)) {
+            // 无法移除当前状态或默认状态
+            return false
+        }
+        statusViews.remove(status.javaClass)
+        statusLayoutIds.remove(status.javaClass)
+        return true
+    }
+
+    /**
      * 改变状态
      */
     private fun changeStatus(status: Status) {
         if (statusType != Status.Default) {
-            statusChangeListener?.onChange(statusType, status)
+            statusChangeListener?.onChange(status, statusType)
         }
         this.statusType = status
     }
@@ -196,7 +218,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     private fun checkAddView(view: View) {
         if (indexOfChild(view) < 0) {
             view.findViewById<View>(R.id.status_retry_view)?.setOnClickListener(this)
-            addView(view, -1, DEFAULT_LAYOUT_PARAMS)
+            addView(view, -1, defaultLayoutParams)
             view.visibility = View.GONE
         }
     }
@@ -239,7 +261,6 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
         }
         return null
     }
-
 
     fun showContent() {
         switchStatus(Status.Content)

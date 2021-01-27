@@ -7,6 +7,8 @@ import com.xxxxls.module_base.adapter.SimpleAdapter
 import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.status.IStatusView
 import com.xxxxls.status.Status
+import com.xxxxls.status.getStatusView
+import com.xxxxls.status.switchStatus
 import com.xxxxls.utils.L
 import com.xxxxls.utils.ktx.singleClick
 import kotlinx.android.synthetic.main.fragment_status_xml.*
@@ -32,6 +34,9 @@ class StatusXmlFragment : BaseFragment() {
     }
 
     private fun initView() {
+        // 添加自定义状态
+        recyclerView.getStatusView()?.addStatus(CustomStatus, R.layout.layout_status_custom)
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         adapter.submitList(
@@ -77,8 +82,8 @@ class StatusXmlFragment : BaseFragment() {
         })
 
         statusView.setOnStatusChangeListener(object : IStatusView.OnStatusChangeListener {
-            override fun onChange(oldStatus: Status, newStatus: Status) {
-                L.e("状态改变：$oldStatus -> $newStatus")
+            override fun onChange(newStatus: Status, oldStatus: Status) {
+                L.e("状态改变：$newStatus -#- $oldStatus")
             }
         })
 
@@ -102,6 +107,9 @@ class StatusXmlFragment : BaseFragment() {
             statusView.showNoNetwork()
         }
 
+        tv_custom.singleClick {
+            statusView?.switchStatus(CustomStatus)
+        }
     }
 
     private fun loading() {
