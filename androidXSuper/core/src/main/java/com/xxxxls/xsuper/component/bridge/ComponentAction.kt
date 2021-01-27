@@ -8,7 +8,7 @@ import android.app.Dialog
  * @author Max
  * @date 2019-12-04.
  */
-sealed class ComponentAction {
+open class ComponentAction {
 
     /**
      * 展示加载弹窗

@@ -2,11 +2,15 @@ package com.xxxxls.module_base.network
 
 import android.app.Activity
 import android.app.Dialog
+import com.xxxxls.module_base.component.FinishAction
 import com.xxxxls.module_base.network.response.BaseResponse
+import com.xxxxls.utils.L
 import com.xxxxls.xsuper.adapter.ExceptionAnalyzer
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import com.xxxxls.xsuper.exceptions.ApiException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.net.*
 
 /**
@@ -19,16 +23,18 @@ object ApiExceptionAnalyzer : ExceptionAnalyzer {
     /**
      * 解析异常
      */
-    override fun analysisException(
+    override suspend fun analysisException(
         bridge: ComponentActionBridge, throwable: Throwable
     ): Throwable {
         return when (throwable) {
             is ApiException -> {
                 /*接口异常*/
-                analysisApiException(
-                    bridge,
-                    throwable
-                )
+                withContext(Dispatchers.Main) {
+                    analysisApiException(
+                        bridge,
+                        throwable
+                    )
+                }
             }
             else -> {
                 /*其他异常*/

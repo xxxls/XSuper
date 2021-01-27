@@ -13,7 +13,7 @@ open class DefaultResultAnalyzer : ResultAnalyzer {
     /**
      * 分析结果
      */
-    override fun <T> analysisResult(
+    override suspend fun <T> analysisResult(
         bridge: ComponentActionBridge,
         result: XSuperResult<T>
     ): XSuperResult<T> {
@@ -23,7 +23,7 @@ open class DefaultResultAnalyzer : ResultAnalyzer {
     /**
      * 分析异常
      */
-    override fun analysisException(bridge: ComponentActionBridge, throwable: Throwable): Throwable {
+    override suspend fun analysisException(bridge: ComponentActionBridge, throwable: Throwable): Throwable {
         return throwable
     }
 

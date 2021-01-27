@@ -24,7 +24,7 @@ class ApiResultAnalyzer private constructor() : ResultAnalyzer {
      * @param bridge 与组件的通信桥梁
      * @param result 结果
      */
-    override fun <T> analysisResult(
+    override suspend fun <T> analysisResult(
         bridge: ComponentActionBridge,
         result: XSuperResult<T>
     ): XSuperResult<T> {
@@ -42,7 +42,7 @@ class ApiResultAnalyzer private constructor() : ResultAnalyzer {
         }
     }
 
-    override fun analysisException(bridge: ComponentActionBridge, throwable: Throwable): Throwable {
+    override suspend fun analysisException(bridge: ComponentActionBridge, throwable: Throwable): Throwable {
         return ApiExceptionAnalyzer.analysisException(bridge, throwable)
     }
 

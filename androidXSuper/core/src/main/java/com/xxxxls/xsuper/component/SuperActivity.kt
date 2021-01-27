@@ -55,26 +55,8 @@ open class SuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoadi
         return this
     }
 
-    //TODO 依赖版本错乱导致此方法没有被实现（应该由activity默认实现该方法的）待解决...
-    private var mDefaultFactory: ViewModelProvider.Factory? = null
-    override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory {
-        checkNotNull(application) {
-            ("Your activity is not yet attached to the "
-                    + "Application instance. You can't request ViewModel before onCreate call.")
-        }
-        if (mDefaultFactory == null) {
-            mDefaultFactory = SavedStateViewModelFactory(
-                application,
-                this,
-                if (intent != null) intent.extras else null
-            )
-        }
-        return mDefaultFactory!!
-    }
-
     override fun onAction(action: ComponentAction) {
         super.onAction(action)
-        L.d("${javaClass.simpleName} -> onAction() action:${action}")
         when (action) {
             is ComponentAction.ShowLoading -> {
                 showLoading(message = action.message)
@@ -88,15 +70,16 @@ open class SuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoadi
             is ComponentAction.BuildDialog -> {
                 action.build(this)
             }
+            else -> {
+
+            }
         }
     }
 
     override fun showLoading(id: Int?, message: CharSequence?) {
-        L.d("${javaClass.simpleName} -> showLoading()")
     }
 
     override fun dismissLoading(id: Int?) {
-        L.d("${javaClass.simpleName} -> dismissLoading()")
     }
 
     override fun getLifecycleTask(): LifecycleTask {

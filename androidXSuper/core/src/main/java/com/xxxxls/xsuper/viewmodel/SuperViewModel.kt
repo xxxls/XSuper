@@ -111,9 +111,9 @@ open class SuperViewModel : ViewModel(), ComponentActionBridge, ILoading, IClear
             block = {
                 block.invoke()
                     .onStart {
-                        loading.showLoadingInMain(this.hashCode())
+                        loading.showLoadingInCoroutine(this.hashCode())
                     }.onCompletion {
-                        loading.dismissLoadingInMain(this.hashCode())
+                        loading.dismissLoadingInCoroutine(this.hashCode())
                     }.catch {
                         // 失败，异常分析处理
                         liveData.onFailure(
@@ -175,10 +175,11 @@ open class SuperViewModel : ViewModel(), ComponentActionBridge, ILoading, IClear
     }
 
     /**
-     * 中转给组件
+     * 中转给组件-发送命令
+     * 注意：必须在主线程中调用此函数
      */
     override fun sendAction(action: ComponentAction) {
-        componentBridgeLiveData.postValue(action)
+        componentBridgeLiveData.value = action
     }
 
     /**
@@ -186,7 +187,7 @@ open class SuperViewModel : ViewModel(), ComponentActionBridge, ILoading, IClear
      * @param analyzer 响应结果分析处理器
      * @param bridge 与组件通信
      */
-    protected open fun <T> analysisResult(
+    protected open suspend fun <T> analysisResult(
         result: XSuperResult<T>,
         analyzer: ResultAnalyzer = getResultAnalyzer(),
         bridge: ComponentActionBridge = this
@@ -199,7 +200,7 @@ open class SuperViewModel : ViewModel(), ComponentActionBridge, ILoading, IClear
      * @param analyzer 响应结果分析处理器
      * @param bridge 与组件通信
      */
-    protected open fun analysisException(
+    protected open suspend fun analysisException(
         throwable: Throwable,
         analyzer: ExceptionAnalyzer = getResultAnalyzer(),
         bridge: ComponentActionBridge = this

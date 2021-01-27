@@ -73,8 +73,6 @@ open class SuperFragment : SuperLazyFragment(), IComponent, IVmComponent, ILoadi
 
     override fun onAction(action: ComponentAction) {
         super.onAction(action)
-        L.d("${javaClass.simpleName} -> onAction() action:${action}")
-
         (activity as? ComponentActionHandler)?.run {
             //转至activity处理
             this.onAction(action)
@@ -93,12 +91,14 @@ open class SuperFragment : SuperLazyFragment(), IComponent, IVmComponent, ILoadi
                 is ComponentAction.BuildDialog -> {
                     action.build(activity)
                 }
+                else -> {
+
+                }
             }
         }
     }
 
     override fun showLoading(id: Int?, message: CharSequence?) {
-        L.d("${javaClass.simpleName} -> showLoading()")
         (activity as? ILoading)?.run {
             //转至activity处理
             this.showLoading(id, message)
@@ -106,7 +106,6 @@ open class SuperFragment : SuperLazyFragment(), IComponent, IVmComponent, ILoadi
     }
 
     override fun dismissLoading(id: Int?) {
-        L.d("${javaClass.simpleName} -> dismissLoading()")
         (activity as? ILoading)?.run {
             //转至activity处理
             this.dismissLoading(id)

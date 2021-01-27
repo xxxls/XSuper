@@ -15,7 +15,7 @@ interface ResultAnalyzer : ExceptionAnalyzer {
      * @param bridge 与组件的通信桥梁
      * @param result 结果
      */
-    fun <T> analysisResult(
+    suspend fun <T> analysisResult(
         bridge: ComponentActionBridge,
         result: XSuperResult<T>
     ): XSuperResult<T>

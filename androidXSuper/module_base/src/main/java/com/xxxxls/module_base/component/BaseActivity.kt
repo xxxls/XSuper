@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.xxxxls.module_base.util.ILog
 import com.xxxxls.module_base.widget.LoadingDialog
 import com.xxxxls.xsuper.component.SuperActivity
+import com.xxxxls.xsuper.component.bridge.ComponentAction
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -31,6 +32,8 @@ open class BaseActivity : SuperActivity(), ILog {
     override fun onDestroy() {
         super.onDestroy()
         unRegisterEventBus()
+        dismissLoading()
+        mLoadingDialog = null
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -68,5 +71,15 @@ open class BaseActivity : SuperActivity(), ILog {
             return
         }
         mLoadingDialog!!.dismiss()
+    }
+
+    override fun onAction(action: ComponentAction) {
+        super.onAction(action)
+        when (action) {
+            is FinishAction -> {
+                // 结束当前页面命令
+                finish()
+            }
+        }
     }
 }

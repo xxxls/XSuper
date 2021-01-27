@@ -30,7 +30,7 @@ interface IVmComponent : IComponent, ViewModelStoreOwner, HasDefaultViewModelPro
     fun addViewModel(viewModel: SuperViewModel?) {
         //建立组件与ViewModel的通信
         getLifecycleOwner()?.let { lifecycleOwner ->
-            viewModel?.componentBridgeLiveData?.observe(lifecycleOwner, Observer<ComponentAction> {
+            viewModel?.componentBridgeLiveData?.observe(lifecycleOwner, {
                 onAction(it)
             })
         } ?: let {
