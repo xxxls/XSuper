@@ -29,4 +29,32 @@ open class BaseResponse<out T> : XSuperResponse<T> {
         return code == 0
     }
 
+    /**
+     * 成功的处理
+     */
+    fun doSuccess(block: (T?) -> Unit) {
+        if (isSuccess()) {
+            block.invoke(getBody())
+        }
+    }
+
+    /**
+     * 成功且结果不为空的处理
+     */
+    suspend fun doSuccessNotEmpty(block: suspend (T) -> Unit) {
+        if (isSuccess()) {
+            getBody()?.let {
+                block.invoke(it)
+            }
+        }
+    }
+
+    /**
+     * 失败的处理
+     */
+    fun doFailure(block: (BaseResponse<T>) -> Unit) {
+        if (!isSuccess()) {
+            block.invoke(this)
+        }
+    }
 }

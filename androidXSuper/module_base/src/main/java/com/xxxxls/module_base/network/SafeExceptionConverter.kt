@@ -8,6 +8,7 @@ import com.xxxxls.xsuper.adapter.ExceptionConverter
 import com.xxxxls.xsuper.exceptions.ApiException
 import com.xxxxls.xsuper.exceptions.CodeException
 import com.xxxxls.xsuper.exceptions.NetWorkException
+import com.xxxxls.xsuper.exceptions.XSuperException
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -59,8 +60,13 @@ class SafeExceptionConverter private constructor() : ExceptionConverter {
                 CodeException(jsonExceptionMsg, throwable)
             }
             else -> {
-                /*其他异常*/
-                CodeException(codeExceptionMsg, throwable)
+                if (throwable is XSuperException) {
+                    // 已经处理过的异常
+                    throwable
+                } else {
+                    /*其他异常*/
+                    CodeException(codeExceptionMsg, throwable)
+                }
             }
         }
     }

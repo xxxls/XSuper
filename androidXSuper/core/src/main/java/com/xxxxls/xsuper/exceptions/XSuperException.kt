@@ -28,4 +28,8 @@ open class XSuperException : Exception {
     constructor(cause: Throwable?, code: Int = 0) : super(cause) {
         this.code = code
     }
+
+    override fun toString(): String {
+        return "[code=$code, message=$message, cause=$cause]"
+    }
 }

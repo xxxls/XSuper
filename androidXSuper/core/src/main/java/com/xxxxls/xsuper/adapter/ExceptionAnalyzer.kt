@@ -11,8 +11,10 @@ interface ExceptionAnalyzer {
 
     /**
      * 解析异常
+     * @param bridge 组件沟通桥梁
+     * @param throwable 异常信息
      */
     fun analysisException(
         bridge: ComponentActionBridge, throwable: Throwable
-    ): Exception
+    ): Throwable
 }

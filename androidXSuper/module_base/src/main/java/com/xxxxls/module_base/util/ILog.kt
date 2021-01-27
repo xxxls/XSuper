@@ -1,14 +1,13 @@
 package com.xxxxls.module_base.util
 
 import android.util.ArrayMap
-import com.xxxxls.logger.BuildConfig
-import com.xxxxls.logger.XLogger
-import com.xxxxls.logger.XLoggerLevel
+import android.util.Log
+import com.xxxxls.module_base.BuildConfig
 
 /**
  * log 日志扩展（方便灵活的控制某个实例下日志功能）
  * @author Max
- * @date 2020/7/7.
+ * @date 2021-01-07.
  */
 interface ILog {
     companion object {
@@ -115,6 +114,7 @@ interface ILog {
      * 默认日志Tag
      */
     fun getLogTag(): String {
+        //TODO 获取当前类名待优化
         return if (tagHashCodeEnabled) {
             this::class.java.simpleName + "#" + this::class.java.hashCode()
         } else {
@@ -126,7 +126,7 @@ interface ILog {
      * 默认日志级别
      */
     fun getLogDefaultLevel(): Int {
-        return XLoggerLevel.INFO
+        return Log.DEBUG
     }
 
     /**
@@ -143,41 +143,41 @@ interface ILog {
         if (!isLog(tag)) {
             return
         }
-        XLogger.log(message = message, tag = tag, level = level)
+        Log.println(level, tag, message.toString())
     }
 
     fun logE(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.e(tag = tag, message = message.toString())
+        Log.e(tag, message.toString())
     }
 
     fun logD(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.d(tag = tag, message = message.toString())
+        Log.d(tag, message.toString())
     }
 
     fun logW(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.w(tag = tag, message = message.toString())
+        Log.w(tag, message.toString())
     }
 
     fun logI(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.i(tag = tag, message = message.toString())
+        Log.i(tag, message.toString())
     }
 
     fun logV(message: CharSequence, tag: String = getLogTag()) {
         if (!isLog(tag)) {
             return
         }
-        XLogger.v(tag = tag, message = message.toString())
+        Log.v(tag, message.toString())
     }
 }

@@ -1,6 +1,7 @@
 package com.xxxxls.xsuper.repository
 
 import com.xxxxls.xsuper.adapter.*
+import com.xxxxls.xsuper.component.ICleared
 import com.xxxxls.xsuper.model.XSuperResponse
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toFailureResult
@@ -14,7 +15,7 @@ import kotlin.coroutines.CoroutineContext
  * @author Max
  * @date 2020/11/28.
  */
-open class XSuperRepository {
+open class XSuperRepository : ICleared {
 
     // 默认适配器
     private val defaultResponseAdapter: ResponseAdapter by lazy {
@@ -29,26 +30,50 @@ open class XSuperRepository {
     /**
      * 获取适配器
      */
-    open fun getResponseAdapter(): ResponseAdapter {
+    protected open fun getResponseAdapter(): ResponseAdapter {
         return defaultResponseAdapter
     }
 
     /**
      * 获取异常转换器
      */
-    open fun getExceptionConverter(): ExceptionConverter {
+    protected open fun getExceptionConverter(): ExceptionConverter {
         return defaultExceptionConverter
     }
 
     /**
-     * API-请求
+     * Flow - 接口
+     * @param adapter 响应适配器
      * @param converter 异常转换器
-     * @param adapter 响应转换器
+     * @param context 协程上下文
      * @param block 发起请求
      */
-    fun <T> apiFlow(
-        converter: ExceptionConverter = getExceptionConverter(),
+    fun <T> flowApi(
         adapter: ResponseAdapter = getResponseAdapter(),
+        converter: ExceptionConverter = getExceptionConverter(),
+        context: CoroutineContext = Dispatchers.IO,
+        block: suspend () -> XSuperResponse<T>
+    ): Flow<T> {
+        return flow {
+            // 拿取响应体
+            val response = block.invoke()
+            // 响应出去，需要捕获异常
+            emit(adapter.getResponseBody(response))
+        }.catch {
+            throw converter.convert(it)
+        }.flowOn(context)
+    }
+
+    /**
+     * Flow - 接口 - 结果
+     * @param converter 异常转换器
+     * @param adapter 响应适配器
+     * @param context 协程上下文
+     * @param block 发起请求
+     */
+    fun <T> flowApiResult(
+        adapter: ResponseAdapter = getResponseAdapter(),
+        converter: ExceptionConverter = getExceptionConverter(),
         context: CoroutineContext = Dispatchers.IO,
         block: suspend () -> XSuperResponse<T>
     ): Flow<XSuperResult<T>> {
@@ -60,24 +85,7 @@ open class XSuperRepository {
     }
 
     /**
-     * 转换为Flow（Api）
-     * @param converter 异常转换器
-     * @param adapter 响应适配器
-     */
-    fun <T> XSuperResponse<T>.asApiFlow(
-        converter: ExceptionConverter = getExceptionConverter(),
-        adapter: ResponseAdapter = getResponseAdapter(),
-        context: CoroutineContext = Dispatchers.IO
-    ): Flow<XSuperResult<T>> {
-        return flow {
-            emit(adapter.responseToResult(this@asApiFlow))
-        }.catch {
-            emit(adapter.throwableToResult(converter.convert(it)))
-        }.flowOn(context)
-    }
-
-    /**
-     * 发起接口请求
+     * 接口 - 转 - Result
      * @param converter 异常转换器
      */
     suspend fun <T> apiResult(
@@ -93,7 +101,7 @@ open class XSuperRepository {
     }
 
     /**
-     * 转换为Result（Api）
+     * Response - 转 - Result
      * @param converter 异常转换器
      * @param adapter 响应适配器
      */
@@ -109,11 +117,11 @@ open class XSuperRepository {
     }
 
     /**
-     * 结果Flow
+     * Flow - Result
      * @param block 发起请求
      * @param converter 异常转换器
      */
-    fun <T> resultFlow(
+    fun <T> flowResult(
         converter: ExceptionConverter = getExceptionConverter(),
         context: CoroutineContext = Dispatchers.IO,
         block: suspend () -> T
@@ -122,6 +130,25 @@ open class XSuperRepository {
             emit(block.invoke().toSuccessResult())
         }.catch {
             emit(converter.convert(it).toFailureResult())
+        }.flowOn(context)
+    }
+
+
+    /**
+     * Flow 安全处理（异常处理）
+     *
+     * @param block 发起请求
+     * @param converter 异常转换器
+     */
+    fun <T> flowSafety(
+        converter: ExceptionConverter = getExceptionConverter(),
+        context: CoroutineContext = Dispatchers.IO,
+        block: suspend () -> T
+    ): Flow<T> {
+        return flow {
+            emit(block.invoke())
+        }.catch {
+            throw (converter.convert(it))
         }.flowOn(context)
     }
 }

@@ -12,19 +12,32 @@ import java.lang.NullPointerException
  * @date 2020/11/27.
  */
 open class DefaultResponseAdapter : ResponseAdapter {
-
     /**
-     * 接口响应转换为响应结果
+     * 获取接口响应体
      */
-    override fun <T> responseToResult(response: XSuperResponse<T>): XSuperResult<T> {
+    override fun <T> getResponseBody(response: XSuperResponse<T>): T {
         if (response.isSuccess()) {
-            response.getBody()?.let {
-                return XSuperResult.Success<T>(data = it)
+            return response.getBody()?.let {
+                return@let it
             } ?: let {
-                return XSuperResult.Failure(XSuperException(NullPointerException("body is Null")))
+                // 这里根据接口规则，可灵活调整
+                throw NullPointerException("response body is Null")
             }
         } else {
-            return XSuperResult.Failure(XSuperException(ApiException(response)))
+            // 接口异常
+            throw ApiException(response)
+        }
+    }
+
+    /**
+     * 接口响应转换为响应结果保证体
+     */
+    override fun <T> responseToResult(response: XSuperResponse<T>): XSuperResult<T> {
+        return try {
+            val body = getResponseBody(response)
+            XSuperResult.Success(data = body)
+        } catch (e: Exception) {
+            throwableToResult(e)
         }
     }
 
@@ -32,6 +45,6 @@ open class DefaultResponseAdapter : ResponseAdapter {
      * 接口请求异常转换为响应结果
      */
     override fun throwableToResult(throwable: Throwable): XSuperResult<Nothing> {
-        return XSuperResult.Failure(CodeException(throwable))
+        return XSuperResult.Failure(throwable)
     }
 }

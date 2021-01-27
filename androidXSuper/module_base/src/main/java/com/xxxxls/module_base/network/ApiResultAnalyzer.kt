@@ -39,15 +39,11 @@ class ApiResultAnalyzer private constructor() : ResultAnalyzer {
                     bridge,
                     (result as XSuperResult.Failure).throwable
                 )
-            if (exception is XSuperException) {
-                exception.toFailureResult()
-            } else {
-                XSuperException(exception).toFailureResult()
-            }
+            exception.toFailureResult()
         }
     }
 
-    override fun analysisException(bridge: ComponentActionBridge, throwable: Throwable): Exception {
+    override fun analysisException(bridge: ComponentActionBridge, throwable: Throwable): Throwable {
         return ApiExceptionAnalyzer.analysisException(bridge, throwable)
     }
 

@@ -4,11 +4,16 @@ import com.xxxxls.xsuper.model.XSuperResponse
 import com.xxxxls.xsuper.model.XSuperResult
 
 /**
- * 响应转换器
+ * 响应适配器
  * @author Max
  * @date 2020/11/27.
  */
 interface ResponseAdapter {
+
+    /**
+     * 获取接口响应体
+     */
+    fun <T> getResponseBody(response: XSuperResponse<T>): T
 
     /**
      * 接口响应转换为响应结果

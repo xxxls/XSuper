@@ -1,16 +1,26 @@
 package com.xxxxls.module_user.data
 
 import com.xxxxls.module_base.mvvm.BaseRepository
+import com.xxxxls.module_base.network.response.BaseResponse
+import com.xxxxls.module_user.bean.LoginBean
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.db.UserDao
+import com.xxxxls.utils.L
+import com.xxxxls.utils.io
 import com.xxxxls.xsuper.adapter.ExceptionAnalyzer
+import com.xxxxls.xsuper.adapter.ExceptionConverter
+import com.xxxxls.xsuper.adapter.ResponseAdapter
+import com.xxxxls.xsuper.exceptions.ApiException
 import com.xxxxls.xsuper.exceptions.XSuperException
+import com.xxxxls.xsuper.model.XSuperResponse
 import com.xxxxls.xsuper.model.XSuperResult
 import com.xxxxls.xsuper.model.toFailureResult
 import com.xxxxls.xsuper.model.toSuccessResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import java.lang.NullPointerException
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * 用户模块Repository
@@ -22,78 +32,79 @@ class UserRepository @Inject constructor(
     private val userDao: UserDao
 ) : BaseRepository() {
 
-
     /**
-     * 登录  (方式一)
+     * 注册账号
      * @param userName 用户名
      * @param password 密码
      */
-    suspend fun login(userName: String, password: String): Flow<XSuperResult<UserBean>> {
-        return apiFlow {
+    suspend fun register(userName: String, password: String) = flowApi {
+        userApis.register(userName, password, password)
+    }
+
+    /**
+     * 登录  (方式一：直接响应数据体)
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun login(userName: String, password: String): Flow<LoginBean> {
+        return flowApi {
             // 请求接口获取到结果
-            val result = userApis.login(userName, password)
-            // 模拟保存到本地记录
-            saveLoginRecord(result.data!!).collectLatest {
-                logE("saveLoginRecord() $it")
+            userApis.login(userName, password)
+        }
+    }
+
+    /**
+     * 登录 (方式二：响应Result包装格式)
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun login2(userName: String, password: String): Flow<XSuperResult<LoginBean>> {
+        return flowApiResult { userApis.login(userName, password) }
+    }
+
+    /**
+     * 获取用户信息
+     * @param userName 用户名
+     * @param password 密码
+     *
+     * TODO 有的公司是先登录，登录会返回token，然后通过token再请求用户信息，
+     * TODO 由于这里采用的WanAndroid提供的api，它不是这样的，所有这里继续调用登录接口来做示例。
+     */
+    suspend fun getUserInfo(userName: String, password: String): Flow<UserBean> {
+        return flowApi {
+            // 请求接口获取到结果
+            userApis.getUserInfo(userName, password)
+        }
+    }
+
+    /**
+     * 登录+获取用户新增
+     * @param userName 用户名
+     * @param password 密码
+     */
+    suspend fun loginAndGetUserInfo(userName: String, password: String): Flow<UserBean> {
+        return flowApi {
+            // 请求接口获取到结果
+            val loginInfo = userApis.login(userName, password)
+            if (loginInfo.isSuccess()) {
+                // 成功后请求获取用户信息接口
+                // 正常情况下：可能是依赖登录接口返回的token，再进行登录接口调用，这里只是做个示例。
+                val userInfo = userApis.getUserInfo(userName, password)
+                // 这里模拟一下：保存本地记录
+                saveLoginRecord(userInfo.getBody()!!).collect()
+                return@flowApi userInfo
+            } else {
+                // 异常直接抛出去
+                throw ApiException(loginInfo)
             }
-            // 返回出去
-            return@apiFlow result
         }
-    }
-
-    /**
-     * 登录 (方式二)
-     * @param userName 用户名
-     * @param password 密码
-     */
-    suspend fun login2(userName: String, password: String): Flow<XSuperResult<UserBean>> {
-        return userApis.login(userName, password).asApiFlow()
-    }
-
-    /**
-     * 登录 (方式三)
-     * @param userName 用户名
-     * @param password 密码
-     */
-    suspend fun login3(userName: String, password: String): Flow<XSuperResult<UserBean>> {
-        return resultFlow {
-            userApis.login(userName, password).data!!
-        }
-    }
-
-    /**
-     * 登录 (方式四) (等同与方式三)
-     * @param userName 用户名
-     * @param password 密码
-     */
-    suspend fun login4(userName: String, password: String): Flow<XSuperResult<UserBean>> {
-        return flow {
-            emit(userApis.login(userName, password).asApiResult())
-        }.catch {
-            emit(XSuperException(it).toFailureResult())
-        }.flowOn(Dispatchers.IO)
-    }
-
-    /**
-     * 登录 (方式五)
-     * @param userName 用户名
-     * @param password 密码
-     */
-    suspend fun login5(userName: String, password: String): Flow<XSuperResult<UserBean>> {
-        return flow {
-            emit(apiResult {
-                userApis.login(userName, password)
-            })
-        }.catch {
-            emit(XSuperException(it).toFailureResult())
-        }.flowOn(Dispatchers.IO)
     }
 
     /**
      * 保存登录记录
      */
-    fun saveLoginRecord(user: UserBean): Flow<XSuperResult<Boolean>> {
-        return resultFlow {
+    fun saveLoginRecord(user: UserBean): Flow<Boolean> {
+        return flowSafety {
             userDao.insert(user)
             true
         }
@@ -102,17 +113,9 @@ class UserRepository @Inject constructor(
     /**
      * 获取登录记录
      */
-    suspend fun getLoginRecord(): Flow<XSuperResult<List<UserBean>>> {
-        return resultFlow {
+    fun getLoginRecord(): Flow<XSuperResult<List<UserBean>>> {
+        return flowResult {
             userDao.getAll() ?: emptyList()
         }
     }
-
-    /**
-     * 注册账号
-     * @param userName 用户名
-     * @param password 密码
-     */
-    suspend fun register(userName: String, password: String) =
-        userApis.register(userName, password, password).asApiFlow()
 }

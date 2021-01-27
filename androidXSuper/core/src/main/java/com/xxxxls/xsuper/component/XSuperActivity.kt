@@ -74,7 +74,7 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoad
 
     override fun onAction(action: ComponentAction) {
         super.onAction(action)
-        L.e("${javaClass.simpleName} -> onAction() action:${action}")
+        L.d("${javaClass.simpleName} -> onAction() action:${action}")
         when (action) {
             is ComponentAction.ShowLoading -> {
                 showLoading(message = action.message)
@@ -92,11 +92,11 @@ open class XSuperActivity : AppCompatActivity(), IComponent, IVmComponent, ILoad
     }
 
     override fun showLoading(id: Int?, message: CharSequence?) {
-        L.e("${javaClass.simpleName} -> showLoading()")
+        L.d("${javaClass.simpleName} -> showLoading()")
     }
 
     override fun dismissLoading(id: Int?) {
-        L.e("${javaClass.simpleName} -> dismissLoading()")
+        L.d("${javaClass.simpleName} -> dismissLoading()")
     }
 
     override fun getLifecycleTask(): LifecycleTask {

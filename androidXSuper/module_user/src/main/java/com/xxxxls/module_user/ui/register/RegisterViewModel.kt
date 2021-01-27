@@ -23,7 +23,7 @@ class RegisterViewModel @ViewModelInject constructor(
     }
 
     fun register(userName: String, password: String) {
-        launchL(registerLiveData){
+        launchF(registerLiveData){
             userRepository.register(userName, password)
         }
     }

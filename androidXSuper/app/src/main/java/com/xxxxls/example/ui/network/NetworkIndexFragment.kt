@@ -6,6 +6,7 @@ import com.xxxxls.example.common.BaseListFragment
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_user.ui.login.LoginViewModel
 import com.xxxxls.titlebar.setTitleBarLeftText
+import com.xxxxls.utils.ktx.trueLet
 import com.xxxxls.xsuper.viewmodel.xsuperViewModels
 import com.xxxxls.xsuper.viewmodel.xsuperViewModelsF
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +36,13 @@ class NetworkIndexFragment : BaseListFragment() {
         viewModel2.loginLiveData.observe(this,success = {
             logE("loginLiveData success list:${it}")
         },failure = {
-            logE("loginLiveData failure error:${it.message}")
+            logE("loginLiveData failure error:${it}")
+        })
+
+        viewModel2.userLiveData.observe(this,success = {
+            logE("userLiveData success list:${it}")
+        },failure = {
+            logE("userLiveData failure error:${it}")
         })
 
     }
@@ -44,6 +51,12 @@ class NetworkIndexFragment : BaseListFragment() {
         super.onInitialize()
         setTitleBarLeftText("返回") {
             activity?.onBackPressed()
+        }
+        val result = true
+        result.trueLet {
+
+        }.elseLet {
+
         }
     }
 
@@ -61,8 +74,8 @@ class NetworkIndexFragment : BaseListFragment() {
     override fun onItemClick(index: Int, item: SimpleItemBean) {
         when (index) {
             0 -> {
-                viewModel.fetchListData()
-                viewModel2.login("Max","12212")
+//                viewModel.fetchListData()
+                viewModel2.loginAndGetUserInfo2("xxxxls","xxxxls123456")
             }
             1 -> {
                 viewModel.fetchListData()

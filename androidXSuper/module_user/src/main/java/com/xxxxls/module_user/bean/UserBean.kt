@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 
 /**
- * 用户Bean
+ * 用户信息
  * @author Max
  * @date 2019-11-28.
  */

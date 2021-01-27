@@ -31,7 +31,7 @@ object ApiExceptionAnalyzer : ExceptionAnalyzer {
      */
     override fun analysisException(
         bridge: ComponentActionBridge, throwable: Throwable
-    ): Exception {
+    ): Throwable {
         return when (throwable) {
             is ApiException -> {
                 /*接口异常*/
@@ -41,12 +41,8 @@ object ApiExceptionAnalyzer : ExceptionAnalyzer {
                 )
             }
             else -> {
-                val throwable = SafeExceptionConverter.instance.convert(throwable)
-                if (throwable is Exception) {
-                    throwable
-                } else {
-                    XSuperException(throwable)
-                }
+                /*其他异常*/
+                SafeExceptionConverter.instance.convert(throwable)
             }
         }
     }
@@ -54,7 +50,7 @@ object ApiExceptionAnalyzer : ExceptionAnalyzer {
     /**
      * 解析接口异常
      */
-    fun analysisApiException(
+    private fun analysisApiException(
         bridge: ComponentActionBridge,
         apiException: ApiException
     ): Exception {

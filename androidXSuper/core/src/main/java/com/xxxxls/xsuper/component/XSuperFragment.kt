@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import com.xxxxls.utils.L
 import com.xxxxls.xsuper.loading.ILoading
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionHandler
@@ -72,7 +73,7 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IVmComponent, ILoa
 
     override fun onAction(action: ComponentAction) {
         super.onAction(action)
-        com.xxxxls.utils.L.e("${javaClass.simpleName} -> onAction() action:${action}")
+        L.d("${javaClass.simpleName} -> onAction() action:${action}")
 
         (activity as? ComponentActionHandler)?.run {
             //转至activity处理
@@ -97,7 +98,7 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IVmComponent, ILoa
     }
 
     override fun showLoading(id: Int?, message: CharSequence?) {
-        com.xxxxls.utils.L.e("${javaClass.simpleName} -> showLoading()")
+        L.d("${javaClass.simpleName} -> showLoading()")
         (activity as? ILoading)?.run {
             //转至activity处理
             this.showLoading(id, message)
@@ -105,7 +106,7 @@ open class XSuperFragment : XSuperLazyFragment(), IComponent, IVmComponent, ILoa
     }
 
     override fun dismissLoading(id: Int?) {
-        com.xxxxls.utils.L.e("${javaClass.simpleName} -> dismissLoading()")
+        L.d("${javaClass.simpleName} -> dismissLoading()")
         (activity as? ILoading)?.run {
             //转至activity处理
             this.dismissLoading(id)

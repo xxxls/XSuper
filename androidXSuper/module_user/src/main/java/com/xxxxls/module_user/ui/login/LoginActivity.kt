@@ -37,6 +37,7 @@ class LoginActivity : BaseActivity() {
         mViewModel.loginLiveData.observe(success = {
             com.xxxxls.utils.L.e("loginLiveData:$it")
         }, failure = {
+
             com.xxxxls.utils.L.e("loginLiveData:$it")
         })
     }

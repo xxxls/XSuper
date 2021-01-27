@@ -21,12 +21,11 @@ open class DefaultResultAnalyzer : ResultAnalyzer {
         return result
     }
 
-    override fun analysisException(bridge: ComponentActionBridge, throwable: Throwable): Exception {
-        return if (throwable is Exception) {
-            throwable
-        } else {
-            XSuperException(throwable)
-        }
+    /**
+     * 分析异常
+     */
+    override fun analysisException(bridge: ComponentActionBridge, throwable: Throwable): Throwable {
+        return throwable
     }
 
 }
