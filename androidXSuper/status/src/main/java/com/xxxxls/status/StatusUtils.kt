@@ -26,9 +26,9 @@ fun View.statusConfig(
     //重试时是否自动切换loading状态
     isAutoSwitchLoading: Boolean = true,
     //重试回调，返回true时自动切换加载状态
-    onRetry: (status: XStatus) -> Unit = { }
-): XSuperStatusView? {
-    return XStatusFactory.status(
+    onRetry: (status: Status) -> Unit = { }
+): SuperStatusView? {
+    return StatusFactory.status(
         this,
         loadingRes,
         emptyRes,
@@ -49,8 +49,8 @@ fun View.statusConfig(
     @LayoutRes noNetworkRes: Int = View.NO_ID,
     //重试回调，返回true时自动切换加载状态
     onRetry: IStatusView.OnRetryClickListener? = null
-): XSuperStatusView? {
-    return XStatusFactory.status(this, loadingRes, emptyRes, errorRes, noNetworkRes, onRetry)
+): SuperStatusView? {
+    return StatusFactory.status(this, loadingRes, emptyRes, errorRes, noNetworkRes, onRetry)
 }
 
 /**
@@ -64,14 +64,14 @@ fun View.getStatusView(): IStatusView? {
  * 获取某个状态视图View
  * @param status 状态
  */
-fun View.getStatusView(status: XStatus): View? {
+fun View.getStatusView(status: Status): View? {
     return getStatusView()?.getViewByStatus(status)
 }
 
 /**
  * 获取某个状态视图 的子view
  */
-fun <V : View> View.getStatusChildView(status: XStatus, @IdRes viewId: Int): V? {
+fun <V : View> View.getStatusChildView(status: Status, @IdRes viewId: Int): V? {
     return getStatusView(status)?.findViewById<V>(viewId)
 }
 
@@ -79,7 +79,7 @@ fun <V : View> View.getStatusChildView(status: XStatus, @IdRes viewId: Int): V? 
  * 切换状态
  * @param delayMillis 延迟时长（毫秒）
  */
-fun View.switchStatus(status: XStatus, delayMillis: Long = 0L) {
+fun View.switchStatus(status: Status, delayMillis: Long = 0L) {
     getStatusView()?.run {
         this.switchStatus(status, delayMillis)
     }
@@ -91,7 +91,7 @@ fun View.switchStatus(status: XStatus, delayMillis: Long = 0L) {
  */
 fun View.showContent(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.Content, delayMillis)
+        this.switchStatus(Status.Content, delayMillis)
     }
 }
 
@@ -101,7 +101,7 @@ fun View.showContent(delayMillis: Long = 0L) {
  */
 fun View.showLoading(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.Loading, delayMillis)
+        this.switchStatus(Status.Loading, delayMillis)
     }
 }
 
@@ -111,7 +111,7 @@ fun View.showLoading(delayMillis: Long = 0L) {
  */
 fun View.showError(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.Error, delayMillis)
+        this.switchStatus(Status.Error, delayMillis)
     }
 }
 
@@ -121,7 +121,7 @@ fun View.showError(delayMillis: Long = 0L) {
  */
 fun View.showEmpty(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.Empty, delayMillis)
+        this.switchStatus(Status.Empty, delayMillis)
     }
 }
 
@@ -131,7 +131,7 @@ fun View.showEmpty(delayMillis: Long = 0L) {
  */
 fun View.showNoNetwork(delayMillis: Long = 0L) {
     getStatusView()?.run {
-        this.switchStatus(XStatus.NoNetwork, delayMillis)
+        this.switchStatus(Status.NoNetwork, delayMillis)
     }
 }
 
@@ -142,7 +142,7 @@ fun View.showNoNetwork(delayMillis: Long = 0L) {
  * @param viewId
  * @param text 文本
  */
-fun View.setStatusText(status: XStatus, viewId: Int, text: CharSequence) {
+fun View.setStatusText(status: Status, viewId: Int, text: CharSequence) {
     getStatusChildView<TextView>(status, viewId)?.text = text
 }
 
@@ -152,7 +152,7 @@ fun View.setStatusText(status: XStatus, viewId: Int, text: CharSequence) {
  * @param viewId
  * @param resId 文本资源
  */
-fun View.setStatusText(status: XStatus, viewId: Int, @StringRes resId: Int) {
+fun View.setStatusText(status: Status, viewId: Int, @StringRes resId: Int) {
     getStatusChildView<TextView>(status, viewId)?.setText(resId)
 }
 
@@ -163,7 +163,7 @@ fun View.setStatusText(status: XStatus, viewId: Int, @StringRes resId: Int) {
  * @param viewId
  * @param resId 资源ID
  */
-fun View.setStatusImage(status: XStatus, viewId: Int, @DrawableRes resId: Int) {
+fun View.setStatusImage(status: Status, viewId: Int, @DrawableRes resId: Int) {
     getStatusChildView<ImageView>(status, viewId)?.setImageResource(resId)
 }
 
@@ -174,7 +174,7 @@ fun View.setStatusImage(status: XStatus, viewId: Int, @DrawableRes resId: Int) {
  * @param listener 点击事件
  */
 fun View.setOnStatusChildViewClickListener(
-    status: XStatus,
+    status: Status,
     viewId: Int,
     listener: (v: View?) -> Unit
 ) {
@@ -189,7 +189,7 @@ fun View.setOnStatusChildViewClickListener(
  * @param listener 点击事件
  */
 fun View.setOnStatusChildViewClickListener(
-    status: XStatus,
+    status: Status,
     viewId: Int,
     listener: View.OnClickListener
 ) {
@@ -202,12 +202,12 @@ fun View.setOnStatusChildViewClickListener(
 fun View.setOnStatusRetryListener(
     //重试时是否自动切换loading状态
     isAutoSwitchLoading: Boolean = true,
-    onRetry: (status: XStatus) -> Boolean
+    onRetry: (status: Status) -> Boolean
 ) {
     this.setOnStatusRetryListener(object : IStatusView.OnRetryClickListener {
-        override fun onRetry(statusView: IStatusView, status: XStatus) {
+        override fun onRetry(statusView: IStatusView, status: Status) {
             if (isAutoSwitchLoading) {
-                statusView.switchStatus(XStatus.Loading)
+                statusView.switchStatus(Status.Loading)
             }
             onRetry(status)
         }

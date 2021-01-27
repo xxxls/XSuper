@@ -6,7 +6,7 @@ import com.xxxxls.example.R
 import com.xxxxls.module_base.adapter.SimpleAdapter
 import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.status.IStatusView
-import com.xxxxls.status.XStatus
+import com.xxxxls.status.Status
 import com.xxxxls.utils.L
 import com.xxxxls.utils.ktx.singleClick
 import kotlinx.android.synthetic.main.fragment_status_xml.*
@@ -69,15 +69,15 @@ class StatusXmlFragment : BaseFragment() {
     private fun initEvent() {
 
         statusView.setOnRetryClickListener(object : IStatusView.OnRetryClickListener {
-            override fun onRetry(statusView: IStatusView, status: XStatus) {
+            override fun onRetry(statusView: IStatusView, status: Status) {
                 L.e("状态重试：status -> $status")
-                statusView.switchStatus(XStatus.Loading)
+                statusView.switchStatus(Status.Loading)
                 loading()
             }
         })
 
         statusView.setOnStatusChangeListener(object : IStatusView.OnStatusChangeListener {
-            override fun onChange(oldStatus: XStatus, newStatus: XStatus) {
+            override fun onChange(oldStatus: Status, newStatus: Status) {
                 L.e("状态改变：$oldStatus -> $newStatus")
             }
         })
@@ -107,16 +107,16 @@ class StatusXmlFragment : BaseFragment() {
     private fun loading() {
         val status = when ((0..3).random()) {
             0 -> {
-                XStatus.Empty
+                Status.Empty
             }
             1 -> {
-                XStatus.Error
+                Status.Error
             }
             2 -> {
-                XStatus.NoNetwork
+                Status.NoNetwork
             }
             else -> {
-                XStatus.Content
+                Status.Content
             }
         }
         statusView.switchStatus(status, 1000)

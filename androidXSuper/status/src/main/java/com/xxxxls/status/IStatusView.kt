@@ -15,26 +15,26 @@ interface IStatusView {
      * @param status 状态
      * @param delayMillis 延时切换（毫秒）
      */
-    fun switchStatus(status: XStatus, delayMillis: Long = 0L)
+    fun switchStatus(status: Status, delayMillis: Long = 0L)
 
     /**
      * 获取状态
      */
-    fun getStatus(): XStatus
+    fun getStatus(): Status
 
     /**
      * 添加状态视图
      * @param status 状态类型
      * @param statusView 状态视图
      */
-    fun addStatus(status: XStatus, statusView: View)
+    fun addStatus(status: Status, statusView: View)
 
     /**
      * 添加状态视图
      * @param status 状态类型
      * @param statusLayoutId 状态视图布局ID
      */
-    fun addStatus(status: XStatus, @LayoutRes statusLayoutId: Int)
+    fun addStatus(status: Status, @LayoutRes statusLayoutId: Int)
 
     /**
      * 设置状态更新时间
@@ -50,7 +50,7 @@ interface IStatusView {
      * 获取某状态对应的视图
      * @param status 状态
      */
-    fun getViewByStatus(status: XStatus): View?
+    fun getViewByStatus(status: Status): View?
 
     //状态改变状态
     interface OnStatusChangeListener {
@@ -60,7 +60,7 @@ interface IStatusView {
          * @param oldStatus 旧状态
          * @param newStatus 新状态
          */
-        fun onChange(oldStatus: XStatus, newStatus: XStatus)
+        fun onChange(oldStatus: Status, newStatus: Status)
     }
 
     //重试事件
@@ -71,6 +71,6 @@ interface IStatusView {
          * @param statusView
          * @param status 触发时的状态
          */
-        fun onRetry(statusView: IStatusView, status: XStatus)
+        fun onRetry(statusView: IStatusView, status: Status)
     }
 }

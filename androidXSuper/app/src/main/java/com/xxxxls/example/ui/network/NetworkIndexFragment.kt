@@ -75,7 +75,7 @@ class NetworkIndexFragment : BaseListFragment() {
         when (index) {
             0 -> {
 //                viewModel.fetchListData()
-                viewModel2.loginAndGetUserInfo2("xxxxls","xxxxls1234562")
+                viewModel2.loginAndGetUserInfo2("xxxxls","xxxxls123456")
             }
             1 -> {
                 viewModel.fetchListData()

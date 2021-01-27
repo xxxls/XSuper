@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.xxxxls.titlebar.XSuperTitleBar
+    <com.xxxxls.titlebar.SuperTitleBar
         style="@style/base_TitleBar"
         app:titlebar_title="Widget" />
 

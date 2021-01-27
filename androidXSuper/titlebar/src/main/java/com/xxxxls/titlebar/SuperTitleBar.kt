@@ -20,7 +20,7 @@ import com.xxxxls.utils.ktx.getDrawableById
  * @author Max
  * @date 2020-01-03.
  */
-open class XSuperTitleBar : FrameLayout, View.OnClickListener {
+open class SuperTitleBar : FrameLayout, View.OnClickListener {
 
     companion object {
 
@@ -133,7 +133,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             setTextSize(COMPLEX_UNIT_PX, textSize)
             setTextColor(textColor)
             compoundDrawablePadding = drawablePadding.toInt()
-            setOnClickListener(this@XSuperTitleBar)
+            setOnClickListener(this@SuperTitleBar)
             setPadding(childLeftRightPadding, 0, childLeftRightPadding, 0)
         }
 
@@ -191,7 +191,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             setTextSize(COMPLEX_UNIT_PX, textSize)
             setTextColor(textColor)
             compoundDrawablePadding = drawablePadding.toInt()
-            setOnClickListener(this@XSuperTitleBar)
+            setOnClickListener(this@SuperTitleBar)
             setPadding(childLeftRightPadding, 0, childLeftRightPadding, 0)
         }
 
@@ -261,7 +261,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             ellipsize = TextUtils.TruncateAt.END
             setTextSize(COMPLEX_UNIT_PX, textSize)
             setTextColor(textColor)
-            setOnClickListener(this@XSuperTitleBar)
+            setOnClickListener(this@SuperTitleBar)
         }
 
         val layoutParams = LinearLayout.LayoutParams(
@@ -301,7 +301,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
             ellipsize = TextUtils.TruncateAt.END
             setTextSize(COMPLEX_UNIT_PX, textSize)
             setTextColor(textColor)
-            setOnClickListener(this@XSuperTitleBar)
+            setOnClickListener(this@SuperTitleBar)
         }
 
         val layoutParams = LinearLayout.LayoutParams(
@@ -395,14 +395,14 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置标题
      */
-    open fun setTitleText(@StringRes resId: Int): XSuperTitleBar {
+    open fun setTitleText(@StringRes resId: Int): SuperTitleBar {
         return setTitleText(content = context.getString(resId))
     }
 
     /**
      * 设置标题
      */
-    open fun setTitleText(content: String?): XSuperTitleBar {
+    open fun setTitleText(content: String?): SuperTitleBar {
         getTitleView()?.apply {
             text = content
             visibility = if (content.isNullOrEmpty()) View.GONE else View.VISIBLE
@@ -414,14 +414,14 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置标题
      */
-    open fun setSubTitleText(@StringRes resId: Int): XSuperTitleBar {
+    open fun setSubTitleText(@StringRes resId: Int): SuperTitleBar {
         return setSubTitleText(content = context.getString(resId))
     }
 
     /**
      * 设置副标题
      */
-    open fun setSubTitleText(content: String?): XSuperTitleBar {
+    open fun setSubTitleText(content: String?): SuperTitleBar {
         getSubTitleView()?.apply {
             text = content
             visibility = if (content.isNullOrEmpty()) View.GONE else View.VISIBLE
@@ -433,7 +433,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置标题文本大小
      */
-    open fun setTitleTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): XSuperTitleBar {
+    open fun setTitleTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): SuperTitleBar {
         getTitleView()?.setTextSize(unit, size)
         return this
     }
@@ -441,7 +441,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置标题文本大小
      */
-    open fun setSubTitleTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): XSuperTitleBar {
+    open fun setSubTitleTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): SuperTitleBar {
         getSubTitleView()?.setTextSize(unit, size)
         return this
     }
@@ -449,14 +449,14 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置左标题
      */
-    open fun setLeftText(@StringRes resId: Int): XSuperTitleBar {
+    open fun setLeftText(@StringRes resId: Int): SuperTitleBar {
         return setLeftText(content = context.getString(resId))
     }
 
     /**
      * 设置左标题
      */
-    open fun setLeftText(content: String?): XSuperTitleBar {
+    open fun setLeftText(content: String?): SuperTitleBar {
         getLeftView().apply {
             text = content
             onUpdateContent(this)
@@ -468,7 +468,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置左图标
      */
-    open fun setLeftIcon(drawable: Drawable?): XSuperTitleBar {
+    open fun setLeftIcon(drawable: Drawable?): SuperTitleBar {
         getLeftView().apply {
             setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
             onUpdateContent(this)
@@ -479,14 +479,14 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置左图标
      */
-    open fun setLeftIcon(@DrawableRes resId: Int): XSuperTitleBar {
+    open fun setLeftIcon(@DrawableRes resId: Int): SuperTitleBar {
         return setLeftIcon(context.getDrawableById(resId))
     }
 
     /**
      * 设置左背景
      */
-    open fun setLeftBackground(drawable: Drawable?): XSuperTitleBar {
+    open fun setLeftBackground(drawable: Drawable?): SuperTitleBar {
         getLeftView().background = drawable
         return this
     }
@@ -494,7 +494,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置左文本大小
      */
-    open fun setLeftTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): XSuperTitleBar {
+    open fun setLeftTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): SuperTitleBar {
         getLeftView().setTextSize(unit, size)
         return this
     }
@@ -502,14 +502,14 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置右标题
      */
-    open fun setRightText(@StringRes resId: Int): XSuperTitleBar {
+    open fun setRightText(@StringRes resId: Int): SuperTitleBar {
         return setRightText(content = context.getString(resId))
     }
 
     /**
      * 设置右标题
      */
-    open fun setRightText(content: String?): XSuperTitleBar {
+    open fun setRightText(content: String?): SuperTitleBar {
         getRightView().apply {
             text = content
             onUpdateContent(this)
@@ -520,7 +520,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置右图标
      */
-    open fun setRightIcon(drawable: Drawable?): XSuperTitleBar {
+    open fun setRightIcon(drawable: Drawable?): SuperTitleBar {
         getRightView().apply {
             setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
             onUpdateContent(this)
@@ -531,14 +531,14 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置右图标
      */
-    open fun setRightIcon(@DrawableRes resId: Int): XSuperTitleBar {
+    open fun setRightIcon(@DrawableRes resId: Int): SuperTitleBar {
         return setRightIcon(context.getDrawableById(resId))
     }
 
     /**
      * 设置右背景
      */
-    open fun setRightBackground(drawable: Drawable?): XSuperTitleBar {
+    open fun setRightBackground(drawable: Drawable?): SuperTitleBar {
         getRightView().background = drawable
         return this
     }
@@ -546,7 +546,7 @@ open class XSuperTitleBar : FrameLayout, View.OnClickListener {
     /**
      * 设置右文本大小
      */
-    open fun setRightTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): XSuperTitleBar {
+    open fun setRightTextSize(unit: Int = COMPLEX_UNIT_PX, size: Float): SuperTitleBar {
         getRightView().setTextSize(unit, size)
         return this
     }

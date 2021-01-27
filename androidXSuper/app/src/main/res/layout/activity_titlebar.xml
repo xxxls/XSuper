@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.xxxxls.titlebar.XSuperTitleBar
+    <com.xxxxls.titlebar.SuperTitleBar
         android:id="@+id/titlebar_a"
         style="@style/base_TitleBar_HasBack"
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         app:titlebar_title="标题栏"
         app:titlebar_title_text_color="@color/base_color_ffffff" />
 
-    <com.xxxxls.titlebar.XSuperTitleBar
+    <com.xxxxls.titlebar.SuperTitleBar
         android:id="@+id/titlebar_b"
         style="@style/base_TitleBar_HasBack"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         app:titlebar_title="@string/app_name"
         app:titlebar_title_text_color="@color/base_color_ffffff" />
 
-    <com.xxxxls.titlebar.XSuperTitleBar
+    <com.xxxxls.titlebar.SuperTitleBar
         android:id="@+id/titlebar_c"
         style="@style/base_TitleBar_HasBack"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
         app:titlebar_title_text_color="@color/base_color_FD1684"
         app:titlebar_title_text_size="14sp" />
 
-    <com.xxxxls.titlebar.XSuperTitleBar
+    <com.xxxxls.titlebar.SuperTitleBar
         android:id="@+id/titlebar_d"
         style="@style/base_TitleBar"
         android:layout_marginTop="10dp"
@@ -65,7 +65,7 @@
         app:titlebar_title="Title"
         app:titlebar_title_text_color="@color/base_color_ffffff" />
 
-    <com.xxxxls.titlebar.XSuperTitleBar
+    <com.xxxxls.titlebar.SuperTitleBar
         android:id="@+id/titlebar_e"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

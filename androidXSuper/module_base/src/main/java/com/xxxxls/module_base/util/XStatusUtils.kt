@@ -3,9 +3,9 @@ package com.xxxxls.module_base.util
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.xxxxls.module_base.R
-import com.xxxxls.status.XStatus
-import com.xxxxls.status.XStatusFactory
-import com.xxxxls.status.XSuperStatusView
+import com.xxxxls.status.Status
+import com.xxxxls.status.StatusFactory
+import com.xxxxls.status.SuperStatusView
 
 /**
  * 多状态
@@ -25,9 +25,9 @@ fun View.status(
     //重试时是否自动切换loading状态
     isAutoSwitchLoading: Boolean = true,
     //重试回调，返回true时自动切换加载状态
-    onRetry: (status: XStatus) -> Unit = { }
-): XSuperStatusView? {
-    return XStatusFactory.status(
+    onRetry: (status: Status) -> Unit = { }
+): SuperStatusView? {
+    return StatusFactory.status(
         this,
         loadingRes,
         emptyRes,

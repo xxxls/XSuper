@@ -21,7 +21,7 @@ class StatusCodeFragment : BaseFragment() {
 
     val adapter = SimpleAdapter()
 
-    var statusView: XSuperStatusView? = null
+    var statusView: SuperStatusView? = null
 
     override fun getLayoutResId(): Int {
         return R.layout.fragment_status_code
@@ -74,17 +74,17 @@ class StatusCodeFragment : BaseFragment() {
             emptyRes = R.layout.base_status_empty,
             noNetworkRes = R.layout.base_status_no_network,
             isAutoSwitchLoading = true,
-            onRetry = { status: XStatus ->
+            onRetry = { status: Status ->
                 L.e("状态重试：status -> $status")
                 loading()
             })
 
         //设置某个状态下的子view文本
-        recyclerView.setStatusText(XStatus.NoNetwork, R.id.base_status_hint_content, "没有网络吗？")
+        recyclerView.setStatusText(Status.NoNetwork, R.id.base_status_hint_content, "没有网络吗？")
 
         //设置某个状态下的子view点击事件
         recyclerView.setOnStatusChildViewClickListener(
-            XStatus.Empty,
+            Status.Empty,
             R.id.base_status_hint_content
         ) {
             toast("点我了")
@@ -118,16 +118,16 @@ class StatusCodeFragment : BaseFragment() {
     private fun loading() {
         val status = when ((0..3).random()) {
             0 -> {
-                XStatus.Empty
+                Status.Empty
             }
             1 -> {
-                XStatus.Error
+                Status.Error
             }
             2 -> {
-                XStatus.NoNetwork
+                Status.NoNetwork
             }
             else -> {
-                XStatus.Content
+                Status.Content
             }
         }
         recyclerView?.switchStatus(status, 3000)

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
  * @author Max
  * @date 2019-12-16.
  */
-object XStatusFactory {
+object StatusFactory {
 
     /**
      * 构建多状态view
@@ -25,8 +25,8 @@ object XStatusFactory {
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         //重试时是否自动切换loading状态
         isAutoSwitchLoading: Boolean = true,
-        onRetry: (status: XStatus) -> Unit = { }
-    ): XSuperStatusView? {
+        onRetry: (status: Status) -> Unit = { }
+    ): SuperStatusView? {
         return status(
             (activity.findViewById(android.R.id.content) as ViewGroup).getChildAt(0),
             loadingRes, emptyRes, errorRes, noNetworkRes, isAutoSwitchLoading, onRetry
@@ -45,8 +45,8 @@ object XStatusFactory {
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         //重试时是否自动切换loading状态
         isAutoSwitchLoading: Boolean = true,
-        onRetry: (status: XStatus) -> Unit = { }
-    ): XSuperStatusView? {
+        onRetry: (status: Status) -> Unit = { }
+    ): SuperStatusView? {
         (activity.findViewById(android.R.id.content) as ViewGroup).findViewById<View>(
             contentViewResId
         )?.apply {
@@ -69,8 +69,8 @@ object XStatusFactory {
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         //重试时是否自动切换loading状态
         isAutoSwitchLoading: Boolean = true,
-        onRetry: (status: XStatus) -> Unit = { }
-    ): XSuperStatusView? {
+        onRetry: (status: Status) -> Unit = { }
+    ): SuperStatusView? {
         fragment.view?.findViewById<View>(contentViewResId)?.apply {
             return status(this, loadingRes, emptyRes, errorRes, noNetworkRes,  isAutoSwitchLoading, onRetry)
         }
@@ -89,8 +89,8 @@ object XStatusFactory {
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         //重试时是否自动切换loading状态
         isAutoSwitchLoading: Boolean = true,
-        onRetry: (status: XStatus) -> Unit = { }
-    ): XSuperStatusView? {
+        onRetry: (status: Status) -> Unit = { }
+    ): SuperStatusView? {
         return status(
             contentView,
             loadingRes,
@@ -98,9 +98,9 @@ object XStatusFactory {
             errorRes,
             noNetworkRes,
             object : IStatusView.OnRetryClickListener {
-                override fun onRetry(statusView: IStatusView, status: XStatus) {
+                override fun onRetry(statusView: IStatusView, status: Status) {
                     if (isAutoSwitchLoading) {
-                        statusView.switchStatus(XStatus.Loading)
+                        statusView.switchStatus(Status.Loading)
                     }
                     onRetry(status)
                 }
@@ -117,19 +117,19 @@ object XStatusFactory {
         @LayoutRes errorRes: Int = View.NO_ID,
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         onRetry: IStatusView.OnRetryClickListener? = null
-    ): XSuperStatusView? {
+    ): SuperStatusView? {
         (contentView?.parent as? ViewGroup)?.apply {
             val layoutParams = contentView.layoutParams
             val index = this.indexOfChild(contentView)
             this.removeView(contentView)
-            val statusView = XSuperStatusView(context)
+            val statusView = SuperStatusView(context)
             this.addView(statusView, index, layoutParams)
-            statusView.addStatus(XStatus.Content, contentView)
-            statusView.addStatus(XStatus.Error, errorRes)
-            statusView.addStatus(XStatus.NoNetwork, noNetworkRes)
-            statusView.addStatus(XStatus.Empty, emptyRes)
-            statusView.addStatus(XStatus.Loading, loadingRes)
-            statusView.switchStatus(XStatus.Content)
+            statusView.addStatus(Status.Content, contentView)
+            statusView.addStatus(Status.Error, errorRes)
+            statusView.addStatus(Status.NoNetwork, noNetworkRes)
+            statusView.addStatus(Status.Empty, emptyRes)
+            statusView.addStatus(Status.Loading, loadingRes)
+            statusView.switchStatus(Status.Content)
             statusView.setOnRetryClickListener(onRetry)
             return statusView
         }

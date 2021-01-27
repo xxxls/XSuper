@@ -1,7 +1,6 @@
 package com.xxxxls.status
 
 import android.content.Context
-import android.os.Handler
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import androidx.annotation.LayoutRes
 class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
 
     //当前类型
-    protected var statusType: XStatus = XStatus.Default
+    protected var statusType: Status = Status.Default
 
     //状态view集合
     protected val statusViews: HashMap<Class<*>, View> by lazy {
@@ -66,31 +65,31 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
                 defStyleAttr
             )
 
-        statusLayoutIds[XStatus.Content::class.java] =
+        statusLayoutIds[Status.Content::class.java] =
             array.getResourceId(
                 R.styleable.XSuperStatusView_status_content_layout,
                 View.NO_ID
             )
 
-        statusLayoutIds[XStatus.Empty::class.java] =
+        statusLayoutIds[Status.Empty::class.java] =
             array.getResourceId(
                 R.styleable.XSuperStatusView_status_empty_layout,
                 View.NO_ID
             )
 
-        statusLayoutIds[XStatus.Error::class.java] =
+        statusLayoutIds[Status.Error::class.java] =
             array.getResourceId(
                 R.styleable.XSuperStatusView_status_error_layout,
                 View.NO_ID
             )
 
-        statusLayoutIds[XStatus.Loading::class.java] =
+        statusLayoutIds[Status.Loading::class.java] =
             array.getResourceId(
                 R.styleable.XSuperStatusView_status_loading_layout,
                 View.NO_ID
             )
 
-        statusLayoutIds[XStatus.NoNetwork::class.java] =
+        statusLayoutIds[Status.NoNetwork::class.java] =
             array.getResourceId(
                 R.styleable.XSuperStatusView_status_no_network_layout,
                 View.NO_ID
@@ -102,7 +101,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     /**
      * 设置更新状态
      */
-    override fun switchStatus(status: XStatus, delayMillis: Long) {
+    override fun switchStatus(status: Status, delayMillis: Long) {
         if (delayMillis > 0) {
             postDelayed({
                 switchStatus(status)
@@ -115,12 +114,12 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     /**
      * 切换状态
      */
-    fun switchStatus(status: XStatus) {
+    fun switchStatus(status: Status) {
         if (this.statusType == status) {
             return
         }
 
-        if (status == XStatus.Content) {
+        if (status == Status.Content) {
             switchContentView()
             changeStatus(status)
             return
@@ -137,7 +136,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     /**
      * 获取当前类型
      */
-    override fun getStatus(): XStatus {
+    override fun getStatus(): Status {
         return statusType
     }
 
@@ -146,7 +145,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
      * @param status 状态类型
      * @param statusView 状态视图
      */
-    override fun addStatus(status: XStatus, statusView: View) {
+    override fun addStatus(status: Status, statusView: View) {
         statusViews[status.javaClass] = statusView
         statusLayoutIds[status.javaClass] = statusView.id
     }
@@ -156,15 +155,15 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
      * @param status 状态类型
      * @param statusLayoutId 状态视图布局ID
      */
-    override fun addStatus(status: XStatus, @LayoutRes statusLayoutId: Int) {
+    override fun addStatus(status: Status, @LayoutRes statusLayoutId: Int) {
         statusLayoutIds[status.javaClass] = statusLayoutId
     }
 
     /**
      * 改变状态
      */
-    private fun changeStatus(status: XStatus) {
-        if (statusType != XStatus.Default) {
+    private fun changeStatus(status: Status) {
+        if (statusType != Status.Default) {
             statusChangeListener?.onChange(statusType, status)
         }
         this.statusType = status
@@ -174,7 +173,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
      * 检查构造view
      * @param status
      */
-    private fun checkGenerateView(status: XStatus): View? {
+    private fun checkGenerateView(status: Status): View? {
         statusViews[status.javaClass]?.let { view ->
             return view
         } ?: let {
@@ -219,7 +218,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
      * 展示内容View
      */
     private fun switchContentView() {
-        checkGenerateView(XStatus.Content)?.let {
+        checkGenerateView(Status.Content)?.let {
             switchView(it)
         } ?: let {
             for (index in 0 until childCount) {
@@ -233,7 +232,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
     /**
      * 获取某状态视图
      */
-    override fun getViewByStatus(status: XStatus): View? {
+    override fun getViewByStatus(status: Status): View? {
         checkGenerateView(status)?.let {
             checkAddView(it)
             return it
@@ -243,28 +242,28 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
 
 
     fun showContent() {
-        switchStatus(XStatus.Content)
+        switchStatus(Status.Content)
     }
 
     fun showError() {
-        switchStatus(XStatus.Error)
+        switchStatus(Status.Error)
     }
 
     fun showLoading() {
-        switchStatus(XStatus.Loading)
+        switchStatus(Status.Loading)
     }
 
     fun showEmpty() {
-        switchStatus(XStatus.Empty)
+        switchStatus(Status.Empty)
     }
 
     fun showNoNetwork() {
-        switchStatus(XStatus.NoNetwork)
+        switchStatus(Status.NoNetwork)
     }
 
     override fun onClick(v: View?) {
         //重试点击事件
-        if (this.statusType != XStatus.Default) {
+        if (this.statusType != Status.Default) {
             retryClickListener?.onRetry(this, this.statusType)
         }
     }
@@ -279,7 +278,7 @@ class XSuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        switchStatus(XStatus.Content)
+        switchStatus(Status.Content)
     }
 
     override fun onDetachedFromWindow() {

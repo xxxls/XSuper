@@ -5,6 +5,7 @@ package com.xxxxls.logger
  * @author Max
  * @date 2020/9/17.
  */
+@Deprecated("已废弃")
 object XLoggerLevel {
 
     /**

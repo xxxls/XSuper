@@ -17,6 +17,7 @@ import java.io.File
  * @author Max
  * @date 2020-01-18.
  */
+@Deprecated("暂时废弃，有空再重头实现一遍")
 object XLogger {
 
     /**

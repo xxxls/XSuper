@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.xxxxls.status.XSuperStatusView
+    <com.xxxxls.status.SuperStatusView
         android:id="@+id/statusView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -24,7 +24,7 @@
             tools:itemCount="10"
             tools:listitem="@android:layout/simple_list_item_1" />
 
-    </com.xxxxls.status.XSuperStatusView>
+    </com.xxxxls.status.SuperStatusView>
 
     <include
         android:layout_height="60dp"
