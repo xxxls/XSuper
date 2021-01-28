@@ -5,7 +5,7 @@ import com.xxxxls.module_base.component.BaseActivity
 import com.xxxxls.module_base.constants.UserPaths
 import com.xxxxls.module_user.R
 import com.xxxxls.utils.ktx.singleClick
-import com.xxxxls.xsuper.viewmodel.xsuperViewModels
+import com.xxxxls.xsuper.viewmodel.superViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.user_activity_login.*
 
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.user_activity_login.*
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {
 
-    private val mViewModel: LoginViewModel by xsuperViewModels()
+    private val mViewModel: LoginViewModel by superViewModels()
 
     override fun getLayoutResId(): Int {
         return R.layout.user_activity_login

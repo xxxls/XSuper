@@ -95,6 +95,9 @@ fun View.showContent(delayMillis: Long = 0L) {
     }
 }
 
+fun IStatusView?.showContent(delayMillis: Long = 0L) {
+    this?.switchStatus(Status.Content, delayMillis)
+}
 
 /**
  * 切换状态 - Loading
@@ -105,6 +108,9 @@ fun View.showLoading(delayMillis: Long = 0L) {
     }
 }
 
+fun IStatusView?.showLoading(delayMillis: Long = 0L) {
+    this?.switchStatus(Status.Loading, delayMillis)
+}
 
 /**
  * 切换状态 - Error
@@ -115,6 +121,9 @@ fun View.showError(delayMillis: Long = 0L) {
     }
 }
 
+fun IStatusView?.showError(delayMillis: Long = 0L) {
+    this?.switchStatus(Status.Error, delayMillis)
+}
 
 /**
  * 切换状态 - Empty
@@ -125,6 +134,9 @@ fun View.showEmpty(delayMillis: Long = 0L) {
     }
 }
 
+fun IStatusView?.showEmpty(delayMillis: Long = 0L) {
+    this?.switchStatus(Status.Empty, delayMillis)
+}
 
 /**
  * 切换状态 - NoNetwork
@@ -133,6 +145,10 @@ fun View.showNoNetwork(delayMillis: Long = 0L) {
     getStatusView()?.run {
         this.switchStatus(Status.NoNetwork, delayMillis)
     }
+}
+
+fun IStatusView?.showNoNetwork(delayMillis: Long = 0L) {
+    this?.switchStatus(Status.NoNetwork, delayMillis)
 }
 
 

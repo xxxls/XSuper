@@ -12,5 +12,29 @@ data class ListResponse<out T>(
     val over: Boolean?,
     val pageCount: Int?,
     val size: Int?,
-    val total: Int?
-)
+    private val total: Int?,
+    val hasNextPage: Boolean = true
+) : IListResponse<T> {
+
+    override fun isHasNextPage(): Boolean {
+        // TODO 待完善
+        return hasNextPage
+    }
+
+    override fun getNextPage(): Int? {
+        return null
+    }
+
+    override fun getTotal(): Int? {
+        return total
+    }
+
+    override fun isEmpty(): Boolean {
+        return datas.isNullOrEmpty()
+    }
+
+    override fun getList(): List<T>? {
+        return datas
+    }
+
+}

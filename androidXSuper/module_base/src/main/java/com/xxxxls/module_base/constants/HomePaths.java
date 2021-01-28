@@ -7,6 +7,9 @@ package com.xxxxls.module_base.constants;
 public interface HomePaths {
 
 
+    //智能列表刷新
+    String HOME_FRAGMENT_LIST_REFRESH_INDEX = "/home/fragment/list/refresh/index";
+
     //paging 主页
     String HOME_FRAGMENT_PAGING_INDEX = "/home/fragment/paging/index";
 

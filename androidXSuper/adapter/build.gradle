@@ -54,10 +54,8 @@ dependencies {
     androidTestApi Android.runner
     androidTestApi Android.espressoCore
     implementation AndroidX.appcompat
-    // JetPack分页
-    api AndroidX.pagingRuntime
-    // 第三方适配器
-    api Depend.baseRecyclerViewAdapter
+    //分页
+    api rootProject.ext.dependencies["paging"]
 }
 
 tasks.withType(Javadoc).all {

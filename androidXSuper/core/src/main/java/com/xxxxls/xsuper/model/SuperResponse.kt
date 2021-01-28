@@ -18,4 +18,33 @@ interface SuperResponse<out T> {
      */
     fun getBody(): T?
 
+
+    /**
+     * 成功的处理
+     */
+    fun doSuccess(block: (T?) -> Unit) {
+        if (isSuccess()) {
+            block.invoke(getBody())
+        }
+    }
+
+    /**
+     * 成功且结果不为空的处理
+     */
+    fun doSuccessNotEmpty(block: (T) -> Unit) {
+        if (isSuccess()) {
+            getBody()?.let {
+                block.invoke(it)
+            }
+        }
+    }
+
+    /**
+     * 失败的处理
+     */
+    fun doFailure(block: (SuperResponse<T>) -> Unit) {
+        if (!isSuccess()) {
+            block.invoke(this)
+        }
+    }
 }

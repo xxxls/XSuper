@@ -61,7 +61,7 @@ import kotlin.reflect.KClass
  * [Fragment.onAttach()], and access prior to that will result in IllegalArgumentException.
  */
 @MainThread
-inline fun <reified VM : SuperViewModel> IVmComponent.xsuperViewModels(
+inline fun <reified VM : SuperViewModel> IVmComponent.superViewModels(
     noinline ownerProducer: () -> ViewModelStoreOwner = { this },
     noinline factoryProducer: (() -> Factory)? = null
 ) = createXSuperViewModelLazy(VM::class, { ownerProducer().viewModelStore }, factoryProducer)

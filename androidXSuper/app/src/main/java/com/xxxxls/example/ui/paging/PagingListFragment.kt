@@ -12,7 +12,7 @@ import com.xxxxls.example.ui.paging.adapter.PagingListAdapter
 import com.xxxxls.module_base.component.BaseFragment
 import com.xxxxls.module_base.constants.HomePaths
 import com.xxxxls.module_base.util.status
-import com.xxxxls.xsuper.viewmodel.xsuperViewModels
+import com.xxxxls.xsuper.viewmodel.superViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_paging_list.*
 
@@ -34,7 +34,7 @@ class PagingListFragment : BaseFragment() {
     @Autowired(name = HomePaths.KEY_HOME_FRAGMENT_PAGING_LIST_TYPE)
     var type: Int = 0
 
-    private val mViewModel: PagingViewModel by xsuperViewModels()
+    private val mViewModel: PagingViewModel by superViewModels()
 
     override fun getLayoutResId(): Int? {
         return R.layout.fragment_paging_list

@@ -171,15 +171,15 @@ open class SuperLazyFragment : Fragment() {
     }
 
     protected open fun onFragmentFirstVisible() {
-        "${javaClass.simpleName} + 第一次对用户可见".logE()
+//        "${javaClass.simpleName} + 第一次对用户可见".logE()
     }
 
     protected open fun onFragmentResume() {
-        "${javaClass.simpleName} + 对用户可见".logE()
+//        "${javaClass.simpleName} + 对用户可见".logE()
     }
 
     protected open fun onFragmentPause() {
-        "${javaClass.simpleName} + 对用户不可见".logE()
+//        "${javaClass.simpleName} + 对用户不可见".logE()
     }
 
     override fun onDestroyView() {

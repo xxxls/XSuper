@@ -18,5 +18,4 @@ class PagingViewModel @ViewModelInject constructor(private val repository: Pagin
     val listLiveData: LiveData<PagingData<PagingItemBean>> by lazy {
         repository.getArticleList().asLiveData()
     }
-
 }

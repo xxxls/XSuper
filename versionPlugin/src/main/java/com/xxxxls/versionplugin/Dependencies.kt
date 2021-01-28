@@ -55,6 +55,7 @@ object Versions {
     const val junit = "4.12"
     const val coroutinesAdapter = "0.9.2"
     const val xsuper = "1.1.1"
+    const val refreshLayout = "2.0.3"
 }
 
 object AndroidX {
@@ -178,6 +179,17 @@ object Depend {
     const val pictureSelector = "com.github.ltyhome:PictureSelector:${Versions.pictureSelector}"
     const val rxFFmpeg = "com.github.microshow:RxFFmpeg:${Versions.rxFFmpeg}"
     const val xLog = "com.elvishew:xlog:${Versions.xLog}"
+
+    //核心必须依赖
+    const val refreshLayout = "com.scwang.smart:refresh-layout-kernel:${Versions.refreshLayout}"
+
+    //经典刷新头
+    const val refreshLayoutHeaderClassics =
+        "com.scwang.smart:refresh-header-classics:${Versions.refreshLayout}"
+
+    //谷歌刷新头
+    const val refreshLayoutHeaderMaterial =
+        "com.scwang.smart:refresh-header-material:${Versions.refreshLayout}"
 }
 
 object XSuper {

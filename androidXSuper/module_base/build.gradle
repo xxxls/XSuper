@@ -151,4 +151,11 @@ dependencies {
     api Retrofit.coroutinesAdapter
     api Retrofit.gson
     api Android.gson
+
+    // 列表适配器
+    api Depend.baseRecyclerViewAdapter
+
+    // 列表刷新器
+    api Depend.refreshLayout
+    api Depend.refreshLayoutHeaderClassics
 }

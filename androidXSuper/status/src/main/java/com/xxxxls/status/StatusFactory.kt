@@ -25,7 +25,7 @@ object StatusFactory {
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         //重试时是否自动切换loading状态
         isAutoSwitchLoading: Boolean = true,
-        onRetry: (status: Status) -> Unit = { }
+        onRetry: ((status: Status) -> Unit)? = null
     ): SuperStatusView? {
         return status(
             (activity.findViewById(android.R.id.content) as ViewGroup).getChildAt(0),
@@ -45,13 +45,13 @@ object StatusFactory {
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         //重试时是否自动切换loading状态
         isAutoSwitchLoading: Boolean = true,
-        onRetry: (status: Status) -> Unit = { }
+        onRetry: ((status: Status) -> Unit)? = null
     ): SuperStatusView? {
         (activity.findViewById(android.R.id.content) as ViewGroup).findViewById<View>(
             contentViewResId
         )?.apply {
             return status(
-                this, loadingRes, emptyRes, errorRes, noNetworkRes, isAutoSwitchLoading,  onRetry
+                this, loadingRes, emptyRes, errorRes, noNetworkRes, isAutoSwitchLoading, onRetry
             )
         }
         return null
@@ -69,10 +69,18 @@ object StatusFactory {
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         //重试时是否自动切换loading状态
         isAutoSwitchLoading: Boolean = true,
-        onRetry: (status: Status) -> Unit = { }
+        onRetry: ((status: Status) -> Unit)? = null
     ): SuperStatusView? {
         fragment.view?.findViewById<View>(contentViewResId)?.apply {
-            return status(this, loadingRes, emptyRes, errorRes, noNetworkRes,  isAutoSwitchLoading, onRetry)
+            return status(
+                this,
+                loadingRes,
+                emptyRes,
+                errorRes,
+                noNetworkRes,
+                isAutoSwitchLoading,
+                onRetry
+            )
         }
         return null
     }
@@ -89,7 +97,7 @@ object StatusFactory {
         @LayoutRes noNetworkRes: Int = View.NO_ID,
         //重试时是否自动切换loading状态
         isAutoSwitchLoading: Boolean = true,
-        onRetry: (status: Status) -> Unit = { }
+        onRetry: ((status: Status) -> Unit)? = null
     ): SuperStatusView? {
         return status(
             contentView,
@@ -102,7 +110,7 @@ object StatusFactory {
                     if (isAutoSwitchLoading) {
                         statusView.switchStatus(Status.Loading)
                     }
-                    onRetry(status)
+                    onRetry?.invoke(status)
                 }
             })
     }

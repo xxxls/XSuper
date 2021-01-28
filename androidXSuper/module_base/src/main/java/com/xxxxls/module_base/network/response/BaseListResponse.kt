@@ -11,6 +11,6 @@ class BaseListResponse<out T> : BaseResponse<ListResponse<T>>() {
      * 获取非空的数据列表
      */
     fun getListNoNull(): List<T> {
-        return data?.datas ?: emptyList()
+        return data?.getListNoNull() ?: emptyList()
     }
 }
