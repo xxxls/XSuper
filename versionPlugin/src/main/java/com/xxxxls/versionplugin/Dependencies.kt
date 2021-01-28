@@ -44,7 +44,7 @@ object Versions {
     const val greenDao = "3.2.2"
     const val greenDaoUpgradeHelper = "v2.1.0"
     const val smartRefresh = "1.1.0"
-    const val baseQuickAdapter = "2.9.47"
+    const val baseRecyclerViewAdapter = "3.0.4"
     const val immersionBar = "3.0.0"
     const val titleBar = "6.0"
     const val flycoTabLayout = "2.1.2@aar"
@@ -169,8 +169,8 @@ object Depend {
     const val smartRefreshHeader =
         "com.scwang.smartrefresh:SmartRefreshHeader:${Versions.smartRefresh}"
 
-    const val baseQuickAdapter =
-        "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.baseQuickAdapter}"
+    const val baseRecyclerViewAdapter =
+        "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.baseRecyclerViewAdapter}"
     const val immersionBar = "com.gyf.immersionbar:immersionbar:${Versions.immersionBar}"
     const val flycoTabLayout = "com.flyco.tablayout:FlycoTabLayout_Lib:${Versions.flycoTabLayout}"
     const val titleBar = "com.hjq:titlebar:${Versions.titleBar}"

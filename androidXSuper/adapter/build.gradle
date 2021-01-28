@@ -1,6 +1,7 @@
 import com.xxxxls.versionplugin.Android
 import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
+import com.xxxxls.versionplugin.Depend
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -53,8 +54,10 @@ dependencies {
     androidTestApi Android.runner
     androidTestApi Android.espressoCore
     implementation AndroidX.appcompat
-    //分页
-    api rootProject.ext.dependencies["paging"]
+    // JetPack分页
+    api AndroidX.pagingRuntime
+    // 第三方适配器
+    api Depend.baseRecyclerViewAdapter
 }
 
 tasks.withType(Javadoc).all {
