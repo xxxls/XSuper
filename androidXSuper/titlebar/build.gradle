@@ -1,4 +1,3 @@
-import com.xxxxls.versionplugin.Android
 import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
 
@@ -25,7 +24,7 @@ android {
         flavorDimensions BuildConfig.flavorDimensions
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
+        consumerProguardFiles 'proguard-rules.pro'
     }
     buildTypes {
         release {
@@ -61,9 +60,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testApi Android.junit
-    androidTestApi Android.runner
-    androidTestApi Android.espressoCore
 
     implementation AndroidX.appcompat
 }

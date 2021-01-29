@@ -30,7 +30,7 @@ android {
         flavorDimensions BuildConfig.flavorDimensions
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
+        consumerProguardFiles 'proguard-rules.pro'
     }
     buildTypes {
         release {
@@ -57,9 +57,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api Android.junit
-    androidTestApi Android.runner
-    androidTestApi Android.espressoCore
 
     //工具集
     api project(path: ':utils')
