@@ -56,6 +56,7 @@ object Versions {
     const val coroutinesAdapter = "0.9.2"
     const val xsuper = "1.1.1"
     const val refreshLayout = "2.0.3"
+    const val mmkv = "1.2.7"
 }
 
 object AndroidX {
@@ -166,10 +167,6 @@ object GreenDao {
 object Depend {
     const val eventBus = "org.greenrobot:eventbus:${Versions.eventBus}"
 
-    const val smartRefresh = "com.scwang.smartrefresh:SmartRefreshLayout:${Versions.smartRefresh}"
-    const val smartRefreshHeader =
-        "com.scwang.smartrefresh:SmartRefreshHeader:${Versions.smartRefresh}"
-
     const val baseRecyclerViewAdapter =
         "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.baseRecyclerViewAdapter}"
     const val immersionBar = "com.gyf.immersionbar:immersionbar:${Versions.immersionBar}"
@@ -190,6 +187,9 @@ object Depend {
     //谷歌刷新头
     const val refreshLayoutHeaderMaterial =
         "com.scwang.smart:refresh-header-material:${Versions.refreshLayout}"
+
+    //腾讯MMKV
+    const val mmkv = "com.tencent:mmkv-static:${Versions.mmkv}"
 }
 
 object XSuper {

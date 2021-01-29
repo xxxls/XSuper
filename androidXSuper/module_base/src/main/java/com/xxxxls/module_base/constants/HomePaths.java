@@ -43,4 +43,7 @@ public interface HomePaths {
 
     //感知生命周期-TASK
     String HOME_FRAGMENT_LIFECYCLE_TASK_INDEX = "/home/fragment/lifecycle/task/index";
+
+    //存储器
+    String HOME_FRAGMENT_STORE_INDEX = "/home/fragment/store/index";
 }

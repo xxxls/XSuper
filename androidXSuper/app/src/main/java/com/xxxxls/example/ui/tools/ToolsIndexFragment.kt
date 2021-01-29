@@ -41,7 +41,8 @@ class ToolsIndexFragment : BaseListFragment() {
             SimpleItemBean("logger"),
             SimpleItemBean("multiVideo"),
             SimpleItemBean("lifecycleTask"),
-            SimpleItemBean("smartListRefresh")
+            SimpleItemBean("smartListRefresh"),
+            SimpleItemBean("store")
         )
     }
 
@@ -70,6 +71,9 @@ class ToolsIndexFragment : BaseListFragment() {
             }
             7 -> {
                 BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_LIST_REFRESH_INDEX)
+            }
+            8 -> {
+                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_STORE_INDEX)
             }
         }
     }

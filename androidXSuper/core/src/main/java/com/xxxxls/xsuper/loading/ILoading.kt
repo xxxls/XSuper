@@ -1,9 +1,7 @@
 package com.xxxxls.xsuper.loading
 
-import com.xxxxls.utils.main
+import com.xxxxls.utils.ktx.main
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**

@@ -1,6 +1,7 @@
 import com.xxxxls.versionplugin.Android
 import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
+import com.xxxxls.versionplugin.Depend
 import com.xxxxls.versionplugin.Kt
 import com.xxxxls.versionplugin.Lifecycle
 
@@ -68,9 +69,9 @@ dependencies {
     androidTestApi Android.runner
     androidTestApi Android.espressoCore
 
-//    implementation AndroidX.appcompat
     api Lifecycle.lifecycleExtensions
     api Kt.coroutinesAndroid
+    api Depend.mmkv
 }
 
 

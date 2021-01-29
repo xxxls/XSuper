@@ -7,7 +7,6 @@ import com.xxxxls.versionplugin.GreenDao
 import com.xxxxls.versionplugin.Hilt
 import com.xxxxls.versionplugin.Retrofit
 import com.xxxxls.versionplugin.Room
-import com.xxxxls.versionplugin.XSuper
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -132,10 +131,6 @@ dependencies {
     //greenDao
     api GreenDao.greenDao
     api GreenDao.upgradeHelper
-
-    //下拉刷新
-    api Depend.smartRefresh
-    api Depend.smartRefreshHeader
 
     //room
     api Room.runtime
