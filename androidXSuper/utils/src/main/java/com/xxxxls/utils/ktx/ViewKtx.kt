@@ -2,7 +2,15 @@ package com.xxxxls.utils.ktx
 
 import android.view.View
 import android.widget.Checkable
+import com.xxxxls.utils.UiUtils
 
+
+/**
+ * 是否右-左布局
+ */
+fun View.isRtl(): Boolean {
+    return UiUtils.isRtl(this)
+}
 
 /**
  * 展示or隐藏

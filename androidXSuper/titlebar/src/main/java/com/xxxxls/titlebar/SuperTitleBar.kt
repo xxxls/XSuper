@@ -13,7 +13,6 @@ import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatTextView
-import com.xxxxls.utils.ktx.getDrawableById
 
 /**
  * TitleBar
@@ -52,6 +51,24 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
 
     //右标题点击事件
     var onRightTitleClickListener: OnRightTitleClickListener? = null
+
+    private val gravityLeft: Int
+        get() {
+            return if (getTitleBarStyle().isAdaptLanguage()) {
+                Gravity.START
+            } else {
+                Gravity.LEFT
+            }
+        }
+
+    private val gravityRight: Int
+        get() {
+            return if (getTitleBarStyle().isAdaptLanguage()) {
+                Gravity.END
+            } else {
+                Gravity.RIGHT
+            }
+        }
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -141,7 +158,7 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
             LayoutParams.WRAP_CONTENT,
             LayoutParams.MATCH_PARENT
         ).apply {
-            gravity = Gravity.START or Gravity.CENTER_VERTICAL
+            gravity = gravityLeft or Gravity.CENTER_VERTICAL
         }
 
         this.addView(itemView, layoutParams)
@@ -155,7 +172,6 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
         //设置背景
         setLeftBackground(background)
     }
-
 
     /**
      * 初始化右view
@@ -199,7 +215,7 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
             LayoutParams.WRAP_CONTENT,
             LayoutParams.MATCH_PARENT
         ).apply {
-            gravity = Gravity.END or Gravity.CENTER_VERTICAL
+            gravity = gravityRight or Gravity.CENTER_VERTICAL
         }
 
         this.addView(itemView, layoutParams)
@@ -470,7 +486,11 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
      */
     open fun setLeftIcon(drawable: Drawable?): SuperTitleBar {
         getLeftView().apply {
-            setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            if (isRtl() && getTitleBarStyle().isAdaptLanguage()) {
+                setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+            } else {
+                setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            }
             onUpdateContent(this)
         }
         return this
@@ -522,7 +542,11 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
      */
     open fun setRightIcon(drawable: Drawable?): SuperTitleBar {
         getRightView().apply {
-            setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            if (isRtl() && getTitleBarStyle().isAdaptLanguage()) {
+                setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null)
+            } else {
+                setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+            }
             onUpdateContent(this)
         }
         return this

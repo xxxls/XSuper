@@ -4,8 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import com.xxxxls.utils.UiUtils
-import com.xxxxls.utils.ktx.getDrawableById
 
 /**
  * 默认标题栏样式
@@ -22,11 +20,11 @@ open class DefaultTitleBarStyle(val context: Context) : ITitleBarStyle {
     }
 
     override fun getChildLeftRightPadding(): Int {
-        return UiUtils.dip2px(context, 16f).toInt()
+        return context.dip2px(16f).toInt()
     }
 
     override fun getTitleMargin(): Int {
-        return UiUtils.dip2px(context, 2f).toInt()
+        return context.dip2px(2f).toInt()
     }
 
     override fun getBackground(): Drawable {
@@ -34,23 +32,23 @@ open class DefaultTitleBarStyle(val context: Context) : ITitleBarStyle {
     }
 
     override fun getHeight(): Int {
-        return UiUtils.dip2px(context, 48f).toInt()
+        return context.dip2px(48f).toInt()
     }
 
     override fun getLeftTextSize(): Float {
-        return UiUtils.dip2px(context, 16f)
+        return context.dip2px(16f)
     }
 
     override fun getTitleTextSize(): Float {
-        return UiUtils.dip2px(context, 18f)
+        return context.dip2px(18f)
     }
 
     override fun getSubTitleTextSize(): Float {
-        return UiUtils.dip2px(context, 14f)
+        return context.dip2px(14f)
     }
 
     override fun getRightTextSize(): Float {
-        return UiUtils.dip2px(context, 16f)
+        return context.dip2px(16f)
     }
 
     override fun getLeftTextColor(): Int {
@@ -82,7 +80,7 @@ open class DefaultTitleBarStyle(val context: Context) : ITitleBarStyle {
     }
 
     override fun getDrawablePadding(): Float {
-        return UiUtils.dip2px(context, 2f)
+        return context.dip2px(2f)
     }
 
 }

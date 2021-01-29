@@ -1,7 +1,6 @@
 import com.xxxxls.versionplugin.Android
 import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
-import com.xxxxls.versionplugin.XSuper
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -67,10 +66,6 @@ dependencies {
     androidTestApi Android.espressoCore
 
     implementation AndroidX.appcompat
-
-    //工具集
-    api project(path: ':utils')
-//    api XSuper.utils
 }
 
 tasks.withType(Javadoc).all {

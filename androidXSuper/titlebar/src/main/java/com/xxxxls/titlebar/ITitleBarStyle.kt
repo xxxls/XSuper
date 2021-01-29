@@ -98,4 +98,9 @@ interface ITitleBarStyle {
      * 分割线高度
      */
     fun getLineHeight(): Int?
+
+    /**
+     * 是否适配系统语言（布局方向）
+     */
+    fun isAdaptLanguage(): Boolean = true
 }
