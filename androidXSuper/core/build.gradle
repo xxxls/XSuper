@@ -75,7 +75,7 @@ dependencies {
     api AndroidX.appcompat
 //    api AndroidX.coreKtx
     api AndroidX.constraintLayout
-    api Android.meteria
+    api Android.material
 //    api Lifecycle.lifecycleExtensions
 //    api AndroidX.fragmentKtx
     api AndroidX.activityKtx

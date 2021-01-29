@@ -80,7 +80,7 @@ object Android {
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val runner = "androidx.test:runner:${Versions.runner}"
     const val junit = "junit:junit:${Versions.junit}"
-    const val meteria = "com.google.android.material:material:${Versions.material}"
+    const val material = "com.google.android.material:material:${Versions.material}"
     const val flexBox = "com.google.android:flexbox:${Versions.flexBox}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
     const val exoPlayer = "com.google.android.exoplayer:exoplayer:2.10.4"
