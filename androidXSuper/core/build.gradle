@@ -4,7 +4,6 @@ import com.xxxxls.versionplugin.BuildConfig
 import com.xxxxls.versionplugin.Hilt
 import com.xxxxls.versionplugin.Kt
 import com.xxxxls.versionplugin.Lifecycle
-import com.xxxxls.versionplugin.XSuper
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -88,7 +87,6 @@ dependencies {
     api Hilt.viewModel
     kapt Hilt.androidCompiler
     kapt Hilt.compiler
-
 }
 
 

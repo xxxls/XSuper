@@ -1,5 +1,3 @@
-import com.xxxxls.versionplugin.Android
-import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
 import com.xxxxls.versionplugin.Glide
 import com.xxxxls.versionplugin.Lifecycle

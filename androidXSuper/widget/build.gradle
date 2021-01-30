@@ -1,8 +1,6 @@
-import com.xxxxls.versionplugin.Android
 import com.xxxxls.versionplugin.AndroidX
 import com.xxxxls.versionplugin.BuildConfig
 import com.xxxxls.versionplugin.Lifecycle
-import com.xxxxls.versionplugin.XSuper
 
 plugins {
     id "com.xxxxls.version.plugin"
@@ -50,10 +48,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testApi Android.junit
-    androidTestApi Android.runner
-    androidTestApi Android.espressoCore
-
     api AndroidX.appcompat
     api Lifecycle.lifecycleExtensions
 
