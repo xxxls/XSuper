@@ -22,7 +22,7 @@ object Versions {
     const val room = "2.3.0-alpha01"
     const val hilt = "2.30-alpha"
     const val hiltViewModule = "1.0.0-alpha02"
-    const val kotlin = "1.3.72"
+    const val kotlin = "1.4.21"
     const val kotlinCoroutinesCore = "1.3.7"
     const val kotlinCoroutinesAndroid = "1.3.9"
     const val retrofit = "2.9.0"
