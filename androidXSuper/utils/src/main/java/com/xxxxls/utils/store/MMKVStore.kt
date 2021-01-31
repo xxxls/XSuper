@@ -52,6 +52,22 @@ object MMKVStore : IStore<MMKV> {
         return true
     }
 
+    /**
+     * 获取Parcelable
+     */
+    inline fun <reified T : Parcelable> getParcelable(key: String, group: String?): T? {
+        val mmkv = getInstance(group) ?: return null
+        return mmkv.decodeParcelable(key, T::class.java)
+    }
+
+    /**
+     * 存储Parcelable
+     */
+    inline fun <reified T : Parcelable> setParcelable(key: String, value: T, group: String?): Boolean {
+        val mmkv = getInstance(group) ?: return false
+        return mmkv.encode(key, value)
+    }
+
     override fun clear(group: String?) {
         val mmkv = getInstance(group) ?: return
         mmkv.clear()

@@ -81,18 +81,18 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
     }
 
     private fun init(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
-        val array = getContext().obtainStyledAttributes(attrs, R.styleable.XSuperTitleBar)
+        val array = getContext().obtainStyledAttributes(attrs, R.styleable.SuperTitleBar)
 
         //标题间距
         titleMargin =
             array.getDimensionPixelOffset(
-                R.styleable.XSuperTitleBar_titlebar_title_margin,
+                R.styleable.SuperTitleBar_titlebar_title_margin,
                 getTitleBarStyle().getTitleMargin()
             )
 
         //子条目左右内间距
         childLeftRightPadding = array.getDimensionPixelOffset(
-            R.styleable.XSuperTitleBar_titlebar_child_left_right_padding,
+            R.styleable.SuperTitleBar_titlebar_child_left_right_padding,
             getTitleBarStyle().getChildLeftRightPadding()
         )
 
@@ -117,28 +117,28 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
      */
     private fun initLeftView(array: TypedArray) {
         //文本
-        val text = array.getString(R.styleable.XSuperTitleBar_titlebar_left_text)
+        val text = array.getString(R.styleable.SuperTitleBar_titlebar_left_text)
         //图标
-        val icon = array.getDrawable(R.styleable.XSuperTitleBar_titlebar_left_icon)
+        val icon = array.getDrawable(R.styleable.SuperTitleBar_titlebar_left_icon)
         //文本大小
         val textSize =
             array.getDimension(
-                R.styleable.XSuperTitleBar_titlebar_left_text_size,
+                R.styleable.SuperTitleBar_titlebar_left_text_size,
                 getTitleBarStyle().getLeftTextSize()
             )
         //文本颜色
         val textColor =
             array.getColor(
-                R.styleable.XSuperTitleBar_titlebar_left_text_color,
+                R.styleable.SuperTitleBar_titlebar_left_text_color,
                 getTitleBarStyle().getLeftTextColor()
             )
         //文本与图标间距
         val drawablePadding = array.getDimension(
-            R.styleable.XSuperTitleBar_titlebar_left_drawable_padding,
+            R.styleable.SuperTitleBar_titlebar_left_drawable_padding,
             getTitleBarStyle().getDrawablePadding()
         )
         //背景
-        val background = array.getDrawable(R.styleable.XSuperTitleBar_titlebar_left_background)
+        val background = array.getDrawable(R.styleable.SuperTitleBar_titlebar_left_background)
             ?: getTitleBarStyle().getLeftBackground()
 
         val itemView = AppCompatTextView(context).apply {
@@ -178,23 +178,23 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
      */
     private fun initRightView(array: TypedArray) {
 
-        val text = array.getString(R.styleable.XSuperTitleBar_titlebar_right_text)
-        val icon = array.getDrawable(R.styleable.XSuperTitleBar_titlebar_right_icon)
+        val text = array.getString(R.styleable.SuperTitleBar_titlebar_right_text)
+        val icon = array.getDrawable(R.styleable.SuperTitleBar_titlebar_right_icon)
         val textSize =
             array.getDimension(
-                R.styleable.XSuperTitleBar_titlebar_right_text_size,
+                R.styleable.SuperTitleBar_titlebar_right_text_size,
                 getTitleBarStyle().getRightTextSize()
             )
         val textColor =
             array.getColor(
-                R.styleable.XSuperTitleBar_titlebar_right_text_color,
+                R.styleable.SuperTitleBar_titlebar_right_text_color,
                 getTitleBarStyle().getRightTextColor()
             )
         val drawablePadding = array.getDimension(
-            R.styleable.XSuperTitleBar_titlebar_right_drawable_padding,
+            R.styleable.SuperTitleBar_titlebar_right_drawable_padding,
             getTitleBarStyle().getDrawablePadding()
         )
-        val background = array.getDrawable(R.styleable.XSuperTitleBar_titlebar_right_background)
+        val background = array.getDrawable(R.styleable.SuperTitleBar_titlebar_right_background)
             ?: getTitleBarStyle().getRightBackground()
 
 
@@ -257,15 +257,15 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
      **/
     private fun initTitleView(parent: LinearLayout, array: TypedArray) {
 
-        val text = array.getString(R.styleable.XSuperTitleBar_titlebar_title)
+        val text = array.getString(R.styleable.SuperTitleBar_titlebar_title)
         val textSize =
             array.getDimension(
-                R.styleable.XSuperTitleBar_titlebar_title_text_size,
+                R.styleable.SuperTitleBar_titlebar_title_text_size,
                 getTitleBarStyle().getTitleTextSize()
             )
         val textColor =
             array.getColor(
-                R.styleable.XSuperTitleBar_titlebar_title_text_color,
+                R.styleable.SuperTitleBar_titlebar_title_text_color,
                 getTitleBarStyle().getTitleTextColor()
             )
 
@@ -298,15 +298,15 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
      */
     private fun initSubTitleView(parent: LinearLayout, array: TypedArray) {
 
-        val text = array.getString(R.styleable.XSuperTitleBar_titlebar_subtitle_text)
+        val text = array.getString(R.styleable.SuperTitleBar_titlebar_subtitle_text)
         val textSize =
             array.getDimension(
-                R.styleable.XSuperTitleBar_titlebar_subtitle_text_size,
+                R.styleable.SuperTitleBar_titlebar_subtitle_text_size,
                 getTitleBarStyle().getTitleTextSize()
             )
         val textColor =
             array.getColor(
-                R.styleable.XSuperTitleBar_titlebar_subtitle_text_color,
+                R.styleable.SuperTitleBar_titlebar_subtitle_text_color,
                 getTitleBarStyle().getTitleTextColor()
             )
 
@@ -337,11 +337,11 @@ open class SuperTitleBar : FrameLayout, View.OnClickListener {
      * 初始化分割线
      */
     protected open fun initLineView(array: TypedArray) {
-        val visible = array.getBoolean(R.styleable.XSuperTitleBar_titlebar_line_visible, true)
-        val drawable = array.getDrawable(R.styleable.XSuperTitleBar_titlebar_line_background)
+        val visible = array.getBoolean(R.styleable.SuperTitleBar_titlebar_line_visible, true)
+        val drawable = array.getDrawable(R.styleable.SuperTitleBar_titlebar_line_background)
             ?: getTitleBarStyle().getLineDrawable()
         val height = array.getDimensionPixelOffset(
-            R.styleable.XSuperTitleBar_titlebar_line_height,
+            R.styleable.SuperTitleBar_titlebar_line_height,
             getTitleBarStyle().getLineHeight() ?: 1
         )
 

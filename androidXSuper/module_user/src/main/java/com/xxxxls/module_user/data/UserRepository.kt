@@ -5,7 +5,7 @@ import com.xxxxls.module_user.bean.LoginBean
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.db.UserDao
 import com.xxxxls.xsuper.exceptions.ApiException
-import com.xxxxls.xsuper.model.XSuperResult
+import com.xxxxls.xsuper.model.SuperResult
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -45,7 +45,7 @@ class UserRepository @Inject constructor(
      * @param userName 用户名
      * @param password 密码
      */
-    suspend fun login2(userName: String, password: String): Flow<XSuperResult<LoginBean>> {
+    suspend fun login2(userName: String, password: String): Flow<SuperResult<LoginBean>> {
         return flowApiResult { userApis.login(userName, password) }
     }
 
@@ -100,7 +100,7 @@ class UserRepository @Inject constructor(
     /**
      * 获取登录记录
      */
-    fun getLoginRecord(): Flow<XSuperResult<List<UserBean>>> {
+    fun getLoginRecord(): Flow<SuperResult<List<UserBean>>> {
         return flowResult {
             userDao.getAll() ?: emptyList()
         }

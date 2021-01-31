@@ -305,7 +305,7 @@ fun View?.setTitleBarRightText(
     }
 }
 
-//XSuperTitleBar - 设置左点击事件
+//SuperTitleBar - 设置左点击事件
 fun SuperTitleBar?.setOnLeftTitleClickListener(onClickListener: ((view: View) -> Unit)? = null): SuperTitleBar? {
     return this?.apply {
         onClickListener?.let {
@@ -319,7 +319,7 @@ fun SuperTitleBar?.setOnLeftTitleClickListener(onClickListener: ((view: View) ->
 }
 
 
-//XSuperTitleBar - 设置右点击事件
+//SuperTitleBar - 设置右点击事件
 fun SuperTitleBar?.setOnRightTitleClickListener(onClickListener: ((view: View) -> Unit)? = null): SuperTitleBar? {
     return this?.apply {
         onClickListener?.let {

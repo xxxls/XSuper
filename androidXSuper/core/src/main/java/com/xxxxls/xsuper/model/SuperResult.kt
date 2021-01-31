@@ -7,19 +7,19 @@ import com.xxxxls.xsuper.callback.SuperCallBack
  * @author Max
  * @date 2019-11-28.
  */
-sealed class XSuperResult<out T> {
+sealed class SuperResult<out T> {
 
     /**
      * 成功
      * @param data 成功的结果
      */
-    data class Success<out T>(val data: T) : XSuperResult<T>()
+    data class Success<out T>(val data: T) : SuperResult<T>()
 
     /**
      * 失败
      * @param throwable
      */
-    data class Failure(val throwable: Throwable) : XSuperResult<Nothing>()
+    data class Failure(val throwable: Throwable) : SuperResult<Nothing>()
 
     override fun toString(): String {
         return when (this) {
@@ -33,8 +33,8 @@ sealed class XSuperResult<out T> {
 /**
  * 成功
  */
-inline fun <reified T> XSuperResult<T>.doSuccess(success: (T) -> Unit): XSuperResult<T> {
-    if (this is XSuperResult.Success) {
+inline fun <reified T> SuperResult<T>.doSuccess(success: (T) -> Unit): SuperResult<T> {
+    if (this is SuperResult.Success) {
         success(data)
     }
     return this
@@ -43,8 +43,8 @@ inline fun <reified T> XSuperResult<T>.doSuccess(success: (T) -> Unit): XSuperRe
 /**
  * 失败
  */
-inline fun <reified T> XSuperResult<T>.doFailure(failure: (Throwable) -> Unit): XSuperResult<T> {
-    if (this is XSuperResult.Failure) {
+inline fun <reified T> SuperResult<T>.doFailure(failure: (Throwable) -> Unit): SuperResult<T> {
+    if (this is SuperResult.Failure) {
         failure(throwable)
     }
     return this
@@ -53,26 +53,26 @@ inline fun <reified T> XSuperResult<T>.doFailure(failure: (Throwable) -> Unit): 
 /**
  * 转换为成功结果
  */
-fun <T> T.toSuccessResult(): XSuperResult.Success<T> {
-    return XSuperResult.Success<T>(this)
+fun <T> T.toSuccessResult(): SuperResult.Success<T> {
+    return SuperResult.Success<T>(this)
 }
 
 /**
  * 转换为失败结果
  */
-fun <T : Throwable> T.toFailureResult(): XSuperResult.Failure {
-    return XSuperResult.Failure(this)
+fun <T : Throwable> T.toFailureResult(): SuperResult.Failure {
+    return SuperResult.Failure(this)
 }
 
 /**
  * Result to callback
  */
-fun <T> XSuperResult<T>.callback(callBack: SuperCallBack<T>) {
+fun <T> SuperResult<T>.callback(callBack: SuperCallBack<T>) {
     when (this) {
-        is XSuperResult.Success<T> -> {
+        is SuperResult.Success<T> -> {
             callBack.onSuccess(this.data)
         }
-        is XSuperResult.Failure -> {
+        is SuperResult.Failure -> {
             callBack.onFailure(this.throwable)
         }
     }
@@ -82,6 +82,6 @@ fun <T> XSuperResult<T>.callback(callBack: SuperCallBack<T>) {
 /**
  * 是否成功
  */
-fun XSuperResult<*>.isSuccess(): Boolean {
-    return this is XSuperResult.Success<*>
+fun SuperResult<*>.isSuccess(): Boolean {
+    return this is SuperResult.Success<*>
 }

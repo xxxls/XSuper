@@ -10,15 +10,15 @@ import com.xxxxls.xsuper.callback.SuperCallBack
  * @author Max
  * @date 2019-11-30.
  */
-open class ResultLiveData<T> : MutableLiveData<XSuperResult<T>>(),
+open class ResultLiveData<T> : MutableLiveData<SuperResult<T>>(),
     SuperCallBack<T> {
 
     override fun onSuccess(result: T) {
-        postValue(XSuperResult.Success(result))
+        postValue(SuperResult.Success(result))
     }
 
     override fun onFailure(throwable: Throwable) {
-        postValue(XSuperResult.Failure(throwable))
+        postValue(SuperResult.Failure(throwable))
     }
 
     /**
@@ -32,12 +32,12 @@ open class ResultLiveData<T> : MutableLiveData<XSuperResult<T>>(),
         success: (value: T) -> Unit = {},
         failure: (e: Throwable) -> Unit = {}
     ): ResultLiveData<T> {
-        super.observe(owner, Observer<XSuperResult<T>> {
+        super.observe(owner, Observer<SuperResult<T>> {
             when (it) {
-                is XSuperResult.Failure -> {
+                is SuperResult.Failure -> {
                     failure(it.throwable)
                 }
-                is XSuperResult.Success -> {
+                is SuperResult.Success -> {
                     success(it.data)
                 }
             }
@@ -56,10 +56,10 @@ open class ResultLiveData<T> : MutableLiveData<XSuperResult<T>>(),
     ): ResultLiveData<T> {
         super.observeForever {
             when (it) {
-                is XSuperResult.Failure -> {
+                is SuperResult.Failure -> {
                     failure(it.throwable)
                 }
-                is XSuperResult.Success -> {
+                is SuperResult.Success -> {
                     success(it.data)
                 }
             }

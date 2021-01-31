@@ -12,7 +12,7 @@ import com.xxxxls.xsuper.loading.*
 import com.xxxxls.xsuper.component.bridge.ComponentAction
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
 import com.xxxxls.xsuper.model.ResultLiveData
-import com.xxxxls.xsuper.model.XSuperResult
+import com.xxxxls.xsuper.model.SuperResult
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlin.coroutines.CoroutineContext
@@ -103,7 +103,7 @@ open class SuperViewModel : ViewModel(), ComponentActionBridge, ILoading, IClear
         analyzer: ResultAnalyzer = getResultAnalyzer(),
         context: CoroutineContext = Dispatchers.IO,
         start: CoroutineStart = CoroutineStart.DEFAULT,
-        block: suspend () -> Flow<XSuperResult<T>>
+        block: suspend () -> Flow<SuperResult<T>>
     ): Job {
         return viewModelScope.launch(
             context = context,
@@ -188,10 +188,10 @@ open class SuperViewModel : ViewModel(), ComponentActionBridge, ILoading, IClear
      * @param bridge 与组件通信
      */
     protected open suspend fun <T> analysisResult(
-        result: XSuperResult<T>,
+        result: SuperResult<T>,
         analyzer: ResultAnalyzer = getResultAnalyzer(),
         bridge: ComponentActionBridge = this
-    ): XSuperResult<T> {
+    ): SuperResult<T> {
         return analyzer.analysisResult(bridge, result)
     }
 

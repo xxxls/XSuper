@@ -64,7 +64,7 @@ import kotlin.reflect.KClass
 inline fun <reified VM : SuperViewModel> IVmComponent.superViewModels(
     noinline ownerProducer: () -> ViewModelStoreOwner = { this },
     noinline factoryProducer: (() -> Factory)? = null
-) = createXSuperViewModelLazy(VM::class, { ownerProducer().viewModelStore }, factoryProducer)
+) = createSuperViewModelLazy(VM::class, { ownerProducer().viewModelStore }, factoryProducer)
 
 /**
  * Returns a property delegate to access parent activity's [ViewModel],
@@ -83,9 +83,9 @@ inline fun <reified VM : SuperViewModel> IVmComponent.superViewModels(
  * [Fragment.onAttach()], and access prior to that will result in IllegalArgumentException.
  */
 @MainThread
-inline fun <reified VM : SuperViewModel> SuperFragment.xsuperActivityViewModels(
+inline fun <reified VM : SuperViewModel> SuperFragment.superActivityViewModels(
     noinline factoryProducer: (() -> Factory)? = null
-) = createXSuperViewModelLazy(VM::class, { requireActivity().viewModelStore },
+) = createSuperViewModelLazy(VM::class, { requireActivity().viewModelStore },
     factoryProducer ?: { requireActivity().defaultViewModelProviderFactory })
 
 /**
@@ -93,7 +93,7 @@ inline fun <reified VM : SuperViewModel> SuperFragment.xsuperActivityViewModels(
  * to default factory.
  */
 @MainThread
-fun <VM : SuperViewModel> IVmComponent.createXSuperViewModelLazy(
+fun <VM : SuperViewModel> IVmComponent.createSuperViewModelLazy(
     viewModelClass: KClass<VM>,
     storeProducer: () -> ViewModelStore,
     factoryProducer: (() -> Factory)? = null
@@ -101,7 +101,7 @@ fun <VM : SuperViewModel> IVmComponent.createXSuperViewModelLazy(
     val factoryPromise = factoryProducer ?: {
         defaultViewModelProviderFactory
     }
-    return XSuperViewModelLazy(
+    return SuperViewModelLazy(
         this,
         viewModelClass,
         storeProducer,
@@ -120,7 +120,7 @@ fun <VM : SuperViewModel> IVmComponent.createXSuperViewModelLazy(
  * [factoryProducer] is a lambda that will be called during initialization,
  * returned [ViewModelProvider.Factory] will be used for creation of [VM]
  */
-class XSuperViewModelLazy<VM : SuperViewModel>(
+class SuperViewModelLazy<VM : SuperViewModel>(
     private val vmComponent: IVmComponent,
     private val viewModelClass: KClass<VM>,
     private val storeProducer: () -> ViewModelStore,

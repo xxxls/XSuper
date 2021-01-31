@@ -1,24 +1,13 @@
 package com.xxxxls.module_user.ui.login
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.xxxxls.module_base.mvvm.BaseLiveData
 import com.xxxxls.module_base.mvvm.BaseViewModel
-import com.xxxxls.module_base.network.ApiResponseAdapter
 import com.xxxxls.module_user.bean.LoginBean
 import com.xxxxls.module_user.bean.UserBean
 import com.xxxxls.module_user.data.UserRepository
-import com.xxxxls.utils.L
-import com.xxxxls.xsuper.adapter.ResponseAdapter
-import com.xxxxls.xsuper.loading.dismissLoadingInMain
-import com.xxxxls.xsuper.loading.showLoadingInMain
 import com.xxxxls.xsuper.model.*
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  * 登录VM

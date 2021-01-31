@@ -3,7 +3,7 @@ package com.xxxxls.xsuper.repository
 import com.xxxxls.xsuper.adapter.*
 import com.xxxxls.xsuper.component.ICleared
 import com.xxxxls.xsuper.model.SuperResponse
-import com.xxxxls.xsuper.model.XSuperResult
+import com.xxxxls.xsuper.model.SuperResult
 import com.xxxxls.xsuper.model.toFailureResult
 import com.xxxxls.xsuper.model.toSuccessResult
 import kotlinx.coroutines.Dispatchers
@@ -76,7 +76,7 @@ open class SuperRepository : ICleared {
         converter: ExceptionConverter = getExceptionConverter(),
         context: CoroutineContext = Dispatchers.IO,
         block: suspend () -> SuperResponse<T>
-    ): Flow<XSuperResult<T>> {
+    ): Flow<SuperResult<T>> {
         return flow {
             emit(adapter.responseToResult(block.invoke()))
         }.catch {
@@ -92,7 +92,7 @@ open class SuperRepository : ICleared {
         converter: ExceptionConverter = getExceptionConverter(),
         adapter: ResponseAdapter = getResponseAdapter(),
         block: suspend () -> SuperResponse<T>
-    ): XSuperResult<T> {
+    ): SuperResult<T> {
         return try {
             adapter.responseToResult(block.invoke())
         } catch (e: Exception) {
@@ -108,7 +108,7 @@ open class SuperRepository : ICleared {
     fun <T> SuperResponse<T>.asApiResult(
         converter: ExceptionConverter = getExceptionConverter(),
         adapter: ResponseAdapter = getResponseAdapter()
-    ): XSuperResult<T> {
+    ): SuperResult<T> {
         return try {
             adapter.responseToResult(this)
         } catch (e: Exception) {
@@ -125,8 +125,8 @@ open class SuperRepository : ICleared {
         converter: ExceptionConverter = getExceptionConverter(),
         context: CoroutineContext = Dispatchers.IO,
         block: suspend () -> T
-    ): Flow<XSuperResult<T>> {
-        return flow<XSuperResult<T>> {
+    ): Flow<SuperResult<T>> {
+        return flow<SuperResult<T>> {
             emit(block.invoke().toSuccessResult())
         }.catch {
             emit(converter.convert(it).toFailureResult())

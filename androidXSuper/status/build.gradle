@@ -8,7 +8,7 @@ plugins {
     id "kotlin-android-extensions"
     id "kotlin-kapt"
     id "com.github.dcendents.android-maven"
-//    id "com.novoda.bintray-release"
+    id "com.novoda.bintray-release"
 }
 
 group='com.github.mxruan'
@@ -50,14 +50,14 @@ android {
     resourcePrefix "status"
 }
 
-//publish {
-//    userOrg = 'xxxls' //bintray注册的用户名/组织名
-//    groupId = 'com.xxxls'////jcenter上的路径
-//    artifactId = 'xsuper-status' //项目名称
-//    publishVersion = '1.0.0' //版本号
-//    desc = '' //项目描述。可空。
-//    website = '' //项目地址，一般填github地址。可空。
-//}
+publish {
+    userOrg = 'xxxls' //bintray注册的用户名/组织名
+    groupId = 'com.xxxls'////jcenter上的路径
+    artifactId = 'super-status' //项目名称
+    publishVersion = '1.0.0' //版本号
+    desc = '' //项目描述。可空。
+    website = '' //项目地址，一般填github地址。可空。
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

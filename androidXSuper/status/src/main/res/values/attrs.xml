@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <declare-styleable name="XSuperStatusView" tools:ignore="ResourceName">
+    <declare-styleable name="SuperStatusView" tools:ignore="ResourceName">
         <attr name="status_loading_layout" format="reference" />
         <attr name="status_error_layout" format="reference" />
         <attr name="status_empty_layout" format="reference" />

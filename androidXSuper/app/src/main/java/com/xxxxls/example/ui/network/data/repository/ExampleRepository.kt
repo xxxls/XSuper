@@ -4,7 +4,7 @@ import com.xxxxls.example.ui.network.data.api.ExampleApi
 import com.xxxxls.example.ui.network.data.local.ExampleDao
 import com.xxxxls.example.ui.network.data.bean.ArticleItemBean
 import com.xxxxls.module_base.util.ILog
-import com.xxxxls.xsuper.model.XSuperResult
+import com.xxxxls.xsuper.model.SuperResult
 import com.xxxxls.xsuper.model.toSuccessResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -23,7 +23,7 @@ class ExampleRepository @Inject constructor(
     /**
      * 获取文章列表
      */
-    suspend fun getArticleList(page: Int): Flow<XSuperResult<List<ArticleItemBean>>> {
+    suspend fun getArticleList(page: Int): Flow<SuperResult<List<ArticleItemBean>>> {
         logD("getArticleList() hashCode:${hashCode()} ,page:$page")
         return flow {
             logD(

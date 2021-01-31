@@ -30,10 +30,10 @@ open class DefaultResponseAdapter : ResponseAdapter {
     /**
      * 接口响应转换为响应结果保证体
      */
-    override fun <T> responseToResult(response: SuperResponse<T>): XSuperResult<T> {
+    override fun <T> responseToResult(response: SuperResponse<T>): SuperResult<T> {
         return try {
             val body = getResponseBody(response)
-            XSuperResult.Success(data = body)
+            SuperResult.Success(data = body)
         } catch (e: Exception) {
             throwableToResult(e)
         }
@@ -42,7 +42,7 @@ open class DefaultResponseAdapter : ResponseAdapter {
     /**
      * 接口请求异常转换为响应结果
      */
-    override fun throwableToResult(throwable: Throwable): XSuperResult<Nothing> {
-        return XSuperResult.Failure(throwable)
+    override fun throwableToResult(throwable: Throwable): SuperResult<Nothing> {
+        return SuperResult.Failure(throwable)
     }
 }

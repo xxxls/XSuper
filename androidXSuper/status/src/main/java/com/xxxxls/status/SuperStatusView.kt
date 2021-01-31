@@ -63,38 +63,38 @@ class SuperStatusView : RelativeLayout, IStatusView, View.OnClickListener {
         val array =
             context.obtainStyledAttributes(
                 attrs,
-                R.styleable.XSuperStatusView,
+                R.styleable.SuperStatusView,
                 defStyleAttr,
                 defStyleAttr
             )
 
         statusLayoutIds[Status.Content::class.java] =
             array.getResourceId(
-                R.styleable.XSuperStatusView_status_content_layout,
+                R.styleable.SuperStatusView_status_content_layout,
                 View.NO_ID
             )
 
         statusLayoutIds[Status.Empty::class.java] =
             array.getResourceId(
-                R.styleable.XSuperStatusView_status_empty_layout,
+                R.styleable.SuperStatusView_status_empty_layout,
                 View.NO_ID
             )
 
         statusLayoutIds[Status.Error::class.java] =
             array.getResourceId(
-                R.styleable.XSuperStatusView_status_error_layout,
+                R.styleable.SuperStatusView_status_error_layout,
                 View.NO_ID
             )
 
         statusLayoutIds[Status.Loading::class.java] =
             array.getResourceId(
-                R.styleable.XSuperStatusView_status_loading_layout,
+                R.styleable.SuperStatusView_status_loading_layout,
                 View.NO_ID
             )
 
         statusLayoutIds[Status.NoNetwork::class.java] =
             array.getResourceId(
-                R.styleable.XSuperStatusView_status_no_network_layout,
+                R.styleable.SuperStatusView_status_no_network_layout,
                 View.NO_ID
             )
 

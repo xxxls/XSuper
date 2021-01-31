@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <declare-styleable name="XSuperTitleBar" tools:ignore="ResourceName">
+    <declare-styleable name="SuperTitleBar" tools:ignore="ResourceName">
 
         <!--左标题文本-->
         <attr name="titlebar_left_text" format="string" />

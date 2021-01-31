@@ -1,7 +1,7 @@
 package com.xxxxls.xsuper.adapter
 
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
-import com.xxxxls.xsuper.model.XSuperResult
+import com.xxxxls.xsuper.model.SuperResult
 
 /**
  * 默认结果分析器
@@ -15,8 +15,8 @@ open class DefaultResultAnalyzer : ResultAnalyzer {
      */
     override suspend fun <T> analysisResult(
         bridge: ComponentActionBridge,
-        result: XSuperResult<T>
-    ): XSuperResult<T> {
+        result: SuperResult<T>
+    ): SuperResult<T> {
         return result
     }
 

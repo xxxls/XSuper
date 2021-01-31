@@ -2,7 +2,7 @@ package com.xxxxls.module_base.network
 
 import com.xxxxls.xsuper.adapter.ResultAnalyzer
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
-import com.xxxxls.xsuper.model.XSuperResult
+import com.xxxxls.xsuper.model.SuperResult
 import com.xxxxls.xsuper.model.isSuccess
 import com.xxxxls.xsuper.model.toFailureResult
 
@@ -26,8 +26,8 @@ class ApiResultAnalyzer private constructor() : ResultAnalyzer {
      */
     override suspend fun <T> analysisResult(
         bridge: ComponentActionBridge,
-        result: XSuperResult<T>
-    ): XSuperResult<T> {
+        result: SuperResult<T>
+    ): SuperResult<T> {
         return if (result.isSuccess()) {
             // 成功的响应，无需额外拦截处理
             result
@@ -36,7 +36,7 @@ class ApiResultAnalyzer private constructor() : ResultAnalyzer {
             val exception =
                 analysisException(
                     bridge,
-                    (result as XSuperResult.Failure).throwable
+                    (result as SuperResult.Failure).throwable
                 )
             exception.toFailureResult()
         }

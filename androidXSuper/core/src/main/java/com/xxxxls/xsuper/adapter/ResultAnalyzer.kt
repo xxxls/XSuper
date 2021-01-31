@@ -1,7 +1,7 @@
 package com.xxxxls.xsuper.adapter
 
 import com.xxxxls.xsuper.component.bridge.ComponentActionBridge
-import com.xxxxls.xsuper.model.XSuperResult
+import com.xxxxls.xsuper.model.SuperResult
 
 /**
  * 结果分析器
@@ -17,6 +17,6 @@ interface ResultAnalyzer : ExceptionAnalyzer {
      */
     suspend fun <T> analysisResult(
         bridge: ComponentActionBridge,
-        result: XSuperResult<T>
-    ): XSuperResult<T>
+        result: SuperResult<T>
+    ): SuperResult<T>
 }
