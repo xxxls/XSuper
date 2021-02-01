@@ -80,25 +80,25 @@ object MMKVStore : IStore<MMKV> {
     }
 
     override fun removeValue(key: String, group: String?): Boolean {
-        val mmkv = getInstance(null) ?: return false
+        val mmkv = getInstance(group) ?: return false
         mmkv.remove(key)
         return true
     }
 
     override fun containsKey(key: String, group: String?): Boolean {
-        val mmkv = getInstance(null) ?: return false
+        val mmkv = getInstance(group) ?: return false
         return mmkv.containsKey(key)
     }
 
     override fun getInstance(group: String?): MMKV? {
         val name = group ?: DEFAULT_GROUP
-        if (!preferenceMap.contains(name)) {
+        if (!preferenceMap.containsKey(name)) {
             synchronized(this) {
-                if (!preferenceMap.contains(name)) {
-                    preferenceMap[name] = (return if (name == DEFAULT_GROUP) {
-                        MMKV.defaultMMKV()
+                if (!preferenceMap.containsKey(name)) {
+                    preferenceMap[name] = ( if (name == DEFAULT_GROUP) {
+                        MMKV.defaultMMKV()!!
                     } else {
-                        MMKV.mmkvWithID(name)
+                        MMKV.mmkvWithID(name)!!
                     })
                 }
             }

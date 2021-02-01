@@ -74,9 +74,9 @@ object SPStore : IStore<SharedPreferences> {
 
     override fun getInstance(group: String?): SharedPreferences? {
         val name = group ?: DEFAULT_GROUP
-        if (!preferenceMap.contains(name)) {
+        if (!preferenceMap.containsKey(name)) {
             synchronized(this) {
-                if (!preferenceMap.contains(name)) {
+                if (!preferenceMap.containsKey(name)) {
                     preferenceMap[name] =
                         AppUtils.getApp().getSharedPreferences(group, Context.MODE_PRIVATE)
                 }
