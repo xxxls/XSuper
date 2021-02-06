@@ -15,13 +15,19 @@ import dagger.hilt.android.AndroidEntryPoint
  * @date 2020-01-07.
  */
 @Route(path = HOME_FRAGMENT_HOME_INDEXS)
+@AndroidEntryPoint
 class MainIndexFragment : BaseListFragment() {
     override fun getTitle(): String {
         return "IndexS"
     }
 
     override fun getItems(): Array<SimpleItemBean> {
-        return arrayOf(SimpleItemBean("tools"), SimpleItemBean("widget"), SimpleItemBean("network"))
+        return arrayOf(
+            SimpleItemBean("tools"),
+            SimpleItemBean("widget"),
+            SimpleItemBean("network"),
+            SimpleItemBean("test")
+        )
     }
 
     override fun onItemClick(index: Int, item: SimpleItemBean) {
@@ -34,6 +40,9 @@ class MainIndexFragment : BaseListFragment() {
             }
             2 -> {
                 BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_NETWORK_INDEX)
+            }
+            3 -> {
+                BasePaths.BASE_ACTIVITY_FRAGMENT.jump(BasePaths.KEY_ACTIVITY_FRAGMENT_PATH to HomePaths.HOME_FRAGMENT_TEST_INDEX)
             }
         }
     }

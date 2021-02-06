@@ -26,6 +26,9 @@ public interface HomePaths {
     //工具主页
     String HOME_FRAGMENT_TOOLS_INDEX = "/home/fragment/tools/index";
 
+    //测试主页
+    String HOME_FRAGMENT_TEST_INDEX = "/home/fragment/test/index";
+
     //网络请求主页
     String HOME_FRAGMENT_NETWORK_INDEX = "/home/fragment/network/index";
 
@@ -46,4 +49,7 @@ public interface HomePaths {
 
     //存储器
     String HOME_FRAGMENT_STORE_INDEX = "/home/fragment/store/index";
+
+    //Flow
+    String HOME_FRAGMENT_FLOW_INDEX = "/home/fragment/flow/index";
 }
